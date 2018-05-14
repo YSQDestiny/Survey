@@ -1,1 +1,1 @@
-include ':app', ':qmui', ':arch'
+include ':app', ':qmui', ':arch', ':lib', ':compiler'
