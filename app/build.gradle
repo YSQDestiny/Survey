@@ -92,14 +92,16 @@ dependencies {
     androidTestImplementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     androidTestImplementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     androidTestImplementation "com.android.support:design:$rootProject.supportLibraryVersion"
-    implementation project(':qmui')
     implementation 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-    implementation project(':arch')
 
     //leak
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+
     implementation project(':lib')
+    implementation project(':arch')
+    implementation project(':qmui')
+    annotationProcessor project(':compiler')
 }

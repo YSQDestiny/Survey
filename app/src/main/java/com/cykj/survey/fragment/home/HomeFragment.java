@@ -75,6 +75,7 @@ public class HomeFragment extends BaseFragment {
         FrameLayout layout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_home, null);
         ButterKnife.bind(this, layout);
         initTabs();
+        initPagers();
         return layout;
     }
 
@@ -121,6 +122,12 @@ public class HomeFragment extends BaseFragment {
 
         mPages = new HashMap<>();
 
+        HomeController homeIndexController = new HomeIndexController(getActivity());
+        homeIndexController.setHomeControllistener(listener);
+        mPages.put(Pager.HOME,homeIndexController);
+
+        mPager.setAdapter(mPagerAdapter);
+        mTabs.setupWithViewPager(mPager,false);
 
     }
 

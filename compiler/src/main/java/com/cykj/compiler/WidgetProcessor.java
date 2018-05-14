@@ -46,8 +46,8 @@ public class WidgetProcessor extends AbstractProcessor{
 
     ClassName mMapName = ClassName.get("java.util", "Map");
     ClassName mHashMapName = ClassName.get("java.util", "HashMap");
-    ClassName mItemDescName = ClassName.get("com.qmuiteam.qmuidemo.model", "QDItemDescription");
-    ClassName mBaseFragmentName = ClassName.get("com.qmuiteam.qmuidemo.base", "BaseFragment");
+    ClassName mItemDescName = ClassName.get("com.cykj.survey.model", "ItemDescription");
+    ClassName mBaseFragmentName = ClassName.get("com.cykj.survey.base", "BaseFragment");
     TypeName mBaseFragmentClassName = ParameterizedTypeName.get(ClassName.get(Class.class),
             WildcardTypeName.subtypeOf(mBaseFragmentName));
     TypeName mMapFieldTypeName = ParameterizedTypeName.get(mMapName,
