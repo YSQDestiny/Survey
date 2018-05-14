@@ -1,16 +1,18 @@
 package com.cykj.survey.manager;
 
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.fragment.utils.TestFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataManager {
 
     private static DataManager _sInstance;
-    private WidgetContainer mWidgetContainer;
+
 
     public DataManager() {
-        mWidgetContainer = WidgetContainer.getInstance();
+
         initHomeDesc();
         initUtilDesc();
         initOtherDesc();
@@ -28,6 +30,8 @@ public class DataManager {
     }
 
     private void initOtherDesc() {
+        mOtherNames = new ArrayList<>();
+        mOtherNames.add(TestFragment.class);
     }
 
     private void initUtilDesc() {
