@@ -4,4 +4,27 @@
 
     <string name="app_upgrade_tip_title">Release Notes (%1$s)</string>
 
+    <!-- business -->
+    <string name="business_edit_name">企业名称:</string>
+    <string name="business_hint_name">请输入企业名称</string>
+    
+    <string name="business_edit_addr">企业地址:</string>
+    <string name="business_hint_addr">请输入企业地址</string>
+    
+    <string name="business_edit_contacts">联系人:</string>
+    <string name="business_hint_contacts">请输入联系人</string>
+
+    <string name="business_edit_tel">联系电话:</string>
+    <string name="business_hint_tel">请输入联系电话</string>
+
+    <string name="business_edit_manager">总经理:</string>
+    <string name="business_hint_manager">请输入总经理姓名</string>
+
+    <string name="business_edit_deputy_manager">副总经理:</string>
+    <string name="business_hint_deputy_manager">请输入副总经理姓名</string>
+
+    <string name="business_edit_safe">质量安全:</string>
+    <string name="business_hint_safe">请输入质量安全负责人信息</string>
+
+
 </resources>

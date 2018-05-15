@@ -70,6 +70,10 @@ public class HomeFragment extends BaseFragment {
         }
     };
 
+    /**
+     * hai you 4 fen zhong
+     * @return
+     */
     @Override
     protected View onCreateView() {
         FrameLayout layout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_home, null);
@@ -99,16 +103,8 @@ public class HomeFragment extends BaseFragment {
                 "工具",false
         );
 
-        QMUITabSegment.Tab other = new QMUITabSegment.Tab(
-                ContextCompat.getDrawable(getContext(),R.mipmap.icon_tabbar_lab),
-                ContextCompat.getDrawable(getContext(),R.mipmap.icon_tabbar_lab_selected),
-                "其他",false
-        );
-
         mTabs.addTab(home)
-             .addTab(util)
-             .addTab(other);
-
+             .addTab(util);
     }
 
     private void initPagers(){
@@ -125,6 +121,10 @@ public class HomeFragment extends BaseFragment {
         HomeController homeIndexController = new HomeIndexController(getActivity());
         homeIndexController.setHomeControllistener(listener);
         mPages.put(Pager.HOME,homeIndexController);
+
+        HomeController homeUtilController = new HomeUtilController(getActivity());
+        homeUtilController.setHomeControllistener(listener);
+        mPages.put(Pager.UTIL,homeUtilController);
 
         mPager.setAdapter(mPagerAdapter);
         mTabs.setupWithViewPager(mPager,false);
