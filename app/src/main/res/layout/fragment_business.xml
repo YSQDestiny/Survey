@@ -291,9 +291,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
-                        android:text="普工" />
+                        android:text="@string/business_worker"
+                        android:layout_marginStart="4dp" />
 
                     <EditText
+                        android:id="@+id/business_edit_worker"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="4dp"
@@ -320,9 +322,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
-                        android:text="特种工" />
+                        android:text="@string/business_special_worker"
+                        android:layout_marginStart="4dp" />
 
                     <EditText
+                        android:id="@+id/business_edit_special_worker"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="4dp"
@@ -374,9 +378,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
-                        android:text="固定资产" />
+                        android:text="@string/business_assets" />
 
                     <EditText
+                        android:id="@+id/business_edit_assets"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="4dp"
@@ -403,9 +408,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
-                        android:text="年营业额" />
+                        android:text="@string/business_amount"
+                        android:layout_marginStart="4dp" />
 
                     <EditText
+                        android:id="@+id/business_edit_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="4dp"
@@ -422,7 +429,61 @@
 
                 </LinearLayout>
 
+            </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f2f0f2"/>
+
+            <!-- 投保范围 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="2dp"
+                    android:text="@string/business_coverage"
+                    android:textSize="16sp"
+                    android:layout_gravity="center_vertical"
+                    />
+                <EditText
+                    android:id="@+id/business_edit_coverage"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/shape_edit"
+                    android:ems="15"
+                    android:hint="@string/business_hint_coverage"
+                    android:inputType="text"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="8dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#f2f0f2"/>
+
+            <!-- 投保险种 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
+                    android:id="@+id/groupListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
