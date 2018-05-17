@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dddddd">
+
+    <Button
+        android:id="@+id/pop_open_camera"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        android:background="@color/qmui_config_color_white"
+        android:layout_marginTop="4dp"
+        android:text="拍照"
+        android:textSize="20sp"
+        android:textColor="#000000"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dddddd"/>
+
+    <Button
+        android:id="@+id/pop_open_album"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        android:background="@color/qmui_config_color_white"
+        android:text="从相册选择"
+        android:textSize="20sp"
+        android:textColor="#000000"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <Button
+        android:id="@+id/pop_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        android:background="@color/app_color_theme_1"
+        android:text="取消"
+        android:textSize="20sp"
+        android:textColor="#ffffff"/>
+
+</LinearLayout>

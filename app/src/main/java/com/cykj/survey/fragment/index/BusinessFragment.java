@@ -9,6 +9,7 @@ import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.lib.Group;
 import com.cykj.survey.lib.annotation.Widget;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
@@ -77,6 +78,17 @@ public class BusinessFragment extends BaseFragment {
 
     private void initTopbar(){
         mTopbar.setTitle("企业信息");
+
+        mTopbar.addRightTextButton("下一页",R.id.topbar_right_text_button)
+        .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                QMUIFragment fragment = new LicenseUploadFragment();
+                startFragment(fragment);
+            }
+        });
+
+
     }
 
     private void initGroupListView(){

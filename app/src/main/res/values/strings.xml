@@ -71,4 +71,10 @@
         fen fen zhe die de chen mo
         ceng
     </string>
+
+    <!-- license -->
+    <string name="license_business_license">营业执照</string>
+    <string name="license_industry_license">行业许可</string>
+    <string name="license_system_level">体系等级</string>
+
 </resources>
