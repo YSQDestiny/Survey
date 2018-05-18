@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -49,6 +50,8 @@ public class LicenseUploadFragment extends BaseFragment {
 
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
+    private String target;
+
     @Override
     protected View onCreateView() {
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_license_upload, null);
@@ -63,16 +66,29 @@ public class LicenseUploadFragment extends BaseFragment {
         }
         ButterKnife.bind(this, root);
 
-        businessLicenseImg.setOnClickListener(imgOnclickListener);
+        businessLicenseImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                target = "business";
+                showMenuDialog();
+            }
+        });
+        industryLicenseImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                target = "industry";
+                showMenuDialog();
+            }
+        });
+        systemLeveImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                target = "system";
+                showMenuDialog();
+            }
+        });
         return root;
     }
-
-    View.OnClickListener imgOnclickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            showMenuDialog();
-        }
-    };
 
     private void showMenuDialog(){
         final String[] items = new String[]{"拍照","从相册选择"};
@@ -82,7 +98,7 @@ public class LicenseUploadFragment extends BaseFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         if (items[which].equals("拍照")){
                             byCamera();
-                            Toast.makeText(getActivity(), "你选择了拍照", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
                         }else if (items[which].equals("从相册选择")){
                             Toast.makeText(getActivity(), "你选择了从相册选择", Toast.LENGTH_SHORT).show();
                         }
@@ -118,6 +134,9 @@ public class LicenseUploadFragment extends BaseFragment {
         //该照片的绝对路径
         imagePath = savePath + fileName;
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        }
         intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
         startActivityForResult(intent,0x008);
     }
@@ -126,9 +145,15 @@ public class LicenseUploadFragment extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
         if (requestCode == 8){
-            if (imagePath != null && requestCode == RESULT_OK){
+            if (imagePath != null && resultCode == -1){
                 Log.e(">>>>>>>>>>...",""+imagePath);
-                businessLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(imagePath,200,200));
+                if (target.equals("business")){
+                    businessLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(imagePath,200,200));
+                }else if (target.equals("industry")){
+                    industryLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(imagePath,200,200));
+                }else if (target.equals("system")){
+                    systemLeveImg.setImageBitmap(PermissionUtils.getBitmapByPath(imagePath,200,200));
+                }
             }
         }
         if(requestCode==6){

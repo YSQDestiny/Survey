@@ -1,5 +1,6 @@
 package com.cykj.survey;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.cykj.survey.base.BaseFragment;
@@ -26,4 +27,5 @@ public class MainActivity extends BaseFragmentActivity{
                     .commit();
         }
     }
+
 }
