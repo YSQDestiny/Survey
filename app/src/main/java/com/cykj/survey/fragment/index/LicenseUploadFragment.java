@@ -18,20 +18,27 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.fragment.utils.PermissionUtils;
+import com.cykj.survey.model.Industry;
+import com.cykj.survey.model.Site;
+import com.cykj.survey.util.JsonUtil;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +54,8 @@ public class LicenseUploadFragment extends BaseFragment {
     ImageView industryLicenseImg;
     @BindView(R.id.system_leve_img)
     ImageView systemLeveImg;
+    @BindView(R.id.license_upload_button)
+    Button mButton;
 
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
@@ -87,7 +96,48 @@ public class LicenseUploadFragment extends BaseFragment {
                 showMenuDialog();
             }
         });
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadPhoto();
+            }
+        });
+
         return root;
+    }
+
+    private void uploadPhoto(){
+        String jsonStr = JsonUtil.getJson("industry.json",getActivity());
+        Industry industry = JSONObject.parseObject(jsonStr,Industry.class);
+        List<Site> firstSite = industry.getSite();
+        showIndustryDialog(firstSite);
+    }
+
+    //弹出行业选择框
+    private void showIndustryDialog(final List<Site> firstSite){
+        final String[] firstName = new String[firstSite.size()];
+        int i = 0;
+        for (Site site : firstSite){
+            firstName[i] = site.getName();
+            i++;
+        }
+        new QMUIDialog.MenuDialogBuilder(getActivity())
+                .setTitle("选择行业")
+                .addItems(firstName, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        for (Site site : firstSite){
+                            if (firstName[which].equals(site.getName())){
+                                if (site.getSite() != null){
+                                    showIndustryDialog(site.getSite());
+                                    dialog.dismiss();
+                                }
+                            }
+                        }
+                    }
+                })
+                .create(mCurrentDialogStyle).show();
     }
 
     private void showMenuDialog(){
@@ -100,11 +150,22 @@ public class LicenseUploadFragment extends BaseFragment {
                             byCamera();
                             dialog.dismiss();
                         }else if (items[which].equals("从相册选择")){
-                            Toast.makeText(getActivity(), "你选择了从相册选择", Toast.LENGTH_SHORT).show();
+                            openAlbum();
+                            dialog.dismiss();
                         }
                     }
                 })
                 .create(mCurrentDialogStyle).show();
+    }
+
+    //打开相册
+    private void openAlbum(){
+        Intent intent = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+            intent = new Intent(Intent.ACTION_GET_CONTENT);
+        }
+        intent.setType("image/*");
+        startActivityForResult(intent,0x006);
     }
 
     private String imagePath;
@@ -157,33 +218,39 @@ public class LicenseUploadFragment extends BaseFragment {
             }
         }
         if(requestCode==6){
-//            //外界的程序访问ContentProvider所提供数据 可以通过ContentResolver接口
-//            ContentResolver resolver = getActivity().getContentResolver();
-//            Uri originalUri = data.getData();//获得图片的uri
-//            Log.e("uri",">>>>>>>>>>...."+originalUri);
-//            Bitmap bm = null;
-//            try {
-//                //显得到bitmap图片
-//                bm = MediaStore.Images.Media.getBitmap(resolver, originalUri);
-//                //获取图片的路径
-//                String[] proj = {MediaStore.Images.Media.DATA};
-//                Cursor cursor = managedQuery(originalUri, proj, null, null, null);
-//                //获得用户选择的图片的索引值
-//                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//                //将光标移至开头 ，这个很重要，不小心很容易引起越界
-//                cursor.moveToFirst();
-//                //最后根据索引值获取图片路径
-//                String path = cursor.getString(column_index);
-//                Log.e("uri",">>>>>>>>>>...."+PermissionUtils.getBitmapByPath(path, 480, 800));
-//                //绑定图片到Imageview
-//                businessLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(path, 480, 800));
-//                //转换成file文件,上传服务器uploadImg(file)
-//               /* File file=new File(path);
-//                Log.e("uri",">>>>>>>>>>...."+file);
-//                uploadImg(file);*/
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+            //外界的程序访问ContentProvider所提供数据 可以通过ContentResolver接口
+            ContentResolver resolver = getActivity().getContentResolver();
+            Uri originalUri = data.getData();//获得图片的uri
+            Log.e("uri",">>>>>>>>>>...."+originalUri);
+            Bitmap bm = null;
+            try {
+                //显得到bitmap图片
+                bm = MediaStore.Images.Media.getBitmap(resolver, originalUri);
+                //获取图片的路径
+                String[] proj = {MediaStore.Images.Media.DATA};
+                Cursor cursor = getActivity().managedQuery(originalUri, proj, null, null, null);
+                //获得用户选择的图片的索引值
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                //将光标移至开头 ，这个很重要，不小心很容易引起越界
+                cursor.moveToFirst();
+                //最后根据索引值获取图片路径
+                String path = cursor.getString(column_index);
+                Log.e("uri",">>>>>>>>>>...."+PermissionUtils.getBitmapByPath(path, 480, 800));
+                //绑定图片到Imageview
+                if (target.equals("business")){
+                    businessLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(path,300,300));
+                }else if (target.equals("industry")){
+                    industryLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(path,300,300));
+                }else if (target.equals("system")){
+                    systemLeveImg.setImageBitmap(PermissionUtils.getBitmapByPath(path,300,300));
+                }
+                //转换成file文件,上传服务器uploadImg(file)
+               /* File file=new File(path);
+                Log.e("uri",">>>>>>>>>>...."+file);
+                uploadImg(file);*/
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

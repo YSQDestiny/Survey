@@ -5,23 +5,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.lib.Group;
 import com.cykj.survey.lib.annotation.Widget;
+import com.cykj.survey.model.Industry;
+import com.cykj.survey.util.JsonUtil;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.yyydjk.library.DropDownMenu;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 @Widget(group = Group.Home, name = "企财险", iconRes = R.mipmap.icon_fragment_business)
 public class BusinessFragment extends BaseFragment {
@@ -76,22 +76,22 @@ public class BusinessFragment extends BaseFragment {
         return root;
     }
 
-    private void initTopbar(){
+    private void initTopbar() {
         mTopbar.setTitle("企业信息");
 
-        mTopbar.addRightTextButton("下一页",R.id.topbar_right_text_button)
-        .setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                QMUIFragment fragment = new LicenseUploadFragment();
-                startFragment(fragment);
-            }
-        });
+        mTopbar.addRightTextButton("下一页", R.id.topbar_right_text_button)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        QMUIFragment fragment = new LicenseUploadFragment();
+                        startFragment(fragment);
+                    }
+                });
 
 
     }
 
-    private void initGroupListView(){
+    private void initGroupListView() {
         QMUIGroupListView.Section section = new QMUIGroupListView.Section(getActivity());
 
         QMUICommonListItemView itemView = mGroupListView.createItemView("投保险种");
@@ -104,21 +104,21 @@ public class BusinessFragment extends BaseFragment {
             }
         };
 
-        section.addItemView(itemView,onClickListener)
+        section.addItemView(itemView, onClickListener)
                 .addTo(mGroupListView);
     }
 
-    private void showMultiChoiceDialog(final View v){
-        final String[] items = new String[]{"综合险","一切险","基本险"};
+    private void showMultiChoiceDialog(final View v) {
+        final String[] items = new String[]{"综合险", "一切险", "基本险"};
         final int[] selected = new int[items.length];
-        if (v instanceof QMUICommonListItemView){
+        if (v instanceof QMUICommonListItemView) {
             String str = ((QMUICommonListItemView) v).getDetailText().toString();
-            if (str != ""){
+            if (!str.equals("")) {
                 String[] str1 = str.split(";");
                 int a = 0;
-                for (int i = 0;i < str1.length;i++){
-                    for (int j = 0;j < items.length;j++){
-                        if (str1[i].equals(items[j])){
+                for (int i = 0; i < str1.length; i++) {
+                    for (int j = 0; j < items.length; j++) {
+                        if (str1[i].equals(items[j])) {
                             selected[a] = j;
                             a++;
                         }
@@ -144,10 +144,10 @@ public class BusinessFragment extends BaseFragment {
             @Override
             public void onClick(QMUIDialog dialog, int index) {
                 String result = "";
-                for (int i = 0; i < builder.getCheckedItemIndexes().length;i++){
-                    result += ""+items[builder.getCheckedItemIndexes()[i]] + ";";
+                for (int i = 0; i < builder.getCheckedItemIndexes().length; i++) {
+                    result += "" + items[builder.getCheckedItemIndexes()[i]] + ";";
                 }
-                if (v instanceof QMUICommonListItemView){
+                if (v instanceof QMUICommonListItemView) {
                     ((QMUICommonListItemView) v).setDetailText(result);
                 }
                 dialog.dismiss();
