@@ -30,6 +30,7 @@ import com.cykj.survey.fragment.utils.PermissionUtils;
 import com.cykj.survey.model.Industry;
 import com.cykj.survey.model.Site;
 import com.cykj.survey.util.JsonUtil;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
@@ -100,44 +101,12 @@ public class LicenseUploadFragment extends BaseFragment {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadPhoto();
+                QMUIFragment fragment = new IndustryFragment();
+                startFragment(fragment);
             }
         });
 
         return root;
-    }
-
-    private void uploadPhoto(){
-        String jsonStr = JsonUtil.getJson("industry.json",getActivity());
-        Industry industry = JSONObject.parseObject(jsonStr,Industry.class);
-        List<Site> firstSite = industry.getSite();
-        showIndustryDialog(firstSite);
-    }
-
-    //弹出行业选择框
-    private void showIndustryDialog(final List<Site> firstSite){
-        final String[] firstName = new String[firstSite.size()];
-        int i = 0;
-        for (Site site : firstSite){
-            firstName[i] = site.getName();
-            i++;
-        }
-        new QMUIDialog.MenuDialogBuilder(getActivity())
-                .setTitle("选择行业")
-                .addItems(firstName, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        for (Site site : firstSite){
-                            if (firstName[which].equals(site.getName())){
-                                if (site.getSite() != null){
-                                    showIndustryDialog(site.getSite());
-                                    dialog.dismiss();
-                                }
-                            }
-                        }
-                    }
-                })
-                .create(mCurrentDialogStyle).show();
     }
 
     private void showMenuDialog(){
