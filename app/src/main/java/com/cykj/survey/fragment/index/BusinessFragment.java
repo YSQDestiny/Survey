@@ -13,6 +13,7 @@ import com.cykj.survey.lib.annotation.Widget;
 import com.cykj.survey.model.Industry;
 import com.cykj.survey.util.JsonUtil;
 import com.qmuiteam.qmui.arch.QMUIFragment;
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
@@ -88,6 +89,7 @@ public class BusinessFragment extends BaseFragment {
                     }
                 });
 
+        QMUIStatusBarHelper.translucent(getActivity());
 
     }
 
