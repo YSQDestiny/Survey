@@ -2,9 +2,12 @@ package com.cykj.survey.fragment.industry;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.fragment.area.ProduceFragment;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
@@ -34,9 +37,7 @@ public class WoodenFurnitureFragment extends BaseFragment {
     }
 
     private void initTopbar() {
-
         mTopbar.setTitle("区域选择");
-
     }
 
     private void initGroupList() {
@@ -64,7 +65,18 @@ public class WoodenFurnitureFragment extends BaseFragment {
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (v instanceof QMUICommonListItemView){
+                    CharSequence text = ((QMUICommonListItemView) v).getText();
+                    switch (text.toString()){
+                        case "生产区":
+                            QMUIFragment fragment = new ProduceFragment();
+                            startFragment(fragment);
+                            break;
+                        default:
+                            Toast.makeText(getActivity(),"该页面还在施工中",Toast.LENGTH_LONG).show();
+                            break;
+                    }
+                }
             }
         };
 
