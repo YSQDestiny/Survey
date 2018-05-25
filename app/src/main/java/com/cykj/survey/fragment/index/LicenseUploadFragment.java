@@ -75,7 +75,7 @@ public class LicenseUploadFragment extends BaseFragment {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 6);
         }
         ButterKnife.bind(this, root);
-
+        initTopBar();
         businessLicenseImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +107,19 @@ public class LicenseUploadFragment extends BaseFragment {
         });
 
         return root;
+    }
+
+    private void initTopBar() {
+
+        mTopbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popBackStack();
+            }
+        });
+
+        mTopbar.setTitle("照片上传");
+
     }
 
     private void showMenuDialog(){

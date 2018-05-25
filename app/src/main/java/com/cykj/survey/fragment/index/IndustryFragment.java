@@ -104,6 +104,13 @@ public class IndustryFragment extends BaseFragment{
 
     private void initTopBar(){
         mTopbar.setTitle("行业选择");
+
+        mTopbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popBackStack();
+            }
+        });
     }
 
     @Override

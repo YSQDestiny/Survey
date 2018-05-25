@@ -80,6 +80,13 @@ public class BusinessFragment extends BaseFragment {
     private void initTopbar() {
         mTopbar.setTitle("企业信息");
 
+        mTopbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popBackStack();
+            }
+        });
+
         mTopbar.addRightTextButton("下一页", R.id.topbar_right_text_button)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override

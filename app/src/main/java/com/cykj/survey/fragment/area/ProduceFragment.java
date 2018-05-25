@@ -2,9 +2,12 @@ package com.cykj.survey.fragment.area;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.fragment.options.SprayingOptionsFragment;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
@@ -50,7 +53,18 @@ public class ProduceFragment extends BaseFragment {
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (v instanceof QMUICommonListItemView){
+                    CharSequence str = ((QMUICommonListItemView) v).getText();
+                    switch (str.toString()){
+                        case "喷涂区":
+                            QMUIFragment fragment = new SprayingOptionsFragment();
+                            startFragment(fragment);
+                            break;
+                        default:
+                            Toast.makeText(getActivity(),"该页面还在施工中",Toast.LENGTH_LONG).show();
+                            break;
+                    }
+                }
             }
         };
 
@@ -65,6 +79,13 @@ public class ProduceFragment extends BaseFragment {
 
     private void initTopbar() {
         mTopbar.setTitle("生产区");
+
+        mTopbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popBackStack();
+            }
+        });
     }
 
 

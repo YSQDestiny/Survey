@@ -38,6 +38,13 @@ public class WoodenFurnitureFragment extends BaseFragment {
 
     private void initTopbar() {
         mTopbar.setTitle("区域选择");
+
+        mTopbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popBackStack();
+            }
+        });
     }
 
     private void initGroupList() {

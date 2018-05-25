@@ -4,6 +4,9 @@
 
     <string name="app_upgrade_tip_title">Release Notes (%1$s)</string>
 
+    <string name="option_yes">是</string>
+    <string name="option_no">否</string>
+
     <!-- business -->
     <string name="business_edit_name">企业名称:</string>
     <string name="business_hint_name">请输入企业名称</string>
@@ -140,4 +143,20 @@
     <string name="license_industry_license">行业许可</string>
     <string name="license_system_level">体系等级</string>
 
+    <!-- spraying-options -->
+    <string name="spraying_options_1">1.安全玻璃是否有合格证</string>
+    <string name="spraying_options_2">2.安全玻璃外观是否完好</string>
+    <string name="spraying_options_3">3.电线开关是否穿管并防爆良好</string>
+    <string name="spraying_options_4">4.照明是否符合防爆要求</string>
+    <string name="spraying_options_5">5.喷漆室是否采用阻燃材料</string>
+    <string name="spraying_options_6">6.安全门是否向外开启且门宽不小于75cm</string>
+    <string name="spraying_options_7">7.通风模式是否采用上送下抽</string>
+    <string name="spraying_options_8">8.送排风系统、喷气系统、消防系统是否连锁</string>
+    <string name="spraying_options_9">9.风机及电机是否防爆</string>
+    <string name="spraying_options_10">10.风管是否设置防火阀</string>
+    <string name="spraying_options_11">11.各机电设备是否接地良好</string>
+    <string name="spraying_options_12">12.安全警示标志是否齐全</string>
+    <string name="spraying_options_13">13.人员防护穿戴是否正确有效</string>
+    <string name="spraying_options_14">14.漆雾过滤设施是否完好有效</string>
+    <string name="spraying_options_15">15.是否采用防静电措施</string>
 </resources>
