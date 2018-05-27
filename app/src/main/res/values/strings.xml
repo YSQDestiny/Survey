@@ -159,4 +159,19 @@
     <string name="spraying_options_13">13.人员防护穿戴是否正确有效</string>
     <string name="spraying_options_14">14.漆雾过滤设施是否完好有效</string>
     <string name="spraying_options_15">15.是否采用防静电措施</string>
+
+    <!-- dry-options -->
+    <string name="dry_options_1">1.送排风装置是否完好且正常运行</string>
+    <string name="dry_options_2">2.风机电机是否防爆</string>
+    <string name="dry_options_3">3.风管是否设置防火阀</string>
+    <string name="dry_options_4">4.作业环境是否整洁清洁</string>
+    <string name="dry_options_5">5.烤灯灯管、防护罩是否完好</string>
+    <string name="dry_options_6">6.漆雾过滤设施是否完好有效</string>
+    <string name="dry_options_7">7.人员防护穿戴是否正确有效</string>
+    <string name="dry_options_8">8.除尘管口风量是否满足要求</string>
+    <string name="dry_options_9">9.作业环境送排风是否正常工作</string>
+    <string name="dry_options_10">10.气动工具是否使用正常</string>
+    <string name="dry_options_11">11.是否采用防静电措施</string>
+    <string name="dry_options_12">12.漏电保护器、电气开关能否满足防爆要求</string>
+    <string name="dry_options_13">13.电气线路是否采用镀锌管套管保护</string>
 </resources>

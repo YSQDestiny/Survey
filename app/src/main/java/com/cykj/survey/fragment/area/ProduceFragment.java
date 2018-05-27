@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.fragment.options.DryOptionsFragment;
 import com.cykj.survey.fragment.options.SprayingOptionsFragment;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
@@ -57,8 +58,12 @@ public class ProduceFragment extends BaseFragment {
                     CharSequence str = ((QMUICommonListItemView) v).getText();
                     switch (str.toString()){
                         case "喷涂区":
-                            QMUIFragment fragment = new SprayingOptionsFragment();
-                            startFragment(fragment);
+                            QMUIFragment sprayingOptionsFragmentfragment = new SprayingOptionsFragment();
+                            startFragment(sprayingOptionsFragmentfragment);
+                            break;
+                        case "干燥区":
+                            QMUIFragment dryOptionsFragment = new DryOptionsFragment();
+                            startFragment(dryOptionsFragment);
                             break;
                         default:
                             Toast.makeText(getActivity(),"该页面还在施工中",Toast.LENGTH_LONG).show();
