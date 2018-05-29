@@ -18,6 +18,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * 生产-喷涂区
+ */
 public class SprayingOptionsFragment extends BaseFragment {
 
     @BindView(R.id.topbar)

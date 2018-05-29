@@ -19,9 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 生产-干燥区
+ * 生产-除尘
  */
-public class DryOptionsFragment extends BaseFragment {
+public class DustRemovalFragment extends BaseFragment {
 
     @BindView(R.id.topbar)
     QMUITopBar mTopbar;
@@ -50,19 +50,21 @@ public class DryOptionsFragment extends BaseFragment {
 
     private void initData() {
         options = new ArrayList<>();
-        options.add(getString(R.string.dry_options_1));
-        options.add(getString(R.string.dry_options_2));
-        options.add(getString(R.string.dry_options_3));
-        options.add(getString(R.string.dry_options_4));
-        options.add(getString(R.string.dry_options_5));
-        options.add(getString(R.string.dry_options_6));
-        options.add(getString(R.string.dry_options_7));
-        options.add(getString(R.string.dry_options_8));
-        options.add(getString(R.string.dry_options_9));
-        options.add(getString(R.string.dry_options_10));
-        options.add(getString(R.string.dry_options_11));
-        options.add(getString(R.string.dry_options_12));
-        options.add(getString(R.string.dry_options_13));
+        options.add(getString(R.string.dustRemoval_optinos_1));
+        options.add(getString(R.string.dustRemoval_optinos_2));
+        options.add(getString(R.string.dustRemoval_optinos_3));
+        options.add(getString(R.string.dustRemoval_optinos_4));
+        options.add(getString(R.string.dustRemoval_optinos_5));
+        options.add(getString(R.string.dustRemoval_optinos_6));
+        options.add(getString(R.string.dustRemoval_optinos_7));
+        options.add(getString(R.string.dustRemoval_optinos_8));
+        options.add(getString(R.string.dustRemoval_optinos_9));
+        options.add(getString(R.string.dustRemoval_optinos_10));
+        options.add(getString(R.string.dustRemoval_optinos_11));
+        options.add(getString(R.string.dustRemoval_optinos_12));
+        options.add(getString(R.string.dustRemoval_optinos_13));
+        options.add(getString(R.string.dustRemoval_optinos_14));
+        options.add(getString(R.string.dustRemoval_optinos_15));
     }
 
     private void initTopbar() {
@@ -82,5 +84,6 @@ public class DryOptionsFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
+
 
 }

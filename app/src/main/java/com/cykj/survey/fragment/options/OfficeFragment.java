@@ -18,10 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * 生产-干燥区
- */
-public class DryOptionsFragment extends BaseFragment {
+public class OfficeFragment extends BaseFragment {
 
     @BindView(R.id.topbar)
     QMUITopBar mTopbar;
@@ -50,19 +47,12 @@ public class DryOptionsFragment extends BaseFragment {
 
     private void initData() {
         options = new ArrayList<>();
-        options.add(getString(R.string.dry_options_1));
-        options.add(getString(R.string.dry_options_2));
-        options.add(getString(R.string.dry_options_3));
-        options.add(getString(R.string.dry_options_4));
-        options.add(getString(R.string.dry_options_5));
-        options.add(getString(R.string.dry_options_6));
-        options.add(getString(R.string.dry_options_7));
-        options.add(getString(R.string.dry_options_8));
-        options.add(getString(R.string.dry_options_9));
-        options.add(getString(R.string.dry_options_10));
-        options.add(getString(R.string.dry_options_11));
-        options.add(getString(R.string.dry_options_12));
-        options.add(getString(R.string.dry_options_13));
+        options.add(getString(R.string.office_options_1));
+        options.add(getString(R.string.office_options_2));
+        options.add(getString(R.string.office_options_3));
+        options.add(getString(R.string.office_options_4));
+        options.add(getString(R.string.office_options_5));
+        options.add(getString(R.string.office_options_6));
     }
 
     private void initTopbar() {

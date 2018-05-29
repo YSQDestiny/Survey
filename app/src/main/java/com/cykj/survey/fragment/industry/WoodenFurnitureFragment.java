@@ -7,6 +7,11 @@ import android.widget.Toast;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.fragment.area.ProduceFragment;
+import com.cykj.survey.fragment.area.StockFragment;
+import com.cykj.survey.fragment.options.AidFragment;
+import com.cykj.survey.fragment.options.ConstructionFragment;
+import com.cykj.survey.fragment.options.OfficeFragment;
+import com.cykj.survey.fragment.options.SurroundingFragment;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
@@ -66,7 +71,7 @@ public class WoodenFurnitureFragment extends BaseFragment {
         QMUICommonListItemView construction = mGroupListView.createItemView("建.构筑物");
         construction.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
-        QMUICommonListItemView aid = mGroupListView.createItemView("辅助");
+        QMUICommonListItemView aid = mGroupListView.createItemView("生产辅助");
         aid.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -79,6 +84,26 @@ public class WoodenFurnitureFragment extends BaseFragment {
                             QMUIFragment fragment = new ProduceFragment();
                             startFragment(fragment);
                             break;
+                        case "库存区":
+                            QMUIFragment stock = new StockFragment();
+                            startFragment(stock);
+                            break;
+                        case "办公区":
+                            QMUIFragment office = new OfficeFragment();
+                            startFragment(office);
+                            break;
+                        case "周边环境":
+                            QMUIFragment surroundingFragment = new SurroundingFragment();
+                            startFragment(surroundingFragment);
+                            break;
+                        case "建.构筑物":
+                            QMUIFragment constructionFragment = new ConstructionFragment();
+                            startFragment(constructionFragment);
+                            break;
+                        case "生产辅助":
+                            QMUIFragment aidFragment = new AidFragment();
+                            startFragment(aidFragment);
+                            break;
                         default:
                             Toast.makeText(getActivity(),"该页面还在施工中",Toast.LENGTH_LONG).show();
                             break;
@@ -90,6 +115,7 @@ public class WoodenFurnitureFragment extends BaseFragment {
         section.setTitle("区域")
                 .addItemView(produce,onClickListener)
                 .addItemView(stock,onClickListener)
+                .addItemView(office,onClickListener)
                 .addItemView(surroundings,onClickListener)
                 .addItemView(construction,onClickListener)
                 .addItemView(aid,onClickListener)
