@@ -1,4 +1,4 @@
-package com.cykj.survey.fragment.options;
+package com.cykj.survey.fragment.options.wooden_furniture;
 
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,9 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 生产-打磨区域
+ * 库存-危废库
  */
-public class GrindingFragment extends BaseFragment {
+public class WasteFragment extends BaseFragment {
 
     @BindView(R.id.topbar)
     QMUITopBar mTopbar;
@@ -50,16 +50,14 @@ public class GrindingFragment extends BaseFragment {
 
     private void initData() {
         options = new ArrayList<>();
-        options.add(getString(R.string.grinding_options_1));
-        options.add(getString(R.string.grinding_options_2));
-        options.add(getString(R.string.grinding_options_3));
-        options.add(getString(R.string.grinding_options_4));
-        options.add(getString(R.string.grinding_options_5));
-        options.add(getString(R.string.grinding_options_6));
-        options.add(getString(R.string.grinding_options_7));
-        options.add(getString(R.string.grinding_options_8));
-        options.add(getString(R.string.grinding_options_9));
-        options.add(getString(R.string.grinding_options_10));
+        options.add(getString(R.string.waste_options_1));
+        options.add(getString(R.string.waste_options_2));
+        options.add(getString(R.string.waste_options_3));
+        options.add(getString(R.string.waste_options_4));
+        options.add(getString(R.string.waste_options_5));
+        options.add(getString(R.string.waste_options_6));
+        options.add(getString(R.string.waste_options_7));
+        options.add(getString(R.string.waste_options_8));
     }
 
     private void initTopbar() {
@@ -79,6 +77,5 @@ public class GrindingFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
-
 
 }

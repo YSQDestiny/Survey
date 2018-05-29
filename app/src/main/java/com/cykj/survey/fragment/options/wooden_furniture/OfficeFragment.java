@@ -1,4 +1,4 @@
-package com.cykj.survey.fragment.options;
+package com.cykj.survey.fragment.options.wooden_furniture;
 
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;

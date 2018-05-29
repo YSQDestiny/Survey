@@ -1,4 +1,4 @@
-package com.cykj.survey.fragment.options;
+package com.cykj.survey.fragment.options.wooden_furniture;
 
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,9 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 生产-喷涂区
+ * 生产-打磨区域
  */
-public class SprayingOptionsFragment extends BaseFragment {
+public class GrindingFragment extends BaseFragment {
 
     @BindView(R.id.topbar)
     QMUITopBar mTopbar;
@@ -50,21 +50,16 @@ public class SprayingOptionsFragment extends BaseFragment {
 
     private void initData() {
         options = new ArrayList<>();
-        options.add(getString(R.string.spraying_options_1));
-        options.add(getString(R.string.spraying_options_2));
-        options.add(getString(R.string.spraying_options_3));
-        options.add(getString(R.string.spraying_options_4));
-        options.add(getString(R.string.spraying_options_5));
-        options.add(getString(R.string.spraying_options_6));
-        options.add(getString(R.string.spraying_options_7));
-        options.add(getString(R.string.spraying_options_8));
-        options.add(getString(R.string.spraying_options_9));
-        options.add(getString(R.string.spraying_options_10));
-        options.add(getString(R.string.spraying_options_11));
-        options.add(getString(R.string.spraying_options_12));
-        options.add(getString(R.string.spraying_options_13));
-        options.add(getString(R.string.spraying_options_14));
-        options.add(getString(R.string.spraying_options_15));
+        options.add(getString(R.string.grinding_options_1));
+        options.add(getString(R.string.grinding_options_2));
+        options.add(getString(R.string.grinding_options_3));
+        options.add(getString(R.string.grinding_options_4));
+        options.add(getString(R.string.grinding_options_5));
+        options.add(getString(R.string.grinding_options_6));
+        options.add(getString(R.string.grinding_options_7));
+        options.add(getString(R.string.grinding_options_8));
+        options.add(getString(R.string.grinding_options_9));
+        options.add(getString(R.string.grinding_options_10));
     }
 
     private void initTopbar() {
@@ -84,4 +79,6 @@ public class SprayingOptionsFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
+
+
 }

@@ -6,11 +6,11 @@ import android.widget.Toast;
 
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
-import com.cykj.survey.fragment.options.CuttingFragment;
-import com.cykj.survey.fragment.options.DryOptionsFragment;
-import com.cykj.survey.fragment.options.DustRemovalFragment;
-import com.cykj.survey.fragment.options.GrindingFragment;
-import com.cykj.survey.fragment.options.SprayingOptionsFragment;
+import com.cykj.survey.fragment.options.wooden_furniture.CuttingFragment;
+import com.cykj.survey.fragment.options.wooden_furniture.DryOptionsFragment;
+import com.cykj.survey.fragment.options.wooden_furniture.DustRemovalFragment;
+import com.cykj.survey.fragment.options.wooden_furniture.GrindingFragment;
+import com.cykj.survey.fragment.options.wooden_furniture.SprayingOptionsFragment;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;

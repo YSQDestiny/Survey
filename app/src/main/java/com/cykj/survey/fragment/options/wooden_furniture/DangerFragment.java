@@ -1,4 +1,4 @@
-package com.cykj.survey.fragment.options;
+package com.cykj.survey.fragment.options.wooden_furniture;
 
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,9 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 木质家具-生产辅助
+ * 库存-危化品库
  */
-public class AidFragment extends BaseFragment{
+public class DangerFragment extends BaseFragment{
 
     @BindView(R.id.topbar)
     QMUITopBar mTopbar;
@@ -50,16 +50,21 @@ public class AidFragment extends BaseFragment{
 
     private void initData() {
         options = new ArrayList<>();
-        options.add(getString(R.string.aid_options_1));
-        options.add(getString(R.string.aid_options_2));
-        options.add(getString(R.string.aid_options_3));
-        options.add(getString(R.string.aid_options_4));
-        options.add(getString(R.string.aid_options_5));
-        options.add(getString(R.string.aid_options_6));
-        options.add(getString(R.string.aid_options_7));
-        options.add(getString(R.string.aid_options_8));
-        options.add(getString(R.string.aid_options_9));
-        options.add(getString(R.string.aid_options_10));
+        options.add(getString(R.string.danger_options_1));
+        options.add(getString(R.string.danger_options_2));
+        options.add(getString(R.string.danger_options_3));
+        options.add(getString(R.string.danger_options_4));
+        options.add(getString(R.string.danger_options_5));
+        options.add(getString(R.string.danger_options_6));
+        options.add(getString(R.string.danger_options_7));
+        options.add(getString(R.string.danger_options_8));
+        options.add(getString(R.string.danger_options_9));
+        options.add(getString(R.string.danger_options_10));
+        options.add(getString(R.string.danger_options_11));
+        options.add(getString(R.string.danger_options_12));
+        options.add(getString(R.string.danger_options_13));
+        options.add(getString(R.string.danger_options_14));
+        options.add(getString(R.string.danger_options_15));
     }
 
     private void initTopbar() {
@@ -79,6 +84,5 @@ public class AidFragment extends BaseFragment{
     public void onDestroyView() {
         super.onDestroyView();
     }
-
 
 }

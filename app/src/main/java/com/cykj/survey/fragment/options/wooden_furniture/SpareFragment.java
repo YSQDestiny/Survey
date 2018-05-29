@@ -1,4 +1,4 @@
-package com.cykj.survey.fragment.options;
+package com.cykj.survey.fragment.options.wooden_furniture;
 
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,9 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 生产-除尘
+ * 库存-备品备件库
  */
-public class DustRemovalFragment extends BaseFragment {
+public class SpareFragment extends BaseFragment{
 
     @BindView(R.id.topbar)
     QMUITopBar mTopbar;
@@ -50,21 +50,8 @@ public class DustRemovalFragment extends BaseFragment {
 
     private void initData() {
         options = new ArrayList<>();
-        options.add(getString(R.string.dustRemoval_optinos_1));
-        options.add(getString(R.string.dustRemoval_optinos_2));
-        options.add(getString(R.string.dustRemoval_optinos_3));
-        options.add(getString(R.string.dustRemoval_optinos_4));
-        options.add(getString(R.string.dustRemoval_optinos_5));
-        options.add(getString(R.string.dustRemoval_optinos_6));
-        options.add(getString(R.string.dustRemoval_optinos_7));
-        options.add(getString(R.string.dustRemoval_optinos_8));
-        options.add(getString(R.string.dustRemoval_optinos_9));
-        options.add(getString(R.string.dustRemoval_optinos_10));
-        options.add(getString(R.string.dustRemoval_optinos_11));
-        options.add(getString(R.string.dustRemoval_optinos_12));
-        options.add(getString(R.string.dustRemoval_optinos_13));
-        options.add(getString(R.string.dustRemoval_optinos_14));
-        options.add(getString(R.string.dustRemoval_optinos_15));
+        options.add(getString(R.string.spare_options_1));
+        options.add(getString(R.string.spare_options_2));
     }
 
     private void initTopbar() {
@@ -84,6 +71,5 @@ public class DustRemovalFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
-
 
 }

@@ -6,13 +6,6 @@ import android.widget.Toast;
 
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
-import com.cykj.survey.fragment.area.ProduceFragment;
-import com.cykj.survey.fragment.area.StockFragment;
-import com.cykj.survey.fragment.options.wooden_furniture.AidFragment;
-import com.cykj.survey.fragment.options.wooden_furniture.ConstructionFragment;
-import com.cykj.survey.fragment.options.wooden_furniture.OfficeFragment;
-import com.cykj.survey.fragment.options.wooden_furniture.SurroundingFragment;
-import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
@@ -20,11 +13,7 @@ import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * 木质家具-区域选择界面
- */
-public class WoodenFurnitureFragment extends BaseFragment {
-
+public class TimberProcessingFragment extends BaseFragment {
 
     @BindView(R.id.topbar)
     QMUITopBar mTopbar;
@@ -38,17 +27,6 @@ public class WoodenFurnitureFragment extends BaseFragment {
         initTopbar();
         initGroupList();
         return root;
-    }
-
-    private void initTopbar() {
-        mTopbar.setTitle("区域选择");
-
-        mTopbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popBackStack();
-            }
-        });
     }
 
     private void initGroupList() {
@@ -80,28 +58,22 @@ public class WoodenFurnitureFragment extends BaseFragment {
                     CharSequence text = ((QMUICommonListItemView) v).getText();
                     switch (text.toString()){
                         case "生产区":
-                            QMUIFragment fragment = new ProduceFragment();
-                            startFragment(fragment);
+
                             break;
                         case "库存区":
-                            QMUIFragment stock = new StockFragment();
-                            startFragment(stock);
+
                             break;
                         case "办公区":
-                            QMUIFragment office = new OfficeFragment();
-                            startFragment(office);
+
                             break;
                         case "周边环境":
-                            QMUIFragment surroundingFragment = new SurroundingFragment();
-                            startFragment(surroundingFragment);
+
                             break;
                         case "建.构筑物":
-                            QMUIFragment constructionFragment = new ConstructionFragment();
-                            startFragment(constructionFragment);
+
                             break;
                         case "生产辅助":
-                            QMUIFragment aidFragment = new AidFragment();
-                            startFragment(aidFragment);
+
                             break;
                         default:
                             Toast.makeText(getActivity(),"该页面还在施工中",Toast.LENGTH_LONG).show();
@@ -121,8 +93,14 @@ public class WoodenFurnitureFragment extends BaseFragment {
                 .addTo(mGroupListView);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    private void initTopbar() {
+        mTopbar.setTitle("区域选择");
+
+        mTopbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popBackStack();
+            }
+        });
     }
 }

@@ -297,4 +297,59 @@
     <string name="aid_options_9">9.相关预案是否定期演练</string>
     <string name="aid_options_10">10.各类操作人员是否持证</string>
 
+    <!-- wood_dry_options 木材加工企业-裁、切、干燥 -->
+    <string name="wood_dry_options_1">1.送排风装置是否完好且正常运行</string>
+    <string name="wood_dry_options_2">2.电气线路是否穿管保护</string>
+    <string name="wood_dry_options_3">3.消防器材是否充足、完好</string>
+    <string name="wood_dry_options_4">4.安全警示标志是否齐全</string>
+    <string name="wood_dry_options_5">5.干燥作业是否有消防应急措施</string>
+    <string name="wood_dry_options_6">6.干燥设备是否定期保养，加润滑油</string>
+    <string name="wood_dry_options_7">7.是否对设备进行检查防止老化磨损产生火花</string>
+    <string name="wood_dry_options_8">8.设备接线是否良好</string>
+    <string name="wood_dry_options_9">9.是否执行禁火管理</string>
+    <string name="wood_dry_options_10">10.人员防护穿戴是否正确有效</string>
+    <string name="wood_dry_options_11">11.干燥后的木料或初始单板是否进行良好散热</string>
+
+    <!-- wood_glue_options 木材加工企业-制胶、涂胶、组坯 -->
+    <string name="wood_glue_options_1">1.设备线路是否完好，接线是否良好</string>
+    <string name="wood_glue_options_2">2.设备安全附件是否完好</string>
+    <string name="wood_glue_options_3">3.设备是否良好接地</string>
+    <string name="wood_glue_options_4">4.作业环境是否整洁清洁</string>
+    <string name="wood_glue_options_5">5.设备操作接触部位绝缘保护是否良好</string>
+    <string name="wood_glue_options_6">6.电气开关能否满足防爆要求</string>
+    <string name="wood_glue_options_7">7.人员防护穿戴是否正确有效</string>
+    <string name="wood_glue_options_8">8.安全警示标志是否齐全</string>
+    <string name="wood_glue_options_9">9.是否采用防静电措施</string>
+    <string name="wood_glue_options_10">10.排风设备电机是否防爆</string>
+    <string name="wood_glue_options_11">11.电控设施是否良好防爆</string>
+    <string name="wood_glue_options_12">12.照明是否防爆</string>
+    <string name="wood_glue_options_13">13.消防器材是否充足、完好</string>
+    <string name="wood_glue_options_14">14.是否设置洗眼、淋雨设施</string>
+
+    <!-- wood_lamination_options 木材加工企业-压合（冷、热） -->
+    <string name="wood_lamination_options_1">1.热压后是否摊开散热</string>
+    <string name="wood_lamination_options_2">2.风机是否开启且运转良好</string>
+    <string name="wood_lamination_options_3">3.压合后的板材是否定位管理，不占用其他区域及通道</string>
+    <string name="wood_lamination_options_4">4.电控箱是否清洁整洁，接线是否良好</string>
+    <string name="wood_lamination_options_5">5.电控箱是否良好接地</string>
+    <string name="wood_lamination_options_6">6.人员防护穿戴是否正确有效</string>
+    <string name="wood_lamination_options_7">7.消防器材</string>
+    <string name="wood_lamination_options_8">8.电气照明是否有防尘保护</string>
+    <string name="wood_lamination_options_9">9.是否定期定时清洗作业区域</string>
+    <string name="wood_lamination_options_10">10.消防器材是否充足、完好</string>
+
+    <!-- wood_tailoring_options 修补、砂光、剪裁 -->
+    <string name="wood_tailoring_options_1">1.手持工具线路是否完好，接线是否良好</string>
+    <string name="wood_tailoring_options_2">2.刨花、锯末每班是否打扫干净，倒在指定地点</string>
+    <string name="wood_tailoring_options_3">3.是否定点操作，不占用其他区域及通道</string>
+    <string name="wood_tailoring_options_4">4.作业环境是否整洁清洁</string>
+    <string name="wood_tailoring_options_5">5.电控箱是否清洁整洁，接线是否良好</string>
+    <string name="wood_tailoring_options_6">6.电控箱进出线孔是否封堵</string>
+    <string name="wood_tailoring_options_7">7.人员防护穿戴是否正确有效</string>
+    <string name="wood_tailoring_options_8">8.除尘管口风量是否满足要求</string>
+    <string name="wood_tailoring_options_9">9.电气照明是否有防尘保护</string>
+    <string name="wood_tailoring_options_10">10.是否定期定时清洗作业区域</string>
+    <string name="wood_tailoring_options_11">11.消防器材是否充足、完好</string>
+
+
 </resources>

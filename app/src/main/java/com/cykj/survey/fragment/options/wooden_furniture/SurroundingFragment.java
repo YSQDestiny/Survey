@@ -1,4 +1,4 @@
-package com.cykj.survey.fragment.options;
+package com.cykj.survey.fragment.options.wooden_furniture;
 
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,9 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 库存-备品备件库
+ * 木制家具-周边环境
  */
-public class SpareFragment extends BaseFragment{
+public class SurroundingFragment extends BaseFragment {
 
     @BindView(R.id.topbar)
     QMUITopBar mTopbar;
@@ -46,12 +46,15 @@ public class SpareFragment extends BaseFragment{
         mRecycler.setItemAnimator( new DefaultItemAnimator());
         mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         return root;
+
     }
 
     private void initData() {
         options = new ArrayList<>();
-        options.add(getString(R.string.spare_options_1));
-        options.add(getString(R.string.spare_options_2));
+        options.add(getString(R.string.surroundings_options_1));
+        options.add(getString(R.string.surroundings_options_2));
+        options.add(getString(R.string.surroundings_options_3));
+        options.add(getString(R.string.surroundings_options_4));
     }
 
     private void initTopbar() {

@@ -1,4 +1,4 @@
-package com.cykj.survey.fragment.options;
+package com.cykj.survey.fragment.options.wooden_furniture;
 
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,9 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 生产-切割拼装区
+ * 库存-成品、原料
  */
-public class CuttingFragment extends BaseFragment {
+public class MaterialFragmet extends BaseFragment{
 
     @BindView(R.id.topbar)
     QMUITopBar mTopbar;
@@ -50,19 +50,20 @@ public class CuttingFragment extends BaseFragment {
 
     private void initData() {
         options = new ArrayList<>();
-        options.add(getString(R.string.cutting_options_1));
-        options.add(getString(R.string.cutting_options_2));
-        options.add(getString(R.string.cutting_options_3));
-        options.add(getString(R.string.cutting_options_4));
-        options.add(getString(R.string.cutting_options_5));
-        options.add(getString(R.string.cutting_options_6));
-        options.add(getString(R.string.cutting_options_7));
-        options.add(getString(R.string.cutting_options_8));
-        options.add(getString(R.string.cutting_options_9));
-        options.add(getString(R.string.cutting_options_10));
-        options.add(getString(R.string.cutting_options_11));
-        options.add(getString(R.string.cutting_options_12));
-        options.add(getString(R.string.cutting_options_13));
+        options.add(getString(R.string.material_options_1));
+        options.add(getString(R.string.material_options_2));
+        options.add(getString(R.string.material_options_3));
+        options.add(getString(R.string.material_options_4));
+        options.add(getString(R.string.material_options_5));
+        options.add(getString(R.string.material_options_6));
+        options.add(getString(R.string.material_options_7));
+        options.add(getString(R.string.material_options_8));
+        options.add(getString(R.string.material_options_9));
+        options.add(getString(R.string.material_options_10));
+        options.add(getString(R.string.material_options_11));
+        options.add(getString(R.string.material_options_12));
+        options.add(getString(R.string.material_options_13));
+        options.add(getString(R.string.material_options_14));
     }
 
     private void initTopbar() {
@@ -82,6 +83,5 @@ public class CuttingFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
-
 
 }

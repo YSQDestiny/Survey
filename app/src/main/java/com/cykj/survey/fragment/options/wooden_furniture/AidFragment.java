@@ -1,4 +1,4 @@
-package com.cykj.survey.fragment.options;
+package com.cykj.survey.fragment.options.wooden_furniture;
 
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,9 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 木质家具-建、构筑物
+ * 木质家具-生产辅助
  */
-public class ConstructionFragment extends BaseFragment {
+public class AidFragment extends BaseFragment{
 
     @BindView(R.id.topbar)
     QMUITopBar mTopbar;
@@ -50,9 +50,16 @@ public class ConstructionFragment extends BaseFragment {
 
     private void initData() {
         options = new ArrayList<>();
-        options.add(getString(R.string.construction_options_1));
-        options.add(getString(R.string.construction_options_2));
-        options.add(getString(R.string.construction_options_3));
+        options.add(getString(R.string.aid_options_1));
+        options.add(getString(R.string.aid_options_2));
+        options.add(getString(R.string.aid_options_3));
+        options.add(getString(R.string.aid_options_4));
+        options.add(getString(R.string.aid_options_5));
+        options.add(getString(R.string.aid_options_6));
+        options.add(getString(R.string.aid_options_7));
+        options.add(getString(R.string.aid_options_8));
+        options.add(getString(R.string.aid_options_9));
+        options.add(getString(R.string.aid_options_10));
     }
 
     private void initTopbar() {
