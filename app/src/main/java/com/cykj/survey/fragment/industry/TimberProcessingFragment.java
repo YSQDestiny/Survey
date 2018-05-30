@@ -6,6 +6,9 @@ import android.widget.Toast;
 
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.fragment.area.WoodProduceFragment;
+import com.cykj.survey.fragment.area.WoodStockFragment;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
@@ -58,10 +61,12 @@ public class TimberProcessingFragment extends BaseFragment {
                     CharSequence text = ((QMUICommonListItemView) v).getText();
                     switch (text.toString()){
                         case "生产区":
-
+                            QMUIFragment wood_produce = new WoodProduceFragment();
+                            startFragment(wood_produce);
                             break;
                         case "库存区":
-
+                            QMUIFragment wood_stock = new WoodStockFragment();
+                            startFragment(wood_stock);
                             break;
                         case "办公区":
 

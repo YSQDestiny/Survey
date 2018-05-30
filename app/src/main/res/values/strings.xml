@@ -38,106 +38,6 @@
     <string name="business_coverage">投保范围:</string>
     <string name="business_hint_coverage">请输入投保范围</string>
 
-    <string name="xiao_ping_zi">
-        xiao ping zi
-        shou wo zhe xiao ping zi
-        zhuang ping fan de ri zi
-        sheng huo de da xiao shi
-        shu xi de guo ke
-        dao ying zhong kan bi ci
-        ge zhong xi nu ai le
-        jin kou de shou zhi
-        xie xia xin de gu shi
-        fen fen zhe die de chen mo
-        ceng ceng ying cang ling yi ge wo
-        shuo zhe bu wan mei de yin se
-        chuan guo yi duo duo xuan lan de xuan wo
-        cong cong feng chui hua kai ri luo
-        shi jian a jie kai wo de mi huo
-        xu xia de yuan wang zai tian bian hai jiao pu cheng le yin he
-        deng zhe liu lang de ni la la zhu wo de shou
-
-    </string>
-
-    <string name="wen_rou">
-        wen rou
-                wu yue tian
-        zou zai feng zhong jin tian yang guang zhen de hao wen rou
-        tian de wen rou di de wen rou xiang ni bao zhe wo
-        mei you fa xian mei you yu zhao ni zhen de you shuo guo
-        ru guo you jiu rang ni zi you
-        bu zhi dao bu ming liao bu xiang yao
-        wei shen me wo de xin
-        ming ming shi xiang kao jin
-        qu gu dan dao li ming
-        bu zhi dao bu ming liao bu xiang yao
-        wei shen me wo de xin
-        na ai qing de qi li
-        zong shi zia gu dan li
-        zai zui hao de ai gei ni
-        bu zhi bu jue bu qing bu yuan
-        you dao xiang zi kou
-        wo mei you ku ye mei you xiao
-        yin wei zhe shi meng
-        mei you yu zhao
-        mei you li you
-        ni zhen de you shuo guo
-        bu dao ran shi wo de wen rou
-    </string>
-
-    <string name="ru_yan">
-        wo zuo zai chuang qian
-        wang zhe chuang wai
-        hui yi man tian
-        sheng ming shi hua li cuo jue
-        shi jian shi zei
-        tuo zou yi qie
-        qi sui de na yi nian
-        zhua zhu na zhi chan
-        yi wei neng zhua zhu xia tian
-        shi qi sui de na nian
-        wen guo ta de lian
-        jiu yi wei he neng yong yuan
-        you mei you na me yi zhong yong yuan
-        yong yuan bu gai bian
-        yong bao guo de mei li dou zai ye bu po sui
-        rang xian jun sui yue bu neng zai lian shang sai ye
-        rang sheng li he si bie dou yao yuan
-        you shui neng ting jian
-        wo zuo zai chuang qian
-        zhuan guo tou kan
-        shui zai cheng shui
-        na yi zhang cang lao de lian
-        hao xiang shi wo jin bi shuang yan
-        ceng jing shi ai wo de he wo shen ai de
-        dou wei rao zai wo shen bian
-        dai bu zou de na xie yi han he jun lian
-        jiu hua cheng zui hou yi di lei
-        you mei you na me yi di yan lei
-        neng xi diao hou hui
-        hua cheng da yu jiang luo zai hui bu qu de jie
-        zai gei wo yi ci ji hui jiang gu shi gai xie
-        huan qian le ta yi sheng de yi ju bao qian
-        you mei you na me yi ge shi jie yong yuan bu tian hei
-        xing xing tai yang wan wu dou ting wo de zhi hui
-        yue liang bu mang zhe yuan que chun tian bu zou yuan
-        shu shao jin jin yong bao zhe shu ye
-        you shui neng ting jian
-        er ji yan qian
-        ci sheng chong yan
-        shi wo lai zi qi hei
-        er you hui gui qi hei
-        ren jian shun jian
-        tian di zhi jian
-        xia ci wo you shi shui
-        you mei you na me yi duo mei gui yong yuan bu diao xie
-        yong yuan jiao ao he wan mei yong yuan bu tuo xie
-        wei he ren sheng zui hou hui xiang yi zhang zhi xve
-        hai bu ru yi pian hua ban ceng jing xian yan
-        you mei you na me yi zhang shu qian
-        ting zhi na yi tian
-    </string>
-
     <!-- license -->
     <string name="license_business_license">营业执照</string>
     <string name="license_industry_license">行业许可</string>
@@ -293,7 +193,7 @@
     <string name="aid_options_5">5.厂区内排水是否良好</string>
     <string name="aid_options_6">6.厂区内机动车、非机动车管理是否良好</string>
     <string name="aid_options_7">7.厂区内安保运行是否良好</string>
-    <string name="aid_options_8">8.厂区内弱电系统是否良好</string>
+    <string name="wood_dry_options_1aid_options_8">8.厂区内弱电系统是否良好</string>
     <string name="aid_options_9">9.相关预案是否定期演练</string>
     <string name="aid_options_10">10.各类操作人员是否持证</string>
 
@@ -338,7 +238,7 @@
     <string name="wood_lamination_options_9">9.是否定期定时清洗作业区域</string>
     <string name="wood_lamination_options_10">10.消防器材是否充足、完好</string>
 
-    <!-- wood_tailoring_options 修补、砂光、剪裁 -->
+    <!-- wood_tailoring_options 木材加工企业-修补、砂光、剪裁 -->
     <string name="wood_tailoring_options_1">1.手持工具线路是否完好，接线是否良好</string>
     <string name="wood_tailoring_options_2">2.刨花、锯末每班是否打扫干净，倒在指定地点</string>
     <string name="wood_tailoring_options_3">3.是否定点操作，不占用其他区域及通道</string>
@@ -351,5 +251,108 @@
     <string name="wood_tailoring_options_10">10.是否定期定时清洗作业区域</string>
     <string name="wood_tailoring_options_11">11.消防器材是否充足、完好</string>
 
+    <!-- wood_dustremoval_options 木材加工企业-除尘系统 -->
+    <string name="wood_dustremoval_options_1">1.是否定期清理 </string>
+    <string name="wood_dustremoval_options_2">2.设备密闭性是否良好</string>
+    <string name="wood_dustremoval_options_3">3.产尘点是否装有吸尘罩</string>
+    <string name="wood_dustremoval_options_4">4.设备转动部位是否有防护设施</string>
+    <string name="wood_dustremoval_options_5">5.电控柜是否清洁整洁，接线是否良好</string>
+    <string name="wood_dustremoval_options_6">6.集尘箱作业是否使用安全照明、氧气检测仪</string>
+    <string name="wood_dustremoval_options_7">7.设备金属外壳接地是否良好</string>
+    <string name="wood_dustremoval_options_8">8.除尘设备运行时人孔门是否关闭</string>
+    <string name="wood_dustremoval_options_9">9.管线照明是否有防尘保护</string>
+    <string name="wood_dustremoval_options_10">10.布袋清理时人员防护穿戴是否正确有效</string>
+    <string name="wood_dustremoval_options_11">11.是否采用绝缘措施操作控制箱的压扣</string>
+    <string name="wood_dustremoval_options_12">12.风机房是否无杂物堆放</string>
+    <string name="wood_dustremoval_options_13">13.卸灰阀检修清理时是否采用工器具操作</string>
+    <string name="wood_dustremoval_options_14">14.是否在除尘器前面设有火星捕集器</string>
+    <string name="wood_dustremoval_options_15">15.设备是否具有静电释放措施、导电纤维</string>
+
+    <!-- wood_material 木材加工企业-库存区-成品、木料堆场 -->
+    <string name="wood_material_options_1">1. 木料堆放是否超过2m</string>
+    <string name="wood_material_options_2">2. 木料堆放是否稳定牢靠，是否成正体型</string>
+    <string name="wood_material_options_3">3. 现场是否张贴安全警示标志</string>
+    <string name="wood_material_options_4">4. 木料堆场是否良好执行禁火管理</string>
+    <string name="wood_material_options_5">5. 配电箱柜是否被阻挡（半径1M范围内不得有杂物）</string>
+    <string name="wood_material_options_6">6. 消防器材是否被阻挡（半径1M范围内不得有杂物）</string>
+    <string name="wood_material_options_7">7. 电气线路敷设是否符合要求</string>
+    <string name="wood_material_options_8">8. 是否分垛储存</string>
+    <string name="wood_material_options_9">9. 每垛占地面积是否＜100㎡，垛与垛间距是否＞1m，垛与墙间距是否＞0.5m，垛与梁、柱间距是否＞0.3m，主要通道的宽度是否＞2m</string>
+    <string name="wood_material_options_10">10.是否禁用碘钨灯和超过六十瓦以上的白炽灯等高温照明灯具</string>
+    <string name="wood_material_options_11">11.使用日光灯等低温照明灯具和其他防燃型照明灯具时，是否对镇流器采取隔热、散热等防火保护措施</string>
+    <string name="wood_material_options_12">12.垂直下方与储存物品水平间距离是否＞0.5m</string>
+    <string name="wood_material_options_13">13.库房外是否单独安装开关箱</string>
+    <string name="wood_material_options_14">14.保管人员离库时，是否拉闸断电</string>
+
+    <!-- wood_danger 木材加工企业-库存区-危化品库、储罐 -->
+    <string name="wood_danger_options_1">1. 操作人员是否得穿戴易产生静电的工作服、帽</string>
+    <string name="wood_danger_options_2">2. 是否在进口设置了静电释放装置</string>
+    <string name="wood_danger_options_3">3. 现场是否张贴安全警示标志</string>
+    <string name="wood_danger_options_4">4. 是否有自动灭火装置</string>
+    <string name="wood_danger_options_5">5. 是否配置了足量且有效的消防器材</string>
+    <string name="wood_danger_options_6">6. 是否设置了满足要求的围堰</string>
+    <string name="wood_danger_options_7">7. 是否设置有可燃气体检测报警装置</string>
+    <string name="wood_danger_options_8">8. 可燃气体检测报警装置是否与送排风设备联动</string>
+    <string name="wood_danger_options_9">9. 风机电机是否防爆</string>
+    <string name="wood_danger_options_10">10.照明、开关是否防爆</string>
+    <string name="wood_danger_options_11">11.电气线路是否穿金属管</string>
+    <string name="wood_danger_options_12">12.储罐是否有液位装置，是否在输卸管道进行跨接</string>
+    <string name="wood_danger_options_13">13.库房地面是否防潮、防渗，库房内是否保持清洁</string>
+    <string name="wood_danger_options_14">14.库房是否执行双人双锁</string>
+    <string name="wood_danger_options_15">15.库房整体避雨、避晒是否良好</string>
+
+    <!-- wood_waste 木材加工企业-库存区-危废库 -->
+    <string name="wood_waste_options_1">1. 委外的危废回收机构是否具备相应资质与技术条件</string>
+    <string name="wood_waste_options_2">2. 贮存、运输是否分类</string>
+    <string name="wood_waste_options_3">3. 可燃危废品贮存区是否设置相应防爆措施</string>
+    <string name="wood_waste_options_4">4. 是否配置了足量且有效的消防器材</string>
+    <string name="wood_waste_options_5">5. 现场是否张贴安全警示标志</string>
+    <string name="wood_waste_options_6">6. 火源管理是否良好</string>
+    <string name="wood_waste_options_7">7. 库房整体避雨、避晒是否良好</string>
+    <string name="wood_waste_options_8">8. 照明、开关是否防爆、电气线路是否穿金属管</string>
+
+    <!-- wood_spare 木材加工企业-库存区-备品备件库 -->
+    <string name="wood_spare_options_1">1. 是否配置了足量且有效的消防器材</string>
+    <string name="wood_spare_options_2">2. 电气线路敷设是否合规</string>
+
+    <!-- wood_office_options 木材加工企业-办公区 -->
+    <string name="wood_office_options_1">1.多层办公楼是否具备至少2个应急出口</string>
+    <string name="wood_office_options_2">2.办公用电是否符合防火管理</string>
+    <string name="wood_office_options_3">3.是否配置了足量且有效的消防器材</string>
+    <string name="wood_office_options_4">4.排水是否畅通</string>
+    <string name="wood_office_options_5">5.相关应急疏散标志是否良好</string>
+    <string name="wood_office_options_6">6.是否备有应急物资</string>
+
+    <!-- wood_surroundings_options 木材加工企业-周边环境 -->
+    <string name="wood_surroundings_options_1">1.周边道路排水是否良好</string>
+    <string name="wood_surroundings_options_2">2.厂区外25M内是否有火灾爆炸风险</string>
+    <string name="wood_surroundings_options_3">3.周边消防救援机构是否在5分钟内可以到达</string>
+    <string name="wood_surroundings_options_4">4.（水文地质查勘.杨博）</string>
+
+    <!-- wood_construction_options 木材加工企业-建、构筑物 -->
+    <string name="wood_construction_options_1">1.厂房、仓库是否达到2级耐火等级</string>
+    <string name="wood_construction_options_2">2.建、构筑物是否有明显缺陷、裂痕</string>
+    <string name="wood_construction_options_3">3.厂房内搭建是否合规</string>
+
+    <!-- wood_aid_options 木材加工企业-生产辅助 -->
+    <string name="wood_aid_options_1">1.入厂是否设有限速标志及减速梗</string>
+    <string name="wood_aid_options_2">2.厂区内是否已设置人车分流地线</string>
+    <string name="wood_aid_options_3">3.厂区内是否设置避雷设施，各点位是否检测</string>
+    <string name="wood_aid_options_4">4.厂区内通道是否满足消防车行驶，且有消防车调头区域</string>
+    <string name="wood_aid_options_5">5.厂区内排水是否良好</string>
+    <string name="wood_aid_options_6">6.厂区内机动车、非机动车管理是否良好</string>
+    <string name="wood_aid_options_7">7.厂区内安保运行是否良好</string>
+    <string name="wood_aid_options_8">8.厂区内弱电系统是否良好</string>
+    <string name="wood_aid_options_9">9.相关预案是否定期演练</string>
+    <string name="wood_aid_options_10">10.各类操作人员是否持证</string>
+    <string name="wood_aid_options_11">11.空压设备安全附件是否良好，运行环境是否良好</string>
+    <string name="wood_aid_options_12">12.锅炉运行环境是否良好，电气设备、管线是否符合要求</string>
+    <string name="wood_aid_options_13">13.配电室是否有火灾报警及自动灭火装置</string>
+    <string name="wood_aid_options_14">14.配电室小动物防护措施是否良好</string>
+    <string name="wood_aid_options_15">15.配电室通风是否良好</string>
+    <string name="wood_aid_options_16">16.配电室相关绝缘措施及工器具是否齐全良好</string>
+    <string name="wood_aid_options_17">17.备用电源是否按要求独立设置</string>
+    <string name="wood_aid_options_18">18.柴油贮存管理是否符合要求</string>
+    <string name="wood_aid_options_19">19.柴油贮存室电气是否符合要求</string>
 
 </resources>

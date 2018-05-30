@@ -51,19 +51,16 @@ public class WoodStockFragment extends BaseFragment {
                 if (v instanceof QMUICommonListItemView){
                     CharSequence str = ((QMUICommonListItemView) v).getText();
                     switch (str.toString()){
-                        case "裁、切、干燥":
+                        case "成品、木料堆场":
 
                             break;
-                        case "制胶、涂胶、组坯":
+                        case "危化品库、储罐":
 
                             break;
-                        case "压合（冷、热）":
+                        case "危废库":
 
                             break;
-                        case "修补、砂光、剪裁":
-
-                            break;
-                        case "除尘系统":
+                        case "备品备件库":
 
                             break;
                         default:
