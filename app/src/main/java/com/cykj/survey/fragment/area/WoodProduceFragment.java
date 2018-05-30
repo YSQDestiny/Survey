@@ -6,6 +6,12 @@ import android.widget.Toast;
 
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.fragment.options.timber_processing.WoodDryFragment;
+import com.cykj.survey.fragment.options.timber_processing.WoodDustremovalFragment;
+import com.cykj.survey.fragment.options.timber_processing.WoodGlueFragment;
+import com.cykj.survey.fragment.options.timber_processing.WoodLaminationFragment;
+import com.cykj.survey.fragment.options.timber_processing.WoodTailoringFragment;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
@@ -58,19 +64,24 @@ public class WoodProduceFragment extends BaseFragment{
                     CharSequence str = ((QMUICommonListItemView) v).getText();
                     switch (str.toString()){
                         case "裁、切、干燥":
-
+                            QMUIFragment wood_dry = new WoodDryFragment();
+                            startFragment(wood_dry);
                             break;
                         case "制胶、涂胶、组坯":
-
+                            QMUIFragment wood_glue = new WoodGlueFragment();
+                            startFragment(wood_glue);
                             break;
                         case "压合（冷、热）":
-
+                            QMUIFragment wood_lamination = new WoodLaminationFragment();
+                            startFragment(wood_lamination);
                             break;
                         case "修补、砂光、剪裁":
-
+                            QMUIFragment wood_tailoring = new WoodTailoringFragment();
+                            startFragment(wood_tailoring);
                             break;
                         case "除尘系统":
-
+                            QMUIFragment wood_dustRemoval = new WoodDustremovalFragment();
+                            startFragment(wood_dustRemoval);
                             break;
                         default:
                             Toast.makeText(getActivity(),"该页面还在施工中",Toast.LENGTH_LONG).show();
