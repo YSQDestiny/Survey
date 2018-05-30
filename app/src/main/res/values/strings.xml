@@ -193,7 +193,7 @@
     <string name="aid_options_5">5.厂区内排水是否良好</string>
     <string name="aid_options_6">6.厂区内机动车、非机动车管理是否良好</string>
     <string name="aid_options_7">7.厂区内安保运行是否良好</string>
-    <string name="wood_dry_options_1aid_options_8">8.厂区内弱电系统是否良好</string>
+    <string name="aid_options_8">8.厂区内弱电系统是否良好</string>
     <string name="aid_options_9">9.相关预案是否定期演练</string>
     <string name="aid_options_10">10.各类操作人员是否持证</string>
 
@@ -354,5 +354,6 @@
     <string name="wood_aid_options_17">17.备用电源是否按要求独立设置</string>
     <string name="wood_aid_options_18">18.柴油贮存管理是否符合要求</string>
     <string name="wood_aid_options_19">19.柴油贮存室电气是否符合要求</string>
+
 
 </resources>

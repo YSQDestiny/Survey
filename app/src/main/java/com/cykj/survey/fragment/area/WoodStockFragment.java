@@ -6,6 +6,11 @@ import android.widget.Toast;
 
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.fragment.options.timber_processing.WoodDangerFragment;
+import com.cykj.survey.fragment.options.timber_processing.WoodMaterialFragment;
+import com.cykj.survey.fragment.options.timber_processing.WoodSpareFragment;
+import com.cykj.survey.fragment.options.timber_processing.WoodWasteFragment;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
@@ -13,6 +18,9 @@ import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * 木材加工企业-库存区-成品、木料堆场
+ */
 public class WoodStockFragment extends BaseFragment {
 
     @BindView(R.id.topbar)
@@ -52,16 +60,20 @@ public class WoodStockFragment extends BaseFragment {
                     CharSequence str = ((QMUICommonListItemView) v).getText();
                     switch (str.toString()){
                         case "成品、木料堆场":
-
+                            QMUIFragment wood_material = new WoodMaterialFragment();
+                            startFragment(wood_material);
                             break;
                         case "危化品库、储罐":
-
+                            QMUIFragment wood_danger = new WoodDangerFragment();
+                            startFragment(wood_danger);
                             break;
                         case "危废库":
-
+                            QMUIFragment wood_waste = new WoodWasteFragment();
+                            startFragment(wood_waste);
                             break;
                         case "备品备件库":
-
+                            QMUIFragment wood_spare = new WoodSpareFragment();
+                            startFragment(wood_spare);
                             break;
                         default:
                             Toast.makeText(getActivity(),"该页面还在施工中",Toast.LENGTH_LONG).show();
@@ -71,7 +83,7 @@ public class WoodStockFragment extends BaseFragment {
             }
         };
 
-        section.setTitle("生产区")
+        section.setTitle("库存区")
                 .addItemView(wood_material,onClickListener)
                 .addItemView(wood_danger,onClickListener)
                 .addItemView(wood_waste,onClickListener)
@@ -80,7 +92,7 @@ public class WoodStockFragment extends BaseFragment {
     }
 
     private void initTopbar() {
-        mTopbar.setTitle("生产区");
+        mTopbar.setTitle("区域选择");
 
         mTopbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override

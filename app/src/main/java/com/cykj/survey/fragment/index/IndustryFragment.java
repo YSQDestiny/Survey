@@ -13,6 +13,7 @@ import com.cykj.survey.bean.IndustryBean;
 import com.cykj.survey.bean.Node;
 import com.cykj.survey.bean.SimpleTreeAdapter;
 import com.cykj.survey.bean.TreeListViewAdapter;
+import com.cykj.survey.fragment.industry.TimberProcessingFragment;
 import com.cykj.survey.fragment.industry.WoodenFurnitureFragment;
 import com.cykj.survey.model.Industry;
 import com.cykj.survey.util.JsonUtil;
@@ -89,6 +90,10 @@ public class IndustryFragment extends BaseFragment{
             case "木质家具制造":
                 QMUIFragment fragment = new WoodenFurnitureFragment();
                 startFragment(fragment);
+                break;
+            case "木材加工企业":
+                QMUIFragment wood_fragment = new TimberProcessingFragment();
+                startFragment(wood_fragment);
                 break;
             default:
                 Toast.makeText(getActivity(),industry,Toast.LENGTH_LONG).show();
