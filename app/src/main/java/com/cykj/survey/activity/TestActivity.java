@@ -1,39 +1,6 @@
 package com.cykj.survey.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-
-import com.cykj.survey.MainActivity;
-import com.cykj.survey.R;
-import com.cykj.survey.fragment.utils.PermissionUtils;
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
-import com.qmuiteam.qmui.widget.QMUITopBar;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import android.content.ContentResolver;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 
 
 public class TestActivity extends AppCompatActivity {
@@ -168,6 +135,54 @@ public class TestActivity extends AppCompatActivity {
  * zhuang ping fan de ri zi
  * sheng huo de da xiao shi
  * shu xi de guo ke
+ * dao ying zhong kan bi ci
+ * ge zhong
+ * jin kou de shou zhi
+ * yan li de bi ci
+ * xie xia xin de gu shi
+ * fen fen zhe die de cheng mo
+ * ceng ceng ying cang ning yi ge wo
+ * shuo zhe bu wan mei de yin se
+ * chuan guo yi duo duo xuan lan de xuan wo
+ * cong cong feng chui hua kai ri luo
+ * shi jian a jie kai wo de mi huo
+ * xu xia de yuan wang zai tian bian hai jiao pu cheng le yin he
+ * deng zhe liu lang de ni lai qian zhu wo de shou
+ * piao liu de xiao ping zi
+ * zhuang ku xiao de yang zi
+ * feng kuang huo shi you zhi
+ * ge zhong xi nu ai le
+ * fen fen zhe die de cheng mo
+ * cheng cheng ying cang ning yi ge wo
+ * shuo zhe bu wan mei de yin se
+ * chuan guo yi duo duo xuan lan de xuan wo
+ * chong chong feng chui hua kai ri luo o
+ * shi jian a jie kai wo de mi huo
+ * xu xia de yuan wang zai tian bian hai jiao pu cheng le yin he
+ * deng zhe liu lang de ni lai qian zhu wo de shou
+ * feng feng zhe die de cheng mo
+ * cheng cheng ying cang ling yi ge wo
+ * shuo zhe bu wan mei de yin se
+ * chuan guo yi duo duo xuan lan de xuan wo
+ * cong cong feng chui hua kai ri luo o
+ * shi jian a jie kai wo de mi huo
+ * xu xia de yuan wang zai tian bian hai jiao pu cheng le yin he
+ * deng zhe liu lang de ni jin jin qian zhu wo de shou
+ */
+
+
+/**
+ * 爆刘继芬
+ * 不要问我，一生曾经爱过多少人
+ * 你懂我伤有多深呐
+ * 要剥开伤口总是很残忍
+ * 劝你莫做那个神戳戳滴人呐
+ * 多情暂且爆刘继芬
+ * 爆刘继芬呐
+ * 不喜欢孤独
+ * 却又害怕两个人相处
+ * 这分明是一种痛苦
+ *
  */
 
 }

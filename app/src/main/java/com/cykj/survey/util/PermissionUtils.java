@@ -1,4 +1,4 @@
-package com.cykj.survey.fragment.utils;
+package com.cykj.survey.util;
 
 import android.Manifest;
 import android.app.Activity;
