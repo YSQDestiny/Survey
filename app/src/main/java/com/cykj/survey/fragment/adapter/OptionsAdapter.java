@@ -1,6 +1,7 @@
 package com.cykj.survey.fragment.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cykj.survey.R;
+import com.cykj.survey.activity.AccidentActivity;
+import com.cykj.survey.base.BaseFragment;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 
 import java.util.List;
 
@@ -59,7 +63,8 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
                     holder.checkBoxYes.setChecked(false);
                 }
                 if (isChecked){
-                    Toast.makeText(mContext,"你勾选了否",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(mContext, AccidentActivity.class);
+                    mContext.startActivity(intent);
                 }
             }
         });

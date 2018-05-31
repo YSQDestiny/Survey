@@ -10,4 +10,5 @@
     <item name="topbar_right_text_button" type="id"/>
 
     <item name="layout_for_test" type="id"/>
+    <item name="activity_accident" type="id"/>
 </resources>
