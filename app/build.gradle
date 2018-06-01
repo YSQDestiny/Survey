@@ -99,10 +99,10 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-    implementation 'com.github.dongjunkun:DropDownMenu:1.0.4'
     implementation project(':lib')
     implementation project(':arch')
     implementation project(':qmui')
     annotationProcessor project(':compiler')
     implementation files('lib/fastjson-1.1.51.android.jar')
+    implementation project(':takephoto_library')
 }

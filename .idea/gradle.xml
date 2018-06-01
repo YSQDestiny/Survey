@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/compiler" />
             <option value="$PROJECT_DIR$/lib" />
             <option value="$PROJECT_DIR$/qmui" />
+            <option value="$PROJECT_DIR$/takephoto_library" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
