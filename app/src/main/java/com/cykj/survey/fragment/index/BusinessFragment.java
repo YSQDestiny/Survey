@@ -1,30 +1,56 @@
 package com.cykj.survey.fragment.index;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Handler;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
+import com.cykj.survey.activity.PhotoUploadActivity;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.lib.Group;
 import com.cykj.survey.lib.annotation.Widget;
+import com.cykj.survey.model.Company;
 import com.cykj.survey.model.Industry;
+import com.cykj.survey.model.ResultModel;
+import com.cykj.survey.util.DateUtil;
+import com.cykj.survey.util.DeviceUtils;
 import com.cykj.survey.util.JsonUtil;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
+import java.io.IOException;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
-@Widget(group = Group.Home, name = "企财险", iconRes = R.mipmap.icon_fragment_business)
 public class BusinessFragment extends BaseFragment {
+
+    private Handler handler;
 
     @BindView(R.id.topbar)
     QMUITopBar mTopbar;
@@ -64,7 +90,6 @@ public class BusinessFragment extends BaseFragment {
 
     @BindView(R.id.business_edit_coverage)
     EditText businessEditCoverage;
-
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
     @Override
@@ -73,9 +98,13 @@ public class BusinessFragment extends BaseFragment {
         ButterKnife.bind(this, root);
         initTopbar();
         initGroupListView();
+        handler = new Handler();
         return root;
     }
 
+    /**
+     * 初始化标题栏
+     */
     private void initTopbar() {
         mTopbar.setTitle("企业信息");
 
@@ -90,8 +119,13 @@ public class BusinessFragment extends BaseFragment {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        QMUIFragment fragment = new LicenseUploadFragment();
-                        startFragment(fragment);
+//                        QMUIFragment fragment = new LicenseUploadFragment();
+//                        startFragment(fragment);
+                        try {
+                            postJson();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
                 });
 
@@ -99,6 +133,82 @@ public class BusinessFragment extends BaseFragment {
 
     }
 
+    private void  postJson() throws IOException{
+        final QMUITipDialog tipDialog = new QMUITipDialog.Builder(getContext())
+                .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
+                .setTipWord("提交中，请稍等")
+                .create();
+        tipDialog.show();
+        String url = "http://2f6bbg.natappfree.cc/company/post";
+
+        Date date = new Date();
+        Company company = new Company();
+        company.setName(businessEditName.getText().toString());
+        company.setAddr(businessEditAddr.getText().toString());
+        company.setLinkman(businessEditContacts.getText().toString());
+        company.setManager(businessEditManager.getText().toString());
+        company.setViceManager(businessEditDeputyManager.getText().toString());
+        company.setSafe(businessEditSafe.getText().toString());
+        company.setWokerNormal(Integer.parseInt(businessEditWorker.getText().toString()));
+        company.setWokerSpecial(Integer.parseInt(businessEditSpecialWorker.getText().toString()));
+        company.setMakeTime(DateUtil.parseToSQLDate(date,DateUtil.yyyyMMddHHmmss));
+        company.setUniqueId(DeviceUtils.getUniqueId(getActivity()));
+        String json = JSONObject.toJSONString(company);
+
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = new FormBody.Builder()
+                .add("json",json)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                tipDialog.dismiss();
+                String resultStr = response.body().string();
+                ResultModel result = JSONObject.parseObject(resultStr,ResultModel.class);
+                if (result.getCode() == 0){
+                    handler.post(seccessRun);
+                    Constants constants = new Constants();
+                    constants.setReportId(Long.parseLong(result.getData()));
+                    QMUIFragment fragment = new LicenseUploadFragment();
+                    startFragment(fragment);
+                }else {
+                    handler.post(failRun);
+                    return;
+                }
+            }
+        });
+
+    }
+
+    Runnable seccessRun = new Runnable() {
+        @Override
+        public void run() {
+            Toast.makeText(getContext(),"保存成功",Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    Runnable failRun = new Runnable() {
+        @Override
+        public void run() {
+            Toast.makeText(getContext(),"保存失败",Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    /**
+     * 初始化GroupList
+     */
     private void initGroupListView() {
         QMUIGroupListView.Section section = new QMUIGroupListView.Section(getActivity());
 
@@ -116,6 +226,10 @@ public class BusinessFragment extends BaseFragment {
                 .addTo(mGroupListView);
     }
 
+    /**
+     * 弹出多选框
+     * @param v
+     */
     private void showMultiChoiceDialog(final View v) {
         final String[] items = new String[]{"综合险", "一切险", "基本险"};
         final int[] selected = new int[items.length];

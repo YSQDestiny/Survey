@@ -27,7 +27,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class QMUIFragment extends Fragment {
+public abstract class QMUIFragment extends Fragment{
+
     private static final String SWIPE_BACK_VIEW = "swipe_back_view";
     private static final String TAG = QMUIFragment.class.getSimpleName();
 

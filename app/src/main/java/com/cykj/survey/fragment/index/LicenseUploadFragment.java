@@ -25,19 +25,12 @@ import android.widget.ImageView;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.util.PermissionUtils;
+import com.jph.takephoto.app.TakePhoto;
+import com.jph.takephoto.model.InvokeParam;
+import com.jph.takephoto.model.TakePhotoOptions;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-
-import org.devio.takephoto.app.TakePhoto;
-import org.devio.takephoto.app.TakePhotoImpl;
-import org.devio.takephoto.model.InvokeParam;
-import org.devio.takephoto.model.TContextWrap;
-import org.devio.takephoto.model.TResult;
-import org.devio.takephoto.model.TakePhotoOptions;
-import org.devio.takephoto.permission.InvokeListener;
-import org.devio.takephoto.permission.PermissionManager;
-import org.devio.takephoto.permission.TakePhotoInvocationHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,7 +41,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class LicenseUploadFragment extends BaseFragment implements TakePhoto.TakeResultListener,InvokeListener {
+public class LicenseUploadFragment extends BaseFragment {
 
     @BindView(R.id.topbar)
     QMUITopBar mTopbar;
@@ -64,35 +57,8 @@ public class LicenseUploadFragment extends BaseFragment implements TakePhoto.Tak
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
     private String target;
-
     private TakePhoto takePhoto;
     private InvokeParam invokeParam;
-
-    public TakePhoto getTakePhoto(){
-        if (takePhoto == null){
-            takePhoto = (TakePhoto) TakePhotoInvocationHandler.of(this).bind(new TakePhotoImpl(this,this));
-        }
-        return takePhoto;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        getTakePhoto().onCreate(savedInstanceState);
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        getTakePhoto().onSaveInstanceState(outState);
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        PermissionManager.TPermissionType type = PermissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        PermissionManager.handlePermissionsResult(getActivity(),type,invokeParam,this);
-    }
 
     @Override
     protected View onCreateView() {
@@ -161,8 +127,7 @@ public class LicenseUploadFragment extends BaseFragment implements TakePhoto.Tak
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (items[which].equals("拍照")){
-//                            byCamera();
-                            photoClick("拍照",getTakePhoto());
+                            byCamera();
                             dialog.dismiss();
                         }else if (items[which].equals("从相册选择")){
                             openAlbum();
@@ -219,89 +184,60 @@ public class LicenseUploadFragment extends BaseFragment implements TakePhoto.Tak
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        getTakePhoto().onActivityResult(requestCode,resultCode,data);
         super.onActivityResult(requestCode,resultCode,data);
-//        if (requestCode == 8){
-//            if (imagePath != null && resultCode == -1){
-//                Log.e(">>>>>>>>>>...",""+imagePath);
-//                if (target.equals("business")){
-//                    businessLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(imagePath,200,200));
-//                }else if (target.equals("industry")){
-//                    industryLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(imagePath,200,200));
-//                }else if (target.equals("system")){
-//                    systemLeveImg.setImageBitmap(PermissionUtils.getBitmapByPath(imagePath,200,200));
-//                }
-//            }
-//        }
-//        if(requestCode==6){
-//            //外界的程序访问ContentProvider所提供数据 可以通过ContentResolver接口
-//            ContentResolver resolver = getActivity().getContentResolver();
-//            Uri originalUri = data.getData();//获得图片的uri
-//            Log.e("uri",">>>>>>>>>>...."+originalUri);
-//            Bitmap bm = null;
-//            try {
-//                //显得到bitmap图片
-//                bm = MediaStore.Images.Media.getBitmap(resolver, originalUri);
-//                //获取图片的路径
-//                String[] proj = {MediaStore.Images.Media.DATA};
-//                Cursor cursor = getActivity().managedQuery(originalUri, proj, null, null, null);
-//                //获得用户选择的图片的索引值
-//                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//                //将光标移至开头 ，这个很重要，不小心很容易引起越界
-//                cursor.moveToFirst();
-//                //最后根据索引值获取图片路径
-//                String path = cursor.getString(column_index);
-//                Log.e("uri",">>>>>>>>>>...."+PermissionUtils.getBitmapByPath(path, 480, 800));
-//                //绑定图片到Imageview
-//                if (target.equals("business")){
-//                    businessLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(path,300,300));
-//                }else if (target.equals("industry")){
-//                    industryLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(path,300,300));
-//                }else if (target.equals("system")){
-//                    systemLeveImg.setImageBitmap(PermissionUtils.getBitmapByPath(path,300,300));
-//                }
-//                //转换成file文件,上传服务器uploadImg(file)
-//               /* File file=new File(path);
-//                Log.e("uri",">>>>>>>>>>...."+file);
-//                uploadImg(file);*/
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        if (requestCode == 8){
+            if (imagePath != null && resultCode == -1){
+                Log.e(">>>>>>>>>>...",""+imagePath);
+                if (target.equals("business")){
+                    businessLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(imagePath,200,200));
+                }else if (target.equals("industry")){
+                    industryLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(imagePath,200,200));
+                }else if (target.equals("system")){
+                    systemLeveImg.setImageBitmap(PermissionUtils.getBitmapByPath(imagePath,200,200));
+                }
+            }
+        }
+        if(requestCode==6){
+            //外界的程序访问ContentProvider所提供数据 可以通过ContentResolver接口
+            ContentResolver resolver = getActivity().getContentResolver();
+            Uri originalUri = data.getData();//获得图片的uri
+            Log.e("uri",">>>>>>>>>>...."+originalUri);
+            Bitmap bm = null;
+            try {
+                //显得到bitmap图片
+                bm = MediaStore.Images.Media.getBitmap(resolver, originalUri);
+                //获取图片的路径
+                String[] proj = {MediaStore.Images.Media.DATA};
+                Cursor cursor = getActivity().managedQuery(originalUri, proj, null, null, null);
+                //获得用户选择的图片的索引值
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                //将光标移至开头 ，这个很重要，不小心很容易引起越界
+                cursor.moveToFirst();
+                //最后根据索引值获取图片路径
+                String path = cursor.getString(column_index);
+                Log.e("uri",">>>>>>>>>>...."+PermissionUtils.getBitmapByPath(path, 480, 800));
+                //绑定图片到Imageview
+                if (target.equals("business")){
+                    businessLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(path,300,300));
+                }else if (target.equals("industry")){
+                    industryLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(path,300,300));
+                }else if (target.equals("system")){
+                    systemLeveImg.setImageBitmap(PermissionUtils.getBitmapByPath(path,300,300));
+                }
+                //转换成file文件,上传服务器uploadImg(file)
+               /* File file=new File(path);
+                Log.e("uri",">>>>>>>>>>...."+file);
+                uploadImg(file);*/
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
-
-    @Override
-    public void takeSuccess(TResult result) {
-        switch (target){
-            case "business":
-                businessLicenseImg.setImageBitmap(PermissionUtils.getBitmapByPath(result.getImages().get(0).getCompressPath(),300,300));
-        }
-    }
-
-    @Override
-    public void takeFail(TResult result, String msg) {
-
-    }
-
-    @Override
-    public void takeCancel() {
-
-    }
-
-    @Override
-    public PermissionManager.TPermissionType invoke(InvokeParam invokeParam) {
-        PermissionManager.TPermissionType type = PermissionManager.checkPermission(TContextWrap.of(this),invokeParam.getMethod());
-        if (PermissionManager.TPermissionType.WAIT.equals(type)){
-            this.invokeParam = invokeParam;
-        }
-        return type;
-    }
-
 
     private void configTakePhotoOption(TakePhoto takePhoto){
         TakePhotoOptions.Builder builder = new TakePhotoOptions.Builder();
