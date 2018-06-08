@@ -139,7 +139,7 @@ public class BusinessFragment extends BaseFragment {
                 .setTipWord("提交中，请稍等")
                 .create();
         tipDialog.show();
-        String url = "http://2f6bbg.natappfree.cc/company/post";
+        String url = Constants.TEST_SERVICE + "/company/post";
 
         Date date = new Date();
         Company company = new Company();

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.cykj.survey.R;
 import com.cykj.survey.model.Company;
+import com.cykj.survey.util.DateUtil;
 
 import java.util.List;
 
@@ -19,20 +20,30 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
     private Context context;
     private LayoutInflater inflater;
 
+    public ReportAdapter(Context context,List<Company> companies){
+        this.context = context;
+        this.companies = companies;
+        inflater = LayoutInflater.from(context);
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = inflater.inflate(R.layout.layout_report_list_item,parent,false);
+        MyViewHolder holder = new MyViewHolder(view);
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+        holder.name.setText(companies.get(position).getName());
+        holder.industry.setText(companies.get(position).getIndustry());
+        holder.time.setText(DateUtil.parseToString(companies.get(position).getMakeTime(),DateUtil.yyyyMMddHHmmss));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return companies.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{

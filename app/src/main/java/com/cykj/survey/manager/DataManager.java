@@ -4,6 +4,7 @@ import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.fragment.index.BusinessFragment;
 import com.cykj.survey.fragment.index.HydropowerFragment;
 import com.cykj.survey.fragment.index.ProjectFragment;
+import com.cykj.survey.fragment.index.ReportListFragment;
 import com.cykj.survey.fragment.utils.BillFragment;
 import com.cykj.survey.model.ItemDescription;
 
@@ -43,7 +44,7 @@ public class DataManager {
 
     private void initHomeDesc() {
         mHomeNames = new ArrayList<>();
-        mHomeNames.add(BusinessFragment.class);
+        mHomeNames.add(ReportListFragment.class);
         mHomeNames.add(HydropowerFragment.class);
         mHomeNames.add(ProjectFragment.class);
     }

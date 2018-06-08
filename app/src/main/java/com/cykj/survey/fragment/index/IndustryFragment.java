@@ -103,7 +103,7 @@ public class IndustryFragment extends BaseFragment{
                             postIndustry();
                         } catch (IOException e) {
                             e.printStackTrace();
-                        }
+                    }
                         dialog.dismiss();
                     }
                 }).create(mCurrentDialogStyle).show();
@@ -115,7 +115,7 @@ public class IndustryFragment extends BaseFragment{
                 .setTipWord("提交中，请稍等")
                 .create();
         tipDialog.show();
-        String url = "http://2f6bbg.natappfree.cc/company/industry";
+        String url = Constants.TEST_SERVICE + "/company/industry";
 
         OkHttpClient client = new OkHttpClient();
 

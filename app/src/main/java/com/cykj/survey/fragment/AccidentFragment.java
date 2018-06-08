@@ -21,10 +21,15 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.fragment.adapter.AccidentGridAdapter;
+import com.cykj.survey.model.Accident;
 import com.cykj.survey.model.AccidentGridModel;
+import com.cykj.survey.model.ResultModel;
+import com.cykj.survey.util.ImgUtil;
 import com.cykj.survey.util.PermissionUtils;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
@@ -34,10 +39,19 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class AccidentFragment extends BaseFragment {
@@ -59,6 +73,9 @@ public class AccidentFragment extends BaseFragment {
     private AccidentGridAdapter resultAdapter;
     private List<AccidentGridModel> typeData;
     private List<AccidentGridModel> resultData;
+
+    private Map<String,String> typeMap = new HashMap<>();
+    private Map<String,String> resultMap = new HashMap<>();
 
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
@@ -107,8 +124,10 @@ public class AccidentFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (typeData.get(position).isSelect()){
                     typeData.get(position).setSelect(false);
+                    typeMap.remove(typeData.get(position).getName());
                 }else {
                     typeData.get(position).setSelect(true);
+                    typeMap.put(typeData.get(position).getName(),typeData.get(position).getName());
                 }
                 typeGridAdapter.notifyDataSetChanged();
             }
@@ -121,6 +140,7 @@ public class AccidentFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (resultData.get(position).isSelect()){
                     resultData.get(position).setSelect(false);
+                    resultMap.remove(resultData.get(position).getName());
                 }else {
                     resultData.get(position).setSelect(true);
                     showSingleChoiceDialog(resultData.get(position).getName(),position);
@@ -137,10 +157,75 @@ public class AccidentFragment extends BaseFragment {
         topbar.addRightTextButton("完成",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popBackStack();
+                postAccident();
             }
         });
 
+    }
+
+    private void postAccident(){
+
+        String url = Constants.TEST_SERVICE + "/accident/postAccident";
+
+        OkHttpClient client = new OkHttpClient();
+
+        Accident accident = new Accident();
+        accident.setCompanyId(Constants.REPORT_ID);
+        accident.setInstructions(accidentEdit.getText().toString());
+        String accidentType = "";
+        if (typeMap.size() != 0){
+            int i = 0;
+            for (String type : typeMap.values()){
+                if (i == 0){
+                    accidentType += type;
+                    i++;
+                }else {
+                    accidentType += "," + type;
+                }
+            }
+        }
+        String accidentResult = "";
+        if (resultMap.size() != 0){
+            int i=0;
+            for (String result : resultMap.keySet()){
+                if (i == 0){
+                    accidentResult += result + "-" +resultMap.get(result);
+                    i++;
+                }else {
+                    accidentResult += "," + result + "-" +resultMap.get(result);
+                }
+            }
+        }
+        accident.setType(accidentType);
+        accident.setResult(accidentResult);
+        accidentSiteImg.setDrawingCacheEnabled(true);
+        accident.setSitePhoto(ImgUtil.bitmapToBase64(accidentSiteImg.getDrawingCache()));
+        accidentSurroundingsImg.setDrawingCacheEnabled(true);
+        accident.setSurroundingsPhoto(ImgUtil.bitmapToBase64(accidentSurroundingsImg.getDrawingCache()));
+
+        RequestBody body = new FormBody.Builder()
+                .add("accident", JSONObject.toJSONString(accident))
+                .build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
+                if (result.getCode() == 0){
+                    popBackStack();
+                }
+            }
+        });
     }
 
     private void initData(){
@@ -167,7 +252,7 @@ public class AccidentFragment extends BaseFragment {
     }
 
     String[] items;
-    private void showSingleChoiceDialog(String str, final int positon){
+    private void showSingleChoiceDialog(final String str, final int positon){
         QMUIDialog.CheckableDialogBuilder dialogBuilder = new QMUIDialog.CheckableDialogBuilder(getActivity());
         if (str.equals("财产损失") || str.equals("0-5万") || str.equals("5-10万") || str.equals("10-50万") || str.equals("50-100万") ||
                 str.equals("100-500万") || str.equals("500万以上")){
@@ -183,6 +268,7 @@ public class AccidentFragment extends BaseFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 resultData.get(positon).setName(items[which]);
+                resultMap.put(str,items[which]);
                 resultAdapter.notifyDataSetChanged();
                 dialog.dismiss();
             }

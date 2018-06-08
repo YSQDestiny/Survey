@@ -1,17 +1,24 @@
 package com.cykj.survey.fragment.index;
 
+import android.os.Handler;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.fragment.adapter.ReportAdapter;
 import com.cykj.survey.lib.Group;
 import com.cykj.survey.lib.annotation.Widget;
 import com.cykj.survey.model.Company;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.DeviceUtils;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
 
@@ -20,7 +27,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -36,7 +42,11 @@ public class ReportListFragment extends BaseFragment {
     @BindView(R.id.topbar)
     QMUITopBar topbar;
     @BindView(R.id.options_recycler)
-    RecyclerView optionsRecycler;
+    RecyclerView mRecycler;
+
+    private Handler handler;
+
+    private ReportAdapter adapter;
 
     private List<Company> companies;
 
@@ -44,14 +54,26 @@ public class ReportListFragment extends BaseFragment {
     protected View onCreateView() {
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_report_list, null);
         ButterKnife.bind(this, root);
+        initTopbar();
+        handler = new Handler();
         getList();
-
         return root;
+    }
+
+    private void initTopbar(){
+        topbar.setTitle("报告列表");
+        topbar.addRightTextButton("新建",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                QMUIFragment fragment = new BusinessFragment();
+                startFragment(fragment);
+            }
+        });
     }
 
     private void getList(){
 
-        String url = "http://2f6bbg.natappfree.cc/company/getList";
+        String url = Constants.TEST_SERVICE + "/company/getList";
 
         OkHttpClient client = new OkHttpClient();
 
@@ -72,11 +94,27 @@ public class ReportListFragment extends BaseFragment {
                 ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
                 if (result.getCode() == 0){
                     companies = JSONObject.parseArray(result.getData(),Company.class);
+                    handler.post(uiable);
                 }
             }
         });
 
     }
+
+    Runnable uiable = new Runnable() {
+        @Override
+        public void run() {
+            if (companies != null){
+                adapter = new ReportAdapter(getActivity(),companies);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                mRecycler.setLayoutManager(layoutManager);
+                mRecycler.setAdapter(adapter);
+                mRecycler.setItemAnimator(new DefaultItemAnimator());
+                mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+            }
+        }
+    };
 
     @Override
     public void onDestroyView() {
