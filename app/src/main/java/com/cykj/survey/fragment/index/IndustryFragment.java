@@ -152,11 +152,11 @@ public class IndustryFragment extends BaseFragment{
         switch (industry){
             case "木质家具制造":
                 QMUIFragment fragment = new WoodenFurnitureFragment();
-                startFragment(fragment);
+                startFragmentAndDestroyCurrent(fragment);
                 break;
             case "木材加工企业":
                 QMUIFragment wood_fragment = new TimberProcessingFragment();
-                startFragment(wood_fragment);
+                startFragmentAndDestroyCurrent(wood_fragment);
                 break;
             default:
                 Toast.makeText(getActivity(),industry,Toast.LENGTH_LONG).show();

@@ -2,7 +2,7 @@ package com.cykj.survey;
 
 public class Constants {
 
-    public final static String TEST_SERVICE = "http://destiny.s1.natapp.cc/";
+    public final static String TEST_SERVICE = "http://destiny.s1.natapp.cc/CYKJ";
 
     public static Long REPORT_ID;
 

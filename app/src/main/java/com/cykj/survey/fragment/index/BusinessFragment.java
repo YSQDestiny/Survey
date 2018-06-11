@@ -134,11 +134,7 @@ public class BusinessFragment extends BaseFragment {
     }
 
     private void  postJson() throws IOException{
-        final QMUITipDialog tipDialog = new QMUITipDialog.Builder(getContext())
-                .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
-                .setTipWord("提交中，请稍等")
-                .create();
-        tipDialog.show();
+        showTipDialog("请稍等...",QMUITipDialog.Builder.ICON_TYPE_LOADING);
         String url = Constants.TEST_SERVICE + "/company/post";
 
         Date date = new Date();
@@ -174,7 +170,7 @@ public class BusinessFragment extends BaseFragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                tipDialog.dismiss();
+                tipDialogDismiss();
                 String resultStr = response.body().string();
                 ResultModel result = JSONObject.parseObject(resultStr,ResultModel.class);
                 if (result.getCode() == 0){
@@ -182,7 +178,7 @@ public class BusinessFragment extends BaseFragment {
                     Constants constants = new Constants();
                     constants.setReportId(Long.parseLong(result.getData()));
                     QMUIFragment fragment = new LicenseUploadFragment();
-                    startFragment(fragment);
+                    startFragmentAndDestroyCurrent(fragment);
                 }else {
                     handler.post(failRun);
                     return;
@@ -195,14 +191,14 @@ public class BusinessFragment extends BaseFragment {
     Runnable seccessRun = new Runnable() {
         @Override
         public void run() {
-            Toast.makeText(getContext(),"保存成功",Toast.LENGTH_SHORT).show();
+            showToastShort("保存成功");
         }
     };
 
     Runnable failRun = new Runnable() {
         @Override
         public void run() {
-            Toast.makeText(getContext(),"保存失败",Toast.LENGTH_SHORT).show();
+            showToastShort("保存失败");
         }
     };
 

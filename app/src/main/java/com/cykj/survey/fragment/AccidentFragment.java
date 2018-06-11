@@ -33,6 +33,7 @@ import com.cykj.survey.util.ImgUtil;
 import com.cykj.survey.util.PermissionUtils;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -164,7 +165,7 @@ public class AccidentFragment extends BaseFragment {
     }
 
     private void postAccident(){
-
+        showTipDialog("请稍等...", QMUITipDialog.Builder.ICON_TYPE_LOADING);
         String url = Constants.TEST_SERVICE + "/accident/postAccident";
 
         OkHttpClient client = new OkHttpClient();
@@ -220,6 +221,7 @@ public class AccidentFragment extends BaseFragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                tipDialogDismiss();
                 ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
                 if (result.getCode() == 0){
                     popBackStack();

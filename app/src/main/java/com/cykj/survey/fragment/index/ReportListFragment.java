@@ -20,6 +20,7 @@ import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.DeviceUtils;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 
 import java.io.IOException;
@@ -72,7 +73,7 @@ public class ReportListFragment extends BaseFragment {
     }
 
     private void getList(){
-
+//        showTipDialog("请稍等...", QMUITipDialog.Builder.ICON_TYPE_LOADING);
         String url = Constants.TEST_SERVICE + "/company/getList";
 
         OkHttpClient client = new OkHttpClient();
@@ -91,6 +92,7 @@ public class ReportListFragment extends BaseFragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+//                tipDialogDismiss();
                 ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
                 if (result.getCode() == 0){
                     companies = JSONObject.parseArray(result.getData(),Company.class);
@@ -112,6 +114,7 @@ public class ReportListFragment extends BaseFragment {
                 mRecycler.setAdapter(adapter);
                 mRecycler.setItemAnimator(new DefaultItemAnimator());
                 mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+
             }
         }
     };
@@ -119,5 +122,11 @@ public class ReportListFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getList();
     }
 }
