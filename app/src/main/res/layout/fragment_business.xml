@@ -479,12 +479,41 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#f2f0f2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="2dp"
+                        android:text="投保险种"
+                        android:textColor="#666666" />
+
+                </FrameLayout>
 
                 <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
                     android:id="@+id/groupListView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
+                <com.cykj.survey.view.CustomGridView
+                    android:id="@+id/grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="4"
+                    android:horizontalSpacing="2dp"
+                    android:verticalSpacing="3dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+                </com.cykj.survey.view.CustomGridView>
 
             </LinearLayout>
 
