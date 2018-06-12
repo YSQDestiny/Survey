@@ -35,10 +35,25 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.name.setText(companies.get(position).getName());
         holder.industry.setText(companies.get(position).getIndustry());
         holder.time.setText(DateUtil.parseToString(companies.get(position).getMakeTime(),DateUtil.yyyyMMddHHmmss));
+        if (mOnItemClickListener != null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onClick(position);
+                }
+            });
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    mOnItemClickListener.onLongClick(position);
+                    return false;
+                }
+            });
+        }
     }
 
     @Override
@@ -58,5 +73,15 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
             time = itemView.findViewById(R.id.report_time);
             industry = itemView.findViewById(R.id.report_industry);
         }
+    }
+
+    OnItemClickListener mOnItemClickListener;
+
+    public interface OnItemClickListener{
+        void onClick( int position);
+        void onLongClick( int position);
+    }
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener ){
+        this. mOnItemClickListener=onItemClickListener;
     }
 }

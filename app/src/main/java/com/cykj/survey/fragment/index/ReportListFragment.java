@@ -1,5 +1,6 @@
 package com.cykj.survey.fragment.index;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -11,6 +12,7 @@ import android.view.View;
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
+import com.cykj.survey.activity.ReportDetailsActivity;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.fragment.adapter.ReportAdapter;
 import com.cykj.survey.lib.Group;
@@ -57,7 +59,9 @@ public class ReportListFragment extends BaseFragment {
         ButterKnife.bind(this, root);
         initTopbar();
         handler = new Handler();
+        showTipDialog("请稍等",QMUITipDialog.Builder.ICON_TYPE_LOADING);
         getList();
+        tipDialogDismiss();
         return root;
     }
 
@@ -114,7 +118,19 @@ public class ReportListFragment extends BaseFragment {
                 mRecycler.setAdapter(adapter);
                 mRecycler.setItemAnimator(new DefaultItemAnimator());
                 mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+                adapter.setOnItemClickListener(new ReportAdapter.OnItemClickListener() {
+                    @Override
+                    public void onClick(int position) {
+                        Intent intent = new Intent(getActivity(), ReportDetailsActivity.class);
+                        intent.putExtra("id",companies.get(position).getId().toString());
+                        startActivity(intent);
+                    }
 
+                    @Override
+                    public void onLongClick(int position) {
+
+                    }
+                });
             }
         }
     };

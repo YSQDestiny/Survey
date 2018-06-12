@@ -11,4 +11,5 @@
 
     <item name="layout_for_test" type="id"/>
     <item name="activity_accident" type="id"/>
+    <item name="activirt_report_details" type="id"/>
 </resources>

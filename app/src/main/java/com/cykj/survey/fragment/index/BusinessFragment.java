@@ -1,54 +1,66 @@
 package com.cykj.survey.fragment.index;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Handler;
-import android.provider.Settings;
-import android.util.Log;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
-import com.cykj.survey.activity.PhotoUploadActivity;
 import com.cykj.survey.base.BaseFragment;
-import com.cykj.survey.lib.Group;
-import com.cykj.survey.lib.annotation.Widget;
+import com.cykj.survey.fragment.adapter.AccidentGridAdapter;
+import com.cykj.survey.fragment.adapter.BusinessRecAdapter;
+import com.cykj.survey.model.AccidentGridModel;
 import com.cykj.survey.model.Company;
-import com.cykj.survey.model.Industry;
+import com.cykj.survey.model.CompanyModel;
+import com.cykj.survey.model.Record;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.DateUtil;
 import com.cykj.survey.util.DeviceUtils;
-import com.cykj.survey.util.JsonUtil;
+import com.cykj.survey.view.CustomGridView;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
-import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
-import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class BusinessFragment extends BaseFragment {
+
+    @BindView(R.id.grid)
+    CustomGridView mGrid;
+    @BindView(R.id.business_recview)
+    RecyclerView mRecview;
+    @BindView(R.id.business_add_text)
+    TextView addText;
+    @BindView(R.id.tip)
+    RelativeLayout tip;
 
     private Handler handler;
 
@@ -85,11 +97,10 @@ public class BusinessFragment extends BaseFragment {
     @BindView(R.id.business_edit_amount)
     EditText businessEditAmount;
 
-    @BindView(R.id.groupListView)
-    QMUIGroupListView mGroupListView;
-
     @BindView(R.id.business_edit_coverage)
     EditText businessEditCoverage;
+
+
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
     @Override
@@ -97,9 +108,158 @@ public class BusinessFragment extends BaseFragment {
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_business, null);
         ButterKnife.bind(this, root);
         initTopbar();
-        initGroupListView();
+        initData();
+        initView();
         handler = new Handler();
         return root;
+    }
+
+    private List<AccidentGridModel> dataList;
+
+    /**
+     * 初始化数据
+     */
+    private void initData() {
+        dataList = new ArrayList<>();
+        dataList.add(new AccidentGridModel("综合险", false));
+        dataList.add(new AccidentGridModel("基本险", false));
+        dataList.add(new AccidentGridModel("一切险", false));
+        dataList.add(new AccidentGridModel("雇主责任险", false));
+        dataList.add(new AccidentGridModel("公众责任险", false));
+    }
+
+    private AccidentGridAdapter adapter;
+    private BusinessRecAdapter recAdapter;
+    private List<Record> recordList;
+    private boolean isFirst = true;
+    private Record record;
+
+    private List<String> insuranceList = new ArrayList<>();
+    /**
+     * 初始化View
+     */
+    private void initView() {
+        adapter = new AccidentGridAdapter(getActivity(), dataList);
+        mGrid.setAdapter(adapter);
+        mGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (dataList.get(position).isSelect()) {
+                    dataList.get(position).setSelect(false);
+                    insuranceList.remove(dataList.get(position).getName());
+                } else {
+                    dataList.get(position).setSelect(true);
+                    insuranceList.add(dataList.get(position).getName());
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        addText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimeEditTextDialog();
+            }
+        });
+
+    }
+
+    private void showTimeEditTextDialog(){
+        final QMUIDialog.EditTextDialogBuilder builder = new QMUIDialog.EditTextDialogBuilder(getActivity());
+        builder.setTitle("出险时间")
+                .setPlaceholder("在此输入出险时间")
+                .setInputType(InputType.TYPE_CLASS_TEXT)
+                .addAction("取消", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                    }
+                })
+                .addAction("确定", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        CharSequence text = builder.getEditText().getText();
+                        if (text != null && text.length() > 0){
+                            record = new Record();
+                            record.setTime(text.toString());
+                            dialog.dismiss();
+                            showAmountEditTextDialog();
+                        }
+                    }
+                })
+                .create(mCurrentDialogStyle).show();
+    }
+
+    private void showAmountEditTextDialog(){
+        final QMUIDialog.EditTextDialogBuilder builder = new QMUIDialog.EditTextDialogBuilder(getActivity());
+        builder.setTitle("损失金额")
+                .setPlaceholder("在此输入损失金额")
+                .setInputType(InputType.TYPE_CLASS_TEXT)
+                .addAction("取消", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                    }
+                })
+                .addAction("确定", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        CharSequence text = builder.getEditText().getText();
+                        if (text != null && text.length() > 0){
+                            record.setAmount(text.toString());
+                            dialog.dismiss();
+                            showReasonEditTextDialog();
+                        }
+                    }
+                })
+                .create(mCurrentDialogStyle).show();
+    }
+
+    private void showReasonEditTextDialog(){
+        final QMUIDialog.EditTextDialogBuilder builder = new QMUIDialog.EditTextDialogBuilder(getActivity());
+        builder.setTitle("出险原因")
+                .setPlaceholder("在此输入出险原因")
+                .setInputType(InputType.TYPE_CLASS_TEXT)
+                .addAction("取消", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                    }
+                })
+                .addAction("确定", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        CharSequence text = builder.getEditText().getText();
+                        if (text != null && text.length() > 0){
+                            record.setReason(text.toString());
+                            dialog.dismiss();
+                            initRecView();
+                        }
+                    }
+                })
+                .create(mCurrentDialogStyle).show();
+    }
+
+    private void initRecView(){
+        if (isFirst){
+            recordList = new ArrayList<>();
+            recordList.add(record);
+            record = null;
+            recAdapter = new BusinessRecAdapter(getActivity(),recordList);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            mRecview.setLayoutManager(layoutManager);
+            mRecview.setAdapter(recAdapter);
+            mRecview.setItemAnimator(new DefaultItemAnimator());
+            mRecview.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+            tip.setVisibility(View.GONE);
+            mRecview.setVisibility(View.VISIBLE);
+            isFirst = false;
+        }else {
+            recordList.add(record);
+            recAdapter.notifyDataSetChanged();
+            record = null;
+        }
     }
 
     /**
@@ -123,7 +283,7 @@ public class BusinessFragment extends BaseFragment {
 //                        startFragment(fragment);
                         try {
                             postJson();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -133,10 +293,16 @@ public class BusinessFragment extends BaseFragment {
 
     }
 
-    private void  postJson() throws IOException{
-        showTipDialog("请稍等...",QMUITipDialog.Builder.ICON_TYPE_LOADING);
+    /**
+     * 提交json数据
+     *
+     * @throws IOException
+     */
+    private void postJson() throws IOException {
+        showTipDialog("请稍等...", QMUITipDialog.Builder.ICON_TYPE_LOADING);
         String url = Constants.TEST_SERVICE + "/company/post";
 
+        CompanyModel companyModel = new CompanyModel();
         Date date = new Date();
         Company company = new Company();
         company.setName(businessEditName.getText().toString());
@@ -147,14 +313,34 @@ public class BusinessFragment extends BaseFragment {
         company.setSafe(businessEditSafe.getText().toString());
         company.setWokerNormal(Integer.parseInt(businessEditWorker.getText().toString()));
         company.setWokerSpecial(Integer.parseInt(businessEditSpecialWorker.getText().toString()));
-        company.setMakeTime(DateUtil.parseToSQLDate(date,DateUtil.yyyyMMddHHmmss));
+        company.setMakeTime(DateUtil.parseToSQLDate(date, DateUtil.yyyyMMddHHmmss));
         company.setUniqueId(DeviceUtils.getUniqueId(getActivity()));
-        String json = JSONObject.toJSONString(company);
+        company.setAssets(Integer.parseInt(businessEditAssets.getText().toString()));
+        company.setAmount(Integer.parseInt(businessEditAmount.getText().toString()));
+        company.setCoverage(businessEditCoverage.getText().toString());
+        if (insuranceList.size() > 0){
+            String insurance = "";
+            int i = 0;
+            for (String str : insuranceList){
+                if (i == 0){
+                    insurance += str;
+                    i++;
+                }else {
+                    insurance += "," + str;
+                }
+            }
+            company.setInsurance(insurance);
+        }
+        if (recordList != null || recordList.size() > 0){
+            companyModel.setRecords(recordList);
+        }
+        companyModel.setCompanyEntity(company);
+        String json = JSONObject.toJSONString(companyModel);
 
         OkHttpClient client = new OkHttpClient();
 
         RequestBody body = new FormBody.Builder()
-                .add("json",json)
+                .add("json", json)
                 .build();
 
         Request request = new Request.Builder()
@@ -172,14 +358,14 @@ public class BusinessFragment extends BaseFragment {
             public void onResponse(Call call, Response response) throws IOException {
                 tipDialogDismiss();
                 String resultStr = response.body().string();
-                ResultModel result = JSONObject.parseObject(resultStr,ResultModel.class);
-                if (result.getCode() == 0){
+                ResultModel result = JSONObject.parseObject(resultStr, ResultModel.class);
+                if (result.getCode() == 0) {
                     handler.post(seccessRun);
                     Constants constants = new Constants();
                     constants.setReportId(Long.parseLong(result.getData()));
                     QMUIFragment fragment = new LicenseUploadFragment();
                     startFragmentAndDestroyCurrent(fragment);
-                }else {
+                } else {
                     handler.post(failRun);
                     return;
                 }
@@ -201,78 +387,6 @@ public class BusinessFragment extends BaseFragment {
             showToastShort("保存失败");
         }
     };
-
-    /**
-     * 初始化GroupList
-     */
-    private void initGroupListView() {
-        QMUIGroupListView.Section section = new QMUIGroupListView.Section(getActivity());
-
-        QMUICommonListItemView itemView = mGroupListView.createItemView("投保险种");
-        itemView.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_NONE);
-
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showMultiChoiceDialog(v);
-            }
-        };
-
-        section.addItemView(itemView, onClickListener)
-                .addTo(mGroupListView);
-    }
-
-    /**
-     * 弹出多选框
-     * @param v
-     */
-    private void showMultiChoiceDialog(final View v) {
-        final String[] items = new String[]{"综合险", "一切险", "基本险"};
-        final int[] selected = new int[items.length];
-        if (v instanceof QMUICommonListItemView) {
-            String str = ((QMUICommonListItemView) v).getDetailText().toString();
-            if (!str.equals("")) {
-                String[] str1 = str.split(";");
-                int a = 0;
-                for (int i = 0; i < str1.length; i++) {
-                    for (int j = 0; j < items.length; j++) {
-                        if (str1[i].equals(items[j])) {
-                            selected[a] = j;
-                            a++;
-                        }
-                    }
-                }
-            }
-        }
-        final QMUIDialog.MultiCheckableDialogBuilder builder = new QMUIDialog.MultiCheckableDialogBuilder(getActivity())
-                .setCheckedItems(selected)
-                .addItems(items, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-        builder.addAction("取消", new QMUIDialogAction.ActionListener() {
-            @Override
-            public void onClick(QMUIDialog dialog, int index) {
-                dialog.dismiss();
-            }
-        });
-        builder.addAction("提交", new QMUIDialogAction.ActionListener() {
-            @Override
-            public void onClick(QMUIDialog dialog, int index) {
-                String result = "";
-                for (int i = 0; i < builder.getCheckedItemIndexes().length; i++) {
-                    result += "" + items[builder.getCheckedItemIndexes()[i]] + ";";
-                }
-                if (v instanceof QMUICommonListItemView) {
-                    ((QMUICommonListItemView) v).setDetailText(result);
-                }
-                dialog.dismiss();
-            }
-        });
-        builder.create(mCurrentDialogStyle).show();
-    }
 
     @Override
     public void onDestroyView() {

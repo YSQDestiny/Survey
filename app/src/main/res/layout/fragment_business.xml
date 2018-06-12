@@ -497,11 +497,6 @@
 
                 </FrameLayout>
 
-                <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
-                    android:id="@+id/groupListView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
                 <com.cykj.survey.view.CustomGridView
                     android:id="@+id/grid"
                     android:layout_width="match_parent"
@@ -515,6 +510,56 @@
                     android:layout_marginTop="8dp">
                 </com.cykj.survey.view.CustomGridView>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#f2f0f2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="2dp"
+                        android:text="出险记录"
+                        android:textColor="#666666" />
+
+                    <TextView
+                        android:id="@+id/business_add_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="2dp"
+                        android:text="添加"
+                        android:textColor="?attr/app_primary_color"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/business_recview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+                </android.support.v7.widget.RecyclerView>
+
+                <RelativeLayout
+                    android:id="@+id/tip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="如有出险记录请点击“添加”按钮添加"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:textColor="#666666"/>
+
+                </RelativeLayout>
             </LinearLayout>
 
         </LinearLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
     private Context mContext;
     private LayoutInflater inflater;
     private boolean oneChecked = false;
+    private SparseBooleanArray yesCheckStates = new SparseBooleanArray();
+    private SparseBooleanArray noCheckStates = new SparseBooleanArray();
 
     public OptionsAdapter(Context mContext,List<String> mDatas){
         this.mContext = mContext;
@@ -42,15 +45,19 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+        holder.checkBoxYes.setTag(position);
+        holder.checkBoxNo.setTag(position);
         holder.tv.setText(mDatas.get(position));
         holder.checkBoxYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (holder.checkBoxNo.isChecked() && holder.checkBoxYes.isChecked()){
                     holder.checkBoxNo.setChecked(false);
+                    noCheckStates.delete(position);
                 }
                 if (isChecked){
+                    yesCheckStates.put(position,true);
                     Toast.makeText(mContext,"你勾选了是",Toast.LENGTH_LONG).show();
                 }
             }
@@ -61,13 +68,18 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (holder.checkBoxNo.isChecked() && holder.checkBoxYes.isChecked()){
                     holder.checkBoxYes.setChecked(false);
+                    yesCheckStates.delete(position);
                 }
                 if (isChecked){
+                    noCheckStates.put(position,true);
                     Intent intent = new Intent(mContext, AccidentActivity.class);
                     mContext.startActivity(intent);
                 }
             }
         });
+
+        holder.checkBoxYes.setChecked(yesCheckStates.get(position,false));
+        holder.checkBoxNo.setChecked(noCheckStates.get(position,false));
     }
 
     @Override

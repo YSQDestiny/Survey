@@ -1,9 +1,11 @@
 package com.cykj.survey.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Company {
 
+    private Long id;
     private String name;
     private String addr;
     private String linkman;
@@ -15,6 +17,18 @@ public class Company {
     private Date makeTime;
     private String uniqueId;
     private String industry;
+    private String businessPhoto;
+    private String industryPhoto;
+    private String systemPhoto;
+
+    //固定资产
+    private Integer assets;
+    //年营业额
+    private Integer amount;
+    //投保范围
+    private String coverage;
+    //投保险种
+    private String insurance;
 
     public String getName() {
         return name;
@@ -102,5 +116,70 @@ public class Company {
 
     public void setIndustry(String industry) {
         this.industry = industry;
+    }
+
+
+    public Integer getAssets() {
+        return assets;
+    }
+
+    public void setAssets(Integer assets) {
+        this.assets = assets;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public String getCoverage() {
+        return coverage;
+    }
+
+    public void setCoverage(String coverage) {
+        this.coverage = coverage;
+    }
+
+    public String getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(String insurance) {
+        this.insurance = insurance;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getBusinessPhoto() {
+        return businessPhoto;
+    }
+
+    public void setBusinessPhoto(String businessPhoto) {
+        this.businessPhoto = businessPhoto;
+    }
+
+    public String getIndustryPhoto() {
+        return industryPhoto;
+    }
+
+    public void setIndustryPhoto(String industryPhoto) {
+        this.industryPhoto = industryPhoto;
+    }
+
+    public String getSystemPhoto() {
+        return systemPhoto;
+    }
+
+    public void setSystemPhoto(String systemPhoto) {
+        this.systemPhoto = systemPhoto;
     }
 }
