@@ -59,10 +59,35 @@ public class ReportListFragment extends BaseFragment {
         ButterKnife.bind(this, root);
         initTopbar();
         handler = new Handler();
-        showTipDialog("请稍等",QMUITipDialog.Builder.ICON_TYPE_LOADING);
         getList();
-        tipDialogDismiss();
         return root;
+    }
+
+    private void initView() {
+
+        if (companies != null){
+            adapter = new ReportAdapter(getActivity(),companies);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            mRecycler.setLayoutManager(layoutManager);
+            mRecycler.setAdapter(adapter);
+            mRecycler.setItemAnimator(new DefaultItemAnimator());
+            mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+            adapter.setOnItemClickListener(new ReportAdapter.OnItemClickListener() {
+                @Override
+                public void onClick(int position) {
+                    Intent intent = new Intent(getActivity(), ReportDetailsActivity.class);
+                    intent.putExtra("id",companies.get(position).getId().toString());
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onLongClick(int position) {
+
+                }
+            });
+        }
+
     }
 
     private void initTopbar(){
@@ -77,6 +102,12 @@ public class ReportListFragment extends BaseFragment {
     }
 
     private void getList(){
+        final QMUITipDialog tipDialog;
+        tipDialog = new QMUITipDialog.Builder(getContext())
+                .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
+                .setTipWord("请稍等...")
+                .create();
+        tipDialog.show();
 //        showTipDialog("请稍等...", QMUITipDialog.Builder.ICON_TYPE_LOADING);
         String url = Constants.TEST_SERVICE + "/company/getList";
 
@@ -96,12 +127,13 @@ public class ReportListFragment extends BaseFragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-//                tipDialogDismiss();
                 ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
                 if (result.getCode() == 0){
                     companies = JSONObject.parseArray(result.getData(),Company.class);
+                    tipDialog.dismiss();
                     handler.post(uiable);
                 }
+
             }
         });
 
@@ -110,28 +142,7 @@ public class ReportListFragment extends BaseFragment {
     Runnable uiable = new Runnable() {
         @Override
         public void run() {
-            if (companies != null){
-                adapter = new ReportAdapter(getActivity(),companies);
-                LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-                layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                mRecycler.setLayoutManager(layoutManager);
-                mRecycler.setAdapter(adapter);
-                mRecycler.setItemAnimator(new DefaultItemAnimator());
-                mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
-                adapter.setOnItemClickListener(new ReportAdapter.OnItemClickListener() {
-                    @Override
-                    public void onClick(int position) {
-                        Intent intent = new Intent(getActivity(), ReportDetailsActivity.class);
-                        intent.putExtra("id",companies.get(position).getId().toString());
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onLongClick(int position) {
-
-                    }
-                });
-            }
+            initView();
         }
     };
 

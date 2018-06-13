@@ -29,6 +29,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/options_tip"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/icon_tip"
+            android:layout_marginLeft="8dp"
+            android:layout_centerVertical="true"/>
+
         <LinearLayout
             android:id="@+id/yes_layout"
             android:orientation="horizontal"

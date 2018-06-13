@@ -1,5 +1,6 @@
 package com.cykj.survey.fragment.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,8 +9,11 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +32,7 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
     private boolean oneChecked = false;
     private SparseBooleanArray yesCheckStates = new SparseBooleanArray();
     private SparseBooleanArray noCheckStates = new SparseBooleanArray();
+    private Dialog dia;
 
     public OptionsAdapter(Context mContext,List<String> mDatas){
         this.mContext = mContext;
@@ -46,6 +51,17 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+        dia = new Dialog(mContext,R.style.edit_AlertDialog_style);
+        dia.setContentView(R.layout.layout_dialog);
+        ImageView imageView = dia.findViewById(R.id.dialog_img);
+        imageView.setBackgroundResource(R.mipmap.tip_test);
+        dia.setCanceledOnTouchOutside(true);
+        Window w = dia.getWindow();
+        WindowManager.LayoutParams lp = w.getAttributes();
+        lp.x = 0;
+        lp.y = 40;
+        dia.onWindowAttributesChanged(lp);
+
         holder.checkBoxYes.setTag(position);
         holder.checkBoxNo.setTag(position);
         holder.tv.setText(mDatas.get(position));
@@ -77,9 +93,15 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
                 }
             }
         });
-
         holder.checkBoxYes.setChecked(yesCheckStates.get(position,false));
         holder.checkBoxNo.setChecked(noCheckStates.get(position,false));
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dia.show();
+            }
+        });
     }
 
     @Override
@@ -92,12 +114,14 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
         TextView tv;
         CheckBox checkBoxYes;
         CheckBox checkBoxNo;
+        ImageView imageView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             tv = itemView.findViewById(R.id.options_name);
             checkBoxYes = itemView.findViewById(R.id.optins_checkbox_yes);
             checkBoxNo = itemView.findViewById(R.id.optins_checkbox_no);
+            imageView = itemView.findViewById(R.id.options_tip);
         }
     }
 }

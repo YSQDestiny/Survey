@@ -20,6 +20,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.fragment.adapter.BusinessRecAdapter;
+import com.cykj.survey.fragment.adapter.RiskAdapter;
 import com.cykj.survey.model.Accident;
 import com.cykj.survey.model.Company;
 import com.cykj.survey.model.CompanyModel;
@@ -109,6 +110,7 @@ public class ReportDetailsActivity extends AppCompatActivity {
     }
 
     private BusinessRecAdapter recAdapter;
+    private RiskAdapter riskAdapter;
 
     private void initView() {
 
@@ -156,7 +158,14 @@ public class ReportDetailsActivity extends AppCompatActivity {
                 detailsRiskCode.setVisibility(View.GONE);
                 riskTip.setVisibility(View.VISIBLE);
             } else {
-
+                riskAdapter = new RiskAdapter(this,accidents);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+                layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                detailsRiskCode.setLayoutManager(layoutManager);
+                detailsRiskCode.setAdapter(riskAdapter);
+                detailsRiskCode.setItemAnimator(new DefaultItemAnimator());
+                detailsRiskCode.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+                detailsRiskCode.setNestedScrollingEnabled(false);
             }
 
         } else {
