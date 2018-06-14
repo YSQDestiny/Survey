@@ -29,7 +29,6 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
     private List<String> mDatas;
     private Context mContext;
     private LayoutInflater inflater;
-    private boolean oneChecked = false;
     private SparseBooleanArray yesCheckStates = new SparseBooleanArray();
     private SparseBooleanArray noCheckStates = new SparseBooleanArray();
     private Dialog dia;
