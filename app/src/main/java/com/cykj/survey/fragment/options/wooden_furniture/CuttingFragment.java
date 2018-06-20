@@ -7,8 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.fragment.adapter.OptionAdapter;
 import com.cykj.survey.fragment.adapter.OptionsAdapter;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
@@ -29,7 +31,7 @@ public class CuttingFragment extends BaseFragment {
     RecyclerView mRecycler;
 
     private List<String> options;
-    private OptionsAdapter optionsAdapter;
+    private OptionAdapter optionAdapter;
 
     @Override
     protected View onCreateView() {
@@ -38,11 +40,11 @@ public class CuttingFragment extends BaseFragment {
         ButterKnife.bind(this, root);
         initTopbar();
         initData();
-        optionsAdapter = new OptionsAdapter(getActivity(),options);
+        optionAdapter = new OptionAdapter(getActivity(), Constants.woodenCuttList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(layoutManager);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecycler.setAdapter(optionsAdapter);
+        mRecycler.setAdapter(optionAdapter);
         mRecycler.setItemAnimator( new DefaultItemAnimator());
         mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         return root;

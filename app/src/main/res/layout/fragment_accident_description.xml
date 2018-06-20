@@ -179,7 +179,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="事故后果"
+                    android:text="事故发生的可能性"
                     android:textColor="#6D727C"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="4dp"
@@ -187,24 +187,67 @@
 
             </RelativeLayout>
 
+            <Spinner
+                android:id="@+id/accident_possibility_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp">
+            </Spinner>
+
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
 
-                <com.cykj.survey.view.CustomGridView
-                    android:id="@+id/accident_result_grid"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:numColumns="4"
-                    android:horizontalSpacing="2dp"
-                    android:verticalSpacing="3dp"
+                    android:text="隐患暴露的频繁程度"
+                    android:textColor="#6D727C"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp">
-                </com.cykj.survey.view.CustomGridView>
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp" />
 
             </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/accident_frequencies_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp">
+            </Spinner>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="发生事故产生的后果"
+                    android:textColor="#6D727C"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/accident_result_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp">
+            </Spinner>
 
         </LinearLayout>
 

@@ -2,6 +2,7 @@ package com.cykj.survey.activity;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -26,6 +27,7 @@ import com.cykj.survey.model.Company;
 import com.cykj.survey.model.CompanyModel;
 import com.cykj.survey.model.Record;
 import com.cykj.survey.model.ResultModel;
+import com.cykj.survey.util.DownloadUtil;
 import com.cykj.survey.util.ImgUtil;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
@@ -107,6 +109,23 @@ public class ReportDetailsActivity extends AppCompatActivity {
 
     private void initTopbar() {
         topbar.setTitle("报告详情");
+        topbar.addRightTextButton("下载",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloadReport();
+            }
+        });
+    }
+
+    private void downloadReport(){
+
+        String url = Constants.TEST_SERVICE + "/company/exportDoc?id=" +company.getCompanyEntity().getId();
+
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+        startActivity(intent);
+
+
     }
 
     private BusinessRecAdapter recAdapter;

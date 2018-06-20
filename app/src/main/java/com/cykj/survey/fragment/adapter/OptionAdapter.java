@@ -19,21 +19,19 @@ import android.widget.Toast;
 
 import com.cykj.survey.R;
 import com.cykj.survey.activity.AccidentActivity;
-import com.cykj.survey.base.BaseFragment;
-import com.qmuiteam.qmui.arch.QMUIFragment;
+import com.cykj.survey.model.Options;
 
 import java.util.List;
 
-public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHolder>{
+public class OptionAdapter  extends RecyclerView.Adapter<OptionAdapter.MyViewHolder>{
 
-    private List<String> mDatas;
+    private List<Options> mDatas;
     private Context mContext;
     private LayoutInflater inflater;
     private SparseBooleanArray yesCheckStates = new SparseBooleanArray();
     private SparseBooleanArray noCheckStates = new SparseBooleanArray();
-    private Dialog dia;
 
-    public OptionsAdapter(Context mContext,List<String> mDatas){
+    public OptionAdapter(Context mContext,List<Options> mDatas){
         this.mContext = mContext;
         this.mDatas = mDatas;
         inflater = LayoutInflater.from(mContext);
@@ -41,7 +39,7 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OptionAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = inflater.inflate(R.layout.layout_options_item,parent,false);
         MyViewHolder holder = new MyViewHolder(view);
@@ -50,20 +48,32 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        dia = new Dialog(mContext,R.style.edit_AlertDialog_style);
-        dia.setContentView(R.layout.layout_dialog);
-        ImageView imageView = dia.findViewById(R.id.dialog_img);
-        imageView.setBackgroundResource(R.mipmap.tip_test);
-        dia.setCanceledOnTouchOutside(true);
-        Window w = dia.getWindow();
-        WindowManager.LayoutParams lp = w.getAttributes();
-        lp.x = 0;
-        lp.y = 40;
-        dia.onWindowAttributesChanged(lp);
+
+        if (mDatas.get(position).getImageId() == 0){
+            holder.imageView.setVisibility(View.GONE);
+        }else {
+            final Dialog dia;
+            dia = new Dialog(mContext,R.style.edit_AlertDialog_style);
+            dia.setContentView(R.layout.layout_dialog);
+            ImageView imageView = dia.findViewById(R.id.dialog_img);
+            imageView.setImageResource(mDatas.get(position).getImageId());
+            dia.setCanceledOnTouchOutside(true);
+            Window w = dia.getWindow();
+            WindowManager.LayoutParams lp = w.getAttributes();
+            lp.x = 0;
+            lp.y = 40;
+            dia.onWindowAttributesChanged(lp);
+            holder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dia.show();
+                }
+            });
+        }
 
         holder.checkBoxYes.setTag(position);
         holder.checkBoxNo.setTag(position);
-        holder.tv.setText(mDatas.get(position));
+        holder.tv.setText(mContext.getString(mDatas.get(position).getName()));
         holder.checkBoxYes.setOnCheckedChangeListener(null);
         holder.checkBoxNo.setOnCheckedChangeListener(null);
 
@@ -106,13 +116,6 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
                 }
             }
         });
-
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dia.show();
-            }
-        });
     }
 
     @Override
@@ -121,7 +124,7 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
     }
 
     @Override
-    public void onViewRecycled(@NonNull MyViewHolder holder) {
+    public void onViewRecycled(@NonNull OptionAdapter.MyViewHolder holder) {
         CheckBox checkBoxYes = holder.checkBoxYes;
         CheckBox checkBoxNo = holder.checkBoxNo;
         checkBoxYes.setTag(-2);
@@ -145,4 +148,5 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
             imageView = itemView.findViewById(R.id.options_tip);
         }
     }
+
 }

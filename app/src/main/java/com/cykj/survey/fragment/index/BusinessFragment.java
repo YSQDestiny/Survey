@@ -130,7 +130,7 @@ public class BusinessFragment extends BaseFragment {
 
     private AccidentGridAdapter adapter;
     private BusinessRecAdapter recAdapter;
-    private List<Record> recordList;
+    private List<Record> recordList = new ArrayList<>();
     private boolean isFirst = true;
     private Record record;
 
@@ -242,7 +242,6 @@ public class BusinessFragment extends BaseFragment {
 
     private void initRecView(){
         if (isFirst){
-            recordList = new ArrayList<>();
             recordList.add(record);
             record = null;
             recAdapter = new BusinessRecAdapter(getActivity(),recordList);
@@ -331,7 +330,7 @@ public class BusinessFragment extends BaseFragment {
             }
             company.setInsurance(insurance);
         }
-        if (recordList != null || recordList.size() > 0){
+        if (recordList.size() > 0){
             companyModel.setRecords(recordList);
         }
         companyModel.setCompanyEntity(company);

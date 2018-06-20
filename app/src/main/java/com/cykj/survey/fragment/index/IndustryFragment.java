@@ -159,7 +159,7 @@ public class IndustryFragment extends BaseFragment{
                 startFragmentAndDestroyCurrent(wood_fragment);
                 break;
             default:
-                Toast.makeText(getActivity(),industry,Toast.LENGTH_LONG).show();
+
                 break;
         }
     }
