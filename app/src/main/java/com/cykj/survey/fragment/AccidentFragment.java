@@ -311,15 +311,20 @@ public class AccidentFragment extends BaseFragment {
         accident.setSurroundingsPhoto(ImgUtil.bitmapToBase64(accidentSurroundingsImg.getDrawingCache()));
         double D = possibilityPoint * frequenciesPoint * resultPoint;
         if (D > 320){
-
+            accident.setLevel("1级风险");
+            accident.setLevelDes("极其危险，不能继续作业");
         }else if (D > 160 & D <= 320){
-
+            accident.setLevel("2极风险");
+            accident.setLevelDes("高度危险，要立即整改");
         }else if (D > 10 & D <= 160){
-
+            accident.setLevel("3级风险");
+            accident.setLevelDes("显著危险，需要整改");
         }else if (D > 20 & D <= 70){
-
+            accident.setLevel("4级风险");
+            accident.setLevelDes("一般危险，需要注意");
         }else if (D > 0 & D <= 20){
-
+            accident.setLevel("5级风险");
+            accident.setLevelDes("稍有危险，可以接受");
         }
 
         RequestBody body = new FormBody.Builder()

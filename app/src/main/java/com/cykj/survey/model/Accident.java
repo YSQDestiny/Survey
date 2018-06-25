@@ -8,6 +8,8 @@ public class Accident {
     private String surroundingsPhoto;
     private String type;
     private String result;
+    private String level;
+    private String levelDes;
 
     public Long getCompanyId() {
         return companyId;
@@ -55,5 +57,21 @@ public class Accident {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getLevelDes() {
+        return levelDes;
+    }
+
+    public void setLevelDes(String levelDes) {
+        this.levelDes = levelDes;
     }
 }
