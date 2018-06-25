@@ -17,10 +17,12 @@ import com.cykj.survey.bean.IndustryBean;
 import com.cykj.survey.bean.Node;
 import com.cykj.survey.bean.SimpleTreeAdapter;
 import com.cykj.survey.bean.TreeListViewAdapter;
+import com.cykj.survey.fragment.project.BridgeAndTunnelFragment;
 import com.cykj.survey.lib.Group;
 import com.cykj.survey.lib.annotation.Widget;
 import com.cykj.survey.model.Industry;
 import com.cykj.survey.util.JsonUtil;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
 import java.util.List;
@@ -111,7 +113,8 @@ public class ProjectFragment extends BaseFragment {
         topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                QMUIFragment fragment = new BridgeAndTunnelFragment();
+                startFragmentAndDestroyCurrent(fragment);
             }
         });
     }
