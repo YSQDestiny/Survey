@@ -109,4 +109,5 @@ dependencies {
     implementation 'com.jph.takephoto:takephoto_library:4.0.3'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 }

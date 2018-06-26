@@ -7,98 +7,85 @@
     android:layout_height="wrap_content"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:background="@color/qmui_config_color_white">
+    android:background="@color/qmui_config_color_white"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
 
-    <android.support.design.widget.TextInputLayout
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/bridgeName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="桥梁名称"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="16dp"
+        android:hint="桥梁名称"
+        app:met_primaryColor="?attr/app_primary_color"
+        app:met_floatingLabel="highlight"
+        app:met_clearButton= "true" />
 
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:maxLines="1"/>
-
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/stationNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="桩号"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="8dp"
+        android:hint="桩号"
+        app:met_primaryColor="?attr/app_primary_color"
+        app:met_floatingLabel="highlight"
+        app:met_clearButton= "true" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:maxLines="1"/>
-
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/length"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="桥长(m)"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="8dp"
+        android:hint="桥长(m)"
+        app:met_primaryColor="?attr/app_primary_color"
+        app:met_floatingLabel="highlight"
+        app:met_clearButton= "true"
+        android:inputType="numberDecimal"/>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:maxLines="1"/>
-
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/porespanType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="孔跨类型"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="8dp"
+        android:hint="孔跨类型"
+        app:met_primaryColor="?attr/app_primary_color"
+        app:met_floatingLabel="highlight"
+        app:met_clearButton= "true" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:maxLines="1"/>
+    <RelativeLayout style="@style/button_wrapper_style">
 
-    </android.support.design.widget.TextInputLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:text="添加"
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="64dp"
-            android:textColor="?attr/app_primary_color"
-            android:layout_marginBottom="16dp"/>
+            android:clickable="true"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="   确认   "
+            app:qmui_radius="5dp"
+            android:layout_marginLeft="32dp"/>
 
-        <TextView
-            android:text="取消"
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="64dp"
-            android:textColor="@color/qmui_config_color_red"
-            android:layout_marginBottom="16dp"/>
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="   取消   "
+            app:qmui_radius="5dp"
+            android:layout_marginRight="32dp"
+            app:qmui_borderColor="@color/qmui_config_color_red"
+            android:textColor="@color/qmui_config_color_red"/>
 
     </RelativeLayout>
 
