@@ -2,9 +2,12 @@ package com.cykj.survey.activity;
 
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -12,22 +15,15 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.cykj.survey.R;
-import com.cykj.survey.fragment.index.IndustryFragment;
-import com.jph.takephoto.app.TakePhoto;
-import com.jph.takephoto.app.TakePhotoActivity;
-import com.jph.takephoto.model.TResult;
-import com.jph.takephoto.model.TakePhotoOptions;
-import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-
 
 import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PhotoUploadActivity extends TakePhotoActivity {
+public class PhotoUploadActivity extends AppCompatActivity {
 
     @BindView(R.id.topbar)
     QMUITopBar topbar;
@@ -94,7 +90,6 @@ public class PhotoUploadActivity extends TakePhotoActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         if (items[which].equals("拍照")){
 //                            byCamera();
-                            photoClick("拍照",getTakePhoto());
                             dialog.dismiss();
                         }else if (items[which].equals("从相册选择")){
 //                            openAlbum();
@@ -103,33 +98,5 @@ public class PhotoUploadActivity extends TakePhotoActivity {
                     }
                 })
                 .create(mCurrentDialogStyle).show();
-    }
-
-    private void configTakePhotoOption(TakePhoto takePhoto){
-        TakePhotoOptions.Builder builder = new TakePhotoOptions.Builder();
-        builder.setWithOwnGallery(true);
-        builder.setCorrectImage(true);
-        takePhoto.setTakePhotoOptions(builder.create());
-    }
-
-    private void photoClick(String fangfa,TakePhoto takePhoto){
-        File file = new File(Environment.getExternalStorageDirectory(),"/temp/" + System.currentTimeMillis() + ".jpg");
-        if (!file.getParentFile().exists()){
-            file.getParentFile().mkdirs();
-        }
-        Uri imageUri = Uri.fromFile(file);
-
-        configTakePhotoOption(takePhoto);
-        switch (fangfa){
-            case "拍照":
-                takePhoto.onPickFromCapture(imageUri);
-                break;
-        }
-    }
-
-    @Override
-    public void takeSuccess(TResult result) {
-        super.takeSuccess(result);
-        Glide.with(this).load(new File(result.getImage().getCompressPath())).into(businessLicenseImg);
     }
 }

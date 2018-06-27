@@ -29,13 +29,11 @@ import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.ImgUtil;
 import com.cykj.survey.util.PermissionUtils;
-import com.jph.takephoto.app.TakePhoto;
-import com.jph.takephoto.model.InvokeParam;
-import com.jph.takephoto.model.TakePhotoOptions;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -69,8 +67,7 @@ public class LicenseUploadFragment extends BaseFragment {
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
     private String target;
-    private TakePhoto takePhoto;
-    private InvokeParam invokeParam;
+
 
     @Override
     protected View onCreateView() {
@@ -297,25 +294,7 @@ public class LicenseUploadFragment extends BaseFragment {
         super.onDestroyView();
     }
 
-    private void configTakePhotoOption(TakePhoto takePhoto){
-        TakePhotoOptions.Builder builder = new TakePhotoOptions.Builder();
-        builder.setWithOwnGallery(true);
-        builder.setCorrectImage(true);
-        takePhoto.setTakePhotoOptions(builder.create());
-    }
 
-    private void photoClick(String fangfa,TakePhoto takePhoto){
-        File file = new File(Environment.getExternalStorageDirectory(),"/temp/" + System.currentTimeMillis() + ".jpg");
-        if (!file.getParentFile().exists()){
-            file.getParentFile().mkdirs();
-        }
-        Uri imageUri = Uri.fromFile(file);
 
-        configTakePhotoOption(takePhoto);
-        switch (fangfa){
-            case "拍照":
-                takePhoto.onPickFromCapture(imageUri);
-                break;
-        }
-    }
+
 }
