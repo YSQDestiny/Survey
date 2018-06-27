@@ -1,5 +1,6 @@
 package com.cykj.survey.fragment.index;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
+import com.cykj.survey.activity.PhotoUploadActivity;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.fragment.adapter.AccidentGridAdapter;
 import com.cykj.survey.fragment.adapter.BusinessRecAdapter;
@@ -362,8 +364,10 @@ public class BusinessFragment extends BaseFragment {
                     handler.post(seccessRun);
                     Constants constants = new Constants();
                     constants.setReportId(Long.parseLong(result.getData()));
-                    QMUIFragment fragment = new LicenseUploadFragment();
-                    startFragmentAndDestroyCurrent(fragment);
+//                    QMUIFragment fragment = new LicenseUploadFragment();
+//                    startFragmentAndDestroyCurrent(fragment);
+                    Intent intent = new Intent(getActivity(), PhotoUploadActivity.class);
+                    getActivity().startActivity(intent);
                 } else {
                     handler.post(failRun);
                     return;

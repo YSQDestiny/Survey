@@ -54,7 +54,8 @@ public class TestActivity extends BaseFragmentActivity {
         testBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestPermissions(TestActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, new RequestPermissionCallBack() {
+                requestPermissions(TestActivity.this, new String[]{Manifest.permission.CAMERA,
+                        Manifest.permission.READ_EXTERNAL_STORAGE}, new RequestPermissionCallBack() {
                     @Override
                     public void granted() {
                         if (hasSdcard()) {
