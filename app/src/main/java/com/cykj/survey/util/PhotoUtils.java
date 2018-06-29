@@ -111,39 +111,39 @@ public class PhotoUtils {
                    return pathHead + Environment.getExternalStorageDirectory() + "/" + split[1];
                }
            }
-       }
-       //DownloadsProvider
-       else if (isDownloadsDocument(uri)){
-           final String id = DocumentsContract.getDocumentId(uri);
-           final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),Long.valueOf(id));
-           return pathHead + getDataColumn(context,contentUri,null,null);
-       }
-       // MediaProvider
-       else if (isMediaDocument(uri)){
-           final String docId = DocumentsContract.getDocumentId(uri);
-           final String[] split = docId.split(":");
-           final String type = split[0];
-
-           Uri contentUri = null;
-           if ("image".equals(type)){
-               contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-           }else if ("video".equals(type)){
-               contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-           }else if ("audio".equals(type)){
-               contentUri =MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+           //DownloadsProvider
+           else if (isDownloadsDocument(uri)){
+               final String id = DocumentsContract.getDocumentId(uri);
+               final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),Long.valueOf(id));
+               return pathHead + getDataColumn(context,contentUri,null,null);
            }
+           // MediaProvider
+           else if (isMediaDocument(uri)){
+               final String docId = DocumentsContract.getDocumentId(uri);
+               final String[] split = docId.split(":");
+               final String type = split[0];
 
-           final String selection = "_id=?";
-           final String[] selectionArgs = new String[]{split[1]};
+               Uri contentUri = null;
+               if ("image".equals(type)){
+                   contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+               }else if ("video".equals(type)){
+                   contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+               }else if ("audio".equals(type)){
+                   contentUri =MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+               }
 
-           return pathHead + getDataColumn(context,contentUri,selection,selectionArgs);
+               final String selection = "_id=?";
+               final String[] selectionArgs = new String[]{split[1]};
+
+               return pathHead + getDataColumn(context,contentUri,selection,selectionArgs);
+           }
        }
        //MediaStore(and general)
-        else if ("content".equalsIgnoreCase(uri.getScheme())){
+       else if ("content".equalsIgnoreCase(uri.getScheme())){
            return pathHead + getDataColumn(context,uri,null,null);
        }
        //File
-        else if ("file".equalsIgnoreCase(uri.getScheme())){
+       else if ("file".equalsIgnoreCase(uri.getScheme())){
            return pathHead + uri.getPath();
        }
        return null;

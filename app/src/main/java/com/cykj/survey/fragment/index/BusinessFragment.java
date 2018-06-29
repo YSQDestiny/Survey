@@ -368,6 +368,7 @@ public class BusinessFragment extends BaseFragment {
 //                    startFragmentAndDestroyCurrent(fragment);
                     Intent intent = new Intent(getActivity(), PhotoUploadActivity.class);
                     getActivity().startActivity(intent);
+                    getActivity().finish();
                 } else {
                     handler.post(failRun);
                     return;

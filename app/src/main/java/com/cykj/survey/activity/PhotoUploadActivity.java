@@ -18,19 +18,34 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
+import com.cykj.survey.Constants;
 import com.cykj.survey.MainActivity;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.fragment.index.IndustryFragment;
+import com.cykj.survey.model.ResultModel;
+import com.cykj.survey.util.ImgUtil;
 import com.cykj.survey.util.PhotoUtils;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 import java.io.File;
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class PhotoUploadActivity extends BaseFragmentActivity {
 
@@ -93,7 +108,7 @@ public class PhotoUploadActivity extends BaseFragmentActivity {
         licenseUploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                upLoadPhoto();
             }
         });
     }
@@ -185,7 +200,12 @@ public class PhotoUploadActivity extends BaseFragmentActivity {
                     //访问相册回调
                 case CODE_GALLERY_REQUEST:
                     if (hasSdcard()){
-                        Bitmap bitmap1 = PhotoUtils.getBitmapFromUri(imageUri,PhotoUploadActivity.this);
+                        String str = PhotoUtils.getPath(this,data.getData());
+                        Uri newUri = Uri.parse(str);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                            newUri = FileProvider.getUriForFile(this,"com.cykj.survey.fileprovider",new File(newUri.getPath()));
+                        }
+                        Bitmap bitmap1 = PhotoUtils.getBitmapFromUri(newUri,PhotoUploadActivity.this);
                         if (bitmap1 != null){
                             switch (target){
                                 case "business":
@@ -205,5 +225,53 @@ public class PhotoUploadActivity extends BaseFragmentActivity {
                     break;
             }
         }
+    }
+
+    private void upLoadPhoto(){
+        showTipDialog("请稍等...", QMUITipDialog.Builder.ICON_TYPE_LOADING);
+        String url = Constants.TEST_SERVICE + "/company/uploadPhoto";
+
+        OkHttpClient client = new OkHttpClient();
+
+        businessLicenseImg.setDrawingCacheEnabled(true);
+        String businessPhoto = ImgUtil.bitmapToBase64(businessLicenseImg.getDrawingCache());
+
+        industryLicenseImg.setDrawingCacheEnabled(true);
+        String indusrtyPhoto = ImgUtil.bitmapToBase64(businessLicenseImg.getDrawingCache());
+
+        systemLeveImg.setDrawingCacheEnabled(true);
+        String systemPhoto = ImgUtil.bitmapToBase64(systemLeveImg.getDrawingCache());
+
+        Long companyId = Constants.REPORT_ID;
+
+        RequestBody body = new FormBody.Builder()
+                .add("companyId",companyId.toString())
+                .add("businessPhoto",businessPhoto)
+                .add("industryPhoto",indusrtyPhoto)
+                .add("systemPhoto",systemPhoto)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                tipDialogDismiss();
+                ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
+                if (result.getCode() == 0){
+                    Intent intent = new Intent(PhotoUploadActivity.this,IndustryActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
     }
 }

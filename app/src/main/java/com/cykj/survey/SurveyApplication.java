@@ -5,9 +5,11 @@ import android.app.Application;
 import android.content.Context;
 
 import com.cykj.survey.manager.QDUpgradeManager;
+import com.lljjcoder.style.citypickerview.CityPickerView;
 import com.squareup.leakcanary.LeakCanary;
 
 public class SurveyApplication extends Application{
+
 
     @SuppressLint("StaticFieldLeak")private static Context context;
 

@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/app_primary_color">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/qmui_config_color_white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="企业信息"
+                    android:textColor="#666666" />
+
+            </FrameLayout>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/business_edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="企业名称"
+                android:textSize="14sp"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/business_edit_companyCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textSize="14sp"
+                android:hint="企业编码(拼音缩写)"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <RelativeLayout
+                android:id="@+id/business_area_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/business_area_select_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="请选择企业所在区域"
+                    android:textColor="#ababab"
+                    android:textSize="14sp"
+                    android:clickable="false"/>
+
+            </RelativeLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/business_edit_town"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textSize="14sp"
+                android:hint="企业所在乡镇"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/business_edit_addr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="详细地址"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/business_edit_linkman"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="联系人"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/business_edit_phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="联系人电话"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/business_edit_manager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="总经理"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/business_edit_viceManager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="副总经理"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/business_edit_safe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="企业安全负责人"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="委托方信息"
+                    android:textColor="#666666" />
+
+            </FrameLayout>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/business_edit_client"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="委托方"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/business_edit_client_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="委托方联系人"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true" />
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/business_edit_client_contact_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="委托方联系人电话"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="工种"
+                    android:textColor="#666666" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/business_edit_wokerNormal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:hint="普通工人"
+                    app:met_primaryColor="?attr/app_primary_color"
+                    app:met_floatingLabel="highlight"
+                    app:met_hideUnderline="true"
+                    android:inputType="number"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/business_edit_wokerSpecial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:hint="特殊工人"
+                    app:met_primaryColor="?attr/app_primary_color"
+                    app:met_floatingLabel="highlight"
+                    app:met_hideUnderline="true"
+                    android:inputType="number"/>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="规模(万元)"
+                    android:textColor="#666666" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/business_edit_assets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:hint="固定资产"
+                    app:met_primaryColor="?attr/app_primary_color"
+                    app:met_floatingLabel="highlight"
+                    app:met_hideUnderline="true"
+                    android:inputType="number"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/business_edit_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:hint="年营业额"
+                    app:met_primaryColor="?attr/app_primary_color"
+                    app:met_floatingLabel="highlight"
+                    app:met_hideUnderline="true"
+                    android:inputType="number"/>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="投保险种"
+                    android:textColor="#666666" />
+
+            </FrameLayout>
+
+            <com.cykj.survey.view.CustomGridView
+                android:id="@+id/grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="4"
+                android:horizontalSpacing="2dp"
+                android:verticalSpacing="3dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+            </com.cykj.survey.view.CustomGridView>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/business_edit_coverage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="投保范围"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="出险记录"
+                    android:textColor="#666666" />
+
+                <TextView
+                    android:id="@+id/business_add_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="2dp"
+                    android:text="添加"
+                    android:textColor="?attr/app_primary_color"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/business_recview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+            </android.support.v7.widget.RecyclerView>
+
+            <RelativeLayout
+                android:id="@+id/tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="如有出险记录请点击“添加”按钮添加"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:textColor="#666666"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

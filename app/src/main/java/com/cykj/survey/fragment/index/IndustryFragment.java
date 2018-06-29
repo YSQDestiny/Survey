@@ -67,13 +67,12 @@ public class IndustryFragment extends BaseFragment{
                 public void onClick(Node node, int position) {
                     if (node.isLeaf()){
                         industry = node.getName();
-                        postIndustry += industry;
+                        postIndustry = industry;
                         showMessagePositiveDialog();
                     }else {
                         if (node.getName().equals("常用行业")){
                             return;
                         }
-                        postIndustry += node.getName();
                     }
                 }
             });

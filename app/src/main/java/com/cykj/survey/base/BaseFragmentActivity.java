@@ -13,13 +13,16 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 public abstract class BaseFragmentActivity extends QMUIFragmentActivity{
 
     private final int mRequestCode = 1024;
     private RequestPermissionCallBack mRequestPermissionCallBack;
+    private QMUITipDialog tipDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,4 +158,25 @@ public abstract class BaseFragmentActivity extends QMUIFragmentActivity{
         String state = Environment.getExternalStorageState();
         return state.equals(Environment.MEDIA_MOUNTED);
     }
+
+    public void showToastShort(String msg){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
+
+    public void showToastLong(String msg){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
+
+    public void showTipDialog(String msg,int icon_type){
+        tipDialog = new QMUITipDialog.Builder(this)
+                .setIconType(icon_type)
+                .setTipWord(msg)
+                .create();
+        tipDialog.show();
+    }
+
+    public void tipDialogDismiss(){
+        tipDialog.dismiss();
+    }
+
 }
