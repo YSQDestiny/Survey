@@ -24,6 +24,7 @@ import com.cykj.survey.fragment.adapter.BusinessRecAdapter;
 import com.cykj.survey.model.AccidentGridModel;
 import com.cykj.survey.model.Company;
 import com.cykj.survey.model.CompanyModel;
+import com.cykj.survey.model.OptionsConstants;
 import com.cykj.survey.model.Record;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.DateUtil;
@@ -278,6 +279,7 @@ public class BasicsBusinessFragment extends BaseFragment {
                     insurance += "," + str;
                 }
             }
+            OptionsConstants.setINSURANCE(insurance);
             company.setInsurance(insurance);
         }
         companyModel.setCompanyEntity(company);
@@ -357,6 +359,7 @@ public class BasicsBusinessFragment extends BaseFragment {
         dataList.add(new AccidentGridModel("一切险", false));
         dataList.add(new AccidentGridModel("雇主责任险", false));
         dataList.add(new AccidentGridModel("公众责任险", false));
+        dataList.add(new AccidentGridModel("团体意外险", false));
     }
 
 
