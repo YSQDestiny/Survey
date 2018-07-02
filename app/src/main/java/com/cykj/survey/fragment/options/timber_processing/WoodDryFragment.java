@@ -9,7 +9,11 @@ import android.view.View;
 
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.fragment.adapter.BasicOptionAdapter;
 import com.cykj.survey.fragment.adapter.OptionsAdapter;
+import com.cykj.survey.model.BasicOptions;
+import com.cykj.survey.model.OptionsConstants;
+import com.cykj.survey.util.Utils;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
 import java.util.ArrayList;
@@ -28,8 +32,8 @@ public class WoodDryFragment extends BaseFragment {
     @BindView(R.id.options_recycler)
     RecyclerView mRecycler;
 
-    private List<String> options;
-    private OptionsAdapter optionsAdapter;
+    private List<BasicOptions> options;
+    private BasicOptionAdapter optionsAdapter;
 
     @Override
     protected View onCreateView() {
@@ -38,7 +42,7 @@ public class WoodDryFragment extends BaseFragment {
         ButterKnife.bind(this, root);
         initTopbar();
         initData();
-        optionsAdapter = new OptionsAdapter(getActivity(),options);
+        optionsAdapter = new BasicOptionAdapter(getActivity(),options);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(layoutManager);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -49,18 +53,7 @@ public class WoodDryFragment extends BaseFragment {
     }
 
     private void initData() {
-        options = new ArrayList<>();
-        options.add(getString(R.string.wood_dry_options_1));
-        options.add(getString(R.string.wood_dry_options_2));
-        options.add(getString(R.string.wood_dry_options_3));
-        options.add(getString(R.string.wood_dry_options_4));
-        options.add(getString(R.string.wood_dry_options_5));
-        options.add(getString(R.string.wood_dry_options_6));
-        options.add(getString(R.string.wood_dry_options_7));
-        options.add(getString(R.string.wood_dry_options_8));
-        options.add(getString(R.string.wood_dry_options_9));
-        options.add(getString(R.string.wood_dry_options_10));
-        options.add(getString(R.string.wood_dry_options_11));
+        options = Utils.insuranceJudge(OptionsConstants.timberDryList,OptionsConstants.INSURANCE);
     }
 
     private void initTopbar() {

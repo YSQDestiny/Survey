@@ -29,6 +29,7 @@ import com.cykj.survey.fragment.index.IndustryFragment;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.ImgUtil;
 import com.cykj.survey.util.PhotoUtils;
+import com.cykj.survey.util.Utils;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
@@ -186,13 +187,13 @@ public class PhotoUploadActivity extends BaseFragmentActivity {
                     if (bitmap != null){
                         switch (target){
                             case "business":
-                                businessLicenseImg.setImageBitmap(bitmap);
+                                businessLicenseImg.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
                                 break;
                             case "industry":
-                                industryLicenseImg.setImageBitmap(bitmap);
+                                businessLicenseImg.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
                                 break;
                             case "system":
-                                systemLeveImg.setImageBitmap(bitmap);
+                                businessLicenseImg.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
                                 break;
                         }
                     }
@@ -209,13 +210,13 @@ public class PhotoUploadActivity extends BaseFragmentActivity {
                         if (bitmap1 != null){
                             switch (target){
                                 case "business":
-                                    businessLicenseImg.setImageBitmap(bitmap1);
+                                    businessLicenseImg.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
                                     break;
                                 case "industry":
-                                    industryLicenseImg.setImageBitmap(bitmap1);
+                                    businessLicenseImg.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
                                     break;
                                 case "system":
-                                    systemLeveImg.setImageBitmap(bitmap1);
+                                    businessLicenseImg.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
                                     break;
                             }
                         }

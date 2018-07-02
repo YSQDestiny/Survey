@@ -10,8 +10,12 @@ import android.view.View;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.fragment.adapter.BasicOptionAdapter;
 import com.cykj.survey.fragment.adapter.OptionAdapter;
 import com.cykj.survey.fragment.adapter.OptionsAdapter;
+import com.cykj.survey.model.BasicOptions;
+import com.cykj.survey.model.OptionsConstants;
+import com.cykj.survey.util.Utils;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
 import java.util.ArrayList;
@@ -30,8 +34,8 @@ public class DustRemovalFragment extends BaseFragment {
     @BindView(R.id.options_recycler)
     RecyclerView mRecycler;
 
-    private List<String> options;
-    private OptionAdapter optionsAdapter;
+    private List<BasicOptions> options;
+    private BasicOptionAdapter optionsAdapter;
 
     @Override
     protected View onCreateView() {
@@ -40,7 +44,7 @@ public class DustRemovalFragment extends BaseFragment {
         ButterKnife.bind(this, root);
         initTopbar();
         initData();
-        optionsAdapter = new OptionAdapter(getActivity(), Constants.woodenDustList);
+        optionsAdapter = new BasicOptionAdapter(getActivity(),options);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(layoutManager);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -51,22 +55,7 @@ public class DustRemovalFragment extends BaseFragment {
     }
 
     private void initData() {
-        options = new ArrayList<>();
-        options.add(getString(R.string.dustRemoval_optinos_1));
-        options.add(getString(R.string.dustRemoval_optinos_2));
-        options.add(getString(R.string.dustRemoval_optinos_3));
-        options.add(getString(R.string.dustRemoval_optinos_4));
-        options.add(getString(R.string.dustRemoval_optinos_5));
-        options.add(getString(R.string.dustRemoval_optinos_6));
-        options.add(getString(R.string.dustRemoval_optinos_7));
-        options.add(getString(R.string.dustRemoval_optinos_8));
-        options.add(getString(R.string.dustRemoval_optinos_9));
-        options.add(getString(R.string.dustRemoval_optinos_10));
-        options.add(getString(R.string.dustRemoval_optinos_11));
-        options.add(getString(R.string.dustRemoval_optinos_12));
-        options.add(getString(R.string.dustRemoval_optinos_13));
-        options.add(getString(R.string.dustRemoval_optinos_14));
-        options.add(getString(R.string.dustRemoval_optinos_15));
+        options = Utils.insuranceJudge(OptionsConstants.woodenDustList,OptionsConstants.INSURANCE);
     }
 
     private void initTopbar() {

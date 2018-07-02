@@ -83,6 +83,7 @@ public class OptionsConstants {
     //基础版-实木家具-库存-原料
     public static List<BasicOptions> woodenMaterialList;
     static {
+        woodenMaterialList = new ArrayList<>();
         woodenMaterialList.add(new BasicOptions("1. 是否有自动灭火装置",0,"财产综合险,财产一切险,财产基本险"));
         woodenMaterialList.add(new BasicOptions("2. 是否配置了足量且有效的消防器材",0,"财产综合险,财产一切险,财产基本险"));
         woodenMaterialList.add(new BasicOptions("3. 现场是否张贴安全警示标志",0,"团体意外险,雇主责任险,财产综合险,财产一切险,财产基本险"));
