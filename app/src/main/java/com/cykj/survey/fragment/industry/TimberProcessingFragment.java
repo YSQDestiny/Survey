@@ -2,6 +2,7 @@ package com.cykj.survey.fragment.industry;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.cykj.survey.R;
@@ -26,6 +27,8 @@ public class TimberProcessingFragment extends BaseFragment {
     QMUITopBar mTopbar;
     @BindView(R.id.groupListView)
     QMUIGroupListView mGroupListView;
+    @BindView(R.id.finish_button)
+    Button finishButton;
 
     @Override
     protected View onCreateView() {
@@ -33,6 +36,12 @@ public class TimberProcessingFragment extends BaseFragment {
         ButterKnife.bind(this, root);
         initTopbar();
         initGroupList();
+        finishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popBackStack();
+            }
+        });
         return root;
     }
 
@@ -61,9 +70,9 @@ public class TimberProcessingFragment extends BaseFragment {
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v instanceof QMUICommonListItemView){
+                if (v instanceof QMUICommonListItemView) {
                     CharSequence text = ((QMUICommonListItemView) v).getText();
-                    switch (text.toString()){
+                    switch (text.toString()) {
                         case "生产区":
                             QMUIFragment wood_produce = new WoodProduceFragment();
                             startFragment(wood_produce);
@@ -89,7 +98,7 @@ public class TimberProcessingFragment extends BaseFragment {
                             startFragment(wood_aid);
                             break;
                         default:
-                            Toast.makeText(getActivity(),"该页面还在施工中",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "该页面还在施工中", Toast.LENGTH_LONG).show();
                             break;
                     }
                 }
@@ -97,12 +106,12 @@ public class TimberProcessingFragment extends BaseFragment {
         };
 
         section.setTitle("区域")
-                .addItemView(produce,onClickListener)
-                .addItemView(stock,onClickListener)
-                .addItemView(office,onClickListener)
-                .addItemView(surroundings,onClickListener)
-                .addItemView(construction,onClickListener)
-                .addItemView(aid,onClickListener)
+                .addItemView(produce, onClickListener)
+                .addItemView(stock, onClickListener)
+                .addItemView(office, onClickListener)
+                .addItemView(surroundings, onClickListener)
+                .addItemView(construction, onClickListener)
+                .addItemView(aid, onClickListener)
                 .addTo(mGroupListView);
     }
 
@@ -115,5 +124,10 @@ public class TimberProcessingFragment extends BaseFragment {
                 popBackStack();
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

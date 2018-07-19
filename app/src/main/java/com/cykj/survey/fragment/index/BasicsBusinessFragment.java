@@ -356,11 +356,10 @@ public class BasicsBusinessFragment extends BaseFragment {
         handler = new Handler();
         company = new Company();
         dataList = new ArrayList<>();
-        dataList.add(new AccidentGridModel("综合险", false));
-        dataList.add(new AccidentGridModel("基本险", false));
-        dataList.add(new AccidentGridModel("一切险", false));
+        dataList.add(new AccidentGridModel("财产综合险", false));
+        dataList.add(new AccidentGridModel("财产基本险", false));
+        dataList.add(new AccidentGridModel("财产一切险", false));
         dataList.add(new AccidentGridModel("雇主责任险", false));
-        dataList.add(new AccidentGridModel("公众责任险", false));
         dataList.add(new AccidentGridModel("团体意外险", false));
     }
 

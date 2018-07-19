@@ -34,4 +34,5 @@ public class IndustryBean {
     public void setName(String name) {
         this.name = name;
     }
+
 }

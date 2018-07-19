@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debugconfig {
+            keyAlias 'debug.keystore'
+            keyPassword '772375012'
+            storeFile file('C:/key/debug.keystore')
+            storePassword '772375012'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.cykj.survey"
@@ -17,30 +25,26 @@ android {
             useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+            signingConfig signingConfigs.debugconfig
         }
-
-        release{
+        release {
             minifyEnabled true
             useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
     }
-
     flavorDimensions "default"
-
     productFlavors {
         mock {
         }
     }
-
     //移除 mockRelease
-    android.variantFilter{ variant ->
-        if (variant.buildType.name == 'release' && variant.getFlavors().get(0).name == 'mock'){
+    android.variantFilter { variant ->
+        if (variant.buildType.name == 'release' && variant.getFlavors().get(0).name == 'mock') {
             variant.setIgnore(true)
         }
     }
-
     //总是显示单元测试结果
     testOptions.unitTests.all {
         testLogging {
@@ -110,4 +114,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.0'
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
     implementation 'liji.library.dev:citypickerview:3.1.8'
+    implementation files('lib/AMap2DMap_5.2.0_AMapSearch_6.1.0_AMapLocation_4.1.0_20180619.jar')
 }

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.cykj.survey.R;
 import com.cykj.survey.activity.AccidentActivity;
 import com.cykj.survey.model.BasicOptions;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 
 import java.util.List;
 
@@ -28,13 +29,13 @@ public class BasicOptionAdapter extends RecyclerView.Adapter<BasicOptionAdapter.
     private List<BasicOptions> mDatas;
     private Context mContext;
     private LayoutInflater inflater;
-    private SparseBooleanArray yesCheckStates = new SparseBooleanArray();
-    private SparseBooleanArray noCheckStates = new SparseBooleanArray();
+    private QMUIFragment fragment;
 
-    public BasicOptionAdapter(Context mContext,List<BasicOptions> mDatas){
+    public BasicOptionAdapter(Context mContext,List<BasicOptions> mDatas,QMUIFragment fragment){
         this.mContext = mContext;
         this.mDatas = mDatas;
         inflater = LayoutInflater.from(mContext);
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -77,9 +78,6 @@ public class BasicOptionAdapter extends RecyclerView.Adapter<BasicOptionAdapter.
         holder.checkBoxYes.setOnCheckedChangeListener(null);
         holder.checkBoxNo.setOnCheckedChangeListener(null);
 
-        holder.checkBoxYes.setChecked(yesCheckStates.get(position,false));
-        holder.checkBoxNo.setChecked(noCheckStates.get(position,false));
-
         holder.checkBoxYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -89,11 +87,9 @@ public class BasicOptionAdapter extends RecyclerView.Adapter<BasicOptionAdapter.
                 }
                 if (holder.checkBoxNo.isChecked() && holder.checkBoxYes.isChecked()){
                     holder.checkBoxNo.setChecked(false);
-                    noCheckStates.delete(position);
                 }
                 if (isChecked){
-                    yesCheckStates.put(position,true);
-                    Toast.makeText(mContext,"你勾选了是",Toast.LENGTH_LONG).show();
+                    remove(position);
                 }
             }
         });
@@ -101,21 +97,29 @@ public class BasicOptionAdapter extends RecyclerView.Adapter<BasicOptionAdapter.
         holder.checkBoxNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                remove(position);
                 int index = (int) holder.checkBoxNo.getTag();
                 if (index == -2){
                     return;
                 }
                 if (holder.checkBoxNo.isChecked() && holder.checkBoxYes.isChecked()){
                     holder.checkBoxYes.setChecked(false);
-                    yesCheckStates.delete(position);
                 }
                 if (isChecked){
-                    noCheckStates.put(position,true);
                     Intent intent = new Intent(mContext, AccidentActivity.class);
                     mContext.startActivity(intent);
                 }
             }
         });
+    }
+
+    public void remove(int position) {
+        mDatas.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mDatas.size());
+        if (mDatas.size() == 0){
+            fragment.getBaseFragmentActivity().popBackStack();
+        }
     }
 
     @Override
@@ -127,8 +131,6 @@ public class BasicOptionAdapter extends RecyclerView.Adapter<BasicOptionAdapter.
     public void onViewRecycled(@NonNull MyViewHolder holder) {
         CheckBox checkBoxYes = holder.checkBoxYes;
         CheckBox checkBoxNo = holder.checkBoxNo;
-        checkBoxYes.setTag(-2);
-        checkBoxNo.setTag(-2);
         super.onViewRecycled(holder);
 
     }

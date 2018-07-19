@@ -134,7 +134,7 @@ public class AccidentFragment extends BaseFragment {
 
         typeGridAdapter = new AccidentGridAdapter(getActivity(), typeData);
         accidentTypeGrid.setAdapter(typeGridAdapter);
-        accidentTypeGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                accidentTypeGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (typeData.get(position).isSelect()) {

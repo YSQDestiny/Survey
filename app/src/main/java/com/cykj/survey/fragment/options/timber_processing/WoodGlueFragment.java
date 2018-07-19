@@ -37,12 +37,11 @@ public class WoodGlueFragment extends BaseFragment{
 
     @Override
     protected View onCreateView() {
-
         View root = LayoutInflater.from(getContext()).inflate(R.layout.fragment_produce_options, null);
         ButterKnife.bind(this, root);
         initTopbar();
         initData();
-        optionsAdapter = new BasicOptionAdapter(getActivity(),options);
+        optionsAdapter = new BasicOptionAdapter(getActivity(),options,this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(layoutManager);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

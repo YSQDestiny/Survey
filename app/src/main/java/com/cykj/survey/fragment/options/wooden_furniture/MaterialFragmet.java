@@ -44,7 +44,7 @@ public class MaterialFragmet extends BaseFragment{
         ButterKnife.bind(this, root);
         initTopbar();
         initData();
-        optionsAdapter = new BasicOptionAdapter(getActivity(),options);
+        optionsAdapter = new BasicOptionAdapter(getActivity(),options,this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(layoutManager);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

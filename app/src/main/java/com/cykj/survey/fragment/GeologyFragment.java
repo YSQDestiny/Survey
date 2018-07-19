@@ -1,16 +1,29 @@
 package com.cykj.survey.fragment;
 
+import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
+import com.cykj.survey.activity.IndustryActivity;
+import com.cykj.survey.activity.PhotoUploadActivity;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.fragment.adapter.AccidentGridAdapter;
+import com.cykj.survey.model.AccidentGridModel;
+import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.view.CustomGridView;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +32,13 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class GeologyFragment extends BaseFragment {
 
@@ -84,15 +104,24 @@ public class GeologyFragment extends BaseFragment {
     @BindView(R.id.geology_5_13)
     Spinner geology5_13;
 
+    private AccidentGridAdapter g1_5adapter;
+    private AccidentGridAdapter g2_4adapter;
+
+    private Handler handler;
+
     @Override
     protected View onCreateView() {
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.ftagment_geology_, null);
         ButterKnife.bind(this, root);
+        handler = new Handler();
         initData();
         initTopbar();
         initView();
         return root;
     }
+
+    List<String> g1_5select = new ArrayList<>();
+    List<String> g2_4select = new ArrayList<>();
 
     private void initView() {
         ArrayAdapter<String> geology1_1Adapter;
@@ -112,6 +141,22 @@ public class GeologyFragment extends BaseFragment {
         spinnerSetAdapter(geology1_3Adapter,geology1_3);
 
         //g1 5
+        g1_5adapter = new AccidentGridAdapter(getActivity(),data1_5);
+        geology1_5.setAdapter(g1_5adapter);
+        geology1_5.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (data1_5.get(position).isSelect()) {
+                    data1_5.get(position).setSelect(false);
+                    g1_5select.remove(data1_5.get(position).getName());
+                } else {
+                    data1_5.get(position).setSelect(true);
+                    g1_5select.add(data1_5.get(position).getName());
+                }
+                g1_5adapter.notifyDataSetChanged();
+            }
+        });
+
 
         ArrayAdapter<String> geology1_6Adapter;
         geology1_6Adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_spinner_item,data1_6);
@@ -130,6 +175,21 @@ public class GeologyFragment extends BaseFragment {
         spinnerSetAdapter(geology2_2Adapter,geology2_2);
 
         //g2 4
+        g2_4adapter = new AccidentGridAdapter(getActivity(),data2_4);
+        geology2_4.setAdapter(g2_4adapter);
+        geology2_4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (data2_4.get(position).isSelect()) {
+                    data2_4.get(position).setSelect(false);
+                    g2_4select.remove(data2_4.get(position).getName());
+                } else {
+                    data2_4.get(position).setSelect(true);
+                    g2_4select.add(data2_4.get(position).getName());
+                }
+                g2_4adapter.notifyDataSetChanged();
+            }
+        });
 
         ArrayAdapter<String> geology2_5Adapter;
         geology2_5Adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_spinner_item,data2_5);
@@ -149,7 +209,7 @@ public class GeologyFragment extends BaseFragment {
 
         ArrayAdapter<String> geology5_1Adapter;
         List<String> g5_1 = new ArrayList<>();
-        for(String str : data1_1.keySet()){
+        for(String str : data5_1.keySet()){
             g5_1.add(str);
         }
         geology5_1Adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_spinner_item,g5_1);
@@ -212,12 +272,12 @@ public class GeologyFragment extends BaseFragment {
     private Map<String,String> data1_1 = new HashMap<>();
     private List<String> data1_2 = new ArrayList<>();
     private List<String> data1_3 = new ArrayList<>();
-    private List<String> data1_5 = new ArrayList<>();
+    private List<AccidentGridModel> data1_5 = new ArrayList<>();
     private List<String> data1_6 = new ArrayList<>();
     private List<String> data1_7 = new ArrayList<>();
     private List<String> data2_1 = new ArrayList<>();
     private List<String> data2_2 = new ArrayList<>();
-    private List<String> data2_4 = new ArrayList<>();
+    private List<AccidentGridModel> data2_4 = new ArrayList<>();
     private List<String> data2_5 = new ArrayList<>();
     private List<String> data2_6 = new ArrayList<>();
     private List<String> data2_7 = new ArrayList<>();
@@ -255,13 +315,12 @@ public class GeologyFragment extends BaseFragment {
         data1_3.add("没有明显变化");
 
 
-        data1_5.add("高温");
-        data1_5.add("低温");
-        data1_5.add("干燥");
-        data1_5.add("热浪");
-        data1_5.add("寒潮");
-        data1_5.add("其他");
-
+        data1_5.add(new AccidentGridModel("高温",false));
+        data1_5.add(new AccidentGridModel("低温",false));
+        data1_5.add(new AccidentGridModel("干燥",false));
+        data1_5.add(new AccidentGridModel("热浪",false));
+        data1_5.add(new AccidentGridModel("寒潮",false));
+        data1_5.add(new AccidentGridModel("其他",false));
 
         data1_6.add("会");
         data1_6.add("不会");
@@ -281,13 +340,12 @@ public class GeologyFragment extends BaseFragment {
         data2_2.add("没有明显变化");
 
 
-        data2_4.add("暴雨");
-        data2_4.add("少雨");
-        data2_4.add("冰雹");
-        data2_4.add("暴雪");
-        data2_4.add("潮湿");
-        data2_4.add("其他");
-
+        data2_4.add(new AccidentGridModel("暴雨",false));
+        data2_4.add(new AccidentGridModel("少雨",false));
+        data2_4.add(new AccidentGridModel("冰雹",false));
+        data2_4.add(new AccidentGridModel("暴雪",false));
+        data2_4.add(new AccidentGridModel("潮湿",false));
+        data2_4.add(new AccidentGridModel("其他",false));
 
         data2_5.add("会");
         data2_5.add("不会");
@@ -402,13 +460,130 @@ public class GeologyFragment extends BaseFragment {
 //                        QMUIFragment fragment = new LicenseUploadFragment();
 //                        startFragment(fragment);
                         try {
-//                            postJson();
+                            postJson();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 });
     }
+
+    private void postJson() {
+
+        String geologyStr = "本地区属于"+ geology5_1.getSelectedItem().toString() + "区，本地区" + data5_1.get(geology5_1.getSelectedItem().toString()) +"，出露的地层以"
+                 + geology5_2.getSelectedItem().toString() +"为主。该地区的地质灾害类型主要以" + geology5_3.getSelectedItem().toString() + "为主，地质灾害" + geology5_4.getSelectedItem()
+                +"。环境地质问题相对"+geology5_5.getSelectedItem().toString()+"，主要环境地质问题为"+geology5_6.getSelectedItem().toString()+"，该地区的环境地质问题"
+                +geology5_7.getSelectedItem().toString() +"危及到厂区安全。综合调查分析认为，本地区存在的地质灾害"+geology5_8.getSelectedItem().toString()
+                +"对企业的生产造成影响,"+geology5_9.getSelectedItem().toString()+"给企业造成经济损失。本地区"+ geology5_10.getSelectedItem().toString() +"断裂构造，地质环境"
+                +geology5_11.getSelectedItem().toString() + "，" + geology5_12.getSelectedItem().toString();
+
+        if (geology5_12.getSelectedItem().toString().equals("容易")){
+            geologyStr += "发生地震，建议标的企业按照国家有关技术要求，做好防震防灾减损工作，做好防震防灾预案准备。通过本次汛期防灾减损勘察工作，综合认为标的企业发生地质灾害的风险"
+            + geology5_13.getSelectedItem().toString() + "。";
+        }else {
+            geologyStr += "发生地震。通过本次汛期防灾减损勘察工作，综合认为标的企业发生地质灾害的风险"+ geology5_13.getSelectedItem().toString() + "。";
+        }
+
+        if (geology1_4.getText().toString().equals("")){
+            showToastShort("请输入异常气温出现月份");
+            return;
+        }
+        if (geology2_3.getText().toString().equals("")){
+            showToastShort("请输入异常降水出现月份");
+            return;
+        }
+        if (geology3_1.getSelectedItem().toString().equals("是") & geology3_2.getText().toString().equals("")){
+            showToastShort("请输入流域信息");
+            return;
+        }
+
+        String g1_5selectStr = "";
+        if (g1_5select.size() > 0){
+            for (int i = 0;i<g1_5select.size();i++){
+                if (i == 0){
+                    g1_5selectStr += g1_5select.get(i);
+                }else {
+                    g1_5selectStr += "、"+g1_5select.get(i);
+                }
+            }
+        }
+
+        String g2_4selectStr = "";
+        if (g2_4select.size() > 0){
+            for (int i = 0;i<g2_4select.size();i++){
+                if (i == 0){
+                    g2_4selectStr += g2_4select.get(i);
+                }else {
+                    g2_4selectStr += "、"+g2_4select.get(i);
+                }
+            }
+        }
+
+        String weatherStr = "";
+        if (geology3_1.getSelectedItem().toString().equals("否")){
+            weatherStr += "本地区不属于任何流域";
+        }else {
+            weatherStr += "本地区属于" + geology3_2.getText().toString();
+        }
+
+       weatherStr += "流域，该地区属于"+ geology1_1.getSelectedItem().toString()
+                +"气候，"+data1_1.get(geology1_1.getSelectedItem().toString())+"。该地区的气温与往年同期相比"+geology1_2.getSelectedItem().toString()
+                +"，异常气温日数与往年同期相比"+geology1_3.getSelectedItem().toString()+"，其主要出现在"+geology1_4.getText()+"月份，主要以" + g1_5selectStr
+                +"等为主，异常气温天气" + geology1_6.getSelectedItem().toString() + "对企业的生产生活造成影响，"+geology1_7.getSelectedItem().toString()
+                +"造成直接的经济损失。" + "本地区的年均降雨量为900-950mm，降雨季节分配不均，5-10月的降雨量占全年的87%。降水与往年同期相比"+geology2_1.getSelectedItem().toString()
+                +"，异常降水与往年同期相比"+geology2_2.getSelectedItem().toString()+"，主要出现在"+geology2_3.getText().toString()+"月份，主要以"+g2_4selectStr
+                +"等为主，异常降水"+geology2_5.getSelectedItem().toString()+"对企业的生产造成影响，"+geology2_6.getSelectedItem().toString()
+               +"造成直接的经济损失。综合认为标的企业发生气象灾害的风险";
+
+        if (geology2_7.getSelectedItem().toString().equals("较高")){
+            weatherStr += geology2_7.getSelectedItem().toString() + "，密切关注气象部门的气象预报，做好气象灾害应急预案及物资准备，灾害易发季节，落实专职人员做好统筹协调及巡检工作。";
+        }else {
+            weatherStr += geology2_7.getSelectedItem().toString() +"。";
+        }
+
+        showTipDialog("请稍等...", QMUITipDialog.Builder.ICON_TYPE_LOADING);
+        String url = Constants.TEST_SERVICE + "/company/postStr";
+
+        OkHttpClient client = new OkHttpClient();
+
+        Long companyId = Constants.REPORT_ID;
+
+        RequestBody body = new FormBody.Builder()
+                .add("companyId",companyId.toString())
+                .add("geologyStr",geologyStr)
+                .add("weatherStr",weatherStr)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                tipDialogDismiss();
+                ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
+                if (result.getCode() == 0){
+                    Intent intent = new Intent(getActivity(),PhotoUploadActivity.class);
+                    getActivity().startActivity(intent);
+                    handler.post(finishAble);
+                }
+            }
+        });
+    }
+
+    Runnable finishAble = new Runnable() {
+        @Override
+        public void run() {
+            popBackStack();
+        }
+    };
 
     @Override
     public void onDestroyView() {

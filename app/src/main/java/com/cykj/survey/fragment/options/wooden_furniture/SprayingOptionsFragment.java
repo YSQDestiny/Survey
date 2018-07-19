@@ -44,7 +44,7 @@ public class SprayingOptionsFragment extends BaseFragment {
         ButterKnife.bind(this, root);
         initTopbar();
         initData();
-        optionsAdapter = new BasicOptionAdapter(getActivity(),options);
+        optionsAdapter = new BasicOptionAdapter(getActivity(),options,this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(layoutManager);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -69,6 +69,14 @@ public class SprayingOptionsFragment extends BaseFragment {
             }
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (options.size() == 0){
+            popBackStack();
+        }
     }
 
     @Override

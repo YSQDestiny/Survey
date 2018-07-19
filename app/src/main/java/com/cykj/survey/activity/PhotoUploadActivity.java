@@ -160,6 +160,7 @@ public class PhotoUploadActivity extends BaseFragmentActivity {
                         Toast.makeText(PhotoUploadActivity.this, "部分权限获取失败，正常功能受到影响", Toast.LENGTH_LONG).show();
                     }
                 });
+                break;
             case "从相册选择":
                 requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, new RequestPermissionCallBack() {
                     @Override
@@ -190,10 +191,10 @@ public class PhotoUploadActivity extends BaseFragmentActivity {
                                 businessLicenseImg.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
                                 break;
                             case "industry":
-                                businessLicenseImg.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
+                                industryLicenseImg.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
                                 break;
                             case "system":
-                                businessLicenseImg.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
+                                systemLeveImg.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
                                 break;
                         }
                     }
@@ -213,10 +214,10 @@ public class PhotoUploadActivity extends BaseFragmentActivity {
                                     businessLicenseImg.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
                                     break;
                                 case "industry":
-                                    businessLicenseImg.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
+                                    industryLicenseImg.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
                                     break;
                                 case "system":
-                                    businessLicenseImg.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
+                                    systemLeveImg.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
                                     break;
                             }
                         }
@@ -275,4 +276,5 @@ public class PhotoUploadActivity extends BaseFragmentActivity {
             }
         });
     }
+
 }

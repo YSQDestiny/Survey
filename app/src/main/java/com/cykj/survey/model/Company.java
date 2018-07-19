@@ -34,6 +34,24 @@ public class Company {
     private String client;
     private String clientContact;
     private String clientContactPhone;
+    private String weatherStr;
+    private String geologyStr;
+
+    public String getWeatherStr() {
+        return weatherStr;
+    }
+
+    public void setWeatherStr(String weatherStr) {
+        this.weatherStr = weatherStr;
+    }
+
+    public String getGeologyStr() {
+        return geologyStr;
+    }
+
+    public void setGeologyStr(String geologyStr) {
+        this.geologyStr = geologyStr;
+    }
 
     public Company() {
     }

@@ -124,7 +124,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/edit_shape"
-                android:inputType="textImeMultiLine"
+                android:inputType="number"
                 android:hint="请输入异常气温主要出现月份"/>
 
             <RelativeLayout
@@ -285,7 +285,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/edit_shape"
-                android:inputType="textImeMultiLine"
+                android:inputType="number"
                 android:hint="请输入异常降水主要出现月份"/>
 
             <RelativeLayout

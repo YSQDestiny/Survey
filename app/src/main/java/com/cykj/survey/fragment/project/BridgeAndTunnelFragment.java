@@ -1,6 +1,7 @@
 package com.cykj.survey.fragment.project;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,9 +14,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cykj.survey.R;
+import com.cykj.survey.activity.MapProjectActivity;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.fragment.adapter.BridgeListAdapter;
 import com.cykj.survey.model.Bridge;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
@@ -48,6 +51,7 @@ public class BridgeAndTunnelFragment extends BaseFragment {
     protected View onCreateView() {
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_project_bridge_and_tunnel, null);
         ButterKnife.bind(this, root);
+        initTopbar();
         projectBridgeAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +59,26 @@ public class BridgeAndTunnelFragment extends BaseFragment {
             }
         });
         return root;
+    }
+
+    private void initTopbar(){
+        topbar.setTitle("桥梁和隧道");
+        topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MapProjectActivity.class);
+                getActivity().startActivity(intent);
+//                QMUIFragment fragment = new ProjectMapFragment();
+//                startFragmentAndDestroyCurrent(fragment);
+            }
+        });
+
+        topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popBackStack();
+            }
+        });
     }
 
     private void showBridgeDialog(){
