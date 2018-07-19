@@ -1,6 +1,7 @@
 package com.cykj.survey;
 
 import com.cykj.survey.model.Options;
+import com.cykj.survey.model.ProjectAccident;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,12 @@ public class Constants {
 
     public void setReportId(Long reportId){
         this.REPORT_ID = reportId;
+    }
+
+    public static List<ProjectAccident> projectAccidentList = new ArrayList<>();
+
+    public void addProjectAccident(ProjectAccident accident){
+        projectAccidentList.add(accident);
     }
 
     public static List<Options> woodenSparayList;
