@@ -17,6 +17,7 @@ import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.PolylineOptions;
 import com.cykj.survey.R;
+import com.cykj.survey.activity.project.WeatherChartActivity;
 import com.cykj.survey.base.BaseFragmentActivity;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
@@ -69,7 +70,7 @@ public class MapProjectActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MapProjectActivity.this,GeologyActivity.class);
+                Intent intent = new Intent(MapProjectActivity.this,WeatherChartActivity.class);
                 startActivity(intent);
                 finish();
             }

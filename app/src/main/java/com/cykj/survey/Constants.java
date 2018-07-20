@@ -22,7 +22,7 @@ public class Constants {
 
     public static List<ProjectAccident> projectAccidentList = new ArrayList<>();
 
-    public void addProjectAccident(ProjectAccident accident){
+    public static void addProjectAccident(ProjectAccident accident){
         projectAccidentList.add(accident);
     }
 
