@@ -26,6 +26,13 @@ public class Constants {
         projectAccidentList.add(accident);
     }
 
+    public static List<String> districtList;
+
+    public static void setDistrictList(List<String> districtList){
+        Constants.districtList = districtList;
+    }
+
+
     public static List<Options> woodenSparayList;
 
     static {

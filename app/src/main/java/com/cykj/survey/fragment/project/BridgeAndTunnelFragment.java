@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.cykj.survey.R;
 import com.cykj.survey.activity.MapProjectActivity;
+import com.cykj.survey.activity.project.ProjectGeologyActivity;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.fragment.adapter.BridgeListAdapter;
 import com.cykj.survey.model.Bridge;
@@ -66,7 +67,7 @@ public class BridgeAndTunnelFragment extends BaseFragment {
         topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MapProjectActivity.class);
+                Intent intent = new Intent(getActivity(), ProjectGeologyActivity.class);
                 getActivity().startActivity(intent);
 //                QMUIFragment fragment = new ProjectMapFragment();
 //                startFragmentAndDestroyCurrent(fragment);

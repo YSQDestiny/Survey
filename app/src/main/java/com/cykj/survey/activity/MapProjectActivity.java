@@ -16,6 +16,7 @@ import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.PolylineOptions;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.activity.project.WeatherChartActivity;
 import com.cykj.survey.base.BaseFragmentActivity;
@@ -58,6 +59,7 @@ public class MapProjectActivity extends BaseFragmentActivity {
     private Handler handler;
     private List<LatLng> latLngList;
     private CityPickerView mPicker = new CityPickerView();
+    private List<String> districtList = new ArrayList<>();
 
     @Override
     protected int getContextViewId() {
@@ -70,9 +72,15 @@ public class MapProjectActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MapProjectActivity.this,WeatherChartActivity.class);
-                startActivity(intent);
-                finish();
+                if (districtList.size() > 0){
+                    Constants.setDistrictList(districtList);
+                    Intent intent = new Intent(MapProjectActivity.this,WeatherChartActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    showToastShort("路径点未选择");
+                }
+
             }
         });
 
@@ -133,6 +141,21 @@ public class MapProjectActivity extends BaseFragmentActivity {
                         } else {
                             address += district.getName();
                             url += "&address=" + address;
+                        }
+
+                        if (district.getName().indexOf("区") != -1){
+                            districtList.add(city.getName().replace("市",""));
+                        }else {
+                            if (district.getName().length() > 2){
+                                if (district.getName().indexOf("县") != -1){
+                                    districtList.add(district.getName().replace("县",""));
+                                }else if (district.getName().indexOf("市") != -1){
+                                    districtList.add(district.getName().replace("市",""));
+                                }
+                            }else {
+                                districtList.add(district.getName());
+                            }
+
                         }
 
                         getLocation(url);

@@ -1,5 +1,7 @@
 package com.cykj.survey.util;
 
+import android.util.Log;
+
 import com.cykj.survey.model.BasicOptions;
 import com.cykj.survey.model.OptionsConstants;
 
@@ -11,12 +13,25 @@ import java.util.Map;
 public class Utils {
 
     public static void main(String[] args){
-        String industry = "团体意外险,财产基本险";
-        List<BasicOptions> options = OptionsConstants.woodenDangerList;
-        List<BasicOptions> options1 = insuranceJudge(options,industry);
+        String str = "\n" +
+                "    $(function () {\n" +
+                "    \t$('#nav-05').trigger('mouseenter');\n" +
+                "    \tsunriseset(103.52, 30.6);\n" +
+                "    \tinitReal('56285');\n" +
+                "    \tinitAqi('56285');\n" +
+                "    \tdrawTemperature('56285');\n" +
+                "    \tchangeTab();\n" +
+                "    \tclimate([9.25,11.19,16.16,21.56,25.61,27.55,29.5,29.4,25.23,20.42,15.68,10.66],[2.67,4.52,8.18,12.72,17.06,20.1,21.99,21.46,18.64,14.65,9.75,4.53],[11.26,16.99,31.01,58.17,89.02,115.62,258.72,262.52,146.97,61.22,23.78,9.55],'大邑');\n" +
+                "    });\n" +
+                "\n" +
+                "    ";
 
-        System.out.print(options.size());
-        System.out.print(options1.size());
+
+
+
+                String substring = str.substring(str.indexOf("climate("), str.indexOf("});"));
+                System.out.println(substring);
+
     }
 
     /**

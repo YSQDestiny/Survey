@@ -1,6 +1,7 @@
 package com.cykj.survey.fragment.index;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -24,6 +25,7 @@ import com.cykj.survey.model.Industry;
 import com.cykj.survey.util.JsonUtil;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
 import java.util.List;
 
@@ -59,54 +61,37 @@ public class ProjectFragment extends BaseFragment {
     @BindView(R.id.project_type_select)
     RelativeLayout projectTypeSelect;
 
-    private List<IndustryBean> mDatas;
-    private TreeListViewAdapter mAdapter;
+    private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
+
 
     @Override
     protected View onCreateView() {
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_project, null);
         ButterKnife.bind(this, root);
         initTopbar();
-        initData();
-        final Dialog dialog = new Dialog(getActivity(),R.style.edit_AlertDialog_style);
-        dialog.setContentView(R.layout.layout_dialog_project_type_select);
-        ListView listView = dialog.findViewById(R.id.project_type_list);
-        try {
-            mAdapter = new SimpleTreeAdapter<IndustryBean>(listView,getActivity(),mDatas,0);
-            mAdapter.setOnTreeNodeClickListener(new TreeListViewAdapter.OnTreeNodeClickListener() {
-                @Override
-                public void onClick(Node node, int position) {
-                    if (node.isLeaf()){
-                        projectType.setText(node.getName());
-                        projectType.setTextColor(getResources().getColor(R.color.qmui_config_color_black));
-                        dialog.dismiss();
-                    }
-                }
-            });
-            listView.setAdapter(mAdapter);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        dialog.setCanceledOnTouchOutside(true);
-        Window w = dialog.getWindow();
-        WindowManager.LayoutParams lp = w.getAttributes();
-        lp.x = 0;
-        lp.y = 40;
-        dialog.onWindowAttributesChanged(lp);
         projectTypeSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.show();
+                showMenuDialog();
             }
         });
         return root;
     }
 
-    private void initData() {
-        String jsonStr = JsonUtil.getJson("projectType.json",getActivity());
-        Industry industry = JSONObject.parseObject(jsonStr,Industry.class);
-        mDatas = industry.getBean();
+    private void showMenuDialog(){
+        final String[] items = new String[]{"公路工程","轨道交通","房屋建筑工程","水利，水电与航道工程"};
+        new QMUIDialog.MenuDialogBuilder(getActivity())
+                .addItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        projectType.setText(items[which]);
+                        projectType.setTextColor(getResources().getColor(R.color.qmui_config_color_black));
+                        dialog.dismiss();
+                    }
+                })
+                .create(mCurrentDialogStyle).show();
     }
+
 
     private void initTopbar() {
         topbar.setTitle("工程信息");

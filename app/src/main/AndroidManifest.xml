@@ -97,6 +97,11 @@
             android:label="@string/app_name"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
 
+        <activity android:name=".activity.project.ProjectGeologyActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+
         <provider android:name="android.support.v4.content.FileProvider"
             android:authorities="com.cykj.survey.fileprovider"
             android:exported="false"

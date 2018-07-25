@@ -335,7 +335,7 @@ public class AccidentActivity extends BaseFragmentActivity {
                 .create(mCurrentDialogStyle).show();
     }
 
-    private void postAccident(){
+    private void        postAccident(){
         showTipDialog("请稍等...", QMUITipDialog.Builder.ICON_TYPE_LOADING);
         String url = Constants.TEST_SERVICE + "/accident/postAccident";
 

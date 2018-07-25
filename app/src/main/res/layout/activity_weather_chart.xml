@@ -12,9 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/qmui_topbar_height" />
 
-    <com.github.mikephil.charting.charts.CombinedChart
-        android:id="@+id/weather_chart"
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/char_rec"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="?attr/app_content_bg_color">
+
+
+
+    </android.support.v7.widget.RecyclerView>
+
+    <!--<com.github.mikephil.charting.charts.CombinedChart-->
+        <!--android:id="@+id/weather_chart"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
 
 </LinearLayout>

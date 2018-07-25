@@ -3,10 +3,13 @@ package com.cykj.survey.activity.project;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.model.WeatherData;
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.charts.CombinedChart.DrawOrder;
 import com.github.mikephil.charting.components.AxisBase;
@@ -21,12 +24,27 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.stuxuhai.jpinyin.PinyinException;
+import com.github.stuxuhai.jpinyin.PinyinFormat;
+import com.github.stuxuhai.jpinyin.PinyinHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class WeatherChartActivity extends BaseFragmentActivity {
 
@@ -34,10 +52,12 @@ public class WeatherChartActivity extends BaseFragmentActivity {
             "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"
     };
 
+    private List<WeatherData> weatherDataList = new ArrayList<>();
+
     @BindView(R.id.topbar)
     QMUITopBar topbar;
-    @BindView(R.id.weather_chart)
-    CombinedChart mChart;
+
+
 
     @Override
     protected int getContextViewId() {
@@ -50,50 +70,72 @@ public class WeatherChartActivity extends BaseFragmentActivity {
         setContentView(R.layout.activity_weather_chart);
         ButterKnife.bind(this);
         initTopbar();
-        mChart.getDescription().setEnabled(false);
-        mChart.setBackgroundColor(Color.WHITE);
-        mChart.setDrawGridBackground(false);
-        mChart.setDrawBarShadow(false);
-        mChart.setHighlightFullBarEnabled(false);
+        initData();
+        initView();
 
-        mChart.setDrawOrder(new DrawOrder[]{
-//                DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.CANDLE, DrawOrder.LINE, DrawOrder.SCATTER
-                DrawOrder.BAR, DrawOrder.LINE
-        });
+    }
 
-        Legend l = mChart.getLegend();
-        l.setWordWrapEnabled(true);
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setDrawInside(false);
+    private void initData() {
 
-        YAxis rightAxis = mChart.getAxisRight();
-        rightAxis.setDrawGridLines(false);
-        rightAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+        for (String addr : Constants.districtList){
 
-        YAxis leftAxis = mChart.getAxisLeft();
-        leftAxis.setDrawGridLines(false);
-        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
-
-        XAxis xAxis = mChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTH_SIDED);
-        xAxis.setAxisMinimum(0f);
-        xAxis.setGranularity(1f);
-        xAxis.setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return mMonths[(int) value % mMonths.length];
+            try {
+                getData(PinyinHelper.convertToPinyinString(addr,"", PinyinFormat.WITHOUT_TONE));
+            } catch (PinyinException e) {
+                e.printStackTrace();
             }
-        });
 
-        CombinedData data = new CombinedData();
-        data.setData(generateLineData());
-        data.setData(gengrateBarData());
-        xAxis.setAxisMaximum(data.getXMax() + 0.25f);
+        }
 
-        mChart.setData(data);
-        mChart.invalidate();
+    }
+
+    private void initView() {
+
+//        mChart.getDescription().setEnabled(false);
+//        mChart.setBackgroundColor(Color.WHITE);
+//        mChart.setDrawGridBackground(false);
+//        mChart.setDrawBarShadow(false);
+//        mChart.setHighlightFullBarEnabled(false);
+//
+//        mChart.setDrawOrder(new DrawOrder[]{
+////                DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.CANDLE, DrawOrder.LINE, DrawOrder.SCATTER
+//                DrawOrder.BAR, DrawOrder.LINE
+//        });
+//
+//        Legend l = mChart.getLegend();
+//        l.setWordWrapEnabled(true);
+//        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+//        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+//        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+//        l.setDrawInside(false);
+//
+//        YAxis rightAxis = mChart.getAxisRight();
+//        rightAxis.setDrawGridLines(false);
+//        rightAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+//
+//        YAxis leftAxis = mChart.getAxisLeft();
+//        leftAxis.setDrawGridLines(false);
+//        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+//
+//        XAxis xAxis = mChart.getXAxis();
+//        xAxis.setPosition(XAxis.XAxisPosition.BOTH_SIDED);
+//        xAxis.setAxisMinimum(0f);
+//        xAxis.setGranularity(1f);
+//        xAxis.setValueFormatter(new IAxisValueFormatter() {
+//            @Override
+//            public String getFormattedValue(float value, AxisBase axis) {
+//                return mMonths[(int) value % mMonths.length];
+//            }
+//        });
+//
+//        CombinedData data = new CombinedData();
+//        data.setData(generateLineData());
+//        data.setData(gengrateBarData());
+//        xAxis.setAxisMaximum(data.getXMax() + 0.25f);
+//
+//        mChart.setData(data);
+//        mChart.invalidate();
+
     }
 
     private void initTopbar(){
@@ -198,5 +240,60 @@ public class WeatherChartActivity extends BaseFragmentActivity {
         d.setBarWidth(barWidth);
 
         return d;
+    }
+
+    private String dataStr;
+    private String[] dataSub;
+
+    private void getData(String pinyin){
+
+        String url = "http://www.nmc.cn/publish/forecast/ASC/"+ pinyin +".html";
+
+        OkHttpClient client = new OkHttpClient();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String str = response.body().string();
+                Document document = Jsoup.parse(str);
+                Elements elements = document.getElementsByTag("script");
+                Element element = elements.get(7);
+                String temp = element.data().toString();
+                String substring = temp.substring(temp.indexOf("climate("), temp.indexOf("});"));
+                dataStr = substring.substring(8,223);
+                dataSub = dataStr.split("],");
+
+                WeatherData weatherData = new WeatherData();
+
+
+
+                String highWeather = dataSub[0].replace("[","");
+                weatherData.setHighWeather(highWeather);
+
+                String lowWeather = dataSub[1].replace("[","");
+                weatherData.setLowWeather(lowWeather);
+
+                String rainfall;
+                rainfall = dataSub[2].replace("[","");
+                rainfall = rainfall.replace("]","");
+                weatherData.setRainfall(rainfall);
+
+                weatherDataList.add(weatherData);
+                dataStr = null;
+                dataSub = null;
+            }
+
+        });
+
+
     }
 }
