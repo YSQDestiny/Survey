@@ -2,6 +2,8 @@ package com.cykj.survey.model;
 
 public class WeatherData {
 
+    private String name;
+
     private String highWeather;
 
     private String lowWeather;
@@ -30,5 +32,13 @@ public class WeatherData {
 
     public void setRainfall(String rainfall) {
         this.rainfall = rainfall;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
