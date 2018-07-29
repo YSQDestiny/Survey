@@ -70,6 +70,44 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="4dp"
+                    android:text="类型"
+                    android:textColor="#6D727C" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/project_accident_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edit_shape"
+                    android:gravity="top"
+                    android:hint="请输入类型"
+                    android:inputType="textImeMultiLine"
+                    android:maxLines="10"
+                    android:minLines="8"
+                    android:scrollbars="vertical" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
                     android:text="文字说明"
                     android:textColor="#6D727C" />
 
@@ -90,6 +128,44 @@
                     android:background="@drawable/edit_shape"
                     android:gravity="top"
                     android:hint="在这里输入详细的情况说明"
+                    android:inputType="textImeMultiLine"
+                    android:maxLines="10"
+                    android:minLines="8"
+                    android:scrollbars="vertical" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="整改建议"
+                    android:textColor="#6D727C" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/project_accident_suggestion"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edit_shape"
+                    android:gravity="top"
+                    android:hint="在这里输入整改建议"
                     android:inputType="textImeMultiLine"
                     android:maxLines="10"
                     android:minLines="8"
