@@ -77,6 +77,12 @@ public class ProjectAccidentActivity extends BaseFragmentActivity {
                 startActivity(intent);
             }
         });
+        topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               finish();
+            }
+        });
     }
 
     @Override

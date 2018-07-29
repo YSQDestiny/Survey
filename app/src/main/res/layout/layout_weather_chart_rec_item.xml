@@ -24,6 +24,6 @@
     <com.github.mikephil.charting.charts.CombinedChart
     android:id="@+id/char_rec_weather_chart"
     android:layout_width="match_parent"
-    android:layout_height="300dp"/>
+    android:layout_height="300dp" />
 
 </LinearLayout>

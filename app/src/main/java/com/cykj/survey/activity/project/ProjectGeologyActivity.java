@@ -8,16 +8,28 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.activity.MapProjectActivity;
+import com.cykj.survey.activity.PhotoUploadActivity;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.model.ResultModel;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ProjectGeologyActivity extends BaseFragmentActivity {
 
@@ -78,13 +90,116 @@ public class ProjectGeologyActivity extends BaseFragmentActivity {
         initView();
     }
 
+    private void postData(){
+
+        String url = Constants.TEST_SERVICE + "/project/postStr";
+
+        String pg6Str = null;
+        String pg8Str = null;
+        String pg10Str = null;
+        String pg11Str = null;
+        String pg12Str = null;
+
+        if (projectGeology6.getSelectedItem().toString().equals("手动填写")){
+            if (projectGeologyEdit6.getText().toString().equals("")){
+                showToastShort("请输入工程项目所在地所属构造区");
+            }else {
+                pg6Str = projectGeologyEdit6.getText().toString();
+            }
+        }
+        if (projectGeology11.getSelectedItem().toString().equals("手动填写")){
+            if (projectGeologyEdit11.getText().toString().equals("")){
+                showToastShort("请输入该地区的覆盖层类型");
+            }else {
+                pg11Str = projectGeologyEdit11.getText().toString();
+            }
+        }
+        if (projectGeology12.getSelectedItem().toString().equals("手动填写")){
+            if (projectGeologyEdit12.getText().toString().equals("")){
+                showToastShort("请输入该地区的基岩类型");
+            }else {
+                pg12Str = projectGeologyEdit12.getText().toString();
+            }
+        }
+        if (projectGeologyEdit8.getText().toString().equals("")){
+            showToastShort("请输入工程项目穿越过的断裂构造");
+        }else{
+            pg8Str = projectGeologyEdit8.getText().toString();
+        }
+        if (projectGeologyEdit10.getText().toString().equals("")){
+            showToastShort("请输入工程项目所在地的地震烈度");
+        }else {
+            pg10Str = projectGeologyEdit10.getText().toString();
+        }
+
+        String str = "工程区所在地区属" + projectGeology1.getSelectedItem().toString() + "地貌区，地势起伏" + projectGeology2.getSelectedItem().toString() +
+        "，山体坡度" + projectGeology3.getSelectedItem().toString() + "，区域内植被覆盖情况"+ projectGeology4.getSelectedItem().toString() + "，主要以"
+        + projectGeology5.getSelectedItem().toString() +"为主。" + "\n" + "工程区所在地区处";
+
+        if (pg6Str != null){
+            str += pg6Str;
+        }else {
+            str += projectGeology6.getSelectedItem().toString();
+        }
+
+        str += "，工程区内" + projectGeology7.getSelectedItem().toString() + "构造，该工程项目穿越过的断裂构造有" +
+                pg8Str +"，断裂构造对该工程项目的影响"+ projectGeology9.getSelectedItem().toString() +"。本工程沿线地震基本烈度为"+
+                pg10Str + "度。";
+
+        if (pg11Str != null){
+            str += "\n" + "根据工程地质勘察情况，该地区的覆盖层主要为" + pg11Str;
+        }else {
+            str += "\n" + "根据工程地质勘察情况，该地区的覆盖层主要为" + projectGeology11.getSelectedItem().toString();
+        }
+
+        if (pg12Str != null){
+            str += "，基岩为" + pg12Str;
+        }else {
+            str += "，基岩为" + projectGeology12.getSelectedItem().toString();
+        }
+
+        str += "\n" + "工程项目所在区域的地下水为" + projectGeology13.getSelectedItem().toString() +"。根据详勘成果，该区域地表水较为"+
+                projectGeology14.getSelectedItem().toString() +",地下水体对混凝土为"+ projectGeology15.getSelectedItem().toString() +"。"
+                + "\n" + "项目沿线与公路工程有关的工程地质问题主要集中在"+projectGeology16.getSelectedItem().toString()+"。";
+
+
+        OkHttpClient client = new OkHttpClient();
+
+        Long projectId = Constants.PROJECT_ID;
+
+        RequestBody body = new FormBody.Builder()
+                .add("projectId",projectId.toString())
+                .add("geologyStr",str)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
+                if (result.getCode() == 0){
+                    Intent intent = new Intent(ProjectGeologyActivity.this, MapProjectActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
     private void initTopbar() {
         topbar.setTitle("地质选项");
         topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProjectGeologyActivity.this, MapProjectActivity.class);
-                startActivity(intent);
+                postData();
             }
         });
     }

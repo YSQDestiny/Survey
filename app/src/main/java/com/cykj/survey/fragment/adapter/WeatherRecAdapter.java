@@ -57,7 +57,6 @@ public class WeatherRecAdapter extends RecyclerView.Adapter<WeatherRecAdapter.My
 
         holder.name.setText(mData.get(position).getName());
         CombinedChart mChart = holder.mChart;
-
         mChart.getDescription().setEnabled(false);
         mChart.setBackgroundColor(Color.WHITE);
         mChart.setDrawGridBackground(false);
