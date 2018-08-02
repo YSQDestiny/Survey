@@ -1,6 +1,6 @@
 package com.cykj.survey.model;
 
-public class WeatherData {
+public class WeatherInfo {
 
     private String name;
 

@@ -12,16 +12,41 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/qmui_topbar_height" />
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/char_rec"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:background="?attr/app_content_bg_color">
 
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="3dip"
+            android:max="100"
+            android:progress="0"
+            android:visibility="gone"/>
+
+        <WebView
+            android:id="@+id/weather_web"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </WebView>
+
+    </LinearLayout>
 
 
-    </android.support.v7.widget.RecyclerView>
+
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/char_rec"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="?attr/app_content_bg_color">-->
+
+
+
+    <!--</android.support.v7.widget.RecyclerView>-->
 
     <!--<com.github.mikephil.charting.charts.CombinedChart-->
         <!--android:id="@+id/weather_chart"-->

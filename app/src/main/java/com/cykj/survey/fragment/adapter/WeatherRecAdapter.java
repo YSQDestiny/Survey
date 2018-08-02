@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cykj.survey.R;
-import com.cykj.survey.model.WeatherData;
+import com.cykj.survey.model.WeatherInfo;
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
@@ -30,14 +30,14 @@ import java.util.List;
 
 public class WeatherRecAdapter extends RecyclerView.Adapter<WeatherRecAdapter.MyViewHolder>{
 
-    private List<WeatherData> mData;
+    private List<WeatherInfo> mData;
     private Context mContext;
     private LayoutInflater inflater;
     private String[] mMonths = new String[]{
             "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"
     };
 
-    public WeatherRecAdapter(Context mContext,List<WeatherData> mData){
+    public WeatherRecAdapter(Context mContext,List<WeatherInfo> mData){
         this.mContext = mContext;
         this.mData = mData;
         inflater = LayoutInflater.from(mContext);
@@ -105,17 +105,17 @@ public class WeatherRecAdapter extends RecyclerView.Adapter<WeatherRecAdapter.My
 
     private LineData generateLineData(int position){
 
-        WeatherData weatherData = mData.get(position);
+        WeatherInfo weatherInfo = mData.get(position);
 
         ArrayList<Entry> entries = new ArrayList<>();
-        String[] highWeather = weatherData.getHighWeather().split(",");
+        String[] highWeather = weatherInfo.getHighWeather().split(",");
         for (int i = 0;i < highWeather.length;i++){
             entries.add(new Entry(i,Float.parseFloat(highWeather[i])));
         }
 
 
         ArrayList<Entry> entries1 = new ArrayList<>();
-        String[] lowWeather = weatherData.getLowWeather().split(",");
+        String[] lowWeather = weatherInfo.getLowWeather().split(",");
         for (int i = 0;i < lowWeather.length;i++){
             entries1.add(new Entry(i,Float.parseFloat(lowWeather[i])));
         }
@@ -152,10 +152,10 @@ public class WeatherRecAdapter extends RecyclerView.Adapter<WeatherRecAdapter.My
 
     private BarData gengrateBarData(int position){
 
-        WeatherData weatherData = mData.get(position);
+        WeatherInfo weatherInfo = mData.get(position);
 
         ArrayList<BarEntry> entries = new ArrayList<>();
-        String[] rainfull = weatherData.getRainfall().split(",");
+        String[] rainfull = weatherInfo.getRainfall().split(",");
         for (int i = 0; i < rainfull.length;i++){
             entries.add(new BarEntry(i,Float.parseFloat(rainfull[i])));
         }
