@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +39,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,22 +83,30 @@ public class WeatherChartActivity extends BaseFragmentActivity {
         initTopbar();
         initData();
 
-        postWetherData();
-
 
     }
 
     private void initData() {
 
-        for (String addr : Constants.districtList) {
-
+        for (final String addr : Constants.districtList) {
+            Thread thread = null;
+            thread =  new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        getData(PinyinHelper.convertToPinyinString(addr, "", PinyinFormat.WITHOUT_TONE), addr);
+                    } catch (PinyinException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
             try {
-                getData(PinyinHelper.convertToPinyinString(addr, "", PinyinFormat.WITHOUT_TONE), addr);
-            } catch (PinyinException e) {
+                thread.join();
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
+        postWetherData();
 
     }
 
@@ -107,6 +117,12 @@ public class WeatherChartActivity extends BaseFragmentActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(WeatherChartActivity.this, ProjectAccidentActivity.class);
                 startActivity(intent);
+            }
+        });
+        topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -156,7 +172,7 @@ public class WeatherChartActivity extends BaseFragmentActivity {
         @Override
         public void run() {
 
-            weatherWeb.loadUrl(Constants.TEST_SERVICE + "/project/showCharts?projectId=6");
+            weatherWeb.loadUrl(Constants.TEST_SERVICE + "/project/showCharts?projectId=27");
             weatherWeb.setWebChromeClient(webChromeClient);
             weatherWeb.setWebViewClient(webViewClient);
 
@@ -239,12 +255,13 @@ public class WeatherChartActivity extends BaseFragmentActivity {
 
     /**
      * JS调用android的方法
+     *
      * @param str
      * @return
      */
     @JavascriptInterface //仍然必不可少
-    public void  getClient(String str){
-        Log.i("ansen","html调用客户端:"+str);
+    public void getClient(String str) {
+        Log.i("ansen", "html调用客户端:" + str);
     }
 
     @Override
@@ -268,42 +285,50 @@ public class WeatherChartActivity extends BaseFragmentActivity {
                 .url(url)
                 .build();
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
+        Call call = client.newCall(request);
+        try {
+            Response response = call.execute();
+            String str = response.body().string();
+            Document document = Jsoup.parse(str);
+            Elements elements = document.getElementsByTag("script");
+            Element element = elements.get(7);
+            String temp = element.data().toString();
+            String substring = temp.substring(temp.indexOf("climate("), temp.indexOf("});"));
+            dataStr = substring.substring(8, 223);
+            dataSub = dataStr.split("],");
 
-            }
+            WeatherInfo weatherInfo = new WeatherInfo();
+            weatherInfo.setName(hanzi);
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String str = response.body().string();
-                Document document = Jsoup.parse(str);
-                Elements elements = document.getElementsByTag("script");
-                Element element = elements.get(7);
-                String temp = element.data().toString();
-                String substring = temp.substring(temp.indexOf("climate("), temp.indexOf("});"));
-                dataStr = substring.substring(8, 223);
-                dataSub = dataStr.split("],");
+            String highWeather = dataSub[0] + "]";
+            weatherInfo.setHighWeather(highWeather);
 
-                WeatherInfo weatherInfo = new WeatherInfo();
-                weatherInfo.setName(hanzi);
+            String lowWeather = dataSub[1] + "]";
+            weatherInfo.setLowWeather(lowWeather);
 
-                String highWeather = dataSub[0] + "]";
-                weatherInfo.setHighWeather(highWeather);
-
-                String lowWeather = dataSub[1] + "]";
-                weatherInfo.setLowWeather(lowWeather);
-
-
+            if (dataSub[2].indexOf("]") == -1) {
+                weatherInfo.setRainfall(dataSub[2] + "]");
+            } else {
                 weatherInfo.setRainfall(dataSub[2]);
-
-                weatherInfoList.add(weatherInfo);
-                dataStr = null;
-                dataSub = null;
             }
 
-        });
-
-
+            weatherInfoList.add(weatherInfo);
+            dataStr = null;
+            dataSub = null;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        client.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//
+//            }
+//
+//        });
     }
 }

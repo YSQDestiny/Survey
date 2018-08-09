@@ -189,6 +189,7 @@ public class ProjectGeologyActivity extends BaseFragmentActivity {
                 if (result.getCode() == 0){
                     Intent intent = new Intent(ProjectGeologyActivity.this, MapProjectActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -200,6 +201,12 @@ public class ProjectGeologyActivity extends BaseFragmentActivity {
             @Override
             public void onClick(View v) {
                 postData();
+            }
+        });
+        topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

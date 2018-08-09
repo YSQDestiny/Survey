@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.activity.ReportDetailsActivity;
+import com.cykj.survey.activity.project.ProjectActivity;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.fragment.adapter.ProjectListAdapter;
 import com.cykj.survey.fragment.adapter.ReportAdapter;
@@ -66,7 +67,8 @@ public class ProjectListFragment extends BaseFragment {
         topbar.addRightTextButton("新建",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), ProjectActivity.class);
+                getActivity().startActivity(intent);
             }
         });
     }

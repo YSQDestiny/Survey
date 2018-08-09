@@ -53,13 +53,13 @@ public class ProjectLocalRecAdapter extends RecyclerView.Adapter<ProjectLocalRec
         }
     }
 
-    ReportAdapter.OnItemClickListener mOnItemClickListener;
+    OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener{
         void onClick( int position);
         void onLongClick( int position);
     }
-    public void setOnItemClickListener(ReportAdapter.OnItemClickListener onItemClickListener ){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener ){
         this. mOnItemClickListener=onItemClickListener;
     }
 }
