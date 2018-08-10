@@ -2,6 +2,7 @@ package com.cykj.survey.fragment.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,10 +36,25 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
         holder.textView.setText(mDatas.get(position).getName());
+        if (mOnItemClickListener != null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onClick(position);
+                }
+            });
 
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    mOnItemClickListener.onLongClick(position);
+                    return false;
+                }
+            });
+        }
     }
 
     @Override
@@ -56,13 +72,13 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         }
     }
 
-    ReportAdapter.OnItemClickListener mOnItemClickListener;
+    OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener{
         void onClick( int position);
         void onLongClick( int position);
     }
-    public void setOnItemClickListener(ReportAdapter.OnItemClickListener onItemClickListener ){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener ){
         this. mOnItemClickListener=onItemClickListener;
     }
 

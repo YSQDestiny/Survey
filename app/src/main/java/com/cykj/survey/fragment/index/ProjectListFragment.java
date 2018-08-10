@@ -14,6 +14,7 @@ import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.activity.ReportDetailsActivity;
 import com.cykj.survey.activity.project.ProjectActivity;
+import com.cykj.survey.activity.project.ProjectReportDetailAccivyty;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.fragment.adapter.ProjectListAdapter;
 import com.cykj.survey.fragment.adapter.ReportAdapter;
@@ -103,10 +104,12 @@ public class ProjectListFragment extends BaseFragment {
     }
 
     Runnable uiable = new Runnable() {
+
         @Override
         public void run() {
             initView();
         }
+
     };
 
     private ProjectListAdapter adapter;
@@ -121,12 +124,12 @@ public class ProjectListFragment extends BaseFragment {
             projectrRecycler.setAdapter(adapter);
             projectrRecycler.setItemAnimator(new DefaultItemAnimator());
             projectrRecycler.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
-            adapter.setOnItemClickListener(new ReportAdapter.OnItemClickListener() {
+            adapter.setOnItemClickListener(new ProjectListAdapter.OnItemClickListener() {
                 @Override
                 public void onClick(int position) {
-//                    Intent intent = new Intent(getActivity(), ReportDetailsActivity.class);
-//                    intent.putExtra("id",projects.get(position).getId().toString());
-//                    startActivity(intent);
+                    Intent intent = new Intent(getActivity(), ProjectReportDetailAccivyty.class);
+                    intent.putExtra("id",projects.get(position).getId().toString());
+                    startActivity(intent);
                 }
 
                 @Override

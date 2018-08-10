@@ -1,6 +1,7 @@
 package com.cykj.survey.activity;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
+import com.cykj.survey.base.BaseFragmentActivity;
 import com.cykj.survey.fragment.adapter.BusinessRecAdapter;
 import com.cykj.survey.fragment.adapter.RiskAdapter;
 import com.cykj.survey.model.Accident;
@@ -45,7 +47,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ReportDetailsActivity extends AppCompatActivity {
+public class ReportDetailsActivity extends BaseFragmentActivity {
 
     @BindView(R.id.topbar)
     QMUITopBar topbar;
@@ -95,6 +97,11 @@ public class ReportDetailsActivity extends AppCompatActivity {
     private CompanyModel company;
 
     @Override
+    protected int getContextViewId() {
+        return R.id.survey;
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_details);
@@ -118,13 +125,32 @@ public class ReportDetailsActivity extends AppCompatActivity {
     }
 
     private void downloadReport(){
+//        final ProgressDialog progressDialog = new ProgressDialog(this);
+//        progressDialog.setTitle("下载报告");
+//        progressDialog.setCancelable(false);
+//        progressDialog.show();
 
         String url = Constants.TEST_SERVICE + "/company/exportDoc?id=" +company.getCompanyEntity().getId();
-
         Uri uri = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW,uri);
         startActivity(intent);
-
+//        DownloadUtil.get().download(url,"download",company.getCompanyEntity().getName() +"报告",new DownloadUtil.OnDownloadListener(){
+//
+//            @Override
+//            public void onDownloadSuccess() {
+//                showToastShort("下载完成");
+//            }
+//
+//            @Override
+//            public void onDownloading(int progress) {
+//                progressDialog.setMessage("下载中...");
+//            }
+//
+//            @Override
+//            public void onDownloadFailed() {
+//
+//            }
+//        });
 
     }
 

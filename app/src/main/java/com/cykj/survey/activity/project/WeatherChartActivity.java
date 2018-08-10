@@ -81,34 +81,34 @@ public class WeatherChartActivity extends BaseFragmentActivity {
         ButterKnife.bind(this);
         handler = new Handler();
         initTopbar();
-        initData();
+        initView();
 
 
     }
 
-    private void initData() {
+    private void initView() {
+        weatherWeb.loadUrl(Constants.TEST_SERVICE + "/project/showCharts?projectId=" + Constants.PROJECT_ID);
+        weatherWeb.setWebChromeClient(webChromeClient);
+        weatherWeb.setWebViewClient(webViewClient);
 
-        for (final String addr : Constants.districtList) {
-            Thread thread = null;
-            thread =  new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        getData(PinyinHelper.convertToPinyinString(addr, "", PinyinFormat.WITHOUT_TONE), addr);
-                    } catch (PinyinException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        postWetherData();
 
+        WebSettings webSettings = weatherWeb.getSettings();
+
+        webSettings.setJavaScriptEnabled(true);//允许使用js
+
+        /**
+         * LOAD_CACHE_ONLY: 不使用网络，只读取本地缓存数据
+         * LOAD_DEFAULT: （默认）根据cache-control决定是否从网络上取数据。
+         * LOAD_NO_CACHE: 不使用缓存，只从网络获取数据.
+         * LOAD_CACHE_ELSE_NETWORK，只要本地有，无论是否过期，或者no-cache，都使用缓存中的数据。
+         */
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);//不使用缓存，只从网络获取数据.
+
+        //支持屏幕缩放
+        webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(true);
     }
+
 
     private void initTopbar() {
         topbar.setTitle("历史气温");
@@ -126,75 +126,6 @@ public class WeatherChartActivity extends BaseFragmentActivity {
             }
         });
     }
-
-    private void postWetherData() {
-
-        String url = Constants.TEST_SERVICE + "/project/postWeather";
-
-        WeatherModel weatherModel = new WeatherModel();
-        weatherModel.setWeatherInfoList(weatherInfoList);
-
-        String str = JSONObject.toJSONString(weatherModel);
-
-        OkHttpClient client = new OkHttpClient();
-
-        Long projectId = Constants.PROJECT_ID;
-
-        RequestBody body = new FormBody.Builder()
-                .add("projectId", projectId.toString())
-                .add("weatherStr", str)
-                .build();
-
-        final Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                ResultModel result = JSONObject.parseObject(response.body().string(), ResultModel.class);
-                if (result.getCode() == 0) {
-//                    Intent intent = new Intent(WeatherChartActivity.this, ProjectAccidentActivity.class);
-//                    startActivity(intent);
-                    handler.post(runnable);
-                }
-            }
-        });
-    }
-
-    Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-
-            weatherWeb.loadUrl(Constants.TEST_SERVICE + "/project/showCharts?projectId=27");
-            weatherWeb.setWebChromeClient(webChromeClient);
-            weatherWeb.setWebViewClient(webViewClient);
-
-
-            WebSettings webSettings = weatherWeb.getSettings();
-
-            webSettings.setJavaScriptEnabled(true);//允许使用js
-
-            /**
-             * LOAD_CACHE_ONLY: 不使用网络，只读取本地缓存数据
-             * LOAD_DEFAULT: （默认）根据cache-control决定是否从网络上取数据。
-             * LOAD_NO_CACHE: 不使用缓存，只从网络获取数据.
-             * LOAD_CACHE_ELSE_NETWORK，只要本地有，无论是否过期，或者no-cache，都使用缓存中的数据。
-             */
-            webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);//不使用缓存，只从网络获取数据.
-
-            //支持屏幕缩放
-            webSettings.setSupportZoom(true);
-            webSettings.setBuiltInZoomControls(true);
-        }
-
-    };
 
 
     //WebViewClient主要帮助WebView处理各种通知、请求事件
