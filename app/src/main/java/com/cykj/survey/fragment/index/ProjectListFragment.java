@@ -103,6 +103,12 @@ public class ProjectListFragment extends BaseFragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+    }
+
     Runnable uiable = new Runnable() {
 
         @Override

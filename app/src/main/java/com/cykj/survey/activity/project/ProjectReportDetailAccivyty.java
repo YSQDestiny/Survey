@@ -2,6 +2,7 @@ package com.cykj.survey.activity.project;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -19,6 +20,8 @@ import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
 import com.qmuiteam.qmui.widget.QMUITopBar;
+
+import java.io.Reader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +55,25 @@ public class ProjectReportDetailAccivyty extends BaseFragmentActivity {
 
     private void initTop() {
         topbar.setTitle("报告详情");
+        topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        topbar.addRightTextButton("下载",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloadReport();
+            }
+        });
+    }
+
+    private void downloadReport() {
+        String url = Constants.TEST_SERVICE + "/project/showProject?projectId=" + projectId;
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+        startActivity(intent);
     }
 
     private void initView(){
@@ -63,6 +85,7 @@ public class ProjectReportDetailAccivyty extends BaseFragmentActivity {
         WebSettings webSettings = reportWeb.getSettings();
 
         webSettings.setJavaScriptEnabled(true);//允许使用js
+
 
         /**
          * LOAD_CACHE_ONLY: 不使用网络，只读取本地缓存数据

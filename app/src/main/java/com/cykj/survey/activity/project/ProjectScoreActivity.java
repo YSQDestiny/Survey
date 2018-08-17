@@ -103,6 +103,7 @@ public class ProjectScoreActivity extends BaseFragmentActivity {
         RequestBody body = new FormBody.Builder()
                 .add("projectId",projectId.toString())
                 .add("score", score.toString())
+                .add("level",level)
                 .build();
 
         final Request request = new Request.Builder()
@@ -120,7 +121,6 @@ public class ProjectScoreActivity extends BaseFragmentActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
                 if (result.getCode() == 0){
-                    showToastShort("提交成功");
                     finish();
                 }
             }
