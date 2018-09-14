@@ -182,7 +182,7 @@ public class OptionsConstants {
         woodenAidList.add(new BasicOptions("17.柴油贮存室电气是否符合要求",0,"财产综合险,财产一切险,财产基本险"));
     }
 
-    //木材加工-生产-裁、切、干燥
+    //木材加工及人造板-生产-裁、切、干燥
     public static List<BasicOptions> timberDryList;
     static {
         timberDryList = new ArrayList<>();
@@ -195,10 +195,10 @@ public class OptionsConstants {
         timberDryList.add(new BasicOptions("7.干燥后的木料或初始单板是否进行良好散热",0,"财产综合险,财产一切险,财产基本险"));
     }
 
-    //    //木材加工-生产-制胶、涂胶、组坯
+    //    //木材加工及人造板-生产-制胶、涂胶、组坯
     public static List<BasicOptions> timberGlueList;
     static {
-        timberGlueList = new ArrayList<>();
+        timberGlueList = new ArrayList<>();//木材加工及人造板-生产-制胶、涂胶、组坯
         timberGlueList.add(new BasicOptions("1.设备线路是否完好,接线是否良好",0,"团体意外险,雇主责任险,财产综合险,财产一切险,财产基本险"));
         timberGlueList.add(new BasicOptions("2.作业环境是否整洁清洁",0,"财产综合险,财产一切险,财产基本险"));
         timberGlueList.add(new BasicOptions("3.电气开关能否满足防爆要求",0,"财产综合险,财产一切险,财产基本险"));
@@ -215,7 +215,7 @@ public class OptionsConstants {
     //木材加工-生产-压合（冷、热）
     public static List<BasicOptions> timberLaminationList;
     static {
-        timberLaminationList = new ArrayList<>();
+        timberLaminationList = new ArrayList<>();    //木材加工及人造板-生产-压合（冷、热）
         timberLaminationList.add(new BasicOptions("1.热压后是否摊开散热",0,"财产综合险,财产一切险,财产基本险"));
         timberLaminationList.add(new BasicOptions("2.风机是否开启且运转良好",0,"财产综合险,财产一切险,财产基本险"));
         timberLaminationList.add(new BasicOptions("3.压合后的板材是否定位管理,不占用其他区域及通道",0,"团体意外险,雇主责任险"));
@@ -230,7 +230,7 @@ public class OptionsConstants {
     //木材加工-生产-修补、砂光、剪裁
     public static List<BasicOptions> timberTailoringList;
     static {
-        timberTailoringList = new ArrayList<>();
+        timberTailoringList = new ArrayList<>();//木材加工及人造板-生产-修补、砂光、剪裁
         timberTailoringList.add(new BasicOptions("1.手持工具线路是否完好,接线是否良好",0,"团体意外险,雇主责任险"));
         timberTailoringList.add(new BasicOptions("2.刨花、锯末每班是否打扫干净,倒在指定地点",0,"财产综合险,财产一切险,财产基本险"));
         timberTailoringList.add(new BasicOptions("3.是否定点操作,不占用其他区域及通道",0,"团体意外险,雇主责任险,财产综合险,财产一切险,财产基本险"));
@@ -246,7 +246,7 @@ public class OptionsConstants {
     //木材加工-生产-除尘
     public static List<BasicOptions> timberDustremovalList;
     static {
-        timberDustremovalList = new ArrayList<>();
+        timberDustremovalList = new ArrayList<>();//木材加工及人造板-生产-除尘
         timberDustremovalList.add(new BasicOptions("1.是否定期清理",0,"财产综合险,财产一切险,财产基本险"));
         timberDustremovalList.add(new BasicOptions("2.产尘点是否装有吸尘罩",0,"雇主责任险,财产综合险,财产一切险,财产基本险"));
         timberDustremovalList.add(new BasicOptions("3.设备转动部位是否有防护设施",0,"团体意外险,雇主责任险"));
@@ -260,7 +260,7 @@ public class OptionsConstants {
     //木材加工-库存-原料
     public static List<BasicOptions> timberMaterialList;
     static {
-        timberMaterialList = new ArrayList<>();
+        timberMaterialList = new ArrayList<>();//木材加工及人造板   库存-成品、木料堆场
         timberMaterialList.add(new BasicOptions("1. 木料堆放是否稳定牢靠,是否成正梯型",0,"财产综合险,财产一切险,财产基本险"));
         timberMaterialList.add(new BasicOptions("2. 现场是否张贴安全警示标志",0,"团体意外险,雇主责任险,财产综合险,财产一切险,财产基本险"));
         timberMaterialList.add(new BasicOptions("3. 木料堆场是否良好执行禁火管理",0,"团体意外险,雇主责任险"));
@@ -275,7 +275,7 @@ public class OptionsConstants {
     //木材加工-库存-危化品库、储罐
     public static List<BasicOptions> timberDangerList;
     static {
-        timberDangerList = new ArrayList<>();
+        timberDangerList = new ArrayList<>();//木材加工及人造板     库存-危化品库、储罐
         timberDangerList.add(new BasicOptions("1. 操作人员是否穿戴不产生静电的工作服、帽",0,"团体意外险,雇主责任险,财产综合险,财产一切险,财产基本险"));
         timberDangerList.add(new BasicOptions("2. 是否在进口设置了静电释放装置",0,"团体意外险,雇主责任险,财产综合险,财产一切险,财产基本险"));
         timberDangerList.add(new BasicOptions("3. 现场是否张贴安全警示标志",0,"团体意外险,雇主责任险,财产综合险,财产一切险,财产基本险"));
@@ -289,10 +289,10 @@ public class OptionsConstants {
         timberDangerList.add(new BasicOptions("11.库房是否执行双人双锁",0,"团体意外险,雇主责任险,财产综合险,财产一切险,财产基本险"));
     }
 
-    //木材加工-库存-危化品库、储罐
+    //木材加工-库存-危废库
     public static List<BasicOptions> timberWasteList;
     static {
-        timberWasteList = new ArrayList<>();
+        timberWasteList = new ArrayList<>();//          木材加工及人造板        库存-危废库
         timberWasteList.add(new BasicOptions("1. 委外的危废回收机构是否具备相应资质与技术条件",0,"财产综合险,财产一切险,财产基本险"));
         timberWasteList.add(new BasicOptions("2. 贮存、运输是否分类",0,"财产综合险,财产一切险,财产基本险"));
         timberWasteList.add(new BasicOptions("3. 可燃危废品贮存区是否设置相应防爆措施",0,"团体意外险,雇主责任险,财产综合险,财产一切险,财产基本险"));
@@ -304,7 +304,7 @@ public class OptionsConstants {
     //木材加工-库存-备件
     public static List<BasicOptions> timberSpareList;
     static {
-        timberSpareList = new ArrayList<>();
+        timberSpareList = new ArrayList<>();//木材加工及人造板  库存-备品备件库
         timberSpareList.add(new BasicOptions("1. 是否配置了足量且有效的消防器材",0,"财产综合险,财产一切险,财产基本险"));
         timberSpareList.add(new BasicOptions("2. 电气线路敷设是否合规",0,"团体意外险,雇主责任险,财产综合险,财产一切险,财产基本险"));
     }
@@ -312,7 +312,7 @@ public class OptionsConstants {
     //木材加工-办公
     public static List<BasicOptions> timberOfficeList;
     static {
-        timberOfficeList = new ArrayList<>();
+        timberOfficeList = new ArrayList<>();//木材加工及人造板-办公区
         timberOfficeList.add(new BasicOptions("1.多层办公楼是否具备至少2个应急出口",0,"团体意外险,雇主责任险"));
         timberOfficeList.add(new BasicOptions("2.办公用电是否符合防火管理",0,"团体意外险,雇主责任险,财产综合险,财产一切险,财产基本险"));
         timberOfficeList.add(new BasicOptions("3.排水是否畅通",0,"财产综合险,财产一切险,财产基本险"));
@@ -323,7 +323,7 @@ public class OptionsConstants {
     //木材加工-环境
     public static List<BasicOptions> timberSurroundingList;
     static {
-        timberSurroundingList = new ArrayList<>();
+        timberSurroundingList = new ArrayList<>();//木材加工及人造板 周边环境-生产环境
         timberSurroundingList.add(new BasicOptions("1.周边道路排水是否良好",0,"财产综合险,财产一切险,财产基本险"));
         timberSurroundingList.add(new BasicOptions("2.厂区外25M内是否有火灾爆炸风险",0,"财产综合险,财产一切险,财产基本险"));
         timberSurroundingList.add(new BasicOptions("3.周边消防救援机构是否在5分钟内可以到达",0,"财产综合险,财产一切险,财产基本险"));
@@ -332,7 +332,7 @@ public class OptionsConstants {
     //木材加工-建构
     public static List<BasicOptions> timberConswtructionList;
     static {
-        timberConswtructionList = new ArrayList<>();
+        timberConswtructionList = new ArrayList<>();//建、构筑物 木材加工及人造板
         timberConswtructionList.add(new BasicOptions("1.建、构筑物是否有明显缺陷、裂痕",0,"财产综合险,财产一切险,财产基本险"));
         timberConswtructionList.add(new BasicOptions("2.厂房内搭建是否合规",0,"财产综合险,财产一切险,财产基本险"));
     }
@@ -340,7 +340,7 @@ public class OptionsConstants {
     //木材加工-辅助
     public static List<BasicOptions> timberAidList;
     static {
-        timberAidList = new ArrayList<>();
+        timberAidList = new ArrayList<>();//生产辅助 木材加工及人造板
         timberAidList.add(new BasicOptions("1.入厂是否设有限速标志及减速梗",0,"团体意外险,雇主责任险"));
         timberAidList.add(new BasicOptions("2.厂区内是否已设置人车分流地线",0,"团体意外险,雇主责任险"));
         timberAidList.add(new BasicOptions("3.厂区内是否设置避雷设施,各点位是否检测",0,"财产综合险,财产一切险,财产基本险"));

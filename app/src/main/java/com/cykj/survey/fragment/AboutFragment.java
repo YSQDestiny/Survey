@@ -13,5 +13,4 @@ public class AboutFragment extends BaseFragment{
         return null;
     }
 
-
 }

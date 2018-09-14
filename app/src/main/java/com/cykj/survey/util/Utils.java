@@ -3,6 +3,7 @@ package com.cykj.survey.util;
 import android.util.Log;
 
 import com.cykj.survey.model.BasicOptions;
+import com.cykj.survey.model.Options;
 import com.cykj.survey.model.OptionsConstants;
 
 import java.util.ArrayList;
@@ -40,22 +41,22 @@ public class Utils {
      * @param insurance 当前选择的保险
      * @return 筛选后的数据
      */
-    public static List<BasicOptions> insuranceJudge(List<BasicOptions> mData,String insurance){
+    public static List<Options> insuranceJudge(List<Options> mData, String insurance){
 
-        Map<String,BasicOptions> map = new HashMap<>();
+        Map<String,Options> map = new HashMap<>();
         String[] temp = insurance.split(",");
         boolean isHave = false;
         for (String str : temp){
-            for (BasicOptions basicOptions : mData){
-                if (basicOptions.getInsurance().indexOf(str) != -1){
-                    if (!map.containsKey(basicOptions.getName())){
-                        map.put(basicOptions.getName(),basicOptions);
+            for (Options options : mData){
+                if (options.getInsuranceType().indexOf(str) != -1){
+                    if (!map.containsKey(options.getName())){
+                        map.put(options.getName(),options);
                     }
                 }
             }
         }
 
-        List<BasicOptions> data = new ArrayList<>();
+        List<Options> data = new ArrayList<>();
         for (String key : map.keySet()){
             data.add(map.get(key));
         }

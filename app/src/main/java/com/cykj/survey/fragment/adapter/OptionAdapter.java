@@ -73,7 +73,6 @@ public class OptionAdapter  extends RecyclerView.Adapter<OptionAdapter.MyViewHol
 
         holder.checkBoxYes.setTag(position);
         holder.checkBoxNo.setTag(position);
-        holder.tv.setText(mContext.getString(mDatas.get(position).getName()));
         holder.checkBoxYes.setOnCheckedChangeListener(null);
         holder.checkBoxNo.setOnCheckedChangeListener(null);
 

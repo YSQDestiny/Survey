@@ -230,7 +230,6 @@ public class PhotoUploadActivity extends BaseFragmentActivity {
     }
 
     private void upLoadPhoto(){
-        showTipDialog("请稍等...", QMUITipDialog.Builder.ICON_TYPE_LOADING);
         String url = Constants.TEST_SERVICE + "/company/uploadPhoto";
 
         OkHttpClient client = new OkHttpClient();
@@ -266,7 +265,6 @@ public class PhotoUploadActivity extends BaseFragmentActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                tipDialogDismiss();
                 ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
                 if (result.getCode() == 0){
                     Intent intent = new Intent(PhotoUploadActivity.this,IndustryActivity.class);

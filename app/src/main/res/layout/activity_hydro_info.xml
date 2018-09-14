@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="?attr/app_primary_color">
 
     <com.qmuiteam.qmui.widget.QMUITopBar
@@ -89,6 +90,21 @@
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
 
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/hydro_edit_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="请输入水电站投产年限"
+                android:textSize="14sp"
+                android:inputType="number"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -145,7 +161,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="请选择水电站形式"
+                    android:text="请选择大坝类型"
                     android:textColor="#ababab"
                     android:textSize="14sp"
                     android:clickable="false"/>
@@ -161,62 +177,38 @@
                     android:layout_marginBottom="2dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="2dp"
-                    android:text="电站开开发主要用途"
+                    android:text="电站开发主要用途"
                     android:textColor="#666666" />
             </FrameLayout>
 
-            <RelativeLayout
-                android:id="@+id/hydro_purpose"
+            <com.cykj.survey.view.CustomGridView
+                android:id="@+id/grid"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:numColumns="4"
+                android:horizontalSpacing="2dp"
+                android:verticalSpacing="3dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+            </com.cykj.survey.view.CustomGridView>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
                 <TextView
-                    android:id="@+id/hydro_purpose_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="请选择水电站形式"
-                    android:textColor="#ababab"
-                    android:textSize="14sp"
-                    android:clickable="false"/>
-            </RelativeLayout>
-
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/hydro_edit_year"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:hint="请输入水电站投产年限"
-                android:textSize="14sp"
-                android:inputType="number"
-                app:met_primaryColor="?attr/app_primary_color"
-                app:met_floatingLabel="highlight"
-                app:met_clearButton= "true"
-                app:met_hideUnderline="true"/>
-
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/hydro_edit_crew_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:hint="请输入水电站机组数量"
-                android:textSize="14sp"
-                android:inputType="number"
-                app:met_primaryColor="?attr/app_primary_color"
-                app:met_floatingLabel="highlight"
-                app:met_clearButton= "true"
-                app:met_hideUnderline="true"/>
-
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="机组样式"
+                    android:textColor="#666666" />
+            </FrameLayout>
 
             <RelativeLayout
                 android:id="@+id/hydro_crew_type"
@@ -235,6 +227,56 @@
                     android:clickable="false"/>
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="机组台数"
+                    android:textColor="#666666" />
+
+                <TextView
+                    android:id="@+id/crew_add_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="2dp"
+                    android:text="添加"
+                    android:textColor="?attr/app_primary_color"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/crew_recview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+            </android.support.v7.widget.RecyclerView>
+
+            <RelativeLayout
+                android:id="@+id/tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="点击“添加”按钮添加"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:textColor="#666666"/>
+
+            </RelativeLayout>
+
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
 
             <com.rengwuxian.materialedittext.MaterialEditText
@@ -251,6 +293,8 @@
                 app:met_floatingLabel="highlight"
                 app:met_clearButton= "true"
                 app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -275,7 +319,6 @@
             </RelativeLayout>
 
         </LinearLayout>
-
 
     </ScrollView>
 

@@ -122,6 +122,31 @@
             android:label="@string/app_name"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
 
+        <activity android:name=".activity.hydropower.HydroGeologyActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+
+        <activity android:name=".activity.hydropower.HydroDisasterActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+
+        <activity android:name=".activity.hydropower.HydroImageActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+
+        <activity android:name=".activity.AreaActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+
+        <activity android:name=".activity.OptionsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+
         <provider android:name="android.support.v4.content.FileProvider"
             android:authorities="com.cykj.survey.fileprovider"
             android:exported="false"
