@@ -18,8 +18,10 @@ import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.PolylineOptions;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
+import com.cykj.survey.activity.project.ProjectGeologyActivity;
 import com.cykj.survey.activity.project.WeatherChartActivity;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.model.ResultModel;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
 import com.lljjcoder.bean.DistrictBean;
@@ -37,8 +39,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MapProjectActivity extends BaseFragmentActivity {
@@ -59,7 +63,7 @@ public class MapProjectActivity extends BaseFragmentActivity {
     private Handler handler;
     private List<LatLng> latLngList;
     private CityPickerView mPicker = new CityPickerView();
-    private List<String> districtList = new ArrayList<>();
+    private List<String> passingPointList = new ArrayList<>();
 
     @Override
     protected int getContextViewId() {
@@ -72,22 +76,53 @@ public class MapProjectActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (districtList.size() > 0){
-                    Constants.setDistrictList(districtList);
-                    Intent intent = new Intent(MapProjectActivity.this,WeatherChartActivity.class);
-                    startActivity(intent);
-                    finish();
+                if (passingPointList.size() > 0){
+                    postPassingPoint();
                 }else {
                     showToastShort("路径点未选择");
                 }
 
             }
         });
-
         topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+    }
+
+    private void postPassingPoint(){
+        String url = Constants.TEST_SERVICE + "/project/postPassingPoint";
+
+        OkHttpClient client = new OkHttpClient();
+
+        Long projectId = Constants.PROJECT_ID;
+
+        RequestBody body = new FormBody.Builder()
+                .add("projectId",projectId.toString())
+                .add("passingPoint",JSONObject.toJSONString(passingPointList))
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
+                if (result.getCode() == 0){
+                    Intent intent = new Intent(MapProjectActivity.this,WeatherChartActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }
@@ -143,20 +178,7 @@ public class MapProjectActivity extends BaseFragmentActivity {
                             url += "&address=" + address;
                         }
 
-                        if (district.getName().indexOf("区") != -1){
-                            districtList.add(city.getName().replace("市",""));
-                        }else {
-                            if (district.getName().length() > 2){
-                                if (district.getName().indexOf("县") != -1){
-                                    districtList.add(district.getName().replace("县",""));
-                                }else if (district.getName().indexOf("市") != -1){
-                                    districtList.add(district.getName().replace("市",""));
-                                }
-                            }else {
-                                districtList.add(district.getName());
-                            }
-
-                        }
+                        passingPointList.add(district.getName());
 
                         getLocation(url);
                     }

@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class ProjectModel {
 
+    private Long id;
+
     private String name;
 
     private String department;
@@ -25,6 +27,36 @@ public class ProjectModel {
     private Date makeTime;
 
     private String type;
+
+    private String score;
+
+    private String passingPost;
+
+    private String level;
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getPassingPost() {
+        return passingPost;
+    }
+
+    public void setPassingPost(String passingPost) {
+        this.passingPost = passingPost;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
 
     public String getName() {
         return name;
@@ -112,5 +144,13 @@ public class ProjectModel {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

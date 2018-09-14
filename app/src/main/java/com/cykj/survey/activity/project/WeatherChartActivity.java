@@ -1,32 +1,31 @@
 package com.cykj.survey.activity.project;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.webkit.JavascriptInterface;
+import android.webkit.JsResult;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
+import com.cykj.survey.MainActivity;
 import com.cykj.survey.R;
-import com.cykj.survey.activity.MapProjectActivity;
 import com.cykj.survey.base.BaseFragmentActivity;
-import com.cykj.survey.fragment.adapter.ReportAdapter;
-import com.cykj.survey.fragment.adapter.WeatherRecAdapter;
 import com.cykj.survey.model.ResultModel;
-import com.cykj.survey.model.WeatherData;
+import com.cykj.survey.model.WeatherInfo;
 import com.cykj.survey.model.WeatherModel;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinFormat;
 import com.github.stuxuhai.jpinyin.PinyinHelper;
@@ -40,6 +39,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,13 +53,15 @@ import okhttp3.Response;
 
 public class WeatherChartActivity extends BaseFragmentActivity {
 
-    @BindView(R.id.char_rec)
-    RecyclerView charRec;
+    @BindView(R.id.weather_web)
+    WebView weatherWeb;
+    @BindView(R.id.progressbar)
+    ProgressBar progressbar;
     private String[] mMonths = new String[]{
             "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"
     };
 
-    private List<WeatherData> weatherDataList = new ArrayList<>();
+    private List<WeatherInfo> weatherInfoList = new ArrayList<>();
 
     @BindView(R.id.topbar)
     QMUITopBar topbar;
@@ -70,99 +72,135 @@ public class WeatherChartActivity extends BaseFragmentActivity {
         return R.id.survey;
     }
 
+    private Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_chart);
         ButterKnife.bind(this);
+        handler = new Handler();
         initTopbar();
-        initData();
         initView();
 
-    }
-
-    private void initData() {
-
-        for (String addr : Constants.districtList) {
-
-            try {
-                getData(PinyinHelper.convertToPinyinString(addr, "", PinyinFormat.WITHOUT_TONE), addr);
-            } catch (PinyinException e) {
-                e.printStackTrace();
-            }
-
-        }
 
     }
 
-    private WeatherRecAdapter adapter;
     private void initView() {
-        adapter = new WeatherRecAdapter(this,weatherDataList);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        charRec.setLayoutManager(layoutManager);
-        charRec.setAdapter(adapter);
-        charRec.setItemAnimator(new DefaultItemAnimator());
-        charRec.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
-//        charRec.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//                super.onScrollStateChanged(recyclerView, newState);
-//                if (newState == 1){
-//
-//                }
-//            }
-//        });
+        weatherWeb.loadUrl(Constants.TEST_SERVICE + "/project/showCharts?projectId=" + Constants.PROJECT_ID);
+        weatherWeb.setWebChromeClient(webChromeClient);
+        weatherWeb.setWebViewClient(webViewClient);
+
+
+        WebSettings webSettings = weatherWeb.getSettings();
+
+        webSettings.setJavaScriptEnabled(true);//允许使用js
+
+        /**
+         * LOAD_CACHE_ONLY: 不使用网络，只读取本地缓存数据
+         * LOAD_DEFAULT: （默认）根据cache-control决定是否从网络上取数据。
+         * LOAD_NO_CACHE: 不使用缓存，只从网络获取数据.
+         * LOAD_CACHE_ELSE_NETWORK，只要本地有，无论是否过期，或者no-cache，都使用缓存中的数据。
+         */
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);//不使用缓存，只从网络获取数据.
+
+        //支持屏幕缩放
+        webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(true);
     }
+
 
     private void initTopbar() {
         topbar.setTitle("历史气温");
         topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postWetherData();
+                Intent intent = new Intent(WeatherChartActivity.this, ProjectAccidentActivity.class);
+                startActivity(intent);
+            }
+        });
+        topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
 
-    private void postWetherData(){
 
-        String url = Constants.TEST_SERVICE +"/project/postWeather";
+    //WebViewClient主要帮助WebView处理各种通知、请求事件
+    private WebViewClient webViewClient = new WebViewClient() {
+        @Override
+        public void onPageFinished(WebView view, String url) {//页面加载完成
+            progressbar.setVisibility(View.GONE);
+        }
 
-        WeatherModel weatherModel = new WeatherModel();
-        weatherModel.setWeatherDataList(weatherDataList);
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {//页面开始加载
+            progressbar.setVisibility(View.VISIBLE);
+        }
 
-        String str = JSONObject.toJSONString(weatherModel);
-
-        OkHttpClient client = new OkHttpClient();
-
-        Long projectId = Constants.PROJECT_ID;
-
-        RequestBody body = new FormBody.Builder()
-                .add("projectId",projectId.toString())
-                .add("geologyStr",str)
-                .build();
-
-        final Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            Log.i("ansen", "拦截url:" + url);
+            if (url.equals("http://www.google.com/")) {
+                Toast.makeText(WeatherChartActivity.this, "国内不能访问google,拦截该url", Toast.LENGTH_LONG).show();
+                return true;//表示我已经处理过了
             }
+            return super.shouldOverrideUrlLoading(view, url);
+        }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
-                if (result.getCode() == 0){
-                    Intent intent = new Intent(WeatherChartActivity.this, ProjectAccidentActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
+    };
+
+    //WebChromeClient主要辅助WebView处理Javascript的对话框、网站图标、网站title、加载进度等
+    private WebChromeClient webChromeClient = new WebChromeClient() {
+        //不支持js的alert弹窗，需要自己监听然后通过dialog弹窗
+        @Override
+        public boolean onJsAlert(WebView webView, String url, String message, JsResult result) {
+            AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
+            localBuilder.setMessage(message).setPositiveButton("确定", null);
+            localBuilder.setCancelable(false);
+            localBuilder.create().show();
+
+            //注意:
+            //必须要这一句代码:result.confirm()表示:
+            //处理结果为确定状态同时唤醒WebCore线程
+            //否则不能继续点击按钮
+            result.confirm();
+            return true;
+        }
+
+        //获取网页标题
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+            Log.i("ansen", "网页标题:" + title);
+        }
+
+        //加载进度回调
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            progressbar.setProgress(newProgress);
+        }
+    };
+
+    /**
+     * JS调用android的方法
+     *
+     * @param str
+     * @return
+     */
+    @JavascriptInterface //仍然必不可少
+    public void getClient(String str) {
+        Log.i("ansen", "html调用客户端:" + str);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //释放资源
+        weatherWeb.destroy();
+        weatherWeb = null;
     }
 
     private String dataStr;
@@ -178,44 +216,50 @@ public class WeatherChartActivity extends BaseFragmentActivity {
                 .url(url)
                 .build();
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
+        Call call = client.newCall(request);
+        try {
+            Response response = call.execute();
+            String str = response.body().string();
+            Document document = Jsoup.parse(str);
+            Elements elements = document.getElementsByTag("script");
+            Element element = elements.get(7);
+            String temp = element.data().toString();
+            String substring = temp.substring(temp.indexOf("climate("), temp.indexOf("});"));
+            dataStr = substring.substring(8, 223);
+            dataSub = dataStr.split("],");
 
+            WeatherInfo weatherInfo = new WeatherInfo();
+            weatherInfo.setName(hanzi);
+
+            String highWeather = dataSub[0] + "]";
+            weatherInfo.setHighWeather(highWeather);
+
+            String lowWeather = dataSub[1] + "]";
+            weatherInfo.setLowWeather(lowWeather);
+
+            if (dataSub[2].indexOf("]") == -1) {
+                weatherInfo.setRainfall(dataSub[2] + "]");
+            } else {
+                weatherInfo.setRainfall(dataSub[2]);
             }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String str = response.body().string();
-                Document document = Jsoup.parse(str);
-                Elements elements = document.getElementsByTag("script");
-                Element element = elements.get(7);
-                String temp = element.data().toString();
-                String substring = temp.substring(temp.indexOf("climate("), temp.indexOf("});"));
-                dataStr = substring.substring(8, 223);
-                dataSub = dataStr.split("],");
-
-                WeatherData weatherData = new WeatherData();
-                weatherData.setName(hanzi);
-
-                String highWeather = dataSub[0].replace("[", "");
-                weatherData.setHighWeather(highWeather);
-
-                String lowWeather = dataSub[1].replace("[", "");
-                weatherData.setLowWeather(lowWeather);
-
-                String rainfall;
-                rainfall = dataSub[2].replace("[", "");
-                rainfall = rainfall.replace("]", "");
-                weatherData.setRainfall(rainfall);
-
-                weatherDataList.add(weatherData);
-                dataStr = null;
-                dataSub = null;
-            }
-
-        });
-
-
+            weatherInfoList.add(weatherInfo);
+            dataStr = null;
+            dataSub = null;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        client.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//
+//            }
+//
+//        });
     }
 }

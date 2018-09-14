@@ -4,13 +4,13 @@ import java.util.List;
 
 public class WeatherModel {
 
-    public List<WeatherData> weatherDataList;
+    public List<WeatherInfo> weatherInfoList;
 
-    public List<WeatherData> getWeatherDataList() {
-        return weatherDataList;
+    public List<WeatherInfo> getWeatherInfoList() {
+        return weatherInfoList;
     }
 
-    public void setWeatherDataList(List<WeatherData> weatherDataList) {
-        this.weatherDataList = weatherDataList;
+    public void setWeatherInfoList(List<WeatherInfo> weatherInfoList) {
+        this.weatherInfoList = weatherInfoList;
     }
 }

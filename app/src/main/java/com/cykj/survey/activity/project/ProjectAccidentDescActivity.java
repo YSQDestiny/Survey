@@ -16,11 +16,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
-import com.cykj.survey.activity.AccidentActivity;
 import com.cykj.survey.base.BaseFragmentActivity;
 import com.cykj.survey.model.ProjectAccident;
 import com.cykj.survey.util.ImgUtil;
@@ -46,6 +44,10 @@ public class ProjectAccidentDescActivity extends BaseFragmentActivity {
     ImageView projectAccidentSiteImg;
     @BindView(R.id.project_accident_surroundings_img)
     ImageView projectAccidentSurroundingsImg;
+    @BindView(R.id.project_accident_type)
+    EditText projectAccidentType;
+    @BindView(R.id.project_accident_suggetion)
+    EditText projectAccidentSuggetion;
 
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
@@ -73,10 +75,12 @@ public class ProjectAccidentDescActivity extends BaseFragmentActivity {
     private void initView() {
         Intent intent = getIntent();
         String accidentJson = intent.getStringExtra("accident");
-        if (accidentJson != null){
-            ProjectAccident accident = JSONObject.parseObject(accidentJson,ProjectAccident.class);
+        if (accidentJson != null) {
+            ProjectAccident accident = JSONObject.parseObject(accidentJson, ProjectAccident.class);
             projectAccidentName.setText(accident.getName());
             projectAccidentEdit.setText(accident.getInstructions());
+            projectAccidentType.setText(accident.getType());
+            projectAccidentSuggetion.setText(accident.getSuggestion());
             projectAccidentSiteImg.setImageBitmap(ImgUtil.base64ToBitmap(accident.getSitePhoto()));
             projectAccidentSurroundingsImg.setImageBitmap(ImgUtil.base64ToBitmap(accident.getSurroundingsPhoto()));
         }
@@ -98,9 +102,9 @@ public class ProjectAccidentDescActivity extends BaseFragmentActivity {
     }
 
 
-    private void initTopbar(){
+    private void initTopbar() {
         topbar.setTitle("添加风险点");
-        topbar.addRightTextButton("完成",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+        topbar.addRightTextButton("完成", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveAccident();
@@ -108,11 +112,14 @@ public class ProjectAccidentDescActivity extends BaseFragmentActivity {
         });
     }
 
-    private void  saveAccident(){
+    private void saveAccident() {
 
         ProjectAccident accident = new ProjectAccident();
+        accident.setProjectId(Constants.PROJECT_ID);
         accident.setName(projectAccidentName.getText().toString());
         accident.setInstructions(projectAccidentEdit.getText().toString());
+        accident.setType(projectAccidentType.getText().toString());
+        accident.setSuggestion(projectAccidentSuggetion.getText().toString());
         projectAccidentSiteImg.setDrawingCacheEnabled(true);
         accident.setSitePhoto(ImgUtil.bitmapToBase64(projectAccidentSiteImg.getDrawingCache()));
         projectAccidentSurroundingsImg.setDrawingCacheEnabled(true);
@@ -140,6 +147,8 @@ public class ProjectAccidentDescActivity extends BaseFragmentActivity {
                 .create(mCurrentDialogStyle).show();
     }
 
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -148,22 +157,22 @@ public class ProjectAccidentDescActivity extends BaseFragmentActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    private void takePhoto(String temp){
-        switch (temp){
+    private void takePhoto(String temp) {
+        switch (temp) {
             case "拍照":
                 requestPermissions(this, new String[]{Manifest.permission.CAMERA,
                         Manifest.permission.READ_EXTERNAL_STORAGE}, new RequestPermissionCallBack() {
                     @Override
                     public void granted() {
-                        if (hasSdcard()){
+                        if (hasSdcard()) {
                             imageUri = Uri.fromFile(fileUri);
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                                imageUri = FileProvider.getUriForFile(ProjectAccidentDescActivity.this,"com.cykj.survey.fileprovider",fileUri);
-                                PhotoUtils.takePicture(ProjectAccidentDescActivity.this,imageUri,CODE_CAMERA_REQUEST);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                imageUri = FileProvider.getUriForFile(ProjectAccidentDescActivity.this, "com.cykj.survey.fileprovider", fileUri);
+                                PhotoUtils.takePicture(ProjectAccidentDescActivity.this, imageUri, CODE_CAMERA_REQUEST);
                             }
-                        }else {
-                            Toast.makeText(ProjectAccidentDescActivity.this,"设备没有SD卡！",Toast.LENGTH_SHORT).show();
-                            Log.e("erro","设备没有SD卡！");
+                        } else {
+                            Toast.makeText(ProjectAccidentDescActivity.this, "设备没有SD卡！", Toast.LENGTH_SHORT).show();
+                            Log.e("erro", "设备没有SD卡！");
                         }
                     }
 
@@ -192,42 +201,42 @@ public class ProjectAccidentDescActivity extends BaseFragmentActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK){
-            switch (requestCode){
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
                 //拍照完成回调
                 case CODE_CAMERA_REQUEST:
-                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(imageUri,ProjectAccidentDescActivity.this);
-                    if (bitmap != null){
-                        switch (terget){
+                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(imageUri, ProjectAccidentDescActivity.this);
+                    if (bitmap != null) {
+                        switch (terget) {
                             case "site":
-                                projectAccidentSiteImg.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
+                                projectAccidentSiteImg.setImageBitmap(ImgUtil.zoomImg(bitmap, 200, 300));
                                 break;
                             case "surroundings":
-                                projectAccidentSurroundingsImg.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
+                                projectAccidentSurroundingsImg.setImageBitmap(ImgUtil.zoomImg(bitmap, 200, 300));
                                 break;
                         }
                     }
                     break;
                 //访问相册回调
                 case CODE_GALLERY_REQUEST:
-                    if (hasSdcard()){
-                        String str = PhotoUtils.getPath(this,data.getData());
+                    if (hasSdcard()) {
+                        String str = PhotoUtils.getPath(this, data.getData());
                         Uri newUri = Uri.parse(str);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                            newUri = FileProvider.getUriForFile(this,"com.cykj.survey.fileprovider",new File(newUri.getPath()));
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            newUri = FileProvider.getUriForFile(this, "com.cykj.survey.fileprovider", new File(newUri.getPath()));
                         }
-                        Bitmap bitmap1 = PhotoUtils.getBitmapFromUri(newUri,ProjectAccidentDescActivity.this);
-                        if (bitmap1 != null){
-                            switch (terget){
+                        Bitmap bitmap1 = PhotoUtils.getBitmapFromUri(newUri, ProjectAccidentDescActivity.this);
+                        if (bitmap1 != null) {
+                            switch (terget) {
                                 case "site":
-                                    projectAccidentSiteImg.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
+                                    projectAccidentSiteImg.setImageBitmap(ImgUtil.zoomImg(bitmap1, 200, 300));
                                     break;
                                 case "surroundings":
-                                    projectAccidentSurroundingsImg.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
+                                    projectAccidentSurroundingsImg.setImageBitmap(ImgUtil.zoomImg(bitmap1, 200, 300));
                                     break;
                             }
                         }
-                    }else {
+                    } else {
                         Toast.makeText(this, "设备没有SD卡!", Toast.LENGTH_SHORT).show();
                     }
                     break;

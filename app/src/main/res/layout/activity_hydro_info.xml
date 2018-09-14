@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/app_primary_color">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/qmui_config_color_white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="水电站信息"
+                    android:textColor="#666666" />
+            </FrameLayout>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/hydro_edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="水电站名称"
+                android:textSize="14sp"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <RelativeLayout
+                android:id="@+id/hydro_area_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/hydro_area_select_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="请选择企业所在区域"
+                    android:textColor="#ababab"
+                    android:textSize="14sp"
+                    android:clickable="false"/>
+
+            </RelativeLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/hydro_edit_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="请输入详细地址"
+                android:textSize="14sp"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="水电站形式"
+                    android:textColor="#666666" />
+            </FrameLayout>
+
+            <RelativeLayout
+                android:id="@+id/hydro_form_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/hydro_form_select_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="请选择水电站形式"
+                    android:textColor="#ababab"
+                    android:textSize="14sp"
+                    android:clickable="false"/>
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="大坝类型"
+                    android:textColor="#666666" />
+            </FrameLayout>
+
+            <RelativeLayout
+                android:id="@+id/hydro_dam_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/hydro_dam_type_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="请选择水电站形式"
+                    android:textColor="#ababab"
+                    android:textSize="14sp"
+                    android:clickable="false"/>
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="电站开开发主要用途"
+                    android:textColor="#666666" />
+            </FrameLayout>
+
+            <RelativeLayout
+                android:id="@+id/hydro_purpose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/hydro_purpose_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="请选择水电站形式"
+                    android:textColor="#ababab"
+                    android:textSize="14sp"
+                    android:clickable="false"/>
+            </RelativeLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/hydro_edit_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="请输入水电站投产年限"
+                android:textSize="14sp"
+                android:inputType="number"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/hydro_edit_crew_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="请输入水电站机组数量"
+                android:textSize="14sp"
+                android:inputType="number"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
+
+            <RelativeLayout
+                android:id="@+id/hydro_crew_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/hydro_crew_type_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="请选择机组样式"
+                    android:textColor="#ababab"
+                    android:textSize="14sp"
+                    android:clickable="false"/>
+            </RelativeLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/hydro_edit_capacity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="请输入单机容量"
+                android:textSize="14sp"
+                android:inputType="number"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/accident_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/edit_shape"
+                    android:inputType="textImeMultiLine"
+                    android:minLines="8"
+                    android:maxLines="10"
+                    android:scrollbars="vertical"
+                    android:gravity="top"
+                    android:hint="大坝及取水口简单描述"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>
