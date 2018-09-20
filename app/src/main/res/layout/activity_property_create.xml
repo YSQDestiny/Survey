@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/app_primary_color">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/qmui_config_color_white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="项目信息"
+                    android:textColor="#666666" />
+
+            </FrameLayout>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="项目名称"
+                android:textSize="14sp"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <RelativeLayout
+                android:id="@+id/property_area_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/property_area_select_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="请选择项目所在区域"
+                    android:textColor="#ababab"
+                    android:textSize="14sp"
+                    android:clickable="false"/>
+
+            </RelativeLayout>
+            
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_town"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textSize="14sp"
+                android:hint="项目所在乡镇"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_addr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="项目详细地址"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <RelativeLayout
+                android:id="@+id/property_date_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/property_date_select_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="项目建成时间"
+                    android:textColor="#ababab"
+                    android:textSize="14sp"
+                    android:clickable="false"/>
+
+            </RelativeLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_acreage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="占地面积(平方米)"
+                android:inputType="numberDecimal"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_residence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="住宅"
+                android:inputType="number"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_shops"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="商铺"
+                android:inputType="number"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_household"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="住户"
+                android:inputType="number"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_tenant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="租户"
+                android:inputType="number"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_charge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="物业收费标准(每平方米)"
+                android:inputType="number"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_ground_parking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="地面停车位"
+                android:inputType="number"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_underground_parking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="地下停车位"
+                android:inputType="number"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="配套设备"
+                    android:textColor="#666666" />
+
+                <TextView
+                    android:id="@+id/property_add_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="2dp"
+                    android:text="添加"
+                    android:textColor="?attr/app_primary_color"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/property_recview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+            </android.support.v7.widget.RecyclerView>
+
+            <RelativeLayout
+                android:id="@+id/tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="如有配套设备请点击“添加”按钮添加"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:textColor="#666666"/>
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="公司信息"
+                    android:textColor="#666666" />
+
+            </FrameLayout>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_company_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textSize="14sp"
+                android:hint="公司名称"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <RelativeLayout
+                android:id="@+id/property_company_date_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/property_company_date_select_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="工商注册时间"
+                    android:textColor="#ababab"
+                    android:textSize="14sp"
+                    android:clickable="false"/>
+
+            </RelativeLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_company_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textSize="14sp"
+                android:hint="工商注册地址"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_company_capital"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textSize="14sp"
+                android:hint="注册资金(万元)"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <RelativeLayout
+                android:id="@+id/property_enter_date_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/property_enter_date_select_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="项目开始服务时间"
+                    android:textColor="#ababab"
+                    android:textSize="14sp"
+                    android:clickable="false"/>
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="委托方"
+                    android:textColor="#666666" />
+
+            </FrameLayout>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_client"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="委托方"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_client_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="委托方联系人"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true" />
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/property_edit_client_contact_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="委托方联系人电话"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
