@@ -14,9 +14,11 @@ public class Constants {
 
 //    public final static String TEST_SERVICE = "http://192.168.199.167:8080/CYKJ";
 
-    public static Long REPORT_ID;
+    public static   Long REPORT_ID;
 
     public static Long PROJECT_ID;
+
+    public static Long PROPERTY_ID;
 
     public void setProjectId(Long projectId){
         this.PROJECT_ID = projectId;
@@ -24,6 +26,10 @@ public class Constants {
 
     public void setReportId(Long reportId){
         this.REPORT_ID = reportId;
+    }
+
+    public void setPropertyId(Long PROPERTY_ID){
+        this.PROPERTY_ID = PROPERTY_ID;
     }
 
     public static List<ProjectAccident> projectAccidentList = new ArrayList<>();

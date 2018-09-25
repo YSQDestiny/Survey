@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/app_primary_color"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/qmui_config_color_white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="扣分："
+                        android:layout_gravity="center_vertical"/>
+
+                    <Spinner
+                        android:id="@+id/property_option_spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_gravity="center_vertical">
+                    </Spinner>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp">
+
+                    <TextView
+                        android:id="@+id/property_option_missingitem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="缺项"
+                        android:textSize="16sp"
+                        android:textColor="@color/qmui_config_color_red"
+                        android:layout_gravity="center_vertical"/>
+
+                    <TextView
+                        android:id="@+id/property_option_reson"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="原因"
+                        android:textSize="16sp"
+                        android:textColor="@color/qmui_config_color_red"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="16dp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="详细内容"
+                    android:textColor="#6D727C"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:textSize="14sp"/>
+
+            </RelativeLayout>
+
+            <com.cykj.survey.view.NoScrollListview
+                android:id="@+id/property_option_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.cykj.survey.view.NoScrollListview>
+
+        </LinearLayout>
+
+
+
+
+
+    </ScrollView>
+
+</LinearLayout>

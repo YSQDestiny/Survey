@@ -3,6 +3,7 @@ package com.cykj.survey.activity.property;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,11 +18,18 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.MainActivity;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
 import com.cykj.survey.fragment.adapter.EquipmentAdapter;
 import com.cykj.survey.model.Equipment;
+import com.cykj.survey.model.Property;
+import com.cykj.survey.model.ResultModel;
+import com.cykj.survey.util.DateUtil;
+import com.cykj.survey.util.DeviceUtils;
+import com.cykj.survey.util.Utils;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
 import com.lljjcoder.bean.DistrictBean;
@@ -33,12 +41,24 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import org.jsoup.helper.DataUtil;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class CreatePropertyActivity extends BaseFragmentActivity {
 
@@ -185,10 +205,13 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
     @BindView(R.id.property_edit_client_contact_phone)
     MaterialEditText propertyEditClientContactPhone;
 
-    private Calendar cal;
+    private Calendar cal = new GregorianCalendar();
     private int year,month,day;
 
     private CityPickerView mPicker = new CityPickerView();
+    private Property property = new Property();
+
+    private Handler handler;
 
     @Override
     protected int getContextViewId() {
@@ -200,6 +223,7 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property_create);
         ButterKnife.bind(this);
+        handler = new Handler();
         getDate();
         mPicker.init(this);
         initTopbar();
@@ -224,7 +248,7 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
                             showToastShort("省份信息获取失败");
                             return;
                         } else {
-
+                            property.setProvince(province.getName());
                         }
 
                         //城市
@@ -232,7 +256,7 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
                             showToastShort("城市信息获取失败");
                             return;
                         } else {
-
+                            property.setCity(city.getName());
                         }
 
                         //地区
@@ -240,7 +264,7 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
                             showToastShort("地区信息获取失败");
                             return;
                         } else {
-
+                            property.setCounty(district.getName());
                         }
 
                         propertyAreaSelectText.setText(province.getName() + "-" + city.getName() + "-" + district.getName());
@@ -388,19 +412,19 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CreatePropertyActivity.this,PropertyUploadActivity.class);
-                startActivity(intent);
-                finish();
+                postProperty();
             }
         });
     }
 
     //获取当前日期
     private void getDate() {
+        year=cal.get(Calendar.YEAR);
+        //获取年月日时分秒
         cal=Calendar.getInstance();
-        year=cal.get(Calendar.YEAR);       //获取年月日时分秒
+        month=cal.get(Calendar.MONTH);
+        //获取到的月份是从0开始计数
         Log.i("wxy","year"+year);
-        month=cal.get(Calendar.MONTH);   //获取到的月份是从0开始计数
         day=cal.get(Calendar.DAY_OF_MONTH);
     }
 
@@ -419,4 +443,134 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
         isNull = false;
         return true;
     }
+
+    private void postProperty(){
+        String url = Constants.TEST_SERVICE + "/property/postProperty";
+        if (editVerify(propertyEditName)){
+            property.setName(propertyEditName.getText().toString());
+        }
+        if (editVerify(propertyEditAddr)){
+            property.setAddress(propertyEditAddr.getText().toString());
+        }
+        if (propertyDateSelectText.equals("项目建成时间")){
+            showToastShort("请选择项目建成时间");
+            return;
+        }else {
+            property.setCreateDate(propertyDateSelectText.getText().toString());
+        }
+        if (editVerify(propertyEditAcreage)){
+            property.setAcreage(propertyEditAcreage.getText().toString());
+        }
+        if (editVerify(propertyEditResidence)){
+            property.setResidence(propertyEditResidence.getText().toString());
+        }
+        if (editVerify(propertyEditShops)){
+            property.setShops(propertyEditShops.getText().toString());
+        }
+        if (editVerify(propertyEditHousehold)){
+            property.setHousehold(propertyEditHousehold.getText().toString());
+        }
+        if (editVerify(propertyEditTenant)){
+            property.setTenant(propertyEditTenant.getText().toString());
+        }
+        if (editVerify(propertyEditCharge)){
+            property.setCharge(propertyEditCharge.getText().toString());
+        }
+        if (editVerify(propertyEditGroundParking)){
+            property.setGroundParking(propertyEditGroundParking.getText().toString());
+        }
+        if (editVerify(propertyEditUndergroundParking)){
+            property.setUnderGroundParkting(propertyEditGroundParking.getText().toString());
+        }
+        if (equipmentList != null || equipmentList.size() > 0){
+            property.setEquiment(JSONObject.toJSONString(equipmentList));
+        }
+        if (editVerify(propertyEditCompanyName)){
+            property.setCompanyName(propertyEditCompanyName.getText().toString());
+        }
+        if (propertyCompanyDateSelectText.equals("工商注册时间")){
+            showToastShort("请选择工商注册时间");
+            return;
+        }else {
+            property.setCompanyDate(propertyCompanyDateSelectText.getText().toString());
+        }
+        if (editVerify(propertyEditCompanyRegister)){
+            property.setCompanyAddr(propertyEditCompanyRegister.getText().toString());
+        }
+        if (editVerify(propertyEditCompanyCapital)){
+            property.setCapital(propertyEditCompanyCapital.getText().toString());
+        }
+        if (propertyEnterDateSelectText.equals("项目开始服务时间")){
+            showToastShort("请选择项目开始服务时间");
+            return;
+        }else {
+            property.setEnterDate(propertyEnterDateSelectText.getText().toString());
+        }
+        if(editVerify(propertyEditClient)){
+            property.setClient(propertyEditClient.getText().toString());
+        }
+        if (editVerify(propertyEditClientContact)){
+            property.setClientContact(propertyEditClientContact.getText().toString());
+        }
+        if (editVerify(propertyEditClientContactPhone)){
+            property.setClientPhone(propertyEditClientContactPhone.getText().toString());
+        }
+        property.setUniqueId(DeviceUtils.getUniqueId(this));
+        property.setMakeTime(DateUtil.parseToSQLDate(new Date(),DateUtil.yyyyMMddHHmmss));
+        if (isNull){
+            return;
+        }else{
+            String json = JSONObject.toJSONString(property);
+
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody body = new FormBody.Builder()
+                    .add("json",json)
+                    .build();
+
+            final Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String resultStr = response.body().string();
+                    ResultModel result = JSONObject.parseObject(resultStr,ResultModel.class);
+                    if (result.getCode() == 0){
+                        handler.post(seccessRun);
+                        Constants constants = new Constants();
+                        constants.setPropertyId(Long.parseLong(result.getData()));
+                        Intent intent = new Intent(CreatePropertyActivity.this,PropertyUploadActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                        handler.post(failRun);
+                        return;
+                    }
+                }
+            });
+
+        }
+    }
+
+    Runnable seccessRun = new Runnable() {
+        @Override
+        public void run() {
+            showToastShort("保存成功");
+        }
+    };
+
+    Runnable failRun = new Runnable() {
+        @Override
+        public void run() {
+            showToastShort("保存失败");
+        }
+    };
 }

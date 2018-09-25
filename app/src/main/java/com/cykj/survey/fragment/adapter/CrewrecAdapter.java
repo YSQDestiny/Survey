@@ -13,7 +13,7 @@ import com.cykj.survey.model.Crew;
 
 import java.util.List;
 
-public class CrewrecAdapter extends RecyclerView.Adapter<MyviewHolder>{
+public class CrewrecAdapter extends RecyclerView.Adapter<CrewrecAdapter.MyviewHolder>{
 
     private List<Crew> mData;
     private Context mContext;
@@ -43,16 +43,17 @@ public class CrewrecAdapter extends RecyclerView.Adapter<MyviewHolder>{
     public int getItemCount() {
         return mData.size();
     }
-}
 
-class MyviewHolder extends RecyclerView.ViewHolder{
+    class MyviewHolder extends RecyclerView.ViewHolder{
 
-    TextView power;
-    TextView count;
+        TextView power;
+        TextView count;
 
-    public MyviewHolder(View itemView) {
-        super(itemView);
-        power = itemView.findViewById(R.id.crewrec_power);
-        count = itemView.findViewById(R.id.crewrec_count);
+        public MyviewHolder(View itemView) {
+            super(itemView);
+            power = itemView.findViewById(R.id.crewrec_power);
+            count = itemView.findViewById(R.id.crewrec_count);
+        }
     }
 }
+

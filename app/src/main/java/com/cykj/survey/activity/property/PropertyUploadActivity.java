@@ -135,7 +135,9 @@ public class PropertyUploadActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(PropertyUploadActivity.this,PropertyAreaActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
