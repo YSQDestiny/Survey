@@ -1,25 +1,22 @@
 package com.cykj.survey.fragment.index;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
+import com.cykj.survey.activity.AreaActivity;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.bean.IndustryBean;
 import com.cykj.survey.bean.Node;
 import com.cykj.survey.bean.SimpleTreeAdapter;
 import com.cykj.survey.bean.TreeListViewAdapter;
-import com.cykj.survey.fragment.industry.TimberProcessingFragment;
-import com.cykj.survey.fragment.industry.WoodenFurnitureFragment;
 import com.cykj.survey.model.Industry;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.JsonUtil;
-import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
@@ -148,19 +145,9 @@ public class IndustryFragment extends BaseFragment{
     }
 
     private void spikFragment(){
-        switch (industry){
-            case "木质家具制造":
-                QMUIFragment fragment = new WoodenFurnitureFragment();
-                startFragmentAndDestroyCurrent(fragment);
-                break;
-            case "木材加工企业":
-                QMUIFragment wood_fragment = new TimberProcessingFragment();
-                startFragmentAndDestroyCurrent(wood_fragment);
-                break;
-            default:
-
-                break;
-        }
+        Intent intent = new Intent(getActivity(), AreaActivity.class);
+        intent.putExtra("industry",industry);
+        getActivity().startActivity(intent);
     }
 
     private void inintData() {

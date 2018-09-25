@@ -20,22 +20,21 @@ import android.widget.Toast;
 import com.cykj.survey.R;
 import com.cykj.survey.activity.AccidentActivity;
 import com.cykj.survey.model.BasicOptions;
+import com.cykj.survey.model.Options;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 
 import java.util.List;
 
 public class BasicOptionAdapter extends RecyclerView.Adapter<BasicOptionAdapter.MyViewHolder>{
 
-    private List<BasicOptions> mDatas;
+    private List<Options> mDatas;
     private Context mContext;
     private LayoutInflater inflater;
-    private QMUIFragment fragment;
 
-    public BasicOptionAdapter(Context mContext,List<BasicOptions> mDatas,QMUIFragment fragment){
+    public BasicOptionAdapter(Context mContext,List<Options> mDatas){
         this.mContext = mContext;
         this.mDatas = mDatas;
         inflater = LayoutInflater.from(mContext);
-        this.fragment = fragment;
     }
 
     @NonNull
@@ -117,9 +116,6 @@ public class BasicOptionAdapter extends RecyclerView.Adapter<BasicOptionAdapter.
         mDatas.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, mDatas.size());
-        if (mDatas.size() == 0){
-            fragment.getBaseFragmentActivity().popBackStack();
-        }
     }
 
     @Override

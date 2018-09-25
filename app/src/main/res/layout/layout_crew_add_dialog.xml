@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/qmui_config_color_white"
+    android:layout_marginLeft="32dp"
+    android:layout_marginRight="32dp">
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/dialog_crew_power"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:hint="请输入机组功率（KW）"
+        android:textSize="14sp"
+        android:inputType="number"
+        app:met_primaryColor="?attr/app_primary_color"
+        app:met_floatingLabel="highlight"
+        app:met_clearButton= "true" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/dialog_crew_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:hint="请输入机组数量"
+        android:textSize="14sp"
+        android:inputType="number"
+        app:met_primaryColor="?attr/app_primary_color"
+        app:met_floatingLabel="highlight"
+        app:met_clearButton= "true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/crew_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="   确认   "
+            app:qmui_radius="5dp"
+            android:layout_marginLeft="32dp"/>
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/crew_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="   取消   "
+            app:qmui_radius="5dp"
+            android:layout_marginRight="32dp"
+            app:qmui_borderColor="@color/qmui_config_color_red"
+            android:textColor="@color/qmui_config_color_red"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

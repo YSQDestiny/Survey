@@ -22,7 +22,6 @@ public abstract class BaseFragmentActivity extends QMUIFragmentActivity{
 
     private final int mRequestCode = 1024;
     private RequestPermissionCallBack mRequestPermissionCallBack;
-    private QMUITipDialog tipDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,18 +164,6 @@ public abstract class BaseFragmentActivity extends QMUIFragmentActivity{
 
     public void showToastLong(String msg){
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
-    }
-
-    public void showTipDialog(String msg,int icon_type){
-        tipDialog = new QMUITipDialog.Builder(this)
-                .setIconType(icon_type)
-                .setTipWord(msg)
-                .create();
-        tipDialog.show();
-    }
-
-    public void tipDialogDismiss(){
-        tipDialog.dismiss();
     }
 
 }

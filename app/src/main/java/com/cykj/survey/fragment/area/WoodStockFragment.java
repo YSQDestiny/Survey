@@ -6,10 +6,6 @@ import android.widget.Toast;
 
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
-import com.cykj.survey.fragment.options.timber_processing.WoodDangerFragment;
-import com.cykj.survey.fragment.options.timber_processing.WoodMaterialFragment;
-import com.cykj.survey.fragment.options.timber_processing.WoodSpareFragment;
-import com.cykj.survey.fragment.options.timber_processing.WoodWasteFragment;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
@@ -58,27 +54,6 @@ public class WoodStockFragment extends BaseFragment {
             public void onClick(View v) {
                 if (v instanceof QMUICommonListItemView){
                     CharSequence str = ((QMUICommonListItemView) v).getText();
-                    switch (str.toString()){
-                        case "成品、木料堆场":
-                            QMUIFragment wood_material = new WoodMaterialFragment();
-                            startFragment(wood_material);
-                            break;
-                        case "危化品库、储罐":
-                            QMUIFragment wood_danger = new WoodDangerFragment();
-                            startFragment(wood_danger);
-                            break;
-                        case "危废库":
-                            QMUIFragment wood_waste = new WoodWasteFragment();
-                            startFragment(wood_waste);
-                            break;
-                        case "备品备件库":
-                            QMUIFragment wood_spare = new WoodSpareFragment();
-                            startFragment(wood_spare);
-                            break;
-                        default:
-                            Toast.makeText(getActivity(),"该页面还在施工中",Toast.LENGTH_LONG).show();
-                            break;
-                    }
                 }
             }
         };

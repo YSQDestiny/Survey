@@ -335,8 +335,8 @@ public class AccidentActivity extends BaseFragmentActivity {
                 .create(mCurrentDialogStyle).show();
     }
 
-    private void        postAccident(){
-        showTipDialog("请稍等...", QMUITipDialog.Builder.ICON_TYPE_LOADING);
+    private void postAccident(){
+
         String url = Constants.TEST_SERVICE + "/accident/postAccident";
 
         OkHttpClient client = new OkHttpClient();
@@ -397,7 +397,6 @@ public class AccidentActivity extends BaseFragmentActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                tipDialogDismiss();
                 ResultModel result = JSONObject.parseObject(response.body().string(), ResultModel.class);
                 if (result.getCode() == 0) {
                     finish();

@@ -5,6 +5,7 @@ import com.cykj.survey.fragment.index.BusinessFragment;
 import com.cykj.survey.fragment.index.HydropowerFragment;
 import com.cykj.survey.fragment.index.ProjectFragment;
 import com.cykj.survey.fragment.index.ProjectListFragment;
+import com.cykj.survey.fragment.index.PropertyListFragment;
 import com.cykj.survey.fragment.index.ReportListFragment;
 import com.cykj.survey.fragment.utils.BillFragment;
 import com.cykj.survey.model.ItemDescription;
@@ -48,6 +49,7 @@ public class DataManager {
         mHomeNames.add(ReportListFragment.class);
         mHomeNames.add(HydropowerFragment.class);
         mHomeNames.add(ProjectListFragment.class);
+        mHomeNames.add(PropertyListFragment.class);
     }
 
     public ItemDescription getDescription(Class<? extends BaseFragment> cls) {

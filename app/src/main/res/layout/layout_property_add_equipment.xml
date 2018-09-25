@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/qmui_config_color_white"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/equipment_edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="设施名称"
+        app:met_primaryColor="?attr/app_primary_color"
+        app:met_floatingLabel="highlight"
+        app:met_clearButton= "true" />
+
+    <Spinner
+        android:id="@+id/equipment_spinner"
+        style="@style/Base.Widget.AppCompat.DropDownItem.Spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+    </Spinner>
+
+    <RelativeLayout style="@style/button_wrapper_style">
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/equipment_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="   确认   "
+            app:qmui_radius="5dp"
+            android:layout_marginLeft="32dp"/>
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/equipment_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="   取消   "
+            app:qmui_radius="5dp"
+            android:layout_marginRight="32dp"
+            app:qmui_borderColor="@color/qmui_config_color_red"
+            android:textColor="@color/qmui_config_color_red"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

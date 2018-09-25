@@ -6,11 +6,6 @@ import android.widget.Toast;
 
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
-import com.cykj.survey.fragment.options.wooden_furniture.CuttingFragment;
-import com.cykj.survey.fragment.options.wooden_furniture.DryOptionsFragment;
-import com.cykj.survey.fragment.options.wooden_furniture.DustRemovalFragment;
-import com.cykj.survey.fragment.options.wooden_furniture.GrindingFragment;
-import com.cykj.survey.fragment.options.wooden_furniture.SprayingOptionsFragment;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
@@ -60,29 +55,6 @@ public class ProduceFragment extends BaseFragment {
                 if (v instanceof QMUICommonListItemView){
                     CharSequence str = ((QMUICommonListItemView) v).getText();
                     switch (str.toString()){
-                        case "喷涂区":
-                            QMUIFragment sprayingOptionsFragmentfragment = new SprayingOptionsFragment();
-                            startFragment(sprayingOptionsFragmentfragment);
-                            break;
-                        case "干燥区":
-                            QMUIFragment dryOptionsFragment = new DryOptionsFragment();
-                            startFragment(dryOptionsFragment);
-                            break;
-                        case "切割拼装区":
-                            QMUIFragment cuttingFragment = new CuttingFragment();
-                            startFragment(cuttingFragment);
-                            break;
-                        case "打磨区":
-                            QMUIFragment grindingFragment = new GrindingFragment();
-                            startFragment(grindingFragment);
-                            break;
-                        case "除尘系统":
-                            QMUIFragment dustRemovalFragment = new DustRemovalFragment();
-                            startFragment(dustRemovalFragment);
-                            break;
-                        default:
-                            Toast.makeText(getActivity(),"该页面还在施工中",Toast.LENGTH_LONG).show();
-                            break;
                     }
                 }
             }

@@ -136,8 +136,15 @@ public class HomeFragment extends BaseFragment {
         super.onDestroyView();
     }
 
+
     enum Pager{
-        HOME,UTIL,OTHER;
+
+        /**
+         *
+         */
+        HOME,
+        UTIL,
+        OTHER;
 
         public static Pager getPagerFromPositon(int position){
             switch (position){
