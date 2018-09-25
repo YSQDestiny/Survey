@@ -15,6 +15,7 @@ import com.cykj.survey.R;
 import com.cykj.survey.activity.AccidentActivity;
 import com.cykj.survey.base.BaseFragmentActivity;
 import com.cykj.survey.fragment.adapter.PropertyOptionListAdapter;
+import com.cykj.survey.model.Deduction;
 import com.cykj.survey.model.PropertyArea;
 import com.cykj.survey.model.PropertyOption;
 import com.cykj.survey.model.ResultModel;
@@ -57,6 +58,8 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
 
     private PropertyOptionListAdapter adapter;
 
+    private PropertyArea area;
+
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
     @Override
@@ -72,7 +75,7 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
         handler = new Handler();
         Intent intent = getIntent();
         String str = intent.getStringExtra("area");
-        PropertyArea area = JSONObject.parseObject(str,PropertyArea.class);
+        area = JSONObject.parseObject(str,PropertyArea.class);
         initTopbar();
         getPropertyOption(area.getName());
         setPoint(area.getSinglePoint());
@@ -206,24 +209,34 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
                 .create(mCurrentDialogStyle).show();
     }
 
+    private void setDeduction(){
+        Deduction deduction = new Deduction();
+        deduction.setDeduction(Integer.parseInt(propertyOptionSpinner.getSelectedItem().toString()));
+        deduction.setArea(area.getName());
+        deduction.setMissing(isMissing);
+
+    }
+
     /**
      * 缺项分输入框
      */
-    private int missingPoint = 0;
+    private boolean isMissing = false;
     private void showMissingPointDialog(){
         new QMUIDialog.MessageDialogBuilder(this)
                 .setTitle("提示")
                 .setMessage("确定完成当前评定项目为缺项吗？")
-                .addAction("取消", new QMUIDialogAction.ActionListener() {
+                .addAction("否", new QMUIDialogAction.ActionListener() {
                     @Override
                     public void onClick(QMUIDialog dialog, int index) {
                         dialog.dismiss();
+                        isMissing = false;
                     }
                 })
-                .addAction("确定", new QMUIDialogAction.ActionListener() {
+                .addAction("是", new QMUIDialogAction.ActionListener() {
                     @Override
                     public void onClick(QMUIDialog dialog, int index) {
                         dialog.dismiss();
+                        isMissing = true;
                     }
                 })
                 .create(mCurrentDialogStyle).show();
