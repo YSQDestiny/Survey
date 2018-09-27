@@ -46,8 +46,9 @@ public class ProjectAccidentDescActivity extends BaseFragmentActivity {
     ImageView projectAccidentSurroundingsImg;
     @BindView(R.id.project_accident_type)
     EditText projectAccidentType;
-    @BindView(R.id.project_accident_suggetion)
-    EditText projectAccidentSuggetion;
+    @BindView(R.id.project_accident_suggestion)
+    EditText projectAccidentSuggestion;
+
 
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
@@ -80,7 +81,7 @@ public class ProjectAccidentDescActivity extends BaseFragmentActivity {
             projectAccidentName.setText(accident.getName());
             projectAccidentEdit.setText(accident.getInstructions());
             projectAccidentType.setText(accident.getType());
-            projectAccidentSuggetion.setText(accident.getSuggestion());
+            projectAccidentSuggestion.setText(accident.getSuggestion());
             projectAccidentSiteImg.setImageBitmap(ImgUtil.base64ToBitmap(accident.getSitePhoto()));
             projectAccidentSurroundingsImg.setImageBitmap(ImgUtil.base64ToBitmap(accident.getSurroundingsPhoto()));
         }
@@ -119,7 +120,7 @@ public class ProjectAccidentDescActivity extends BaseFragmentActivity {
         accident.setName(projectAccidentName.getText().toString());
         accident.setInstructions(projectAccidentEdit.getText().toString());
         accident.setType(projectAccidentType.getText().toString());
-        accident.setSuggestion(projectAccidentSuggetion.getText().toString());
+        accident.setSuggestion(projectAccidentSuggestion.getText().toString());
         projectAccidentSiteImg.setDrawingCacheEnabled(true);
         accident.setSitePhoto(ImgUtil.bitmapToBase64(projectAccidentSiteImg.getDrawingCache()));
         projectAccidentSurroundingsImg.setDrawingCacheEnabled(true);
@@ -146,7 +147,6 @@ public class ProjectAccidentDescActivity extends BaseFragmentActivity {
                 })
                 .create(mCurrentDialogStyle).show();
     }
-
 
 
     @Override

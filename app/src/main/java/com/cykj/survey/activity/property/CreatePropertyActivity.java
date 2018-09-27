@@ -415,6 +415,12 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
                 postProperty();
             }
         });
+        topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     //获取当前日期

@@ -76,22 +76,6 @@
             <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/property_edit_town"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:textSize="14sp"
-                android:hint="项目所在乡镇"
-                app:met_primaryColor="?attr/app_primary_color"
-                app:met_floatingLabel="highlight"
-                app:met_clearButton= "true"
-                app:met_hideUnderline="true"/>
-
-            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
-
-            <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/property_edit_addr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -222,7 +206,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:hint="物业收费标准(每平方米)"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
                 app:met_clearButton= "true"

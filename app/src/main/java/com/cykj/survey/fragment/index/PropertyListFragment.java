@@ -13,7 +13,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.activity.ReportDetailsActivity;
+import com.cykj.survey.activity.project.ProjectReportDetailAccivyty;
 import com.cykj.survey.activity.property.CreatePropertyActivity;
+import com.cykj.survey.activity.property.ProertyDetailActivirt;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.fragment.adapter.ProPertyAdapter;
 import com.cykj.survey.fragment.adapter.PropertyAreaAdapter;
@@ -135,7 +137,9 @@ public class PropertyListFragment extends BaseFragment {
             adapter.setOnItemClickListener(new ProPertyAdapter.OnItemClickListener() {
                 @Override
                 public void onClick(int position) {
-
+                    Intent intent = new Intent(getActivity(), ProertyDetailActivirt.class);
+                    intent.putExtra("id",properties.get(position).getId().toString());
+                    startActivity(intent);
                 }
 
                 @Override

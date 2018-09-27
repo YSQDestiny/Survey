@@ -170,7 +170,6 @@ public class IndustryFragment extends BaseFragment{
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
     }
 
 }

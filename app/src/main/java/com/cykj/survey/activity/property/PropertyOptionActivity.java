@@ -203,6 +203,7 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
                     @Override
                     public void onClick(QMUIDialog dialog, int index) {
                         dialog.dismiss();
+                        setDeduction();
                         finish();
                     }
                 })
@@ -211,10 +212,14 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
 
     private void setDeduction(){
         Deduction deduction = new Deduction();
-        deduction.setDeduction(Integer.parseInt(propertyOptionSpinner.getSelectedItem().toString()));
+        if (isMissing){
+            deduction.setDeduction(area.getSinglePoint());
+        }else {
+            deduction.setDeduction(Integer.parseInt(propertyOptionSpinner.getSelectedItem().toString()));
+        }
         deduction.setArea(area.getName());
         deduction.setMissing(isMissing);
-
+        Constants.addDeduction(deduction);
     }
 
     /**

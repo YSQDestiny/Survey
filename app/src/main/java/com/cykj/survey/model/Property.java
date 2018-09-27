@@ -109,6 +109,11 @@ public class Property {
     private Date makeTime;
 
     /**
+     * 扣分
+     */
+    private String deduction;
+
+    /**
      * 三张照片
      */
     private String businessPhoto;
@@ -345,5 +350,13 @@ public class Property {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDeduction() {
+        return deduction;
+    }
+
+    public void setDeduction(String deduction) {
+        this.deduction = deduction;
     }
 }

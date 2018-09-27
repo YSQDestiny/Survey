@@ -140,6 +140,12 @@ public class PropertyUploadActivity extends BaseFragmentActivity {
                 finish();
             }
         });
+        topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 

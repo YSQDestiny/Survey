@@ -26,6 +26,7 @@ import com.cykj.survey.base.BaseFragmentActivity;
 import com.cykj.survey.fragment.adapter.AccidentGridAdapter;
 import com.cykj.survey.model.Accident;
 import com.cykj.survey.model.AccidentGridModel;
+import com.cykj.survey.model.PropertyAccident;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.ImgUtil;
 import com.cykj.survey.util.PhotoUtils;
@@ -98,6 +99,8 @@ public class AccidentActivity extends BaseFragmentActivity {
     private Uri imageUri;
     private String terget;
 
+    private String temp;
+
     @Override
     protected int getContextViewId() {
         return R.id.activity_accident;
@@ -108,6 +111,8 @@ public class AccidentActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_accident_description);
         ButterKnife.bind(this);
+        Intent intent = getIntent();
+        temp = intent.getStringExtra("target");
         initTopbar();
         initData();
 
@@ -267,7 +272,11 @@ public class AccidentActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("完成", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postAccident();
+                if (temp != null & temp.equals("property")){
+                    postPropertyAccident();
+                }else {
+                    postAccident();
+                }
             }
         });
 
@@ -382,6 +391,76 @@ public class AccidentActivity extends BaseFragmentActivity {
 
         RequestBody body = new FormBody.Builder()
                 .add("accident", JSONObject.toJSONString(accident))
+                .build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                ResultModel result = JSONObject.parseObject(response.body().string(), ResultModel.class);
+                if (result.getCode() == 0) {
+                    finish();
+                }
+            }
+        });
+    }
+
+    private void postPropertyAccident(){
+        PropertyAccident propertyAccident = new PropertyAccident();
+
+        String url = Constants.TEST_SERVICE + "/property/postAccident";
+
+        OkHttpClient client = new OkHttpClient();
+
+        propertyAccident.setPropertyId(Constants.PROPERTY_ID);
+        propertyAccident.setInstructions(accidentEdit.getText().toString());
+        String accidentType = "";
+        if (typeMap.size() != 0) {
+            int i = 0;
+            for (String type : typeMap.values()) {
+                if (i == 0) {
+                    accidentType += type;
+                    i++;
+                } else {
+                    accidentType += "," + type;
+                }
+            }
+        }
+        propertyAccident.setResult(accidentResultSpinner.getSelectedItem().toString());
+        propertyAccident.setType(accidentType);
+        accidentSiteImg.setDrawingCacheEnabled(true);
+        propertyAccident.setSitePhoto(ImgUtil.bitmapToBase64(accidentSiteImg.getDrawingCache()));
+        accidentSurroundingsImg.setDrawingCacheEnabled(true);
+        propertyAccident.setSurroundingsPhoto(ImgUtil.bitmapToBase64(accidentSurroundingsImg.getDrawingCache()));
+        double D = possibilityPoint * frequenciesPoint * resultPoint;
+        if (D > 320){
+            propertyAccident.setLevel("1");
+            propertyAccident.setLevelDes("极其危险，不能继续作业");
+        }else if (D > 160 & D <= 320){
+            propertyAccident.setLevel("2");
+            propertyAccident.setLevelDes("高度危险，要立即整改");
+        }else if (D > 10 & D <= 160){
+            propertyAccident.setLevel("3");
+            propertyAccident.setLevelDes("显著危险，需要整改");
+        }else if (D > 20 & D <= 70){
+            propertyAccident.setLevel("4");
+            propertyAccident.setLevelDes("一般危险，需要注意");
+        }else if (D > 0 & D <= 20){
+            propertyAccident.setLevel("5");
+            propertyAccident.setLevelDes("稍有危险，可以接受");
+        }
+
+        RequestBody body = new FormBody.Builder()
+                .add("accident", JSONObject.toJSONString(propertyAccident))
                 .build();
 
         Request request = new Request.Builder()
