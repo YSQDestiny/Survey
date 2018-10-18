@@ -40,7 +40,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-@Widget(group = Group.Home, name = "工程险", iconRes = R.mipmap.icon_fragment_engineering)
+@Widget(group = Group.Home, name = "工程", iconRes = R.mipmap.icon_fragment_engineering)
 public class ProjectListFragment extends BaseFragment {
 
 

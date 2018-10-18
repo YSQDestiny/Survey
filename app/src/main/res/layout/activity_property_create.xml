@@ -137,7 +137,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="住宅"
+                android:hint="住宅（栋）"
                 android:inputType="number"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
@@ -154,7 +154,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="商铺"
+                android:hint="商铺（间）"
                 android:inputType="number"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
@@ -171,7 +171,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="住户"
+                android:hint="住户（户）"
                 android:inputType="number"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
@@ -188,7 +188,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="租户"
+                android:hint="租户（户）"
                 android:inputType="number"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
@@ -205,7 +205,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="物业收费标准(每平方米)"
+                android:hint="物业收费标准(元/㎡)"
                 android:inputType="numberDecimal"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
@@ -222,7 +222,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="地面停车位"
+                android:hint="地面停车位（个）"
                 android:inputType="number"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
@@ -239,12 +239,41 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="地下停车位"
+                android:hint="地下停车位（个）"
                 android:inputType="number"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
                 app:met_clearButton= "true"
                 app:met_hideUnderline="true"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="物业类型"
+                    android:textColor="#666666"/>
+
+            </FrameLayout>
+
+            <com.cykj.survey.view.CustomGridView
+                android:id="@+id/grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="4"
+                android:horizontalSpacing="2dp"
+                android:verticalSpacing="3dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+            </com.cykj.survey.view.CustomGridView>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -374,6 +403,7 @@
                 android:layout_marginRight="8dp"
                 android:textSize="14sp"
                 android:hint="注册资金(万元)"
+                android:inputType="numberDecimal"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
                 app:met_clearButton= "true"
@@ -457,6 +487,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:hint="委托方联系人电话"
+                android:inputType="number"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
                 app:met_clearButton= "true"

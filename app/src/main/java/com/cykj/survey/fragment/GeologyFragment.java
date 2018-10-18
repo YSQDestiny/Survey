@@ -487,10 +487,22 @@ public class GeologyFragment extends BaseFragment {
         if (geology1_4.getText().toString().equals("")){
             showToastShort("请输入异常气温出现月份");
             return;
+        }else{
+            int g1_4 = Integer.parseInt(geology1_4.getText().toString());
+            if (g1_4 > 12 | g1_4 <= 0){
+                showToastShort("请输入正确的月份");
+                return;
+            }
         }
         if (geology2_3.getText().toString().equals("")){
             showToastShort("请输入异常降水出现月份");
             return;
+        }else{
+            int g2_3 = Integer.parseInt(geology2_3.getText().toString());
+            if (g2_3 > 12 | g2_3 <= 0){
+                showToastShort("请输入正确的月份");
+                return;
+            }
         }
         if (geology3_1.getSelectedItem().toString().equals("是") & geology3_2.getText().toString().equals("")){
             showToastShort("请输入流域信息");

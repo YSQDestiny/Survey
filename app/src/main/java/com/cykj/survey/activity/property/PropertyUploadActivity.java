@@ -15,9 +15,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.activity.PhotoUploadActivity;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.model.PhotoModel;
+import com.cykj.survey.model.Property;
 import com.cykj.survey.util.ImgUtil;
 import com.cykj.survey.util.PhotoUtils;
 import com.qmuiteam.qmui.widget.QMUITopBar;
@@ -38,8 +42,6 @@ public class PropertyUploadActivity extends BaseFragmentActivity {
     ImageView propertyIndustryImg;
     @BindView(R.id.property_system_leve_img)
     ImageView propertySystemLeveImg;
-    @BindView(R.id.property_upload_button)
-    Button propertyUploadButton;
 
     private static final int CODE_GALLERY_REQUEST = 0xa0;
     private static final int CODE_CAMERA_REQUEST = 0xa1;
@@ -51,6 +53,8 @@ public class PropertyUploadActivity extends BaseFragmentActivity {
 
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
+    private Property property;
+
     @Override
     protected int getContextViewId() {
         return R.id.survey;
@@ -61,6 +65,9 @@ public class PropertyUploadActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property_upload);
         ButterKnife.bind(this);
+        Intent intent = getIntent();
+        String json = intent.getStringExtra("property");
+        property = JSONObject.parseObject(json,Property.class);
         initTopbar();
         initView();
     }
@@ -90,19 +97,6 @@ public class PropertyUploadActivity extends BaseFragmentActivity {
                 showMenuDialog();
             }
         });
-
-        propertyUploadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                upLoadPhoto();
-            }
-        });
-    }
-
-    /**
-     * 上传照片
-     */
-    private void upLoadPhoto() {
 
     }
 
@@ -135,7 +129,27 @@ public class PropertyUploadActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                propertyBusinessImg.setDrawingCacheEnabled(true);
+                String businessPhoto = ImgUtil.bitmapToBase64(ImgUtil.zoomImg(propertyBusinessImg.getDrawingCache(),480,800));
+
+                propertyIndustryImg.setDrawingCacheEnabled(true);
+                String indusrtyPhoto = ImgUtil.bitmapToBase64(ImgUtil.zoomImg(propertyIndustryImg.getDrawingCache(),480,800));
+
+                propertySystemLeveImg.setDrawingCacheEnabled(true);
+                String systemPhoto = ImgUtil.bitmapToBase64(ImgUtil.zoomImg(propertySystemLeveImg.getDrawingCache(),480,800));
+
+                PhotoModel photoModel = new PhotoModel();
+                photoModel.setBusinessPhoto(businessPhoto);
+                photoModel.setIndustryPhoto(indusrtyPhoto);
+                photoModel.setSystemPhoto(systemPhoto);
+
+                Constants.setPhotoModel(photoModel);
+
                 Intent intent = new Intent(PropertyUploadActivity.this,PropertyAreaActivity.class);
+
+                intent.putExtra("property",JSONObject.toJSONString(property));
+
                 startActivity(intent);
                 finish();
             }

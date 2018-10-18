@@ -272,7 +272,7 @@ public class AccidentActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("完成", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (temp != null & temp.equals("property")){
+                if (temp != null){
                     postPropertyAccident();
                 }else {
                     postAccident();

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.RelativeLayout;
@@ -20,16 +21,17 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
-import com.cykj.survey.MainActivity;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.fragment.adapter.AccidentGridAdapter;
 import com.cykj.survey.fragment.adapter.EquipmentAdapter;
+import com.cykj.survey.model.AccidentGridModel;
 import com.cykj.survey.model.Equipment;
 import com.cykj.survey.model.Property;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.DateUtil;
 import com.cykj.survey.util.DeviceUtils;
-import com.cykj.survey.util.Utils;
+import com.cykj.survey.view.CustomGridView;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
 import com.lljjcoder.bean.DistrictBean;
@@ -40,8 +42,6 @@ import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
-
-import org.jsoup.helper.DataUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -80,11 +80,6 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
     @BindView(R.id.property_area_select)
     RelativeLayout propertyAreaSelect;
     /**
-     * 项目所在小镇
-     */
-    @BindView(R.id.property_edit_town)
-    MaterialEditText propertyEditTown;
-    /**
      * 项目详细地址
      */
     @BindView(R.id.property_edit_addr)
@@ -110,62 +105,62 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
     @BindView(R.id.property_edit_residence)
     MaterialEditText propertyEditResidence;
     /**
-     *商铺
+     * 商铺
      */
     @BindView(R.id.property_edit_shops)
     MaterialEditText propertyEditShops;
     /**
-     *住户
+     * 住户
      */
     @BindView(R.id.property_edit_household)
     MaterialEditText propertyEditHousehold;
     /**
-     *租户
+     * 租户
      */
     @BindView(R.id.property_edit_tenant)
     MaterialEditText propertyEditTenant;
     /**
-     *收费标准
+     * 收费标准
      */
     @BindView(R.id.property_edit_charge)
     MaterialEditText propertyEditCharge;
     /**
-     *地面停车位
+     * 地面停车位
      */
     @BindView(R.id.property_edit_ground_parking)
     MaterialEditText propertyEditGroundParking;
     /**
-     *地下停车位
+     * 地下停车位
      */
     @BindView(R.id.property_edit_underground_parking)
     MaterialEditText propertyEditUndergroundParking;
     /**
-     *添加按钮
+     * 添加按钮
      */
     @BindView(R.id.property_add_text)
     TextView propertyAddText;
     /**
-     *展示列表
+     * 展示列表
      */
     @BindView(R.id.property_recview)
     RecyclerView propertyRecview;
     /**
-     *提示信息
+     * 提示信息
      */
     @BindView(R.id.tip)
     RelativeLayout tip;
     /**
-     *公司名称
+     * 公司名称
      */
     @BindView(R.id.property_edit_company_name)
     MaterialEditText propertyEditCompanyName;
     /**
-     *公司成立时间文字
+     * 公司成立时间文字
      */
     @BindView(R.id.property_company_date_select_text)
     TextView propertyCompanyDateSelectText;
     /**
-     *公司成立时间布局
+     * 公司成立时间布局
      */
     @BindView(R.id.property_company_date_select)
     RelativeLayout propertyCompanyDateSelect;
@@ -175,12 +170,12 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
     @BindView(R.id.property_edit_company_register)
     MaterialEditText propertyEditCompanyRegister;
     /**
-     *注册资金
+     * 注册资金
      */
     @BindView(R.id.property_edit_company_capital)
     MaterialEditText propertyEditCompanyCapital;
     /**
-     *入驻时间
+     * 入驻时间
      */
     @BindView(R.id.property_enter_date_select_text)
     TextView propertyEnterDateSelectText;
@@ -204,9 +199,11 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
      */
     @BindView(R.id.property_edit_client_contact_phone)
     MaterialEditText propertyEditClientContactPhone;
+    @BindView(R.id.grid)
+    CustomGridView grid;
 
     private Calendar cal = new GregorianCalendar();
-    private int year,month,day;
+    private int year, month, day;
 
     private CityPickerView mPicker = new CityPickerView();
     private Property property = new Property();
@@ -230,10 +227,31 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
         initView();
     }
 
+    private AccidentGridAdapter adapter;
+    private ArrayList<String> typeList = new ArrayList<>();
+
     /**
      * 初始化View
      */
     private void initView() {
+        final List<AccidentGridModel> dataList = new ArrayList<>();
+        dataList.add(new AccidentGridModel("住宅",false));
+        dataList.add(new AccidentGridModel("商业",false));
+        adapter = new AccidentGridAdapter(this,dataList);
+        grid.setAdapter(adapter);
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (dataList.get(position).isSelect()) {
+                    dataList.get(position).setSelect(false);
+                    typeList.remove(dataList.get(position).getName());
+                } else {
+                    dataList.get(position).setSelect(true);
+                    typeList.add(dataList.get(position).getName());
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
 
         propertyAreaSelect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -286,12 +304,12 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
                 DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        propertyDateSelectText.setText(year+"年"+(++month)+"月"+day+"日");
+                        propertyDateSelectText.setText(year + "年" + (++month) + "月" + day + "日");
                         propertyDateSelectText.setTextColor(getResources().getColor(R.color.bank_bg01));
                     }
                 };
                 //后边三个参数为显示dialog时默认的日期，月份从0开始，0-11对应1-12个月
-                DatePickerDialog dialog=new DatePickerDialog(CreatePropertyActivity.this, 0,listener,year,month,day);
+                DatePickerDialog dialog = new DatePickerDialog(CreatePropertyActivity.this, 0, listener, year, month, day);
                 dialog.show();
             }
         });
@@ -302,12 +320,12 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
                 DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        propertyCompanyDateSelectText.setText(year+"年"+(++month)+"月"+day+"日");
+                        propertyCompanyDateSelectText.setText(year + "年" + (++month) + "月" + day + "日");
                         propertyCompanyDateSelectText.setTextColor(getResources().getColor(R.color.bank_bg01));
                     }
                 };
                 //后边三个参数为显示dialog时默认的日期，月份从0开始，0-11对应1-12个月
-                DatePickerDialog dialog=new DatePickerDialog(CreatePropertyActivity.this, 0,listener,year,month,day);
+                DatePickerDialog dialog = new DatePickerDialog(CreatePropertyActivity.this, 0, listener, year, month, day);
                 dialog.show();
             }
         });
@@ -318,12 +336,12 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
                 DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        propertyEnterDateSelectText.setText(year+"年"+(++month)+"月"+day+"日");
+                        propertyEnterDateSelectText.setText(year + "年" + (++month) + "月" + day + "日");
                         propertyEnterDateSelectText.setTextColor(getResources().getColor(R.color.bank_bg01));
                     }
                 };
                 //后边三个参数为显示dialog时默认的日期，月份从0开始，0-11对应1-12个月
-                DatePickerDialog dialog=new DatePickerDialog(CreatePropertyActivity.this, 0,listener,year,month,day);
+                DatePickerDialog dialog = new DatePickerDialog(CreatePropertyActivity.this, 0, listener, year, month, day);
                 dialog.show();
             }
         });
@@ -339,12 +357,13 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
     }
 
     private List<Equipment> equipmentList = new ArrayList<>();
+
     /**
      * 显示添加dialog
      */
-    private void showAddDialog(){
+    private void showAddDialog() {
         final Equipment equipment = new Equipment();
-        final QMUIDialog dialog = new QMUIDialog(this,R.style.edit_AlertDialog_style);
+        final QMUIDialog dialog = new QMUIDialog(this, R.style.edit_AlertDialog_style);
         dialog.setContentView(R.layout.layout_property_add_equipment);
         dialog.setCanceledOnTouchOutside(false);
         Window w = dialog.getWindow();
@@ -359,15 +378,15 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
         data.add("医疗卫生配套");
         data.add("健身、娱乐配套");
         ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,data);
-        spinnerSetAdapter(adapter,spinner);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data);
+        spinnerSetAdapter(adapter, spinner);
         QMUIRoundButton confirmButton = dialog.findViewById(R.id.equipment_confirm);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editVerify(name)){
+                if (editVerify(name)) {
                     equipment.setName(name.getText().toString());
-                }else{
+                } else {
                     return;
                 }
                 equipment.setType(spinner.getSelectedItem().toString());
@@ -385,15 +404,15 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
             }
         });
         dialog.show();
-
     }
 
     private EquipmentAdapter equipmentAdapter;
-    private void initRec(){
-        if (equipmentList.size() == 0){
+
+    private void initRec() {
+        if (equipmentList.size() == 0) {
             return;
-        }else if (equipmentList.size() == 1){
-            equipmentAdapter = new EquipmentAdapter(this,equipmentList);
+        } else if (equipmentList.size() == 1) {
+            equipmentAdapter = new EquipmentAdapter(this, equipmentList);
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             propertyRecview.setLayoutManager(layoutManager);
@@ -402,7 +421,7 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
             propertyRecview.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
             tip.setVisibility(View.GONE);
             propertyRecview.setVisibility(View.VISIBLE);
-        }else if (equipmentList.size() > 1){
+        } else if (equipmentList.size() > 1) {
             equipmentAdapter.notifyDataSetChanged();
         }
     }
@@ -425,21 +444,22 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
 
     //获取当前日期
     private void getDate() {
-        year=cal.get(Calendar.YEAR);
+        year = cal.get(Calendar.YEAR);
         //获取年月日时分秒
-        cal=Calendar.getInstance();
-        month=cal.get(Calendar.MONTH);
+        cal = Calendar.getInstance();
+        month = cal.get(Calendar.MONTH);
         //获取到的月份是从0开始计数
-        Log.i("wxy","year"+year);
-        day=cal.get(Calendar.DAY_OF_MONTH);
+        Log.i("wxy", "year" + year);
+        day = cal.get(Calendar.DAY_OF_MONTH);
     }
 
-    private void spinnerSetAdapter(ArrayAdapter<String> arrayAdapter, Spinner spinner){
+    private void spinnerSetAdapter(ArrayAdapter<String> arrayAdapter, Spinner spinner) {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
     }
 
     private boolean isNull = false;
+
     private boolean editVerify(final MaterialEditText materialEdit) {
         if (materialEdit.getText().toString().equals("")) {
             materialEdit.setError("请输入" + materialEdit.getHint().toString());
@@ -450,119 +470,106 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
         return true;
     }
 
-    private void postProperty(){
+    private void postProperty() {
         String url = Constants.TEST_SERVICE + "/property/postProperty";
-        if (editVerify(propertyEditName)){
+        if (editVerify(propertyEditName)) {
             property.setName(propertyEditName.getText().toString());
         }
-        if (editVerify(propertyEditAddr)){
+        if (editVerify(propertyEditAddr)) {
             property.setAddress(propertyEditAddr.getText().toString());
         }
-        if (propertyDateSelectText.equals("项目建成时间")){
+        if (propertyDateSelectText.equals("项目建成时间")) {
             showToastShort("请选择项目建成时间");
             return;
-        }else {
+        } else {
             property.setCreateDate(propertyDateSelectText.getText().toString());
         }
-        if (editVerify(propertyEditAcreage)){
+        if (editVerify(propertyEditAcreage)) {
             property.setAcreage(propertyEditAcreage.getText().toString());
         }
-        if (editVerify(propertyEditResidence)){
+        if (editVerify(propertyEditResidence)) {
             property.setResidence(propertyEditResidence.getText().toString());
         }
-        if (editVerify(propertyEditShops)){
+        if (editVerify(propertyEditShops)) {
             property.setShops(propertyEditShops.getText().toString());
         }
-        if (editVerify(propertyEditHousehold)){
+        if (editVerify(propertyEditHousehold)) {
             property.setHousehold(propertyEditHousehold.getText().toString());
         }
-        if (editVerify(propertyEditTenant)){
+        if (editVerify(propertyEditTenant)) {
             property.setTenant(propertyEditTenant.getText().toString());
         }
-        if (editVerify(propertyEditCharge)){
+        if (editVerify(propertyEditCharge)) {
             property.setCharge(propertyEditCharge.getText().toString());
         }
-        if (editVerify(propertyEditGroundParking)){
+        if (editVerify(propertyEditGroundParking)) {
             property.setGroundParking(propertyEditGroundParking.getText().toString());
         }
-        if (editVerify(propertyEditUndergroundParking)){
+        if (editVerify(propertyEditUndergroundParking)) {
             property.setUnderGroundParkting(propertyEditGroundParking.getText().toString());
         }
-        if (equipmentList != null || equipmentList.size() > 0){
+        if (equipmentList != null || equipmentList.size() > 0) {
             property.setEquiment(JSONObject.toJSONString(equipmentList));
         }
-        if (editVerify(propertyEditCompanyName)){
+        if (editVerify(propertyEditCompanyName)) {
             property.setCompanyName(propertyEditCompanyName.getText().toString());
         }
-        if (propertyCompanyDateSelectText.equals("工商注册时间")){
+        if (propertyCompanyDateSelectText.equals("工商注册时间")) {
             showToastShort("请选择工商注册时间");
             return;
-        }else {
+        } else {
             property.setCompanyDate(propertyCompanyDateSelectText.getText().toString());
         }
-        if (editVerify(propertyEditCompanyRegister)){
+        if (editVerify(propertyEditCompanyRegister)) {
             property.setCompanyAddr(propertyEditCompanyRegister.getText().toString());
         }
-        if (editVerify(propertyEditCompanyCapital)){
+        if (editVerify(propertyEditCompanyCapital)) {
             property.setCapital(propertyEditCompanyCapital.getText().toString());
         }
-        if (propertyEnterDateSelectText.equals("项目开始服务时间")){
+        if (propertyEnterDateSelectText.equals("项目开始服务时间")) {
             showToastShort("请选择项目开始服务时间");
             return;
-        }else {
+        } else {
             property.setEnterDate(propertyEnterDateSelectText.getText().toString());
         }
-        if(editVerify(propertyEditClient)){
+        if (editVerify(propertyEditClient)) {
             property.setClient(propertyEditClient.getText().toString());
         }
-        if (editVerify(propertyEditClientContact)){
+        if (editVerify(propertyEditClientContact)) {
             property.setClientContact(propertyEditClientContact.getText().toString());
         }
-        if (editVerify(propertyEditClientContactPhone)){
+        if (editVerify(propertyEditClientContactPhone)) {
             property.setClientPhone(propertyEditClientContactPhone.getText().toString());
         }
         property.setUniqueId(DeviceUtils.getUniqueId(this));
-        property.setMakeTime(DateUtil.parseToSQLDate(new Date(),DateUtil.yyyyMMddHHmmss));
-        if (isNull){
+        property.setMakeTime(DateUtil.parseToSQLDate(new Date(), DateUtil.yyyyMMddHHmmss));
+
+        if (typeList.size() > 0){
+            String type = "";
+            int i = 0;
+            for (String str : typeList){
+                if (i == 0){
+                    type += str;
+                    i++;
+                }else {
+                    type += "," + str;
+                }
+            }
+            property.setType(type);
+        }
+
+        if (isNull) {
             return;
-        }else{
+        } else {
+            if (Constants.NETWORK_FLAG){
+
+            }
             String json = JSONObject.toJSONString(property);
 
-            OkHttpClient client = new OkHttpClient();
-
-            RequestBody body = new FormBody.Builder()
-                    .add("json",json)
-                    .build();
-
-            final Request request = new Request.Builder()
-                    .url(url)
-                    .post(body)
-                    .build();
-
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-
-                }
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    String resultStr = response.body().string();
-                    ResultModel result = JSONObject.parseObject(resultStr,ResultModel.class);
-                    if (result.getCode() == 0){
-                        handler.post(seccessRun);
-                        Constants constants = new Constants();
-                        constants.setPropertyId(Long.parseLong(result.getData()));
-                        Intent intent = new Intent(CreatePropertyActivity.this,PropertyUploadActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }else{
-                        handler.post(failRun);
-                        return;
-                    }
-                }
-            });
-
+            Intent intent = new Intent(CreatePropertyActivity.this, PropertyUploadActivity.class);
+            intent.putExtra("property",json);
+            startActivity(intent);
+            finish();
         }
     }
 

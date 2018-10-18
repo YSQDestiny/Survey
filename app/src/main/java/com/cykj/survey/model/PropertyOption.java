@@ -1,6 +1,8 @@
 package com.cykj.survey.model;
 
-public class PropertyOption {
+import java.io.Serializable;
+
+public class PropertyOption implements Serializable {
 
     private String name;
 

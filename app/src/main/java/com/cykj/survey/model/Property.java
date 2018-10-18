@@ -1,8 +1,9 @@
 package com.cykj.survey.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Property {
+public class Property implements Serializable {
 
     private Long id;
     /**
@@ -119,6 +120,8 @@ public class Property {
     private String businessPhoto;
     private String industryPhoto;
     private String systemPhoto;
+
+    private String type;
 
     public String getName() {
         return name;
@@ -358,5 +361,13 @@ public class Property {
 
     public void setDeduction(String deduction) {
         this.deduction = deduction;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

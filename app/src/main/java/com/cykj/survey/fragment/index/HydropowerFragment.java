@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-@Widget(group = Group.Home, name = "水电站", iconRes = R.mipmap.icon_fragment_hydropower_station)
+@Widget(group = Group.Home, name = "能源", iconRes = R.mipmap.icon_fragment_hydropower_station)
 public class HydropowerFragment extends BaseFragment {
 
     @BindView(R.id.topbar)

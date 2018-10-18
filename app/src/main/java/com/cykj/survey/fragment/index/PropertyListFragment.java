@@ -10,24 +10,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
-import com.cykj.survey.activity.ReportDetailsActivity;
-import com.cykj.survey.activity.project.ProjectReportDetailAccivyty;
 import com.cykj.survey.activity.property.CreatePropertyActivity;
 import com.cykj.survey.activity.property.ProertyDetailActivirt;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.fragment.adapter.ProPertyAdapter;
-import com.cykj.survey.fragment.adapter.PropertyAreaAdapter;
 import com.cykj.survey.lib.Group;
 import com.cykj.survey.lib.annotation.Widget;
 import com.cykj.survey.model.Property;
+import com.cykj.survey.model.PropertyArea;
+import com.cykj.survey.model.PropertyOption;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.DeviceUtils;
+import com.cykj.survey.util.LocalDataCache;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,9 +41,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-@Widget(group = Group.Home, name = "物业", iconRes = R.mipmap.icon_fragment_engineering)
+@Widget(group = Group.Home, name = "物业", iconRes = R.mipmap.icon_fragment_property)
 public class PropertyListFragment extends BaseFragment {
-
 
     @BindView(R.id.topbar)
     QMUITopBar topbar;
@@ -79,8 +80,6 @@ public class PropertyListFragment extends BaseFragment {
             }
         });
 
-
-
     }
 
     @Override
@@ -89,32 +88,65 @@ public class PropertyListFragment extends BaseFragment {
     }
 
     private void getList(){
-        String url = Constants.TEST_SERVICE + "/property/getList";
+        Object object = LocalDataCache.getLoaclData(getContext(),DeviceUtils.getUniqueId(getContext()) + "property");
+        if (object == null){
+            String url = Constants.TEST_SERVICE + "/property/getList";
 
-        OkHttpClient client = new OkHttpClient();
+            OkHttpClient client = new OkHttpClient();
 
-        RequestBody requestBody = new FormBody.Builder()
-                .add("uniqueId", DeviceUtils.getUniqueId(getContext()))
-                .build();
+            RequestBody requestBody = new FormBody.Builder()
+                    .add("uniqueId", DeviceUtils.getUniqueId(getContext()))
+                    .build();
 
-        final Request request = new Request.Builder().url(url).post(requestBody).build();
+            final Request request = new Request.Builder().url(url).post(requestBody).build();
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
 
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
-                if (result.getCode() == 0){
-                    properties = JSONObject.parseArray(result.getData(),Property.class);
-                    handler.post(UIable);
                 }
 
-            }
-        });
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
+                    if (result.getCode() == 0){
+                        properties = JSONObject.parseArray(result.getData(),Property.class);
+                        handler.post(UIable);
+                        if (properties != null){
+                            LocalDataCache.save(getContext(),properties,DeviceUtils.getUniqueId(getContext()) + "property");
+                        }
+                    }
+                }
+            });
+        }else {
+            properties = (List<Property>) object;
+            handler.post(UIable);
+        }
+
+        Object object2 = LocalDataCache.getLoaclData(getContext(),"propertyArea");
+        if (object2 == null){
+            String url = Constants.TEST_SERVICE + "/property/getAreaAndOptions";
+            OkHttpClient client = new OkHttpClient();
+            final Request request = new Request.Builder().url(url).build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
+                    if (result.getCode() == 0){
+                        Map<PropertyArea,List<PropertyOption>> optionsMap = JSONObject.parseObject(result.getData(),new TypeReference<Map<PropertyArea, List<PropertyOption>>>(){});
+                        if (optionsMap != null){
+                            LocalDataCache.save(getContext(),optionsMap,"propertyArea");
+                        }
+                    }
+                }
+            });
+        }
     }
 
     Runnable UIable = new Runnable() {

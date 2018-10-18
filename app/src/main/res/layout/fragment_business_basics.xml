@@ -65,7 +65,8 @@
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
                 app:met_clearButton= "true"
-                app:met_hideUnderline="true"/>
+                app:met_hideUnderline="true"
+                android:inputType="text"/>
 
             <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
 
@@ -150,7 +151,8 @@
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
                 app:met_clearButton= "true"
-                app:met_hideUnderline="true"/>
+                app:met_hideUnderline="true"
+                android:inputType="number"/>
 
             <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
 
@@ -260,7 +262,8 @@
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
                 app:met_clearButton= "true"
-                app:met_hideUnderline="true" />
+                app:met_hideUnderline="true"
+                android:inputType="phone"/>
 
             <FrameLayout
                 android:layout_width="match_parent"

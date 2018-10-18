@@ -120,6 +120,12 @@ public class ReportDetailsActivity extends BaseFragmentActivity {
                 downloadReport();
             }
         });
+        topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void downloadReport(){

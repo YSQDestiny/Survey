@@ -38,7 +38,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-@Widget(group = Group.Home, name = "企财险", iconRes = R.mipmap.icon_fragment_business)
+@Widget(group = Group.Home, name = "企财", iconRes = R.mipmap.icon_fragment_business)
 public class ReportListFragment extends BaseFragment {
 
 

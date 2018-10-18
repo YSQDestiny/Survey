@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -22,12 +23,13 @@ public class ImgUtil {
         try {
             if (bitmap != null) {
                 baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 50, baos);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 10, baos);
 
                 baos.flush();
                 baos.close();
 
                 byte[] bitmapBytes = baos.toByteArray();
+                Log.d("ImageSize","压缩后的大小="+bitmapBytes.length);
                 result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
             }
         } catch (IOException e) {

@@ -1,6 +1,8 @@
 package com.cykj.survey.model;
 
-public class PropertyArea {
+import java.io.Serializable;
+
+public class PropertyArea implements Serializable {
 
     private String name;
 
@@ -30,5 +32,15 @@ public class PropertyArea {
 
     public void setImportant(int important) {
         this.important = important;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }
