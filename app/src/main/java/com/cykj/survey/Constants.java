@@ -5,6 +5,8 @@ import com.cykj.survey.model.Options;
 import com.cykj.survey.model.PhotoModel;
 import com.cykj.survey.model.ProjectAccident;
 import com.cykj.survey.model.Property;
+import com.cykj.survey.model.PropertyAccident;
+import com.cykj.survey.model.UploadModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,4 +83,23 @@ public class Constants {
         photoModel = model;
     }
 
+    public static List<PropertyAccident> propertyAccidentList = new ArrayList<>();
+
+    public static void addPropertyAccident(PropertyAccident propertyAccident){
+        propertyAccidentList.add(propertyAccident);
+    }
+
+    public static void cleanPropertyAccidentList(){
+        propertyAccidentList.clear();
+    }
+
+    public static List<UploadModel> uploadModelList = new ArrayList<>();
+
+    public static void addUploadModel(UploadModel uploadModel){
+        uploadModelList.add(uploadModel);
+    }
+
+    public static void cleanUploadList(){
+        uploadModelList.clear();
+    }
 }

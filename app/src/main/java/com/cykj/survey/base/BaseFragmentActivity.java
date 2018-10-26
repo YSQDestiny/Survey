@@ -51,14 +51,17 @@ public abstract class BaseFragmentActivity extends QMUIFragmentActivity{
                         //在用户已经拒绝授权的情况下，如果shouldShowRequestPermissionRationale返回false则
                         // 可以推断出用户选择了“不在提示”选项，在这种情况下需要引导用户至设置页手动授权
                         if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[i])) {
-                            new AlertDialog.Builder(BaseFragmentActivity.this).setTitle("PermissionTest")//设置对话框标题
+                            //设置对话框标题
+                            new AlertDialog.Builder(BaseFragmentActivity.this).setTitle("PermissionTest")
                                     .setMessage("【用户选择了不再提示按钮，或者系统默认不在提示（如MIUI）。" +
                                             "引导用户到应用设置页去手动授权,注意提示用户具体需要哪些权限】" +
                                             "获取相关权限失败:" + permissionName +
                                             "将导致部分功能无法正常使用，需要到设置页面手动授权")//设置显示的内容
-                                    .setPositiveButton("去授权", new DialogInterface.OnClickListener() {//添加确定按钮
+                                    //确定按钮的响应事件
+                                    //添加确定按钮
+                                    .setPositiveButton("去授权", new DialogInterface.OnClickListener() {
                                         @Override
-                                        public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
+                                        public void onClick(DialogInterface dialog, int which) {
                                             //TODO Auto-generated method stub
                                             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                                             Uri uri = Uri.fromParts("package", getApplicationContext().getPackageName(), null);
@@ -66,7 +69,8 @@ public abstract class BaseFragmentActivity extends QMUIFragmentActivity{
                                             startActivity(intent);
                                             dialog.dismiss();
                                         }
-                                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {//添加返回按钮
+                                        //添加返回按钮
+                                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {//响应事件
                                     // TODO Auto-generated method stub
@@ -112,13 +116,16 @@ public abstract class BaseFragmentActivity extends QMUIFragmentActivity{
             if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_DENIED) {
                 isAllGranted = false;
                 if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, permission)) {
-                    new AlertDialog.Builder(BaseFragmentActivity.this).setTitle("PermissionTest")//设置对话框标题
+                    //设置对话框标题
+                    new AlertDialog.Builder(BaseFragmentActivity.this).setTitle("PermissionTest")
                             .setMessage("【用户曾经拒绝过你的请求，所以这次发起请求时解释一下】" +
                                     "您好，需要如下权限：" + permissionNames +
                                     " 请允许，否则将影响部分功能的正常使用。")//设置显示的内容
-                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {//添加确定按钮
+                            //添加确定按钮
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                //确定按钮的响应事件
                                 @Override
-                                public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
+                                public void onClick(DialogInterface dialog, int which) {
                                     //TODO Auto-generated method stub
                                     ActivityCompat.requestPermissions(((Activity) context), permissions, mRequestCode);
                                 }

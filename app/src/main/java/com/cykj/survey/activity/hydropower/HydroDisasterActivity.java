@@ -151,7 +151,7 @@ public class HydroDisasterActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HydroDisasterActivity.this,HydroImageActivity.class);
+                Intent intent = new Intent(HydroDisasterActivity.this,ElectromechanicalActivity.class);
                 startActivity(intent);
             }
         });

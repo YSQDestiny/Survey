@@ -54,6 +54,8 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
     TextView propertyOptionCurrent;
     @BindView(R.id.property_option_list)
     NoScrollListview propertyOptionList;
+    @BindView(R.id.property_option_standard)
+    TextView propertyOptionStandard;
 
     private Handler handler;
 
@@ -143,7 +145,7 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
             deduction = deductionModel.getDeduction();
             propertyOptionCurrent.setText(Integer.toString((area.getSinglePoint() - deductionModel.getDeduction())));
             showTipDialog(deductionModel);
-        }else {
+        } else {
             deduction = 0;
             propertyOptionCurrent.setText(Integer.toString(area.getSinglePoint()));
         }
@@ -157,6 +159,7 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
      * 初始化view
      */
     private void initView() {
+        propertyOptionStandard.setText(area.getStandard());
         if (optionList != null) {
             adapter = new PropertyOptionListAdapter(this, optionList);
             propertyOptionList.setAdapter(adapter);
@@ -192,6 +195,14 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
                 handler.post(UIable);
             }
         });
+    }
+
+
+    /**
+     * 毫无意义
+     */
+    private void zhuangYangzi(){
+
     }
 
     /**
@@ -304,9 +315,9 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
         List<DeductionModel> deductionModels = JSONObject.parseArray(Constants.DEDUCTION_JSON, DeductionModel.class);
         for (DeductionModel model : deductionModels) {
             if (model.getArea().equals(area.getName())) {
-                if (isMissing){
+                if (isMissing) {
                     model.setDeduction(area.getSinglePoint());
-                }else {
+                } else {
                     model.setDeduction(Integer.parseInt(propertyOptionSpinner.getSelectedItem().toString()) + deduction);
                 }
                 model.setMissing(isMissing);
@@ -363,7 +374,7 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
                     public void onClick(QMUIDialog dialog, int index) {
                         CharSequence text = builder.getEditText().getText();
                         if (text != null || text.length() > 0) {
-                            resonList.add(text.toString() + " -" +propertyOptionSpinner.getSelectedItem().toString() + "分");
+                            resonList.add(text.toString() + " -" + propertyOptionSpinner.getSelectedItem().toString() + "分");
                             dialog.dismiss();
                         } else {
                             showToastShort("请填入扣分原因");
@@ -375,15 +386,16 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
 
     /**
      * 提交扣分信息
+     *
      * @param json
      */
-    private void postDeduction(String json){
+    private void postDeduction(String json) {
         String url = Constants.TEST_SERVICE + "/property/postDeduction";
         OkHttpClient client = new OkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
-                .add("id",Constants.PROPERTY_ID.toString())
-                .add("json",json)
+                .add("id", Constants.PROPERTY_ID.toString())
+                .add("json", json)
                 .build();
 
         final Request request = new Request.Builder().url(url).post(requestBody).build();
@@ -397,7 +409,7 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 ResultModel result = JSONObject.parseObject(response.body().string(), ResultModel.class);
-                if(result.getCode() == 0){
+                if (result.getCode() == 0) {
                     finish();
                 }
             }

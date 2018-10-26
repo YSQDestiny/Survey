@@ -23,8 +23,10 @@ import com.cykj.survey.model.DeductionModel;
 import com.cykj.survey.model.Industry;
 import com.cykj.survey.model.Property;
 import com.cykj.survey.model.PropertyArea;
+import com.cykj.survey.model.PropertyModel;
 import com.cykj.survey.model.PropertyOption;
 import com.cykj.survey.model.ResultModel;
+import com.cykj.survey.model.UploadModel;
 import com.cykj.survey.util.DeviceUtils;
 import com.cykj.survey.util.JsonUtil;
 import com.cykj.survey.util.LocalDataCache;
@@ -117,7 +119,6 @@ public class PropertyAreaActivity extends BaseFragmentActivity {
     }
 
 
-
     /**
      * 已查勘区域提示框
      */
@@ -137,6 +138,13 @@ public class PropertyAreaActivity extends BaseFragmentActivity {
                     }
                 })
                 .create(mCurrentDialogStyle).show();
+    }
+
+    /**
+     *
+     */
+    private void showTipdia(){
+        int i = 0;
     }
 
     /**
@@ -160,6 +168,15 @@ public class PropertyAreaActivity extends BaseFragmentActivity {
                         List<Property> properties = (List<Property>) object;
                         properties.add(property);
                         LocalDataCache.save(PropertyAreaActivity.this,properties,DeviceUtils.getUniqueId(PropertyAreaActivity.this) + "property");
+
+                        PropertyModel propertyModel = new PropertyModel();
+                        propertyModel.setProperty(property);
+                        if (Constants.propertyAccidentList.size() > 0){
+                            propertyModel.setAccidentList(Constants.propertyAccidentList);
+                        }
+                        UploadModel uploadModel = new UploadModel();
+                        uploadModel.setTarget("property");
+                        uploadModel.setJson(JSONObject.toJSONString(propertyModel));
                         dialog.dismiss();
                     }
                 })
@@ -209,6 +226,7 @@ public class PropertyAreaActivity extends BaseFragmentActivity {
      * 数据初始化
      */
     private void initData() {
+        Constants.cleanPropertyAccidentList();
         Constants.cleanDeductionJson();
         String jsonStr = JsonUtil.getJson("property.json",this);
         Industry industry = JSONObject.parseObject(jsonStr,Industry.class);
@@ -224,7 +242,7 @@ public class PropertyAreaActivity extends BaseFragmentActivity {
         topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFinishTip();
+                showFinishTip();//oojiprivate int yangshiqi
             }
         });
         topbar.addRightTextButton("查勘记录",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
@@ -240,6 +258,7 @@ public class PropertyAreaActivity extends BaseFragmentActivity {
         super.onResume();
         property.setDeduction(Constants.DEDUCTION_JSON);
     }
+
 
     Runnable Tipable = new Runnable() {
         @Override

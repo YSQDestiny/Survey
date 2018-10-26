@@ -93,6 +93,9 @@ public class BasicOptionAdapter extends RecyclerView.Adapter<BasicOptionAdapter.
             }
         });
 
+        /**
+         *
+         */
         holder.checkBoxNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

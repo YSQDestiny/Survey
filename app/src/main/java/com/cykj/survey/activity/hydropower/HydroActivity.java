@@ -77,6 +77,20 @@ public class HydroActivity extends BaseFragmentActivity {
     RelativeLayout tip;
     @BindView(R.id.grid)
     CustomGridView grid;
+    @BindView(R.id.hydro_dam_type_material)
+    TextView hydroDamTypeMaterial;
+    @BindView(R.id.hydro_dam_material)
+    RelativeLayout hydroDamMaterial;
+    @BindView(R.id.hydro_edit_axial_length)
+    MaterialEditText hydroEditAxialLength;
+    @BindView(R.id.hydro_edit_hight)
+    MaterialEditText hydroEditHight;
+    @BindView(R.id.hydro_edit_normal_water)
+    MaterialEditText hydroEditNormalWater;
+    @BindView(R.id.hydro_edit_design_water)
+    MaterialEditText hydroEditDesignWater;
+    @BindView(R.id.hydro_edit_check_water)
+    MaterialEditText hydroEditCheckWater;
 
     private CityPickerView mPicker = new CityPickerView();
 
@@ -104,10 +118,10 @@ public class HydroActivity extends BaseFragmentActivity {
 
     private void initTopbar() {
         topbar.setTitle("基本信息");
-        topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+        topbar.addRightTextButton("照片采集", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HydroActivity.this, HydroGeologyActivity.class);
+                Intent intent = new Intent(HydroActivity.this, TakePhotoActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -124,9 +138,9 @@ public class HydroActivity extends BaseFragmentActivity {
 
     private void initView() {
 
-        dataList.add(new AccidentGridModel("发电",false));
-        dataList.add(new AccidentGridModel("灌溉",false));
-        dataList.add(new AccidentGridModel("航运",false));
+        dataList.add(new AccidentGridModel("发电", false));
+        dataList.add(new AccidentGridModel("灌溉", false));
+        dataList.add(new AccidentGridModel("航运", false));
 
         accidentGridAdapteradapter = new AccidentGridAdapter(this, dataList);
         grid.setAdapter(accidentGridAdapteradapter);
@@ -211,6 +225,14 @@ public class HydroActivity extends BaseFragmentActivity {
             @Override
             public void onClick(View v) {
                 showMenuDialog(hydroCrewTypeText, crewItems);
+            }
+        });
+
+        final String[] damMaterial = {"浆砌石","混凝土"};
+        hydroDamMaterial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMenuDialog(hydroDamTypeMaterial,damMaterial);
             }
         });
 

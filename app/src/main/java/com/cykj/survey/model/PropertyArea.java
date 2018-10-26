@@ -10,6 +10,8 @@ public class PropertyArea implements Serializable {
 
     private int important;
 
+    private String standard;
+
     public String getName() {
         return name;
     }
@@ -32,6 +34,14 @@ public class PropertyArea implements Serializable {
 
     public void setImportant(int important) {
         this.important = important;
+    }
+
+    public String getStandard() {
+        return standard;
+    }
+
+    public void setStandard(String standard) {
+        this.standard = standard;
     }
 
     @Override

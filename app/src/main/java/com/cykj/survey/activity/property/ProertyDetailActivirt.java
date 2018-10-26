@@ -2,6 +2,7 @@ package com.cykj.survey.activity.property;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -58,6 +59,15 @@ public class ProertyDetailActivirt extends BaseFragmentActivity {
                 finish();
             }
         });
+        topbar.addRightTextButton("下载",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = Constants.TEST_SERVICE + "property/download?id=" +propertyId;
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initView(){
@@ -65,11 +75,10 @@ public class ProertyDetailActivirt extends BaseFragmentActivity {
         reportWeb.setWebChromeClient(webChromeClient);
         reportWeb.setWebViewClient(webViewClient);
 
-
         WebSettings webSettings = reportWeb.getSettings();
 
-        webSettings.setJavaScriptEnabled(true);//允许使用js
-
+        //允许使用js
+        webSettings.setJavaScriptEnabled(true);
 
         /**
          * LOAD_CACHE_ONLY: 不使用网络，只读取本地缓存数据
@@ -77,7 +86,8 @@ public class ProertyDetailActivirt extends BaseFragmentActivity {
          * LOAD_NO_CACHE: 不使用缓存，只从网络获取数据.
          * LOAD_CACHE_ELSE_NETWORK，只要本地有，无论是否过期，或者no-cache，都使用缓存中的数据。
          */
-        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);//不使用缓存，只从网络获取数据.
+        //不使用缓存，只从网络获取数据.
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
         //支持屏幕缩放
         webSettings.setSupportZoom(true);
@@ -117,7 +127,6 @@ public class ProertyDetailActivirt extends BaseFragmentActivity {
             localBuilder.setMessage(message).setPositiveButton("确定", null);
             localBuilder.setCancelable(false);
             localBuilder.create().show();
-
             //注意:
             //必须要这一句代码:result.confirm()表示:
             //处理结果为确定状态同时唤醒WebCore线程

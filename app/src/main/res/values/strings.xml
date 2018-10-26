@@ -43,7 +43,7 @@
     <string name="license_industry_license">行业许可</string>
     <string name="license_system_level">体系等级</string>
 
-    <!-- spraying-options 生产-喷涂区 -->
+    <!-- spraying-options 木质家具制造  生产-喷涂区 -->
     <string name="spraying_options_1">1.安全玻璃是否有合格证、外观是否完好 </string>
     <string name="spraying_options_2">2.漏电保护器、电气开关能否满足防爆要求</string>
     <string name="spraying_options_3">3.电气线路是否采用镀锌管套管保护</string>

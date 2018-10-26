@@ -54,7 +54,6 @@ import okhttp3.Response;
 
 public class AccidentActivity extends BaseFragmentActivity {
 
-
     @BindView(R.id.topbar)
     QMUITopBar topbar;
     @BindView(R.id.accident_edit)
@@ -71,7 +70,6 @@ public class AccidentActivity extends BaseFragmentActivity {
     Spinner accidentFrequenciesSpinner;
     @BindView(R.id.accident_result_spinner)
     Spinner accidentResultSpinner;
-
 
     private ArrayAdapter<String> possibilityAdapter;
     private ArrayAdapter<String> frequenciesAdapter;
@@ -99,7 +97,7 @@ public class AccidentActivity extends BaseFragmentActivity {
     private Uri imageUri;
     private String terget;
 
-    private String temp;
+    private String temp = "";
 
     @Override
     protected int getContextViewId() {
@@ -131,6 +129,7 @@ public class AccidentActivity extends BaseFragmentActivity {
                 showMenuDialog();
             }
         });
+
 
         typeGridAdapter = new AccidentGridAdapter(this, typeData);
         accidentTypeGrid.setAdapter(typeGridAdapter);
@@ -459,29 +458,9 @@ public class AccidentActivity extends BaseFragmentActivity {
             propertyAccident.setLevelDes("稍有危险，可以接受");
         }
 
-        RequestBody body = new FormBody.Builder()
-                .add("accident", JSONObject.toJSONString(propertyAccident))
-                .build();
+        Constants.addPropertyAccident(propertyAccident);
 
-        Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                ResultModel result = JSONObject.parseObject(response.body().string(), ResultModel.class);
-                if (result.getCode() == 0) {
-                    finish();
-                }
-            }
-        });
+        finish();
     }
 
     @Override
@@ -577,5 +556,9 @@ public class AccidentActivity extends BaseFragmentActivity {
                     break;
             }
         }
+    }
+
+    private void moyanggong(){
+
     }
 }
