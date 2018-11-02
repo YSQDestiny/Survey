@@ -1,6 +1,8 @@
 package com.cykj.survey.activity.hydropower;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -74,6 +76,13 @@ public class ElectromechanicalActivity extends BaseFragmentActivity {
 
     private void initTopbar(){
         topbar.setTitle("机电设备风险");
+        topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ElectromechanicalActivity.this,BuildingActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initView(){

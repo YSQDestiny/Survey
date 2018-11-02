@@ -363,7 +363,7 @@ public class HydroGeologyActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HydroGeologyActivity.this,HydroDisasterActivity.class);
+                Intent intent = new Intent(HydroGeologyActivity.this,HydroGeologyPhotoActivity.class);
                 startActivity(intent);
                 finish();
             }
