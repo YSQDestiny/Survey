@@ -84,7 +84,6 @@ public class TakePhotoActivity extends BaseFragmentActivity implements View.OnCl
                 finish();
             }
         });
-
     }
 
     /**
@@ -164,8 +163,6 @@ public class TakePhotoActivity extends BaseFragmentActivity implements View.OnCl
         }
     }
 
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -226,10 +223,10 @@ public class TakePhotoActivity extends BaseFragmentActivity implements View.OnCl
                         Toast.makeText(this, "设备没有SD卡!", Toast.LENGTH_SHORT).show();
                     }
                     break;
+
             }
         }
     }
-
 
     @Override
     public void onClick(View v) {

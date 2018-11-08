@@ -12,25 +12,42 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/qmui_topbar_height" />
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/qmui_config_color_white">
+        android:background="@color/qmui_config_color_white"
+        android:layout_weight="1">
 
-        <com.cykj.survey.view.CustomGridView
-            android:id="@+id/grid"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:numColumns="4"
-            android:horizontalSpacing="2dp"
-            android:verticalSpacing="3dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
-        </com.cykj.survey.view.CustomGridView>
+            android:layout_height="match_parent"
+            >
 
-    </RelativeLayout>
+            <com.cykj.survey.view.CustomGridView
+                android:id="@+id/grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="4"
+                android:horizontalSpacing="2dp"
+                android:verticalSpacing="3dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+            </com.cykj.survey.view.CustomGridView>
 
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/add_img_button"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        android:layout_gravity="bottom"
+        android:background="@color/app_color_theme_6"
+        android:text="上传"
+        android:textColor="@color/qmui_config_color_white"
+        android:textSize="20sp"/>
 
 </LinearLayout>

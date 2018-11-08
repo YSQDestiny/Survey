@@ -2,6 +2,7 @@ package com.cykj.survey.activity.hydropower;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -87,7 +88,7 @@ public class BuildingActivity extends BaseFragmentActivity {
 
     private void initView(){
 
-        ArrayAdapter<String> hdAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,data2);
+        final ArrayAdapter<String> hdAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,data2);
         ArrayAdapter<String> hdAdapter3 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,data3);
         ArrayAdapter<String> hdAdapter4 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,data4);
         ArrayAdapter<String> hdAdapter5 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,data5);
@@ -132,6 +133,11 @@ public class BuildingActivity extends BaseFragmentActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                int count = parent.getCount();
+                if (count >= 0){
+                    System.out.println("imaging be without you");
+                    Log.d("","");
+                }
                 return;
             }
         });

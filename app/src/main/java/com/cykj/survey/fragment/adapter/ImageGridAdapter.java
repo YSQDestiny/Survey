@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.cykj.survey.R;
 import com.cykj.survey.model.AccidentGridModel;
+import com.cykj.survey.model.HydroImage;
 
 import java.util.List;
 
@@ -17,9 +19,9 @@ public class ImageGridAdapter extends BaseAdapter {
 
     private Context mContext;
 
-    private List<Bitmap> data;
+    private List<HydroImage> data;
 
-    public ImageGridAdapter(Context mContext,List<Bitmap> data){
+    public ImageGridAdapter(Context mContext,List<HydroImage> data){
         this.mContext = mContext;
         this.data = data;
     }
@@ -44,8 +46,9 @@ public class ImageGridAdapter extends BaseAdapter {
 
         convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_gridview_image_item,null);
         ImageView imageView = convertView.findViewById(R.id.geidview_image);
-        imageView.setImageBitmap(data.get(position));
-
+        TextView textView = convertView.findViewById(R.id.image_name);
+        imageView.setImageBitmap(data.get(position).getImg());
+        textView.setText(data.get(position).getName());
         return convertView;
     }
 

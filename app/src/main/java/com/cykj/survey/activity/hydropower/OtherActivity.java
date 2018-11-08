@@ -53,11 +53,12 @@ public class OtherActivity extends BaseFragmentActivity {
         setContentView(R.layout.activity_hydro_other);
         ButterKnife.bind(this);
         initTopbar();
+        initView();
     }
 
     private void initTopbar() {
         topbar.setTitle("其他风险");
-        topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+        topbar.addRightTextButton("完成", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

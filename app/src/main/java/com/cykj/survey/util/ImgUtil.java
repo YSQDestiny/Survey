@@ -23,7 +23,7 @@ public class ImgUtil {
         try {
             if (bitmap != null) {
                 baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 10, baos);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
 
                 baos.flush();
                 baos.close();

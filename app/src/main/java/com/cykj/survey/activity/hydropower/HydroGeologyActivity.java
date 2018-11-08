@@ -165,8 +165,8 @@ public class HydroGeologyActivity extends BaseFragmentActivity {
         data1_8.add("较小");
         data1_8.add("无");
 
-        data2_1.add("较大");
-        data2_1.add("较小");
+        data2_1.add("较大（≥0.1亿m³）");
+        data2_1.add("较小（＜0.1亿m³）");
         data2_2.add("较好");
         data2_2.add("一般");
         data2_2.add("较差");
@@ -185,9 +185,9 @@ public class HydroGeologyActivity extends BaseFragmentActivity {
         data2_8.add("较小");
         data2_8.add("无");
 
-        data3_1.add("存在");
+        data3_1.add("存在（低于0℃）");
         data3_1.add("不存在");
-        data3_2.add("容易");
+        data3_2.add("容易（冬季雨雪、冰冻天数每年＞7天）");
         data3_2.add("不容易");
         data3_3.add("存在");
         data3_3.add("不存在");
@@ -196,8 +196,8 @@ public class HydroGeologyActivity extends BaseFragmentActivity {
         data3_4.add("较小");
         data3_4.add("无");
 
-        data4_1.add("较多");
-        data4_1.add("较少");
+        data4_1.add("较多（≥20天）");
+        data4_1.add("较少（＜20天）");
         data4_1.add("无");
         data4_2.add("偏多");
         data4_2.add("偏少");
@@ -363,7 +363,7 @@ public class HydroGeologyActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HydroGeologyActivity.this,HydroGeologyPhotoActivity.class);
+                Intent intent = new Intent(HydroGeologyActivity.this,HydroImageActivity.class);
                 startActivity(intent);
                 finish();
             }

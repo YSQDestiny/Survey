@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,32 +23,35 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/hydro_disaster_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F4F5F7">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="电站厂房数量"
-                    android:textColor="#6D727C"
-                    android:textSize="14sp" />
-
-            </RelativeLayout>
-
-            <Spinner
-                android:id="@+id/hydro_disaster_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp">
-            </Spinner>
+                android:hint="电站主厂房数量"
+                android:textSize="14sp"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/hydro_disaster_vice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="电站副厂房数量"
+                android:textSize="14sp"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -130,7 +134,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="厂房内有无报警装置"
+                    android:text="厂房内有无消防报警装置"
                     android:textColor="#6D727C"
                     android:textSize="14sp" />
 
