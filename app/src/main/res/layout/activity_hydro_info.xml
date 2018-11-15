@@ -207,7 +207,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="请输入大坝轴顶长度(米)"
+                android:hint="大坝轴顶长度(米)"
                 android:textSize="14sp"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
@@ -224,7 +224,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="请输入最大坝高(米)"
+                android:hint="最大坝高(米)"
                 android:textSize="14sp"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
@@ -394,21 +394,6 @@
             </RelativeLayout>
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/hydro_edit_capacity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:hint="请输入单机容量"
-                android:textSize="14sp"
-                android:inputType="number"
-                app:met_primaryColor="?attr/app_primary_color"
-                app:met_floatingLabel="highlight"
-                app:met_clearButton= "true"
-                app:met_hideUnderline="true"/>
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#f2f0f2"/>
 

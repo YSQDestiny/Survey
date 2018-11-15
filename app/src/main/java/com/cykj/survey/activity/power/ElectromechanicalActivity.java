@@ -1,4 +1,4 @@
-package com.cykj.survey.activity.hydropower;
+package com.cykj.survey.activity.power;
 
 import android.content.Intent;
 import android.os.Bundle;

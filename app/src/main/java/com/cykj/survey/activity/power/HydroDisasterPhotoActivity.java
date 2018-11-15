@@ -1,10 +1,9 @@
-package com.cykj.survey.activity.hydropower;
+package com.cykj.survey.activity.power;
 
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,7 +32,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HydroImageActivity extends BaseFragmentActivity {
+public class HydroDisasterPhotoActivity extends BaseFragmentActivity {
 
     @BindView(R.id.topbar)
     QMUITopBar topbar;
@@ -55,7 +54,8 @@ public class HydroImageActivity extends BaseFragmentActivity {
     private String terget;
     private HydroImage hydroImage;
 
-    private String[] items = new String[]{"地貌", "山体", "植被覆盖", "裸露岩体", "坡度"};
+    private String[] items = new String[]{"消防报警系统", "厂房内部", "消防器材放置位置", "透平油等易燃物放置位置", "中控室采集监控系统", "升压站/变压器", "变压器铭牌",
+            "变压器近景", "厂房内动力电缆排布"};
 
     private int pos = -1;
 
@@ -73,13 +73,23 @@ public class HydroImageActivity extends BaseFragmentActivity {
         initView();
     }
 
-    private void initView() {
-        addImgButton.setOnClickListener(new View.OnClickListener() {
+    private void initTopbar() {
+        topbar.setTitle("现场照片");
+        topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showItemMenuDialog(items);
+
             }
         });
+        topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void initView() {
         adapter = new ImageGridAdapter(this, dataList);
         grid.setAdapter(adapter);
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -89,17 +99,14 @@ public class HydroImageActivity extends BaseFragmentActivity {
                 showItemMenuDialog(items);
             }
         });
-    }
 
-    private void initTopbar() {
-        topbar.setTitle("现场照片");
-        topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+        addImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HydroImageActivity.this,HydroDisasterActivity.class);
-                startActivity(intent);
+                showItemMenuDialog(items);
             }
         });
+        
     }
 
     private void showItemMenuDialog(final String[] items) {
@@ -108,22 +115,16 @@ public class HydroImageActivity extends BaseFragmentActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (pos != -1) {
-                            dataList.get(pos).setName(items[which]);
-                        } else {
                             hydroImage = new HydroImage();
                             hydroImage.setName(items[which]);
+                        } else {
+                            dataList.get(pos).setName(items[which]);
                         }
-
                         dialog.dismiss();
                         showMenuDialog();
                     }
                 })
                 .create(mCurrentDialogStyle).show();
-    }
-
-    private Bitmap getBitMap() {
-        Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(R.mipmap.icon_add_img)).getBitmap();
-        return bitmap;
     }
 
     private void showMenuDialog() {
@@ -154,19 +155,18 @@ public class HydroImageActivity extends BaseFragmentActivity {
                         if (hasSdcard()) {
                             imageUri = Uri.fromFile(fileUri);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                imageUri = FileProvider.getUriForFile(HydroImageActivity.this, "com.cykj.survey.fileprovider", fileUri);
-                                PhotoUtils.takePicture(HydroImageActivity.this, imageUri, CODE_CAMERA_REQUEST);
+                                imageUri = FileProvider.getUriForFile(HydroDisasterPhotoActivity.this, "com.cykj.survey.fileprovider", fileUri);
+                                PhotoUtils.takePicture(HydroDisasterPhotoActivity.this, imageUri, CODE_CAMERA_REQUEST);
                             }
                         } else {
-                            Toast.makeText(HydroImageActivity.this, "设备没有SD卡！", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(HydroDisasterPhotoActivity.this, "设备没有SD卡！", Toast.LENGTH_SHORT).show();
                             Log.e("erro", "设备没有SD卡！");
                         }
                     }
 
-
                     @Override
                     public void denied() {
-                        Toast.makeText(HydroImageActivity.this, "部分权限获取失败，正常功能受到影响", Toast.LENGTH_LONG).show();
+                        Toast.makeText(HydroDisasterPhotoActivity.this, "部分权限获取失败，正常功能受到影响", Toast.LENGTH_LONG).show();
                     }
                 });
                 break;
@@ -174,24 +174,22 @@ public class HydroImageActivity extends BaseFragmentActivity {
                 requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, new RequestPermissionCallBack() {
                     @Override
                     public void granted() {
-                        PhotoUtils.openPic(HydroImageActivity.this, CODE_GALLERY_REQUEST);
+                        PhotoUtils.openPic(HydroDisasterPhotoActivity.this, CODE_GALLERY_REQUEST);
                     }
 
                     @Override
                     public void denied() {
-                        Toast.makeText(HydroImageActivity.this, "部分权限获取失败，正常功能受到影响", Toast.LENGTH_LONG).show();
+                        Toast.makeText(HydroDisasterPhotoActivity.this, "部分权限获取失败，正常功能受到影响", Toast.LENGTH_LONG).show();
                     }
                 });
                 break;
             default:
                 break;
         }
+
     }
 
-
     /**
-     * yo lu xi gu
-     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -203,7 +201,7 @@ public class HydroImageActivity extends BaseFragmentActivity {
             switch (requestCode) {
                 //拍照完成回调
                 case CODE_CAMERA_REQUEST:
-                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(imageUri, HydroImageActivity.this);
+                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(imageUri, HydroDisasterPhotoActivity.this);
                     if (bitmap != null) {
                         if (pos != -1) {
                             dataList.get(pos).setImg(PermissionUtils.compressImage(bitmap));
@@ -225,7 +223,7 @@ public class HydroImageActivity extends BaseFragmentActivity {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             newUri = FileProvider.getUriForFile(this, "com.cykj.survey.fileprovider", new File(newUri.getPath()));
                         }
-                        Bitmap bitmap1 = PhotoUtils.getBitmapFromUri(newUri, HydroImageActivity.this);
+                        Bitmap bitmap1 = PhotoUtils.getBitmapFromUri(newUri, HydroDisasterPhotoActivity.this);
                         if (bitmap1 != null) {
                             if (pos != -1) {
                                 dataList.get(pos).setImg(PermissionUtils.compressImage(bitmap1));
@@ -244,5 +242,4 @@ public class HydroImageActivity extends BaseFragmentActivity {
             }
         }
     }
-
 }

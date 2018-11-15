@@ -1,6 +1,5 @@
-package com.cykj.survey.activity.hydropower;
+package com.cykj.survey.activity.power;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;

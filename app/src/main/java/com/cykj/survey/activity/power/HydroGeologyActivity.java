@@ -1,4 +1,4 @@
-package com.cykj.survey.activity.hydropower;
+package com.cykj.survey.activity.power;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,10 +6,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.model.HydroGeology;
+import com.cykj.survey.model.ResultModel;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +22,13 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class HydroGeologyActivity extends BaseFragmentActivity {
 
@@ -264,6 +276,11 @@ public class HydroGeologyActivity extends BaseFragmentActivity {
     }
 
     private void initView() {
+
+        setAdapter();
+    }
+
+    private void setAdapter(){
         List<String> g1_1 = new ArrayList<>();
         for(String str : data1_1.keySet()){
             g1_1.add(str);
@@ -350,7 +367,6 @@ public class HydroGeologyActivity extends BaseFragmentActivity {
         spinnerSetAdapter(pgAdapter5_11,hydroGeology511);
         spinnerSetAdapter(pgAdapter5_12,hydroGeology512);
         spinnerSetAdapter(pgAdapter5_13,hydroGeology513);
-
     }
 
     private void spinnerSetAdapter(ArrayAdapter<String> arrayAdapter,Spinner spinner){
@@ -363,15 +379,89 @@ public class HydroGeologyActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HydroGeologyActivity.this,HydroImageActivity.class);
-                startActivity(intent);
-                finish();
+                setData();
             }
         });
         topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+    }
+
+    private void setData(){
+
+        String rainStorm = "";
+        rainStorm += "，所在流域属"+ hydroGeology11.getSelectedItem().toString() + "，具有" + data1_1.get(hydroGeology11.getSelectedItem().toString()) + "等特点。"
+                  + "该地多年平均气温 ℃，最热月平均气温 ℃，最冷月平均气温 ℃，多年平均降水量,多年平均降水量 mm,，主要集中在 月,占全年降水量的75%。"
+                  + "该地区气候垂直变化" + hydroGeology12.getSelectedItem().toString() + "，夏季降水充足，" + hydroGeology13.getSelectedItem().toString() + "干旱、暴雨、大风、绵雨等灾害性天气。"
+                  +  "该地的降水年内分配极不均匀，主要集中在 月，暴雨多集中在 月，夏季常常出现短时强降雨天气，易造成短时洪峰。其次该流域内，植被覆盖情况" + hydroGeology14.getSelectedItem().toString()
+                  + "，对地表的坡面流水有一定的调蓄和涵养能力，暴雨季节库区及河道内的漂浮物（枯枝、落叶、杂物）" + hydroGeology16.getSelectedItem().toString() + "，对电站设施存在" + hydroGeology17.getSelectedItem().toString()
+                  + "的影响。综合而言，该电站受暴雨的影响" + hydroGeology18.getSelectedItem().toString() + "。"  ;
+
+        String flood = "";
+        flood += "该流域内多山地及丘陵，支流发育，汇水面积大，该电站的库容量"+ hydroGeology21.getSelectedItem().toString() + "，拦河坝设计洪水二十年一遇，校核洪水一百年一遇，厂房设计洪水二十年一遇，校核洪水五十年一遇。流域上游森林植被覆盖率高，生态环境"
+               + hydroGeology22.getSelectedItem().toString() + "。流域径流主要由" + hydroGeology23.getSelectedItem().toString() + "补给形成，径流年内分配" + hydroGeology24.getSelectedItem().toString() + "，径流主要集中在汛期 月，径流量约占全年的78.2%，8月汛期平均流量可达41.3m3/s。箭板电站龙溪河上游"
+               + hydroGeology26.getSelectedItem().toString() + "其他的电站及大坝，对该流域的洪峰";
+        if (hydroGeology26.getSelectedItem().equals("存在")){
+            flood += "能够起到一定的调节作用，";
+        }else {
+            flood += "缺少一定的调节作用，";
+        }
+        flood += "箭板电站也具备一定的泄洪调蓄能力。因此，该电站的洪水风险" + hydroGeology27.getSelectedItem().toString() + "。";
+
+        String low = "";
+        low += "该地区冬季" + hydroGeology31.getSelectedItem().toString() + "低温天气，" + hydroGeology32.getSelectedItem().toString() + "出现雨雪、冰冻等低温天气，该地河流" + hydroGeology33.getSelectedItem().toString()
+            + "凌汛现象，其他低温灾害对电站设施及大坝的影响" + hydroGeology34.getSelectedItem().toString() + "。";
+
+        String lightning = "";
+        lightning += "箭板电站地处河谷地带，因地形、地势原因，气流抬升作用明显，夏季雷雨天气" + hydroGeology41.getSelectedItem().toString() + "，且云层偏低，因此雷雨云对地闪击的频率比平原或丘陵区" + hydroGeology42.getSelectedItem().toString()
+                  + "，该地区" + hydroGeology43.getSelectedItem().toString() + "发生雷击的风险。" + "箭板电站距离沐川县城约24公里（04-4），根据中国气象数据，沐川县年平均雷暴日为42.9d/a（04-1）。综合考虑沐川县与箭板电站的降雨、地形、气候等因素差异，电站所在区域的雷暴日约在30～50d/a，属于"
+                  + hydroGeology44.getSelectedItem().toString() + "。";
+
+        String geology = "";
+        geology += "板电站即位于龙溪河河谷冲积地区，该地区的岩性主要为" + hydroGeology51.getSelectedItem().toString() +"，电站周边地形坡地"+ hydroGeology512.getSelectedItem().toString() + "。电站区域内的崩塌、滑坡、泥石流等地质灾害" + hydroGeology52.getSelectedItem().toString()
+                + "。其次，该地区距离地震带" + hydroGeology53.getSelectedItem().toString() + "，地震发生强度及规模均" + hydroGeology54.getSelectedItem().toString() + "。该地区" + hydroGeology55.getSelectedItem().toString() + "区域性断层通过，小型活动断裂隙构造"
+                + hydroGeology56.getSelectedItem().toString() + "，该地区的区域稳定性" + hydroGeology57.getSelectedItem().toString() + "，" + hydroGeology58.getSelectedItem().toString() + "发生较强破坏力地震的可能性，电站坝址区的地基稳定" + hydroGeology59.getSelectedItem().toString()
+                + "，电站库区蓄水并" + hydroGeology510.getSelectedItem().toString() + "诱发过库区地震。综上所述，该电站区域发生地震灾害的风险" + hydroGeology511.getSelectedItem().toString()  + "，发生崩塌、滑坡、泥石流等地质灾害的的风险" + hydroGeology513.getSelectedItem().toString() + "。";
+
+        HydroGeology hydroGeology = new HydroGeology();
+        hydroGeology.setRainStorm(rainStorm);
+        hydroGeology.setFlood(flood);
+        hydroGeology.setLow(low);
+        hydroGeology.setLightning(lightning);
+        hydroGeology.setGeology(geology);
+
+        String json = JSONObject.toJSONString(hydroGeology);
+        String url = Constants.TEST_SERVICE + "/hydro/uploadGeology";
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = new FormBody.Builder()
+                .add("json",json)
+                .add("id",Constants.HYDRO_ID.toString())
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String resultStr = response.body().string();
+                ResultModel result = JSONObject.parseObject(resultStr,ResultModel.class);
+                if (result.getCode() == 0){
+                    Intent intent = new Intent(HydroGeologyActivity.this,HydroImageActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }

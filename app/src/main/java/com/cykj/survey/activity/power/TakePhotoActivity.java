@@ -1,4 +1,4 @@
-package com.cykj.survey.activity.hydropower;
+package com.cykj.survey.activity.power;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -16,26 +16,33 @@ import android.widget.Toast;
 
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.model.HydroImage;
 import com.cykj.survey.util.ImgUtil;
 import com.cykj.survey.util.PhotoUtils;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HydroGeologyPhotoActivity extends BaseFragmentActivity implements View.OnClickListener {
+public class TakePhotoActivity extends BaseFragmentActivity implements View.OnClickListener {
 
     @BindView(R.id.topbar)
     QMUITopBar topbar;
-    @BindView(R.id.hydro_grology_around)
-    ImageView hydroGrologyAround;
-    @BindView(R.id.hydro_grology_rock)
-    ImageView hydroGrologyRock;
-    @BindView(R.id.hydro_grology_slope)
-    ImageView hydroGrologySlope;
+    @BindView(R.id.hydro_takephoto_prospect)
+    ImageView hydroTakephotoProspect;
+    @BindView(R.id.hydro_takephoto_dam_prospect)
+    ImageView hydroTakephotoDamProspect;
+    @BindView(R.id.hydro_takephoto_dam_close)
+    ImageView hydroTakephotoDamClose;
+    @BindView(R.id.hydro_takephoto_gate)
+    ImageView hydroTakephotoGate;
+    @BindView(R.id.hydro_takephoto_hoist)
+    ImageView hydroTakephotoHoist;
 
     private static final int CODE_GALLERY_REQUEST = 0xa0;
     private static final int CODE_CAMERA_REQUEST = 0xa1;
@@ -47,20 +54,32 @@ public class HydroGeologyPhotoActivity extends BaseFragmentActivity implements V
 
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
+    private List<HydroImage> imageList;
+
     @Override
     protected int getContextViewId() {
         return R.id.survey;
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_hydro_takephoto);
+        ButterKnife.bind(this);
+        initTopbar();
+        initView();
+    }
+
     /**
      * 初始化标题栏
      */
-    private void initTopbar() {
+    private void initTopbar(){
         topbar.setTitle("照片采集");
-        topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+        topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HydroGeologyPhotoActivity.this, HydroDisasterActivity.class);
+                setData();
+                Intent intent = new Intent(TakePhotoActivity.this,HydroGeologyActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,25 +89,29 @@ public class HydroGeologyPhotoActivity extends BaseFragmentActivity implements V
                 finish();
             }
         });
+    }
+
+
+    private void setData() {
+        imageList = new ArrayList<>();
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hydro_grology_photo);
-        ButterKnife.bind(this);
-        initTopbar();
-        initView();
+    private HydroImage getImage(ImageView imageView){
+        HydroImage hydroImage = new HydroImage();
+
+        return hydroImage;
     }
 
     /**
      * 初始化View
      */
     private void initView(){
-        hydroGrologyAround.setOnClickListener(this);
-        hydroGrologyRock.setOnClickListener(this);
-        hydroGrologySlope.setOnClickListener(this);
+        hydroTakephotoProspect.setOnClickListener(this);
+        hydroTakephotoDamProspect.setOnClickListener(this);
+        hydroTakephotoDamClose.setOnClickListener(this);
+        hydroTakephotoGate.setOnClickListener(this);
+        hydroTakephotoHoist.setOnClickListener(this);
     }
 
     /**
@@ -126,18 +149,18 @@ public class HydroGeologyPhotoActivity extends BaseFragmentActivity implements V
                         if (hasSdcard()){
                             imageUri = Uri.fromFile(fileUri);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                                imageUri = FileProvider.getUriForFile(HydroGeologyPhotoActivity.this,"com.cykj.survey.fileprovider",fileUri);
-                                PhotoUtils.takePicture(HydroGeologyPhotoActivity.this,imageUri,CODE_CAMERA_REQUEST);
+                                imageUri = FileProvider.getUriForFile(TakePhotoActivity.this,"com.cykj.survey.fileprovider",fileUri);
+                                PhotoUtils.takePicture(TakePhotoActivity.this,imageUri,CODE_CAMERA_REQUEST);
                             }
                         }else {
-                            Toast.makeText(HydroGeologyPhotoActivity.this,"设备没有SD卡！",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(TakePhotoActivity.this,"设备没有SD卡！",Toast.LENGTH_SHORT).show();
                             Log.e("erro","设备没有SD卡！");
                         }
                     }
 
                     @Override
                     public void denied() {
-                        Toast.makeText(HydroGeologyPhotoActivity.this, "部分权限获取失败，正常功能受到影响", Toast.LENGTH_LONG).show();
+                        Toast.makeText(TakePhotoActivity.this, "部分权限获取失败，正常功能受到影响", Toast.LENGTH_LONG).show();
                     }
                 });
                 break;
@@ -145,12 +168,12 @@ public class HydroGeologyPhotoActivity extends BaseFragmentActivity implements V
                 requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, new RequestPermissionCallBack() {
                     @Override
                     public void granted() {
-                        PhotoUtils.openPic(HydroGeologyPhotoActivity.this, CODE_GALLERY_REQUEST);
+                        PhotoUtils.openPic(TakePhotoActivity.this, CODE_GALLERY_REQUEST);
                     }
 
                     @Override
                     public void denied() {
-                        Toast.makeText(HydroGeologyPhotoActivity.this, "部分权限获取失败，正常功能受到影响", Toast.LENGTH_LONG).show();
+                        Toast.makeText(TakePhotoActivity.this, "部分权限获取失败，正常功能受到影响", Toast.LENGTH_LONG).show();
                     }
                 });
                 break;
@@ -164,17 +187,23 @@ public class HydroGeologyPhotoActivity extends BaseFragmentActivity implements V
             switch (requestCode){
                 //拍照完成回调
                 case CODE_CAMERA_REQUEST:
-                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(imageUri,HydroGeologyPhotoActivity.this);
+                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(imageUri,TakePhotoActivity.this);
                     if (bitmap != null){
                         switch (target){
-                            case "around":
-                                hydroGrologyAround.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
+                            case "prospect":
+                                hydroTakephotoProspect.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
                                 break;
-                            case "rock":
-                                hydroGrologyRock.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
+                            case "damProspect":
+                                hydroTakephotoDamProspect.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
                                 break;
-                            case "slope":
-                                hydroGrologySlope.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
+                            case "damClose":
+                                hydroTakephotoDamClose.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
+                                break;
+                            case "gate":
+                                hydroTakephotoGate.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
+                                break;
+                            case "hoist":
+                                hydroTakephotoHoist.setImageBitmap(ImgUtil.zoomImg(bitmap,200,300));
                                 break;
                         }
                     }
@@ -187,17 +216,23 @@ public class HydroGeologyPhotoActivity extends BaseFragmentActivity implements V
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
                             newUri = FileProvider.getUriForFile(this,"com.cykj.survey.fileprovider",new File(newUri.getPath()));
                         }
-                        Bitmap bitmap1 = PhotoUtils.getBitmapFromUri(newUri,HydroGeologyPhotoActivity.this);
+                        Bitmap bitmap1 = PhotoUtils.getBitmapFromUri(newUri,TakePhotoActivity.this);
                         if (bitmap1 != null){
                             switch (target){
-                                case "around":
-                                    hydroGrologyAround.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
+                                case "prospect":
+                                    hydroTakephotoProspect.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
                                     break;
-                                case "rock":
-                                    hydroGrologyRock.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
+                                case "damProspect":
+                                    hydroTakephotoDamProspect.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
                                     break;
-                                case "slope":
-                                    hydroGrologySlope.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
+                                case "damClose":
+                                    hydroTakephotoDamClose.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
+                                    break;
+                                case "gate":
+                                    hydroTakephotoGate.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
+                                    break;
+                                case "hoist":
+                                    hydroTakephotoHoist.setImageBitmap(ImgUtil.zoomImg(bitmap1,200,300));
                                     break;
                             }
                         }
@@ -205,6 +240,7 @@ public class HydroGeologyPhotoActivity extends BaseFragmentActivity implements V
                         Toast.makeText(this, "设备没有SD卡!", Toast.LENGTH_SHORT).show();
                     }
                     break;
+
             }
         }
     }
@@ -212,16 +248,24 @@ public class HydroGeologyPhotoActivity extends BaseFragmentActivity implements V
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.hydro_grology_around:
-                target = "around";
+            case R.id.hydro_takephoto_prospect:
+                target = "prospect";
                 showMenuDialog();
                 break;
-            case R.id.hydro_grology_rock:
-                target = "rock";
+            case R.id.hydro_takephoto_dam_prospect:
+                target = "damProspect";
                 showMenuDialog();
                 break;
-            case R.id.hydro_grology_slope:
-                target = "slope";
+            case R.id.hydro_takephoto_dam_close:
+                target = "damClose";
+                showMenuDialog();
+                break;
+            case R.id.hydro_takephoto_gate:
+                target = "gate";
+                showMenuDialog();
+                break;
+            case R.id.hydro_takephoto_hoist:
+                target = "hoist";
                 showMenuDialog();
                 break;
             default:

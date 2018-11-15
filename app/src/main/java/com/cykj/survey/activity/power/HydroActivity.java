@@ -1,4 +1,4 @@
-package com.cykj.survey.activity.hydropower;
+package com.cykj.survey.activity.power;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,12 +15,16 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
 import com.cykj.survey.fragment.adapter.AccidentGridAdapter;
 import com.cykj.survey.fragment.adapter.CrewrecAdapter;
 import com.cykj.survey.model.AccidentGridModel;
 import com.cykj.survey.model.Crew;
+import com.cykj.survey.model.Hydro;
+import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.view.CustomGridView;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
@@ -33,11 +37,21 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class HydroActivity extends BaseFragmentActivity {
 
@@ -65,8 +79,6 @@ public class HydroActivity extends BaseFragmentActivity {
     TextView hydroCrewTypeText;
     @BindView(R.id.hydro_crew_type)
     RelativeLayout hydroCrewType;
-    @BindView(R.id.hydro_edit_capacity)
-    MaterialEditText hydroEditCapacity;
     @BindView(R.id.accident_edit)
     EditText accidentEdit;
     @BindView(R.id.crew_add_text)
@@ -100,6 +112,9 @@ public class HydroActivity extends BaseFragmentActivity {
 
     private List<AccidentGridModel> dataList = new ArrayList<>();
 
+    private Hydro hydro;
+
+    private Map<String,String> useMap = new HashMap<>();
 
     @Override
     protected int getContextViewId() {
@@ -121,9 +136,7 @@ public class HydroActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("照片采集", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HydroActivity.this, TakePhotoActivity.class);
-                startActivity(intent);
-                finish();
+                setData();
             }
         });
         topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
@@ -137,7 +150,39 @@ public class HydroActivity extends BaseFragmentActivity {
     private AccidentGridAdapter accidentGridAdapteradapter;
 
     private void initView() {
+        hydro  = new Hydro();
 
+        initGrid();
+
+        initPicker();
+
+        initMenuSelect();
+
+        initCrewDialog();
+
+    }
+
+    private CrewrecAdapter adapter;
+
+    private void initRecList() {
+        if (crewList.size() == 0) {
+            return;
+        } else if (crewList.size() == 1) {
+            adapter = new CrewrecAdapter(this, crewList);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            crewRecview.setLayoutManager(layoutManager);
+            crewRecview.setAdapter(adapter);
+            crewRecview.setItemAnimator(new DefaultItemAnimator());
+            crewRecview.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+            tip.setVisibility(View.GONE);
+            crewRecview.setVisibility(View.VISIBLE);
+        } else if (crewList.size() > 1) {
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    private void initGrid(){
         dataList.add(new AccidentGridModel("发电", false));
         dataList.add(new AccidentGridModel("灌溉", false));
         dataList.add(new AccidentGridModel("航运", false));
@@ -149,14 +194,17 @@ public class HydroActivity extends BaseFragmentActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (dataList.get(position).isSelect()) {
                     dataList.get(position).setSelect(false);
-
+                    useMap.remove(dataList.get(position).getName());
                 } else {
                     dataList.get(position).setSelect(true);
-
+                    useMap.put(dataList.get(position).getName(),dataList.get(position).getName());
                 }
                 accidentGridAdapteradapter.notifyDataSetChanged();
             }
         });
+    }
+
+    private void initPicker(){
 
         hydroAreaSelect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,7 +219,7 @@ public class HydroActivity extends BaseFragmentActivity {
                             showToastShort("省份信息获取失败");
                             return;
                         } else {
-
+                            hydro.setProvince(province.getName());
                         }
 
                         //城市
@@ -179,7 +227,7 @@ public class HydroActivity extends BaseFragmentActivity {
                             showToastShort("城市信息获取失败");
                             return;
                         } else {
-
+                            hydro.setCity(city.getName());
                         }
 
                         //地区
@@ -187,7 +235,7 @@ public class HydroActivity extends BaseFragmentActivity {
                             showToastShort("地区信息获取失败");
                             return;
                         } else {
-
+                            hydro.setCounty(district.getName());
                         }
 
                         hydroAreaSelectText.setText(province.getName() + "-" + city.getName() + "-" + district.getName());
@@ -202,7 +250,9 @@ public class HydroActivity extends BaseFragmentActivity {
                 mPicker.showCityPicker();
             }
         });
+    }
 
+    private void initMenuSelect(){
         final String[] formItem = {"引水式", "坝式", "其他形式"};
 
         hydroFormSelect.setOnClickListener(new View.OnClickListener() {
@@ -235,7 +285,9 @@ public class HydroActivity extends BaseFragmentActivity {
                 showMenuDialog(hydroDamTypeMaterial,damMaterial);
             }
         });
+    }
 
+    private void initCrewDialog(){
         crewAddText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -277,39 +329,23 @@ public class HydroActivity extends BaseFragmentActivity {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
+
                     }
                 });
                 dialog.show();
             }
         });
-
     }
 
-    private CrewrecAdapter adapter;
-
-    private void initRecList() {
-        if (crewList.size() == 0) {
-            return;
-        } else if (crewList.size() == 1) {
-            adapter = new CrewrecAdapter(this, crewList);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-            crewRecview.setLayoutManager(layoutManager);
-            crewRecview.setAdapter(adapter);
-            crewRecview.setItemAnimator(new DefaultItemAnimator());
-            crewRecview.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-            tip.setVisibility(View.GONE);
-            crewRecview.setVisibility(View.VISIBLE);
-        } else if (crewList.size() > 1) {
-            adapter.notifyDataSetChanged();
-        }
-    }
+    private boolean isNull = false;
 
     private boolean editVerify(final MaterialEditText materialEdit) {
         if (materialEdit.getText().toString().equals("")) {
             materialEdit.setError("请输入" + materialEdit.getHint().toString());
+            isNull = true;
             return false;
         }
+        isNull = false;
         return true;
     }
 
@@ -326,4 +362,131 @@ public class HydroActivity extends BaseFragmentActivity {
                 .create(mCurrentDialogStyle).show();
     }
 
+
+    private void setData(){
+
+        if (editVerify(hydroEditName)){
+            hydro.setName(hydroEditName.getText().toString());
+        }
+
+        if (editVerify(hydroEditAddress)){
+            hydro.setAddr(hydroEditAddress.getText().toString());
+        }
+
+        if (editVerify(hydroEditYear)){
+            hydro.setYear(Integer.parseInt(hydroEditYear.getText().toString()));
+        }
+
+        if (hydroFormSelectText.getText().toString().equals("请选择水电站形式")){
+            showToastShort("请选择水电站形式");
+            return;
+        }else {
+            hydro.setForm(hydroFormSelectText.getText().toString());
+        }
+
+        if (hydroDamTypeText.getText().toString().equals("请选择大坝类型")){
+            showToastShort("请选择大坝类型");
+            return;
+        }else {
+            hydro.setType(hydroDamTypeText.getText().toString());
+        }
+
+        if (hydroDamTypeMaterial.getText().toString().equals("请选择大坝材质")){
+            showToastShort("请选择大坝材质");
+            return;
+        }else {
+            hydro.setMaterial(hydroDamTypeMaterial.getText().toString());
+        }
+
+        if (!hydroEditAxialLength.getText().toString().equals("")){
+            hydro.setLength(Double.parseDouble(hydroEditAxialLength.getText().toString()));
+        }
+
+        if (!hydroEditHight.getText().toString().equals("")){
+            hydro.setHigh(Double.parseDouble(hydroEditHight.getText().toString()));
+        }
+
+        if (!hydroEditNormalWater.getText().toString().equals("")){
+            hydro.setNormal(Double.parseDouble(hydroEditNormalWater.getText().toString()));
+        }
+
+        if (!hydroEditDesignWater.getText().toString().equals("")){
+            hydro.setDesign(Double.parseDouble(hydroEditDesignWater.getText().toString()));
+        }
+
+        if (!hydroEditCheckWater.getText().toString().equals("")){
+            hydro.setCheckWater(Double.parseDouble(hydroEditCheckWater.getText().toString()));
+        }
+
+        if (useMap.size() > 0){
+            String purpose = "";
+            int i = 0;
+            for (String str : useMap.keySet()){
+                if (i == 0){
+                    purpose += str;
+                    i++;
+                }else {
+                    purpose += ","+str;
+                }
+            }
+            hydro.setPurpose(purpose);
+        }else {
+            showToastShort("请选择水电站主要用途");
+            return;
+        }
+
+        if (hydroCrewTypeText.getText().toString().equals("请选择机组样式")){
+            showToastShort("请选择机组样式");
+            return;
+        }else {
+            hydro.setCrewStyle(hydroCrewTypeText.getText().toString());
+        }
+
+        if (crewList.size() > 0){
+            hydro.setCrew(JSONObject.toJSONString(crewList));
+        }else {
+            showToastShort("请添加机组信息");
+            return;
+        }
+
+        if (isNull){
+            return;
+        }else {
+            String url = Constants.TEST_SERVICE + "/hydro/saveHydro";
+
+            String json = JSONObject.toJSONString(hydro);
+
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody body = new FormBody.Builder()
+                    .add("json",json)
+                    .build();
+
+            final Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    showToastShort("网络连接失败");
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String resultStr = response.body().string();
+                    ResultModel result = JSONObject.parseObject(resultStr,ResultModel.class);
+                    if (result.getCode() == 0){
+                        Constants.HYDRO_ID = Long.parseLong(result.getData());
+                        Intent intent = new Intent(HydroActivity.this, TakePhotoActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            });
+        }
+
+
+    }
 }

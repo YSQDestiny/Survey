@@ -1,4 +1,4 @@
-package com.cykj.survey.activity.hydropower;
+package com.cykj.survey.activity.power;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,6 @@ import butterknife.ButterKnife;
 public class HydroDisasterActivity extends BaseFragmentActivity {
 
 
-    private static List<String> data1 = new ArrayList<>();
     private static List<String> data2 = new ArrayList<>();
     private static List<String> data4 = new ArrayList<>();
     private static List<String> data5 = new ArrayList<>();
@@ -31,6 +30,8 @@ public class HydroDisasterActivity extends BaseFragmentActivity {
     private static List<String> data15 = new ArrayList<>();
     private static List<String> data16 = new ArrayList<>();
     private static List<String> data17 = new ArrayList<>();
+    private static List<String> data18 = new ArrayList<>();
+    private static List<String> data20 = new ArrayList<>();
 
     static {
 
@@ -63,11 +64,18 @@ public class HydroDisasterActivity extends BaseFragmentActivity {
         data15.add("是");
         data15.add("否");
 
-        data16.add("是");
-        data16.add("否");
+        data16.add("整齐（线路按要求走线槽，设有防火封堵）");
+        data16.add("较整齐（动力电缆和大部分控制电缆走线槽，有防火封堵）");
+        data16.add("不整齐（线路布置杂乱，动力电缆和控制电缆混合布线）");
 
         data17.add("是");
         data17.add("否");
+
+        data18.add("厂房外部");
+        data18.add("厂房内部");
+
+        data20.add("是");
+        data20.add("否");
     }
 
     @BindView(R.id.topbar)
@@ -78,8 +86,6 @@ public class HydroDisasterActivity extends BaseFragmentActivity {
     MaterialEditText hydroDisasterVice;
     @BindView(R.id.hydro_disaster_2)
     Spinner hydroDisaster2;
-    @BindView(R.id.hydro_disaster_level)
-    MaterialEditText hydroDisasterLevel;
     @BindView(R.id.hydro_disaster_4)
     Spinner hydroDisaster4;
     @BindView(R.id.hydro_disaster_5)
@@ -96,14 +102,19 @@ public class HydroDisasterActivity extends BaseFragmentActivity {
     MaterialEditText hydroTransformerNumber;
     @BindView(R.id.hydro_transformer_version)
     MaterialEditText hydroTransformerVersion;
-    @BindView(R.id.hydro_transformer_location)
-    MaterialEditText hydroTransformerLocation;
+    @BindView(R.id.hydro_disaster_18)
+    Spinner hydroDisaster18;
+    @BindView(R.id.hydro_distance)
+    MaterialEditText hydroDistance;
     @BindView(R.id.hydro_disaster_15)
     Spinner hydroDisaster15;
+    @BindView(R.id.hydro_disaster_20)
+    Spinner hydroDisaster20;
     @BindView(R.id.hydro_disaster_16)
     Spinner hydroDisaster16;
     @BindView(R.id.hydro_disaster_17)
     Spinner hydroDisaster17;
+
 
     @Override
     protected int getContextViewId() {
@@ -130,6 +141,8 @@ public class HydroDisasterActivity extends BaseFragmentActivity {
         ArrayAdapter<String> hdAdapter15 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data15);
         ArrayAdapter<String> hdAdapter16 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data16);
         ArrayAdapter<String> hdAdapter17 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data17);
+        ArrayAdapter<String> hdAdapter18 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data18);
+        ArrayAdapter<String> hdAdapter20 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data20);
 
         spinnerSetAdapter(hdAdapter2, hydroDisaster2);
         spinnerSetAdapter(hdAdapter4, hydroDisaster4);
@@ -141,6 +154,8 @@ public class HydroDisasterActivity extends BaseFragmentActivity {
         spinnerSetAdapter(hdAdapter15, hydroDisaster15);
         spinnerSetAdapter(hdAdapter16, hydroDisaster16);
         spinnerSetAdapter(hdAdapter17, hydroDisaster17);
+        spinnerSetAdapter(hdAdapter18, hydroDisaster18);
+        spinnerSetAdapter(hdAdapter20, hydroDisaster20);
 
     }
 
@@ -149,7 +164,7 @@ public class HydroDisasterActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HydroDisasterActivity.this, ElectromechanicalActivity.class);
+                Intent intent = new Intent(HydroDisasterActivity.this, HydroDisasterPhotoActivity.class);
                 startActivity(intent);
             }
         });
@@ -164,6 +179,32 @@ public class HydroDisasterActivity extends BaseFragmentActivity {
     private void spinnerSetAdapter(ArrayAdapter<String> arrayAdapter, Spinner spinner) {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
+    }
+
+    private void setData(){
+        String disaster = "";
+        disaster += "箭板电站有" + hydroDisasterMain.getText().toString() + "座主厂房，"+hydroDisasterVice.getText().toString()+"座副厂房，厂房主体为"
+                 + hydroDisaster2.getSelectedItem().toString() + "，根据对厂房结构材料进行观测，初步判定为";
+        switch (hydroDisaster2.getSelectedItem().toString()){
+            case "钢混结构":
+                disaster += "1级耐火等级建筑。水电站厂房火灾危险性类别有丙、丁、戊类，1级建筑耐火等级满足《水利水电工程设计防火规范》（SDJ 278－1990）要求。";
+                break;
+            case "砖混结构":
+                disaster += "2级耐火等级建筑。水电站厂房火灾危险性类别有丙、丁、戊类，2级建筑耐火等级满足《水利水电工程设计防火规范》（SDJ 278－1990）要求。";
+                break;
+            case "砖木结构":
+                disaster += "3-4级耐火等级建筑。水电站厂房火灾危险性类别有丙、丁、戊类，3-4级建筑耐火等级满足《水利水电工程设计防火规范》（SDJ 278－1990）要求。";
+                break;
+            case "彩钢结构":
+                disaster += "3-4级耐火等级建筑。水电站厂房火灾危险性类别有丙、丁、戊类，3-4级建筑耐火等级满足《水利水电工程设计防火规范》（SDJ 278－1990）要求。";
+                break;
+            default:
+                break;
+        }
+
+        disaster += "厂房区域" + hydroDisaster4.getSelectedItem().toString() +"禁烟火标志，" + hydroDisaster5.getSelectedItem().toString() +"自动消防报警装置。其内部物资等放置"
+                 + hydroDisaster6.getSelectedItem().toString() + "，消防间距" + hydroDisaster7.getSelectedItem().toString() + "，消防器材配置充足且按期点检，透平油等易燃物"
+                 + hydroDisaster8.getSelectedItem().toString() + "保存，发生火灾风险小；重点区域安装视频监控，中控室24小时有人值班，能及时发现并扑灭初期火灾。";
     }
 
 }

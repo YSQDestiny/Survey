@@ -1,6 +1,7 @@
 package com.cykj.survey;
 
 import com.cykj.survey.model.Deduction;
+import com.cykj.survey.model.Hydro;
 import com.cykj.survey.model.Options;
 import com.cykj.survey.model.PhotoModel;
 import com.cykj.survey.model.ProjectAccident;
@@ -15,9 +16,9 @@ public class Constants {
 
 //    public final static String TEST_SERVICE = "http://destiny.s1.natapp.cc/CYKJ";
 
-      public final static String TEST_SERVICE = "http://47.92.209.204:80/CYKJ";
+//      public final static String TEST_SERVICE = "http://47.92.209.204:80/CYKJ";
 
-//      public final static String TEST_SERVICE = "http://192.168.0.123:8080/CYKJ";
+      public final static String TEST_SERVICE = "http://192.168.0.112:8080/CYKJ";
 
 //    public final static String TEST_SERVICE = "http://192.168.199.167:8080/CYKJ";
 
@@ -28,6 +29,8 @@ public class Constants {
     public static Long PROJECT_ID;
 
     public static Long PROPERTY_ID;
+
+    public static Long HYDRO_ID;
 
     public static String DEDUCTION_JSON;
 
@@ -101,5 +104,11 @@ public class Constants {
 
     public static void cleanUploadList(){
         uploadModelList.clear();
+    }
+
+    public static Hydro hydro;
+
+    public static void setHydro(Hydro hydro1){
+        hydro = hydro1;
     }
 }

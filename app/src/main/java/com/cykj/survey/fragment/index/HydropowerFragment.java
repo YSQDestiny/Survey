@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.cykj.survey.R;
-import com.cykj.survey.activity.hydropower.HydroActivity;
+import com.cykj.survey.activity.power.HydroActivity;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.lib.Group;
 import com.cykj.survey.lib.annotation.Widget;
@@ -14,7 +14,6 @@ import com.qmuiteam.qmui.widget.QMUITopBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 @Widget(group = Group.Home, name = "能源", iconRes = R.mipmap.icon_fragment_hydropower_station)
 public class HydropowerFragment extends BaseFragment {

@@ -82,20 +82,6 @@
 
             <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
 
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/hydro_disaster_level"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:hint="厂房耐火等级"
-                android:textSize="14sp"
-                app:met_primaryColor="?attr/app_primary_color"
-                app:met_floatingLabel="highlight"
-                app:met_clearButton= "true"
-                app:met_hideUnderline="true"/>
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -292,19 +278,47 @@
 
             <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="主变压器安装位置"
+                    android:textColor="#6D727C"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/hydro_disaster_18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </Spinner>
+
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/hydro_transformer_location"
+                android:id="@+id/hydro_distance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="主变压器安装位置"
+                android:hint="变压器距离厂房多少米"
                 android:textSize="14sp"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
                 app:met_clearButton= "true"
-                app:met_hideUnderline="true"/>
+                app:met_hideUnderline="true"
+                android:inputType="number"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -325,6 +339,33 @@
 
             <Spinner
                 android:id="@+id/hydro_disaster_15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </Spinner>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="变压器及进出线温度是否过高"
+                    android:textColor="#6D727C"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/hydro_disaster_20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"

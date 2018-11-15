@@ -46,7 +46,7 @@
         android:layout_height="?attr/qmui_topbar_height"
         android:layout_gravity="bottom"
         android:background="@color/app_color_theme_6"
-        android:text="上传"
+        android:text="添加照片"
         android:textColor="@color/qmui_config_color_white"
         android:textSize="20sp"/>
 
