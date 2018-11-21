@@ -447,10 +447,15 @@ public class HydroGeologyActivity extends BaseFragmentActivity {
                 .post(body)
                 .build();
 
+        /**
+         * qi sha la kuo le ni wa
+         * wo zhi dao wo de wei lai bu shi meng
+         * wo bu zai de di yi
+         */
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                showToastShort("网络连接失败！");
             }
 
             @Override

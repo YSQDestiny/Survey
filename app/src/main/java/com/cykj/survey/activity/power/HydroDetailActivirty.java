@@ -43,7 +43,6 @@ public class HydroDetailActivirty extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property_details);
         ButterKnife.bind(this);
         Intent intent = getIntent();
@@ -71,7 +70,9 @@ public class HydroDetailActivirty extends BaseFragmentActivity {
         });
     }
 
-    //WebViewClient主要帮助WebView处理各种通知、请求事件
+    /**
+     *WebViewClient主要帮助WebView处理各种通知、请求事件
+     */
     private WebViewClient webViewClient = new WebViewClient() {
         @Override
         public void onPageFinished(WebView view, String url) {//页面加载完成
@@ -87,8 +88,9 @@ public class HydroDetailActivirty extends BaseFragmentActivity {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             Log.i("ansen", "拦截url:" + url);
             if (url.equals("http://www.google.com/")) {
-                Toast.makeText(ProertyDetailActivirt.this, "国内不能访问google,拦截该url", Toast.LENGTH_LONG).show();
-                return true;//表示我已经处理过了
+                Toast.makeText(HydroDetailActivirty.this, "国内不能访问google,拦截该url", Toast.LENGTH_LONG).show();
+                //表示我已经处理过了
+                return true;
             }
             return super.shouldOverrideUrlLoading(view, url);
         }
@@ -119,7 +121,9 @@ public class HydroDetailActivirty extends BaseFragmentActivity {
         webSettings.setBuiltInZoomControls(true);
     }
 
-    //WebChromeClient主要辅助WebView处理Javascript的对话框、网站图标、网站title、加载进度等
+    /**
+     * WebChromeClient主要辅助WebView处理Javascript的对话框、网站图标、网站title、加载进度等
+     */
     private WebChromeClient webChromeClient = new WebChromeClient() {
         //不支持js的alert弹窗，需要自己监听然后通过dialog弹窗
         @Override
@@ -152,11 +156,11 @@ public class HydroDetailActivirty extends BaseFragmentActivity {
 
     /**
      * JS调用android的方法
-     *
+     * 仍然必不可少
      * @param str
      * @return
      */
-    @JavascriptInterface //仍然必不可少
+    @JavascriptInterface
     public void getClient(String str) {
 
     }

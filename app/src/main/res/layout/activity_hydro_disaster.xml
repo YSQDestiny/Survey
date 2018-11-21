@@ -258,7 +258,8 @@
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
                 app:met_clearButton= "true"
-                app:met_hideUnderline="true"/>
+                app:met_hideUnderline="true"
+                android:inputType="number"/>
 
             <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
 
@@ -412,7 +413,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="线路是否老化"
+                    android:text="线路是否有老化痕迹"
                     android:textColor="#6D727C"
                     android:textSize="14sp" />
 

@@ -6,16 +6,27 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.model.ResultModel;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class HydroDisasterActivity extends BaseFragmentActivity {
 
@@ -61,21 +72,21 @@ public class HydroDisasterActivity extends BaseFragmentActivity {
         data10.add("是");
         data10.add("否");
 
-        data15.add("是");
-        data15.add("否");
+        data15.add("有");
+        data15.add("无");
 
         data16.add("整齐（线路按要求走线槽，设有防火封堵）");
         data16.add("较整齐（动力电缆和大部分控制电缆走线槽，有防火封堵）");
         data16.add("不整齐（线路布置杂乱，动力电缆和控制电缆混合布线）");
 
-        data17.add("是");
-        data17.add("否");
+        data17.add("有");
+        data17.add("无");
 
         data18.add("厂房外部");
         data18.add("厂房内部");
 
-        data20.add("是");
-        data20.add("否");
+        data20.add("正常");
+        data20.add("过高");
     }
 
     @BindView(R.id.topbar)
@@ -164,8 +175,7 @@ public class HydroDisasterActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HydroDisasterActivity.this, HydroDisasterPhotoActivity.class);
-                startActivity(intent);
+                setData();
             }
         });
         topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
@@ -183,8 +193,19 @@ public class HydroDisasterActivity extends BaseFragmentActivity {
 
     private void setData(){
         String disaster = "";
-        disaster += "箭板电站有" + hydroDisasterMain.getText().toString() + "座主厂房，"+hydroDisasterVice.getText().toString()+"座副厂房，厂房主体为"
-                 + hydroDisaster2.getSelectedItem().toString() + "，根据对厂房结构材料进行观测，初步判定为";
+        if (!hydroDisasterMain.getText().toString().equals("")){
+            disaster += "箭板电站有" + hydroDisasterMain.getText().toString() + "座主厂房，";
+        }else {
+            showToastShort("请输入主厂房数量");
+            return;
+        }
+        if (!hydroDisasterVice.getText().toString().equals("")){
+            disaster +=hydroDisasterVice.getText().toString()+"座副厂房，厂房主体为";
+        }else {
+            showToastShort("请输入副厂房数量");
+            return;
+        }
+        disaster += hydroDisaster2.getSelectedItem().toString() + "，根据对厂房结构材料进行观测，初步判定为";
         switch (hydroDisaster2.getSelectedItem().toString()){
             case "钢混结构":
                 disaster += "1级耐火等级建筑。水电站厂房火灾危险性类别有丙、丁、戊类，1级建筑耐火等级满足《水利水电工程设计防火规范》（SDJ 278－1990）要求。";
@@ -204,7 +225,75 @@ public class HydroDisasterActivity extends BaseFragmentActivity {
 
         disaster += "厂房区域" + hydroDisaster4.getSelectedItem().toString() +"禁烟火标志，" + hydroDisaster5.getSelectedItem().toString() +"自动消防报警装置。其内部物资等放置"
                  + hydroDisaster6.getSelectedItem().toString() + "，消防间距" + hydroDisaster7.getSelectedItem().toString() + "，消防器材配置充足且按期点检，透平油等易燃物"
-                 + hydroDisaster8.getSelectedItem().toString() + "保存，发生火灾风险小；重点区域安装视频监控，中控室24小时有人值班，能及时发现并扑灭初期火灾。";
+                 + hydroDisaster8.getSelectedItem().toString() + "保存，发生火灾风险小；重点区域安装视频监控，中控室24小时有人值班，能及时发现并扑灭初期火灾。"
+                 + "电站升压站内安装";
+
+        if (!hydroTransformerNumber.getText().toString().equals("")){
+            disaster += hydroTransformerNumber.getText().toString() + "台油浸式主变压器，型号分别为";
+        }else {
+            showToastShort("请输入变压器台数");
+            return;
+        }
+        if (!hydroTransformerVersion.getText().toString().equals("")){
+            disaster += hydroTransformerVersion.getText().toString() + "；变压器安装在" + hydroDisaster18.getSelectedItem().toString() + "，与厂房距离超过";
+        }else {
+            showToastShort("请输入变压器型号");
+            return;
+        }
+        if (!hydroDistance.getText().toString().equals("")){
+            disaster += hydroDistance.getText().toString() + "米，间设围墙，墙面靠近变压器侧无门窗。满足《3-110KV高压配电装置设计规范》（GB 50060-2008）要求。变压器表面"
+            + hydroDisaster15.getSelectedItem().toString() + "明显发黄点，进出线路及母排温度" + hydroDisaster20.getSelectedItem().toString() + "，短期变压器发生火灾风险";
+        }
+        switch (hydroDisaster20.getSelectedItem().toString()){
+            case "正常":
+                disaster += "较小，对厂房影响小";
+                break;
+            case "过高":
+                disaster += "较高，对厂房影响大";
+                break;
+            default:
+                break;
+        }
+
+        disaster += "厂区内线路布置" + hydroDisaster16.getSelectedItem().toString() + "，查勘期间电站无机组运行，大部分线路处于断开状态。现场对线路表面进行观察，线路" + hydroDisaster17.getSelectedItem().toString()
+                 + "明显老化痕迹，升压站场地内出线穿管，";
+
+        if (hydroDisaster16.getSelectedItem().toString().equals("不整齐（线路布置杂乱，动力电缆和控制电缆混合布线）") & hydroDisaster17.getSelectedItem().toString().equals("有")){
+            disaster += "线路短期风险较高";
+        }else {
+            disaster += "线路短期风险较小";
+        }
+
+        String url = Constants.TEST_SERVICE + "/hydro/uploadDisaster";
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = new FormBody.Builder()
+                .add("disaster",disaster)
+                .add("id",Constants.HYDRO_ID.toString())
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String resultStr = response.body().string();
+                ResultModel result = JSONObject.parseObject(resultStr,ResultModel.class);
+                if (result.getCode() == 0){
+                    Intent intent = new Intent(HydroDisasterActivity.this, HydroDisasterPhotoActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
     }
 
 }

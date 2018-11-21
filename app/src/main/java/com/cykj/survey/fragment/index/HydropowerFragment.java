@@ -65,6 +65,7 @@ public class HydropowerFragment extends BaseFragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), HydroActivity.class);
                 getActivity().startActivity(intent);
+
             }
         });
     }

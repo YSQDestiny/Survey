@@ -1,19 +1,31 @@
 package com.cykj.survey.activity.power;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.model.ResultModel;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class OtherActivity extends BaseFragmentActivity {
 
@@ -32,7 +44,7 @@ public class OtherActivity extends BaseFragmentActivity {
 
     static {
         data1.add("有");
-        data1.add("无");
+        data1.add("没有");
 
         data2.add("有");
         data2.add("无");
@@ -60,7 +72,7 @@ public class OtherActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("完成", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
             }
         });
     }
@@ -78,5 +90,43 @@ public class OtherActivity extends BaseFragmentActivity {
     private void spinnerSetAdapter(ArrayAdapter<String> arrayAdapter, Spinner spinner){
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
+    }
+
+    private void setData(){
+        String other = "";
+
+        other += "箭板电站管理较为规范，厂区周围" + hydroOther1.getSelectedItem().toString() + "建造围墙，24小时有人值班，" +
+                "与区域群众" + hydroOther2.getSelectedItem().toString() + "民事纠纷，设备设施遭受人员或小动物损坏可能性"
+                + hydroOther3.getSelectedItem().toString()+"。";
+
+        String url = Constants.TEST_SERVICE + "/hydro/uploadOthers";
+
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = new FormBody.Builder()
+                .add("other",other)
+                .add("id",Constants.HYDRO_ID.toString())
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String resultStr = response.body().string();
+                ResultModel result = JSONObject.parseObject(resultStr,ResultModel.class);
+                if (result.getCode() == 0){
+                    finish();
+                }
+            }
+        });
     }
 }

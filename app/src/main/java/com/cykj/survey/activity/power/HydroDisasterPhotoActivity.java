@@ -78,7 +78,9 @@ public class HydroDisasterPhotoActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(HydroDisasterPhotoActivity.this,ElectromechanicalActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
         topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
@@ -231,6 +233,7 @@ public class HydroDisasterPhotoActivity extends BaseFragmentActivity {
                             } else {
                                 hydroImage.setImg(PermissionUtils.compressImage(bitmap1));
                                 dataList.add(hydroImage);
+
                                 hydroImage = null;
                             }
                             adapter.notifyDataSetChanged();

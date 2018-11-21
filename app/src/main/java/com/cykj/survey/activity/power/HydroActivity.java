@@ -25,6 +25,7 @@ import com.cykj.survey.model.AccidentGridModel;
 import com.cykj.survey.model.Crew;
 import com.cykj.survey.model.Hydro;
 import com.cykj.survey.model.ResultModel;
+import com.cykj.survey.util.DeviceUtils;
 import com.cykj.survey.view.CustomGridView;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
@@ -448,6 +449,8 @@ public class HydroActivity extends BaseFragmentActivity {
             showToastShort("请添加机组信息");
             return;
         }
+
+        hydro.setUniqueId(DeviceUtils.getUniqueId(this));
 
         if (isNull){
             return;

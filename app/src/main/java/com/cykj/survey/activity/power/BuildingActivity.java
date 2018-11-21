@@ -9,15 +9,27 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.model.ResultModel;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class BuildingActivity extends BaseFragmentActivity {
 
@@ -74,14 +86,12 @@ public class BuildingActivity extends BaseFragmentActivity {
         initView();
     }
 
-        private void initTopbar(){
+    private void initTopbar(){
         topbar.setTitle("水工建筑风险");
         topbar.addRightTextButton("采集照片",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BuildingActivity.this,OtherActivity.class);
-                startActivity(intent);
-                finish();
+                setData();
             }
         });
     }
@@ -133,11 +143,7 @@ public class BuildingActivity extends BaseFragmentActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                int count = parent.getCount();
-                if (count >= 0){
-                    System.out.println("imaging be without you");
-                    Log.d("","");
-                }
+
                 return;
             }
         });
@@ -149,4 +155,42 @@ public class BuildingActivity extends BaseFragmentActivity {
         spinner.setAdapter(arrayAdapter);
     }
 
+    private void setData(){
+        String building = "";
+        building += accidentEdit.getText().toString() + "现场查勘大坝主体结构良好，坝体" + hydroBuilding2.getSelectedItem().toString()
+        + "漏水。启闭机及闸门等均维护较好，" + hydroBuilding3.getSelectedItem().toString() + "明显缺陷。电站厂房置于坝体后方左岸开挖基岩上。目前厂房主体结构"
+        + hydroBuilding4.getSelectedItem().toString()+"。";
+
+        String url = Constants.TEST_SERVICE + "/hydro/uploadBuilding";
+
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = new FormBody.Builder()
+                .add("building",building)
+                .add("id",Constants.HYDRO_ID.toString())
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String resultStr = response.body().string();
+                ResultModel result = JSONObject.parseObject(resultStr,ResultModel.class);
+                if (result.getCode() == 0){
+                    Intent intent = new Intent(BuildingActivity.this,OtherActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+    }
 }
