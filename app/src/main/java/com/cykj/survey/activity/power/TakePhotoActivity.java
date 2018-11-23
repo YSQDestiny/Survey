@@ -14,20 +14,32 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
 import com.cykj.survey.model.HydroImage;
+import com.cykj.survey.model.HydroImageModel;
+import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.ImgUtil;
 import com.cykj.survey.util.PhotoUtils;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class TakePhotoActivity extends BaseFragmentActivity implements View.OnClickListener {
 
@@ -54,7 +66,7 @@ public class TakePhotoActivity extends BaseFragmentActivity implements View.OnCl
 
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
-    private List<HydroImage> imageList;
+    private List<HydroImageModel> imageList;
 
     @Override
     protected int getContextViewId() {
@@ -79,8 +91,6 @@ public class TakePhotoActivity extends BaseFragmentActivity implements View.OnCl
             @Override
             public void onClick(View v) {
                 setData();
-                Intent intent = new Intent(TakePhotoActivity.this,HydroGeologyActivity.class);
-                startActivity(intent);
             }
         });
         topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
@@ -94,13 +104,50 @@ public class TakePhotoActivity extends BaseFragmentActivity implements View.OnCl
 
     private void setData() {
         imageList = new ArrayList<>();
+        hydroTakephotoProspect.setDrawingCacheEnabled(true);
+        hydroTakephotoDamProspect.setDrawingCacheEnabled(true);
+        hydroTakephotoDamClose.setDrawingCacheEnabled(true);
+        hydroTakephotoGate.setDrawingCacheEnabled(true);
+        hydroTakephotoHoist.setDrawingCacheEnabled(true);
+        imageList.add(new HydroImageModel("电站远景照片",ImgUtil.bitmapToBase64(hydroTakephotoProspect.getDrawingCache()),Constants.HYDRO_ID));
+        imageList.add(new HydroImageModel("大坝远景照片",ImgUtil.bitmapToBase64(hydroTakephotoDamProspect.getDrawingCache()),Constants.HYDRO_ID));
+        imageList.add(new HydroImageModel("大坝近景照片",ImgUtil.bitmapToBase64(hydroTakephotoDamClose.getDrawingCache()),Constants.HYDRO_ID));
+        imageList.add(new HydroImageModel("闸门照片",ImgUtil.bitmapToBase64(hydroTakephotoGate.getDrawingCache()),Constants.HYDRO_ID));
+        imageList.add(new HydroImageModel("启闭机照片",ImgUtil.bitmapToBase64(hydroTakephotoHoist.getDrawingCache()),Constants.HYDRO_ID));
 
-    }
+        String json = JSONObject.toJSONString(imageList);
 
-    private HydroImage getImage(ImageView imageView){
-        HydroImage hydroImage = new HydroImage();
+        String url = Constants.TEST_SERVICE + "/hydro/uploadImage";
 
-        return hydroImage;
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = new FormBody.Builder()
+                .add("json",json)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String resultStr = response.body().string();
+                ResultModel result = JSONObject.parseObject(resultStr,ResultModel.class);
+                if (result.getCode() == 0){
+                    Intent intent = new Intent(TakePhotoActivity.this,HydroGeologyActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+
     }
 
     /**

@@ -15,10 +15,15 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
 import com.cykj.survey.fragment.adapter.ImageGridAdapter;
 import com.cykj.survey.model.HydroImage;
+import com.cykj.survey.model.HydroImageModel;
+import com.cykj.survey.model.ResultModel;
+import com.cykj.survey.util.ImgUtil;
 import com.cykj.survey.util.PermissionUtils;
 import com.cykj.survey.util.PhotoUtils;
 import com.cykj.survey.view.CustomGridView;
@@ -26,11 +31,19 @@ import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class HydroDisasterPhotoActivity extends BaseFragmentActivity {
 
@@ -78,15 +91,55 @@ public class HydroDisasterPhotoActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HydroDisasterPhotoActivity.this,ElectromechanicalActivity.class);
-                startActivity(intent);
-                finish();
+                setData();
             }
         });
         topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+    }
+
+    private void setData(){
+        List<HydroImageModel> modelList = new ArrayList<>();
+        for (HydroImage image : dataList){
+            modelList.add(new HydroImageModel(image.getName(),ImgUtil.bitmapToBase64(image.getImg()),Constants.HYDRO_ID));
+        }
+
+        String json = JSONObject.toJSONString(modelList);
+
+        String url = Constants.TEST_SERVICE + "/hydro/uploadImage";
+
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = new FormBody.Builder()
+                .add("json",json)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                String resultStr = response.body().string();
+                ResultModel result = JSONObject.parseObject(resultStr,ResultModel.class);
+                if (result.getCode() == 0){
+                    Intent intent = new Intent(HydroDisasterPhotoActivity.this,ElectromechanicalActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
             }
         });
     }
@@ -117,10 +170,10 @@ public class HydroDisasterPhotoActivity extends BaseFragmentActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (pos != -1) {
+                            dataList.get(pos).setName(items[which]);
+                        } else {
                             hydroImage = new HydroImage();
                             hydroImage.setName(items[which]);
-                        } else {
-                            dataList.get(pos).setName(items[which]);
                         }
                         dialog.dismiss();
                         showMenuDialog();

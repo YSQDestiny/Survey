@@ -399,25 +399,25 @@ public class HydroActivity extends BaseFragmentActivity {
             hydro.setMaterial(hydroDamTypeMaterial.getText().toString());
         }
 
-        if (!hydroEditAxialLength.getText().toString().equals("")){
-            hydro.setLength(Double.parseDouble(hydroEditAxialLength.getText().toString()));
-        }
-
-        if (!hydroEditHight.getText().toString().equals("")){
-            hydro.setHigh(Double.parseDouble(hydroEditHight.getText().toString()));
-        }
-
-        if (!hydroEditNormalWater.getText().toString().equals("")){
-            hydro.setNormal(Double.parseDouble(hydroEditNormalWater.getText().toString()));
-        }
-
-        if (!hydroEditDesignWater.getText().toString().equals("")){
-            hydro.setDesign(Double.parseDouble(hydroEditDesignWater.getText().toString()));
-        }
-
-        if (!hydroEditCheckWater.getText().toString().equals("")){
-            hydro.setCheckWater(Double.parseDouble(hydroEditCheckWater.getText().toString()));
-        }
+//        if (!hydroEditAxialLength.getText().toString().equals("")){
+//            hydro.setLength(Double.parseDouble(hydroEditAxialLength.getText().toString()));
+//        }
+//
+//        if (!hydroEditHight.getText().toString().equals("")){
+//            hydro.setHigh(Double.parseDouble(hydroEditHight.getText().toString()));
+//        }
+//
+//        if (!hydroEditNormalWater.getText().toString().equals("")){
+//            hydro.setNormal(Double.parseDouble(hydroEditNormalWater.getText().toString()));
+//        }
+//
+//        if (!hydroEditDesignWater.getText().toString().equals("")){
+//            hydro.setDesign(Double.parseDouble(hydroEditDesignWater.getText().toString()));
+//        }
+//
+//        if (!hydroEditCheckWater.getText().toString().equals("")){
+//            hydro.setCheckWater(Double.parseDouble(hydroEditCheckWater.getText().toString()));
+//        }
 
         if (useMap.size() > 0){
             String purpose = "";

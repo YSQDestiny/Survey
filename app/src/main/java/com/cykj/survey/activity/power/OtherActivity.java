@@ -72,7 +72,7 @@ public class OtherActivity extends BaseFragmentActivity {
         topbar.addRightTextButton("完成", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                setData();
             }
         });
     }

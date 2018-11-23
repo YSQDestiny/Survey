@@ -88,12 +88,19 @@ public class BuildingActivity extends BaseFragmentActivity {
 
     private void initTopbar(){
         topbar.setTitle("水工建筑风险");
-        topbar.addRightTextButton("采集照片",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+        topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setData();
             }
         });
+        topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     private void initView(){

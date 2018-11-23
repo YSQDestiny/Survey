@@ -262,6 +262,61 @@
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="8dp"></Spinner>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f0f2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="4dp"
+                    android:text="9.厂区排水沟是否畅通？"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f0f2" />
+
+                <Spinner
+                    android:id="@+id/hydro_geology_1_9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f0f2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="4dp"
+                    android:text="10.厂区排水设施是否完备？"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f0f2" />
+
+                <Spinner
+                    android:id="@+id/hydro_geology_1_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp" />
             </LinearLayout>
 
             <RelativeLayout
@@ -460,7 +515,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="18dp"
                     android:layout_marginTop="4dp"
-                    android:text="7.该电站是否具备泄洪调蓄能力？"
+                    android:text="7.该大坝设施是否对该流域洪峰起到调控作用？"
                     android:textSize="14sp" />
 
                 <View
@@ -629,6 +684,62 @@
 
                 <Spinner
                     android:id="@+id/hydro_geology_3_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp" />
+
+                <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f2f0f2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="4dp"
+                    android:text="5.输电线路有无历史覆冰记录？"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f0f2" />
+
+                <Spinner
+                    android:id="@+id/hydro_geology_3_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f0f2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="4dp"
+                    android:text="6.覆冰程度？"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f0f2" />
+
+                <Spinner
+                    android:id="@+id/hydro_geology_3_6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -825,7 +936,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="18dp"
                     android:layout_marginTop="4dp"
-                    android:text="2.电站附近地质灾害的发育情况？"
+                    android:text="2.电站所在区域的地形条件？"
                     android:textSize="14sp" />
 
                 <View
@@ -853,7 +964,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="18dp"
                     android:layout_marginTop="4dp"
-                    android:text="3.电站与地震带的距离如何？"
+                    android:text="3.电站所在区域的岩土条件？"
                     android:textSize="14sp" />
 
                 <View
@@ -881,7 +992,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="18dp"
                     android:layout_marginTop="4dp"
-                    android:text="4.电站周边地震发生的强度与规模？"
+                    android:text="4.电站所在区域的地质构造条件？"
                     android:textSize="14sp" />
 
                 <View
@@ -909,7 +1020,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="18dp"
                     android:layout_marginTop="4dp"
-                    android:text="5.该地区是否存在大型断裂构造通过？"
+                    android:text="5.电站所在区域的水文地质条件？"
                     android:textSize="14sp" />
 
                 <View
@@ -937,7 +1048,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="18dp"
                     android:layout_marginTop="4dp"
-                    android:text="6.电站附近是否发育小型活动断裂构造？"
+                    android:text="6.电站所在区域存在哪些不良地质现象？"
                     android:textSize="14sp" />
 
                 <View
@@ -965,7 +1076,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="18dp"
                     android:layout_marginTop="4dp"
-                    android:text="7.电站周边的区域稳定性如何？"
+                    android:text="7.电站所在区域的不良地质现象是否会影响到电站及设施安全？"
                     android:textSize="14sp" />
 
                 <View
@@ -993,7 +1104,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="18dp"
                     android:layout_marginTop="4dp"
-                    android:text="8.是否存在发生较大破坏强度地震的可能性？"
+                    android:text="8.不良地质现象占地面积比例？"
                     android:textSize="14sp" />
 
                 <View
@@ -1021,7 +1132,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="18dp"
                     android:layout_marginTop="4dp"
-                    android:text="9.电站坝址区的地基稳定性如何？"
+                    android:text="9.电站所在区域是否存在其他工程活动？"
                     android:textSize="14sp" />
 
                 <View
@@ -1049,7 +1160,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="18dp"
                     android:layout_marginTop="4dp"
-                    android:text="10.电站库区蓄水是否诱发过库区地震？"
+                    android:text="10.工程活动对电站的影响如何？"
                     android:textSize="14sp" />
 
                 <View
@@ -1077,7 +1188,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="18dp"
                     android:layout_marginTop="4dp"
-                    android:text="11.电站发生地震灾害的风险如何？"
+                    android:text="11.电站坝址区的地基稳定性如何？"
                     android:textSize="14sp" />
 
                 <View
@@ -1105,7 +1216,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="18dp"
                     android:layout_marginTop="4dp"
-                    android:text="12.电站周边的地形坡度？"
+                    android:text="12.电站所在区域是否存在地质遗迹及自然保护区？"
                     android:textSize="14sp" />
 
                 <View
@@ -1133,7 +1244,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="18dp"
                     android:layout_marginTop="4dp"
-                    android:text="13.电站周边发生地质灾害的风险如何？"
+                    android:text="13.电站库区蓄水是否诱发过库区地震？"
                     android:textSize="14sp" />
 
                 <View
@@ -1143,6 +1254,90 @@
 
                 <Spinner
                     android:id="@+id/hydro_geology_5_13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f0f2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="4dp"
+                    android:text="14.电站库区蓄水后是否发生过库区地质灾害？"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f0f2" />
+
+                <Spinner
+                    android:id="@+id/hydro_geology_5_14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f0f2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="4dp"
+                    android:text="15.电站所在区域的地质环境条件复杂程度？"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f0f2" />
+
+                <Spinner
+                    android:id="@+id/hydro_geology_5_15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f0f2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="4dp"
+                    android:text="16.电站所在区域发生地质灾害的风险如何？"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f0f2" />
+
+                <Spinner
+                    android:id="@+id/hydro_geology_5_16"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
