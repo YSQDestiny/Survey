@@ -127,10 +127,10 @@ public class ReportListFragment extends BaseFragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                tipDialog.dismiss();
                 ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
                 if (result.getCode() == 0){
                     companies = JSONObject.parseArray(result.getData(),Company.class);
-                    tipDialog.dismiss();
                     handler.post(uiable);
                 }
 

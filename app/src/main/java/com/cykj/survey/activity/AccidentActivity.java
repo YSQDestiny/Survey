@@ -559,6 +559,7 @@ public class AccidentActivity extends BaseFragmentActivity {
     }
 
     private void moyanggong(){
+        String amp;
 
     }
 }
