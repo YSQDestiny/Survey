@@ -140,6 +140,7 @@ public class AccidentActivity extends BaseFragmentActivity {
                     typeData.get(position).setSelect(false);
                     typeMap.remove(typeData.get(position).getName());
                 } else {
+
                     typeData.get(position).setSelect(true);
                     typeMap.put(typeData.get(position).getName(), typeData.get(position).getName());
                 }

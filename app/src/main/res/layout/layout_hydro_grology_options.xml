@@ -1,0 +1,1353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/qmui_group_list_section_header_footer_padding_vertical"
+        android:paddingLeft="?attr/qmui_content_padding_horizontal"
+        android:paddingRight="?attr/qmui_content_padding_horizontal"
+        android:paddingTop="@dimen/qmui_group_list_section_header_footer_padding_vertical"
+        android:text="暴雨风险"
+        android:textColor="?attr/qmui_config_color_gray_3"
+        android:textSize="@dimen/qmui_group_list_section_header_footer_text_size" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="该电站所在地的气候类型？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_1_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="该地多年平均气温为多少？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size"
+        android:inputType="numberDecimal"/>
+
+    <EditText
+        android:id="@+id/hydro_geology_temperature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill"
+        android:background="@drawable/qmui_divider_bottom_bitmap"
+        android:hint="请输入平均气温"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textColor="?attr/qmui_config_color_gray_5"
+        android:textSize="?attr/qmui_common_list_item_detail_h_text_size"
+        android:inputType="numberDecimal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="该地多年平均降水量为多少？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <EditText
+        android:id="@+id/hydro_geology_precipitation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill"
+        android:background="@drawable/qmui_divider_bottom_bitmap"
+        android:hint="请输入平均降水"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textColor="?attr/qmui_config_color_gray_5"
+        android:textSize="?attr/qmui_common_list_item_detail_h_text_size"
+        android:inputType="numberDecimal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="该地的降水量主要集中在几月份？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/hydro_geology_1_4_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/common_content_spacing"
+            android:paddingRight="@dimen/common_content_spacing"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="~"
+            android:textColor="?attr/qmui_config_color_gray_1"
+            android:textSize="?attr/qmui_common_list_item_title_h_text_size"
+            android:layout_weight="0"/>
+
+        <Spinner
+            android:id="@+id/hydro_geology_1_4_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="该地区是否存在暴雨、干旱、大风等灾害性天气？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_1_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="该地区气候垂直变化是否明显？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_1_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="该地区植被覆盖情况如何？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_1_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="暴雨季节主要集中几月份？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/hydro_geology_1_8_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/common_content_spacing"
+            android:paddingRight="@dimen/common_content_spacing"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="~"
+            android:textColor="?attr/qmui_config_color_gray_1"
+            android:textSize="?attr/qmui_common_list_item_title_h_text_size"
+            android:layout_weight="0"/>
+
+        <Spinner
+            android:id="@+id/hydro_geology_1_8_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="暴雨季节河道内漂浮物数量？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_1_9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="暴雨对电站设施的影响程度？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_1_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="厂区排水沟是否畅通？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_1_11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="厂区排水设施是否完备？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_1_12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/qmui_group_list_section_header_footer_padding_vertical"
+        android:paddingLeft="?attr/qmui_content_padding_horizontal"
+        android:paddingRight="?attr/qmui_content_padding_horizontal"
+        android:paddingTop="@dimen/qmui_group_list_section_header_footer_padding_vertical"
+        android:text="洪水风险"
+        android:textColor="?attr/qmui_config_color_gray_3"
+        android:textSize="@dimen/qmui_group_list_section_header_footer_text_size" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="该电站的库容量如何？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_2_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站上游流域的生态环境如何？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_2_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="流域径流的主要来源？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_2_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="径流年内分配是否均匀？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_2_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="汛期主要集中在几月份？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/hydro_geology_2_5_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/common_content_spacing"
+            android:paddingRight="@dimen/common_content_spacing"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="~"
+            android:textColor="?attr/qmui_config_color_gray_1"
+            android:textSize="?attr/qmui_common_list_item_title_h_text_size"
+            android:layout_weight="0"/>
+
+        <Spinner
+            android:id="@+id/hydro_geology_2_5_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站上游是否存在其他电站及大坝设施？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_2_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/hydro_geology_2_7_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="该大坝设施是否对该流域洪峰起到调控作用？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_2_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/qmui_group_list_section_header_footer_padding_vertical"
+        android:paddingLeft="?attr/qmui_content_padding_horizontal"
+        android:paddingRight="?attr/qmui_content_padding_horizontal"
+        android:paddingTop="@dimen/qmui_group_list_section_header_footer_padding_vertical"
+        android:text="低温灾害"
+        android:textColor="?attr/qmui_config_color_gray_3"
+        android:textSize="@dimen/qmui_group_list_section_header_footer_text_size" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="该地区全年平均最低气温？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <EditText
+        android:id="@+id/hydro_geology_3_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill"
+        android:background="@drawable/qmui_divider_bottom_bitmap"
+        android:hint="请输入平均最低气温"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textColor="?attr/qmui_config_color_gray_5"
+        android:textSize="?attr/qmui_common_list_item_detail_h_text_size"
+        android:inputType="numberDecimal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="地区多年极端低最低气温？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <EditText
+        android:id="@+id/hydro_geology_3_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill"
+        android:background="@drawable/qmui_divider_bottom_bitmap"
+        android:hint="请输入端低最低气温"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textColor="?attr/qmui_config_color_gray_5"
+        android:textSize="?attr/qmui_common_list_item_detail_h_text_size"
+        android:inputType="numberDecimal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="该地区是否容易出现雨雪、冰冻等低温天气？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_3_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="输电线路有无历史覆冰记录？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_3_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/hydro_geology_3_5_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="覆冰程度？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size"
+        android:visibility="visible"/>
+
+    <Spinner
+        android:id="@+id/hydro_geology_3_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="visible"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="河流是否存在凌汛现象？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_3_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/qmui_group_list_section_header_footer_padding_vertical"
+        android:paddingLeft="?attr/qmui_content_padding_horizontal"
+        android:paddingRight="?attr/qmui_content_padding_horizontal"
+        android:paddingTop="@dimen/qmui_group_list_section_header_footer_padding_vertical"
+        android:text="雷击风险"
+        android:textColor="?attr/qmui_config_color_gray_3"
+        android:textSize="@dimen/qmui_group_list_section_header_footer_text_size" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站距离最近的县城多少公里？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <EditText
+        android:id="@+id/hydro_geology_4_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill"
+        android:background="@drawable/qmui_divider_bottom_bitmap"
+        android:hint="请输入距离最近的县城多少公里"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textColor="?attr/qmui_config_color_gray_5"
+        android:textSize="?attr/qmui_common_list_item_detail_h_text_size"
+        android:inputType="numberDecimal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站区域雷暴日天数？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <EditText
+        android:id="@+id/hydro_geology_4_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill"
+        android:background="@drawable/qmui_divider_bottom_bitmap"
+        android:hint="请输入雷暴日天数"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textColor="?attr/qmui_config_color_gray_5"
+        android:textSize="?attr/qmui_common_list_item_detail_h_text_size"
+        android:inputType="numberDecimal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站所在地的雷暴分区？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_4_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="该地区雷雨天气高发季节？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_4_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="该地区云层高度情况？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_4_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站区域雷击频率比平原地区如何？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_4_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站区域装设避雷针数量？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <EditText
+        android:id="@+id/hydro_geology_4_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill"
+        android:background="@drawable/qmui_divider_bottom_bitmap"
+        android:hint="请输入避雷针数量"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textColor="?attr/qmui_config_color_gray_5"
+        android:textSize="?attr/qmui_common_list_item_detail_h_text_size"
+        android:inputType="number"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="接闪器、下引线、接地体状况？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_4_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <EditText
+        android:id="@+id/hydro_geology_4_8_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill"
+        android:background="@drawable/qmui_divider_bottom_bitmap"
+        android:hint="请简述破损情况"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textColor="?attr/qmui_config_color_gray_5"
+        android:textSize="?attr/qmui_common_list_item_detail_h_text_size"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="避雷针绝缘电阻值是否正常？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_4_9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/qmui_group_list_section_header_footer_padding_vertical"
+        android:paddingLeft="?attr/qmui_content_padding_horizontal"
+        android:paddingRight="?attr/qmui_content_padding_horizontal"
+        android:paddingTop="@dimen/qmui_group_list_section_header_footer_padding_vertical"
+        android:text="地质风险"
+        android:textColor="?attr/qmui_config_color_gray_3"
+        android:textSize="@dimen/qmui_group_list_section_header_footer_text_size" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站所在区域的岩石类型？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站所在区域的地形条件？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站所在区域的岩土条件？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站所在区域的地质构造条件？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站所在区域的水文地质条件？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站所在区域存在哪些不良地质现象？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站所在区域的不良地质现象是否会影响到电站及设施安全？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="不良地质现象占地面积比例？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站所在区域是否存在其他工程活动？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/hydro_geology_5_10_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站所在区域是否存在其他工程活动？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size"
+        android:visibility="gone"/>
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站坝址区的地基稳定性如何？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站所在区域是否存在地质遗迹及自然保护区？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站库区蓄水是否诱发过库区地震？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站库区蓄水后是否发生过库区地质灾害？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:background="@drawable/qmui_s_list_item_bg_with_border_bottom"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_content_spacing"
+        android:paddingRight="@dimen/common_content_spacing"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="电站所在区域的地质环境条件复杂程度？"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/hydro_geology_5_15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>

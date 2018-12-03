@@ -371,16 +371,22 @@ public class HydroActivity extends BaseFragmentActivity {
         if (hydroEditName.getText().toString().equals("")){
             hydroEditName.setError("请输入电站名称");
             return;
+        }else{
+            hydro.setName(hydroEditName.getText().toString());
         }
 
         if (hydroEditAddress.getText().toString().equals("")){
             hydroEditAddress.setError("请输入详细地址");
             return;
+        }else{
+            hydro.setAddr(hydroEditAddress.getText().toString());
         }
 
         if (hydroEditYear.getText().toString().equals("")){
             hydroEditYear.setError("请输入投产年限");
             return;
+        }else{
+            hydro.setYear(Integer.parseInt(hydroEditYear.getText().toString()));
         }
 
         if (hydroFormSelectText.getText().toString().equals("请选择水电站形式")) {

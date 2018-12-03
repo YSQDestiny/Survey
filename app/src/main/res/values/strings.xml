@@ -355,5 +355,7 @@
     <string name="wood_aid_options_18">18.柴油贮存管理是否符合要求</string>
     <string name="wood_aid_options_19">19.柴油贮存室电气是否符合要求</string>
 
+    <string name="fengdian_huozhai_1">19.厂房内有无消防报警装置</string>
+    <string name="fengdian_huozhai_2">19.厂房内有无消防报警装置</string>
 
 </resources>

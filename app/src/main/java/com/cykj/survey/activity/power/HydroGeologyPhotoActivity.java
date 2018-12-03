@@ -70,7 +70,6 @@ public class HydroGeologyPhotoActivity extends BaseFragmentActivity implements V
                 finish();
             }
         });
-
     }
 
     @Override
@@ -107,6 +106,7 @@ public class HydroGeologyPhotoActivity extends BaseFragmentActivity implements V
                             takePhoto(items[which]);
                             dialog.dismiss();
                         }
+
                     }
                 })
                 .create(mCurrentDialogStyle).show();

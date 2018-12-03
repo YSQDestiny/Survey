@@ -63,7 +63,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="电站人员配备是否充足"
+                    android:text="电站人员结构是否合理"
                     android:textColor="#6D727C"
                     android:textSize="14sp" />
 
@@ -159,7 +159,234 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="设备使用年限"
+                android:hint="柜体投产年限"
+                android:textSize="14sp"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"
+                android:inputType="number"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="柜体工作期间有无异响"
+                    android:textColor="#6D727C"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/hydro_electromechanical_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </Spinner>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/hydro_electromechanical_7_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="填写异常柜体名称"
+                android:textSize="14sp"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"
+                android:inputType="text" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="柜体工作期间有无异常发热"
+                    android:textColor="#6D727C"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/hydro_electromechanical_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </Spinner>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/hydro_electromechanical_8_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="填写异常柜体名称"
+                android:textSize="14sp"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"
+                android:inputType="text" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="柜体工作期间表盘指示是否正常"
+                    android:textColor="#6D727C"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/hydro_electromechanical_9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </Spinner>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/hydro_electromechanical_9_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="填写不正常柜体名称及表盘名称"
+                android:textSize="14sp"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"
+                android:inputType="text"
+                android:visibility="gone"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="柜体内部是否整洁"
+                    android:textColor="#6D727C"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/hydro_electromechanical_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </Spinner>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="柜体内部线路有无老化"
+                    android:textColor="#6D727C"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/hydro_electromechanical_11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </Spinner>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="柜体故障是否及时处理"
+                    android:textColor="#6D727C"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/hydro_electromechanical_12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </Spinner>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/hydro_disaster_used_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="电站机组运行年限"
                 android:textSize="14sp"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
@@ -170,13 +397,30 @@
             <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/hydro_disaster_crew"
+                android:id="@+id/hydro_disaster_a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="查勘期间工作机组台数"
+                android:hint="机组A修周期"
+                android:textSize="14sp"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"
+                android:inputType="number"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1.5dp" android:background="#f2f0f2"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/hydro_disaster_b"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="机组B修周期"
                 android:textSize="14sp"
                 app:met_primaryColor="?attr/app_primary_color"
                 app:met_floatingLabel="highlight"
@@ -195,14 +439,122 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="机组运行工况"
+                    android:text="机组运行期间振动是否正常"
                     android:textColor="#6D727C"
                     android:textSize="14sp" />
 
             </RelativeLayout>
 
             <Spinner
-                android:id="@+id/hydro_electromechanical_8"
+                android:id="@+id/hydro_electromechanical_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </Spinner>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="机组运行期间温度是否正常"
+                    android:textColor="#6D727C"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/hydro_electromechanical_17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </Spinner>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="机组运行期间有无异常噪音"
+                    android:textColor="#6D727C"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/hydro_electromechanical_18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </Spinner>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="机组运行期间是否能达到并保持铭牌出力"
+                    android:textColor="#6D727C"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/hydro_electromechanical_19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </Spinner>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="辅机及油气水系统工况是否正常"
+                    android:textColor="#6D727C"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/hydro_electromechanical_20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"

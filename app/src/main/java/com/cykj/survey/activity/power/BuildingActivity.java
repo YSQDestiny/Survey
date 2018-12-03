@@ -2,20 +2,19 @@ package com.cykj.survey.activity.power;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
 import com.cykj.survey.model.ResultModel;
 import com.qmuiteam.qmui.widget.QMUITopBar;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,44 +32,52 @@ import okhttp3.Response;
 
 public class BuildingActivity extends BaseFragmentActivity {
 
-    @BindView(R.id.topbar)
-    QMUITopBar topbar;
-    @BindView(R.id.accident_edit)
-    EditText accidentEdit;
-    @BindView(R.id.hydro_building_1)
-    Spinner hydroBuilding1;
-    @BindView(R.id.hydro_building_2)
-    Spinner hydroBuilding2;
-    @BindView(R.id.accident_building_2_edit)
-    EditText accidentBuilding2Edit;
-    @BindView(R.id.hydro_building_3)
-    Spinner hydroBuilding3;
-    @BindView(R.id.hydro_building_4)
-    Spinner hydroBuilding4;
-    @BindView(R.id.accident_building_4_edit)
-    EditText accidentBuilding4Edit;
-
-    private static List<String> data2 = new ArrayList<>();
-
-    private static List<String> data3 = new ArrayList<>();
 
     private static List<String> data4 = new ArrayList<>();
-
     private static List<String> data5 = new ArrayList<>();
+    private static List<String> data6 = new ArrayList<>();
+    private static List<String> data7 = new ArrayList<>();
+    private static List<String> data8 = new ArrayList<>();
 
     static {
-        data2.add("结构良好，无漏水");
-        data2.add("有漏水");
-
-        data3.add("无");
-        data3.add("有");
-
         data4.add("无");
         data4.add("有");
 
         data5.add("无");
         data5.add("有");
+
+        data6.add("无");
+        data6.add("有");
+
+        data7.add("无");
+        data7.add("有（承重墙体、梁、顶等有开裂，变形等）");
+
+        data8.add("无");
+        data8.add("有");
     }
+
+    @BindView(R.id.topbar)
+    QMUITopBar topbar;
+    @BindView(R.id.hydro_building_use)
+    MaterialEditText hydroBuildingUse;
+    @BindView(R.id.accident_edit)
+    EditText accidentEdit;
+    @BindView(R.id.accident_edit_2)
+    EditText accidentEdit2;
+    @BindView(R.id.hydro_building_4)
+    Spinner hydroBuilding4;
+    @BindView(R.id.hydro_building_5)
+    Spinner hydroBuilding5;
+    @BindView(R.id.hydro_building_6)
+    Spinner hydroBuilding6;
+    @BindView(R.id.accident_building_6_edit)
+    EditText accidentBuilding6Edit;
+    @BindView(R.id.hydro_building_7)
+    Spinner hydroBuilding7;
+    @BindView(R.id.hydro_building_8)
+    Spinner hydroBuilding8;
+    @BindView(R.id.accident_building_4_edit)
+    EditText accidentBuilding4Edit;
 
     @Override
     protected int getContextViewId() {
@@ -86,9 +93,9 @@ public class BuildingActivity extends BaseFragmentActivity {
         initView();
     }
 
-    private void initTopbar(){
+    private void initTopbar() {
         topbar.setTitle("水工建筑风险");
-        topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+        topbar.addRightTextButton("下一步", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setData();
@@ -103,27 +110,29 @@ public class BuildingActivity extends BaseFragmentActivity {
 
     }
 
-    private void initView(){
+    private void initView() {
 
-        final ArrayAdapter<String> hdAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,data2);
-        ArrayAdapter<String> hdAdapter3 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,data3);
-        ArrayAdapter<String> hdAdapter4 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,data4);
-        ArrayAdapter<String> hdAdapter5 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,data5);
+        final ArrayAdapter<String> hdAdapter4 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data4);
+        ArrayAdapter<String> hdAdapter5 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data5);
+        ArrayAdapter<String> hdAdapter6 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data6);
+        ArrayAdapter<String> hdAdapter7 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data7);
+        ArrayAdapter<String> hdAdapter8 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data8);
 
-        spinnerSetAdapter(hdAdapter2,hydroBuilding1);
-        spinnerSetAdapter(hdAdapter3,hydroBuilding2);
-        spinnerSetAdapter(hdAdapter4,hydroBuilding3);
-        spinnerSetAdapter(hdAdapter5,hydroBuilding4);
+        spinnerSetAdapter(hdAdapter4, hydroBuilding4);
+        spinnerSetAdapter(hdAdapter5, hydroBuilding5);
+        spinnerSetAdapter(hdAdapter6, hydroBuilding6);
+        spinnerSetAdapter(hdAdapter7, hydroBuilding7);
+        spinnerSetAdapter(hdAdapter8, hydroBuilding8);
 
-        hydroBuilding2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        hydroBuilding6.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (data3.get(position)){
+                switch (data6.get(position)) {
                     case "有":
-                        accidentBuilding2Edit.setVisibility(View.VISIBLE);
+                        accidentBuilding6Edit.setVisibility(View.VISIBLE);
                         break;
                     case "无":
-                        accidentBuilding2Edit.setVisibility(View.GONE);
+                        accidentBuilding6Edit.setVisibility(View.GONE);
                         break;
                 }
             }
@@ -135,10 +144,10 @@ public class BuildingActivity extends BaseFragmentActivity {
 
         });
 
-        hydroBuilding4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        hydroBuilding8.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (data5.get(position)){
+                switch (data8.get(position)) {
                     case "有":
                         accidentBuilding4Edit.setVisibility(View.VISIBLE);
                         break;
@@ -157,47 +166,52 @@ public class BuildingActivity extends BaseFragmentActivity {
 
     }
 
-    private void spinnerSetAdapter(ArrayAdapter<String> arrayAdapter, Spinner spinner){
+    private void spinnerSetAdapter(ArrayAdapter<String> arrayAdapter, Spinner spinner) {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
     }
 
-    private void setData(){
-        String building = "";
-        building += accidentEdit.getText().toString() + "现场查勘大坝主体结构良好，坝体" + hydroBuilding2.getSelectedItem().toString()
-        + "漏水。启闭机及闸门等均维护较好，" + hydroBuilding3.getSelectedItem().toString() + "明显缺陷。电站厂房置于坝体后方左岸开挖基岩上。目前厂房主体结构"
-        + hydroBuilding4.getSelectedItem().toString()+"。";
+    private void setData() {
 
-        String url = Constants.TEST_SERVICE + "/hydro/uploadBuilding";
+        Intent intent = new Intent(BuildingActivity.this, OtherActivity.class);
+        startActivity(intent);
+        finish();
 
-        OkHttpClient client = new OkHttpClient();
-
-        RequestBody body = new FormBody.Builder()
-                .add("building",building)
-                .add("id",Constants.HYDRO_ID.toString())
-                .build();
-
-        final Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String resultStr = response.body().string();
-                ResultModel result = JSONObject.parseObject(resultStr,ResultModel.class);
-                if (result.getCode() == 0){
-                    Intent intent = new Intent(BuildingActivity.this,OtherActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
+//        String building = "";
+//        building += accidentEdit.getText().toString() + "现场查勘大坝主体结构良好，坝体" + hydroBuilding2.getSelectedItem().toString()
+//                + "漏水。启闭机及闸门等均维护较好，" + hydroBuilding3.getSelectedItem().toString() + "明显缺陷。电站厂房置于坝体后方左岸开挖基岩上。目前厂房主体结构"
+//                + hydroBuilding4.getSelectedItem().toString() + "。";
+//
+//        String url = Constants.TEST_SERVICE + "/hydro/uploadBuilding";
+//
+//        OkHttpClient client = new OkHttpClient();
+//
+//        RequestBody body = new FormBody.Builder()
+//                .add("building", building)
+//                .add("id", Constants.HYDRO_ID.toString())
+//                .build();
+//
+//        final Request request = new Request.Builder()
+//                .url(url)
+//                .post(body)
+//                .build();
+//
+//        client.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                String resultStr = response.body().string();
+//                ResultModel result = JSONObject.parseObject(resultStr, ResultModel.class);
+//                if (result.getCode() == 0) {
+//                    Intent intent = new Intent(BuildingActivity.this, OtherActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                }
+//            }
+//        });
     }
 }

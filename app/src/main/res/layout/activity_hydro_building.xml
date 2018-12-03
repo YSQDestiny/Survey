@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/app_primary_color"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
@@ -20,6 +21,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/hydro_building_use"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="大坝投入使用年限"
+                android:textSize="14sp"
+                app:met_primaryColor="?attr/app_primary_color"
+                app:met_floatingLabel="highlight"
+                app:met_clearButton= "true"
+                app:met_hideUnderline="true"
+                android:inputType="number"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -71,14 +87,80 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="大坝结构是否良好，有无漏水"
+                    android:text="坝体有无渗漏"
+                    android:textColor="#6D727C"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/accident_edit_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/edit_shape"
+                    android:inputType="textImeMultiLine"
+                    android:minLines="8"
+                    android:maxLines="10"
+                    android:scrollbars="vertical"
+                    android:gravity="top"
+                    android:hint="有渗漏则进行具体描述，无则留空"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="闸门和启闭机有无维护记录"
                     android:textColor="#6D727C"
                     android:textSize="14sp" />
 
             </RelativeLayout>
 
             <Spinner
-                android:id="@+id/hydro_building_1"
+                android:id="@+id/hydro_building_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </Spinner>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4F5F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="启闭机钢丝绳有无断丝情况"
+                    android:textColor="#6D727C"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/hydro_building_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -105,7 +187,7 @@
             </RelativeLayout>
 
             <Spinner
-                android:id="@+id/hydro_building_2"
+                android:id="@+id/hydro_building_6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -119,7 +201,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/accident_building_2_edit"
+                    android:id="@+id/accident_building_6_edit"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_marginLeft="8dp"
@@ -148,14 +230,14 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="厂房主体结构有无破损开裂"
+                    android:text="厂房有无结构性损伤"
                     android:textColor="#6D727C"
                     android:textSize="14sp" />
 
             </RelativeLayout>
 
             <Spinner
-                android:id="@+id/hydro_building_3"
+                android:id="@+id/hydro_building_7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -163,6 +245,28 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp">
             </Spinner>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/accident_edit_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/edit_shape"
+                    android:inputType="textImeMultiLine"
+                    android:minLines="8"
+                    android:maxLines="10"
+                    android:scrollbars="vertical"
+                    android:gravity="top"
+                    android:hint="简述厂房结构性损伤"/>
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -175,14 +279,14 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="屋顶、墙面等有无漏水"
+                    android:text="厂房内部有无渗水痕迹"
                     android:textColor="#6D727C"
                     android:textSize="14sp" />
 
             </RelativeLayout>
 
             <Spinner
-                android:id="@+id/hydro_building_4"
+                android:id="@+id/hydro_building_8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
