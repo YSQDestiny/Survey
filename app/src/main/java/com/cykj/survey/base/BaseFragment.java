@@ -15,11 +15,12 @@ import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import com.cykj.survey.manager.QDUpgradeManager;
+
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
-public abstract class BaseFragment extends QMUIFragment{
+public abstract class BaseFragment extends QMUIFragment {
 
     private QMUITipDialog tipDialog;
 

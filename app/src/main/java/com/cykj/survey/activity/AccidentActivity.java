@@ -130,7 +130,6 @@ public class AccidentActivity extends BaseFragmentActivity {
             }
         });
 
-
         typeGridAdapter = new AccidentGridAdapter(this, typeData);
         accidentTypeGrid.setAdapter(typeGridAdapter);
         accidentTypeGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -147,7 +146,6 @@ public class AccidentActivity extends BaseFragmentActivity {
                 typeGridAdapter.notifyDataSetChanged();
             }
         });
-
         possibilityAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,possibilityList);
         possibilityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         accidentPossibilitySpinner.setAdapter(possibilityAdapter);

@@ -363,7 +363,9 @@ public class BasicsBusinessFragment extends BaseFragment {
         dataList.add(new AccidentGridModel("团体意外险", false));
     }
 
-
+    /**
+     * 初始化view
+     */
     private void initView() {
 
         adapter = new AccidentGridAdapter(getActivity(), dataList);
@@ -457,6 +459,7 @@ public class BasicsBusinessFragment extends BaseFragment {
             businessRecview.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
             tip.setVisibility(View.GONE);
             businessRecview.setVisibility(View.VISIBLE);
+            businessRecview.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         } else if (recordList.size() > 1) {
             recAdapter.notifyDataSetChanged();
         }

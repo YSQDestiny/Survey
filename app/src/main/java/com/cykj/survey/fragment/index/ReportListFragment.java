@@ -95,7 +95,7 @@ public class ReportListFragment extends BaseFragment {
         topbar.addRightTextButton("新建",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                QMUIFragment fragment = new BasicsBusinessFragment();
+                QMUIFragment fragment = new CompanyIndexFragment();
                 startFragment(fragment);
             }
         });
