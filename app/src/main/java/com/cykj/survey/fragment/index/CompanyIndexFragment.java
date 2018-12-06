@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.cykj.survey.R;
 import com.cykj.survey.activity.BasicsBusinessActivity;
+import com.cykj.survey.activity.PhotoUploadActivity;
 import com.cykj.survey.base.BaseFragment;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
@@ -40,9 +41,6 @@ public class CompanyIndexFragment extends BaseFragment {
         QMUICommonListItemView item1 = groupListView.createItemView("基础信息");
         item1.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
-        QMUICommonListItemView item2 = groupListView.createItemView("地质气象");
-        item2.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
-
         QMUICommonListItemView item3 = groupListView.createItemView("照片上传");
         item3.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
@@ -56,14 +54,16 @@ public class CompanyIndexFragment extends BaseFragment {
                     CharSequence text = ((QMUICommonListItemView) v).getText();
                     switch (text.toString()){
                         case "基础信息":
-                            Intent intent = new Intent(getActivity(),BasicsBusinessActivity.class);
-                            getActivity().startActivity(intent);
-                            break;
-                        case "地质气象":
+                            BaseFragment fragment = new BasicsBusinessFragment();
+                            startFragment(fragment);
                             break;
                         case "照片上传":
+                            Intent intent = new Intent(getActivity(),PhotoUploadActivity.class);
+                            getActivity().startActivity(intent);
                             break;
                         case "现场查勘":
+                            BaseFragment fragment1 = new IndustryFragment();
+                            startFragment(fragment1);
                             break;
                     }
                 }
@@ -72,7 +72,6 @@ public class CompanyIndexFragment extends BaseFragment {
 
         QMUIGroupListView.newSection(getContext())
                 .addItemView(item1,onClickListener)
-                .addItemView(item2,onClickListener)
                 .addItemView(item3,onClickListener)
                 .addItemView(item4,onClickListener)
                 .addTo(groupListView);

@@ -1,6 +1,5 @@
 package com.cykj.survey.fragment.index;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -11,13 +10,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
-import com.cykj.survey.activity.PhotoUploadActivity;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.fragment.GeologyFragment;
 import com.cykj.survey.fragment.adapter.AccidentGridAdapter;
@@ -61,6 +61,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class BasicsBusinessFragment extends BaseFragment {
+
     @BindView(R.id.topbar)
     QMUITopBar topbar;
     @BindView(R.id.business_edit_name)
@@ -101,20 +102,22 @@ public class BasicsBusinessFragment extends BaseFragment {
     MaterialEditText businessEditAmount;
     @BindView(R.id.grid)
     CustomGridView grid;
+    @BindView(R.id.business_season)
+    Spinner businessSeason;
     @BindView(R.id.business_add_text)
     TextView businessAddText;
     @BindView(R.id.business_recview)
     RecyclerView businessRecview;
     @BindView(R.id.tip)
     RelativeLayout tip;
-    @BindView(R.id.business_edit_coverage)
-    MaterialEditText businessEditCoverage;
 
     private CityPickerView mPicker = new CityPickerView();
 
     private Handler handler;
 
     private Company company;
+
+    private List<String> season = new ArrayList<>();
 
     @Override
     protected View onCreateView() {
@@ -194,12 +197,10 @@ public class BasicsBusinessFragment extends BaseFragment {
             }
         });
 
-        topbar.addRightTextButton("下一页", R.id.topbar_right_text_button)
+        topbar.addRightTextButton("完成", R.id.topbar_right_text_button)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        QMUIFragment fragment = new LicenseUploadFragment();
-//                        startFragment(fragment);
                         try {
                             postJson();
                         } catch (Exception e) {
@@ -222,7 +223,7 @@ public class BasicsBusinessFragment extends BaseFragment {
         if (editVerify(businessEditName)) {
             company.setName(businessEditName.getText().toString());
         }
-        if (editVerify(businessEditCompanyCode)){
+        if (editVerify(businessEditCompanyCode)) {
             company.setCompanyCode(businessEditCompanyCode.getText().toString());
         }
         if (editVerify(businessEditAddr)) {
@@ -252,52 +253,69 @@ public class BasicsBusinessFragment extends BaseFragment {
         if (editVerify(businessEditAmount)) {
             company.setAmount(Integer.parseInt(businessEditAmount.getText().toString()));
         }
-        if (editVerify(businessEditCoverage)){
-            company.setCoverage(businessEditCoverage.getText().toString());
-        }
-        if (editVerify(businessEditPhoneNumber)){
+        if (editVerify(businessEditPhoneNumber)) {
             company.setPhoneNumber(businessEditPhoneNumber.getText().toString());
         }
-        if (editVerify(businessEditClient)){
+        if (editVerify(businessEditClient)) {
             company.setClient(businessEditClient.getText().toString());
         }
-        if (editVerify(businessEditClientContact)){
+        if (editVerify(businessEditClientContact)) {
             company.setClientContact(businessEditClientContact.getText().toString());
         }
-        if (editVerify(businessEditClientContactPhone)){
+        if (editVerify(businessEditClientContactPhone)) {
             company.setClientContactPhone(businessEditClientContactPhone.getText().toString());
         }
         company.setTown(businessEditTown.getText().toString());
-        company.setMakeTime(DateUtil.parseToSQLDate(date,DateUtil.yyyyMMddHHmmss));
+        company.setMakeTime(DateUtil.parseToSQLDate(date, DateUtil.yyyyMMddHHmmss));
         company.setUniqueId(DeviceUtils.getUniqueId(getActivity()));
-        if (insuranceList.size() > 0){
+        if (insuranceList.size() > 0) {
             String insurance = "";
             int i = 0;
-            for (String str : insuranceList){
-                if (i == 0){
+            for (String str : insuranceList) {
+                if (i == 0) {
                     insurance += str;
                     i++;
-                }else {
+                } else {
                     insurance += "," + str;
                 }
             }
             OptionsConstants.setINSURANCE(insurance);
             company.setInsurance(insurance);
         }
+        String weatherStr = "";
+        String seasonStr = businessSeason.getSelectedItem().toString();
+        switch (seasonStr){
+            case "春":
+                weatherStr += "春季：该季节雷电开始频繁，建议定期检查避雷设施的完好性、定期测试防雷接地电阻是否符合要求，将未设点的位置及时设点，将已设点的位置进行检测并保证其设施完好。";
+                break;
+            case "夏":
+                weatherStr += "夏季：该季节降雨量增多，建议及时清掏并修缮排水沟渠、管道，保证车间、办公区、库存、变配电等重要区域的排水能力，定期检查屋顶面是否有破漏并及时修补。配备防洪防汛物资，如沙袋、铁锹、排水泵等。";
+                break;
+            case "秋":
+                weatherStr += "秋、冬季：该季节空气湿度、温度开始降低，易出现火灾，建议企业配置足量消防设施，并定期检查其功能完好性，保证各火灾报警系统处于良好的工作状态。督促员工进入防火防爆区域时正确穿戴防静电工作服并提前进行静电释放，更需定期检查静电跨接措施，做好防火防静电。";
+                break;
+            case "冬":
+                weatherStr += "秋、冬季：该季节空气湿度、温度开始降低，易出现火灾，建议企业配置足量消防设施，并定期检查其功能完好性，保证各火灾报警系统处于良好的工作状态。督促员工进入防火防爆区域时正确穿戴防静电工作服并提前进行静电释放，更需定期检查静电跨接措施，做好防火防静电。";
+                break;
+            default:
+                break;
+        }
+        company.setWeatherStr(weatherStr);
+        company.setGeologyStr("");
         companyModel.setCompanyEntity(company);
-        if (recordList.size() > 0){
+        if (recordList.size() > 0) {
             companyModel.setRecords(recordList);
         }
-        if (isNull){
+        if (isNull) {
             return;
-        }else {
+        } else {
             showTipDialog("请稍等...", QMUITipDialog.Builder.ICON_TYPE_LOADING);
             String json = JSONObject.toJSONString(companyModel);
 
             OkHttpClient client = new OkHttpClient();
 
             RequestBody body = new FormBody.Builder()
-                    .add("json",json)
+                    .add("json", json)
                     .build();
 
             final Request request = new Request.Builder()
@@ -315,16 +333,12 @@ public class BasicsBusinessFragment extends BaseFragment {
                 public void onResponse(Call call, Response response) throws IOException {
                     tipDialogDismiss();
                     String resultStr = response.body().string();
-                    ResultModel result = JSONObject.parseObject(resultStr,ResultModel.class);
+                    ResultModel result = JSONObject.parseObject(resultStr, ResultModel.class);
                     if (result.getCode() == 0) {
                         handler.post(seccessRun);
                         Constants constants = new Constants();
                         constants.setReportId(Long.parseLong(result.getData()));
-                    QMUIFragment fragment = new GeologyFragment();
-                    startFragmentAndDestroyCurrent(fragment);
-//                        Intent intent = new Intent(getActivity(), PhotoUploadActivity.class);
-//                        getActivity().startActivity(intent);
-//                        getActivity().finish();
+                        popBackStack();
                     } else {
                         handler.post(failRun);
                         return;
@@ -361,12 +375,25 @@ public class BasicsBusinessFragment extends BaseFragment {
         dataList.add(new AccidentGridModel("财产一切险", false));
         dataList.add(new AccidentGridModel("雇主责任险", false));
         dataList.add(new AccidentGridModel("团体意外险", false));
+        season.add("春");
+        season.add("夏");
+        season.add("秋");
+        season.add("冬");
+    }
+
+    private void spinnerSetAdapter(ArrayAdapter<String> arrayAdapter, Spinner spinner) {
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
     }
 
     /**
      * 初始化view
      */
     private void initView() {
+
+        ArrayAdapter<String> geology1_0Adapter;
+        geology1_0Adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, season);
+        spinnerSetAdapter(geology1_0Adapter,businessSeason);
 
         adapter = new AccidentGridAdapter(getActivity(), dataList);
         grid.setAdapter(adapter);
@@ -459,7 +486,7 @@ public class BasicsBusinessFragment extends BaseFragment {
             businessRecview.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
             tip.setVisibility(View.GONE);
             businessRecview.setVisibility(View.VISIBLE);
-            businessRecview.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+            businessRecview.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         } else if (recordList.size() > 1) {
             recAdapter.notifyDataSetChanged();
         }
