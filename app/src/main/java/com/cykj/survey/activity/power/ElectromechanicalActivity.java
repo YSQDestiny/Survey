@@ -7,16 +7,27 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.model.ResultModel;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ElectromechanicalActivity extends BaseFragmentActivity {
 
@@ -149,7 +160,7 @@ public class ElectromechanicalActivity extends BaseFragmentActivity {
         hydroElectromechanical7.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (data7.get(i)){
+                switch (data7.get(i)) {
                     case "有":
                         hydroElectromechanical7Edit.setVisibility(View.VISIBLE);
                         break;
@@ -168,7 +179,7 @@ public class ElectromechanicalActivity extends BaseFragmentActivity {
         hydroElectromechanical8.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (data8.get(i)){
+                switch (data8.get(i)) {
                     case "有":
                         hydroElectromechanical8Edit.setVisibility(View.VISIBLE);
                         break;
@@ -187,7 +198,7 @@ public class ElectromechanicalActivity extends BaseFragmentActivity {
         hydroElectromechanical9.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (data9.get(i)){
+                switch (data9.get(i)) {
                     case "正常":
                         hydroElectromechanical9Edit.setVisibility(View.GONE);
                         break;
@@ -259,70 +270,77 @@ public class ElectromechanicalActivity extends BaseFragmentActivity {
         startActivity(intent);
         finish();
 
-//        int manage = 0;
-//        int operation = 0;
-//        String electromechanical = "";
-//
-//        if (!hydroManage.getText().toString().equals("")) {
-//            manage = Integer.parseInt(hydroManage.getText().toString());
-//        } else {
-//            showToastShort("请输入管理人员数量");
-//            return;
-//        }
-//
-//        if (!hydroOperation.getText().toString().equals("")) {
-//            operation = Integer.parseInt(hydroOperation.getText().toString());
-//        } else {
-//            showToastShort("请输入运维人员数量");
-//        }
-//
-//        if (hydroDisasterLevel.getText().toString().equals("")) {
-//            showToastShort("请输入电站机组及柜体制造年限");
-//            return;
-//        }
-//        if (hydroDisasterUseYear.getText().toString().equals("")) {
-//            showToastShort("请输入设备使用年限");
-//            return;
-//        }
-//
-//
-//        electromechanical += "箭板电站共配备人员" + (manage + operation) + "名，其中管理人员" + manage + "名，运维人员" + operation + "名,人员配置"
-//                + hydroElectromechanical2.getSelectedItem().toString() + "。电站自动化程度高，运维制度齐全，管理规范，人员操作熟练，维护、检修记录"
-//                + hydroElectromechanical3.getSelectedItem().toString() + "。中控室24小时" + hydroElectromechanical4.getSelectedItem().toString()
-//                + "人值班，值班人员能通过控制室内的监视控制屏第一时间发现线路及设备故障。箭板电站机组设备及电气屏柜均于" + hydroDisasterLevel.getText().toString()
-//                + "年，前后制造，距今使用约" + hydroDisasterUseYear.getText().toString() + "年。现场查勘期间设备" + hydroDisasterCrew.getText().toString()
-//                + "台机组处于生产发电中，运行工况正常。";
-//
-//        String url = Constants.TEST_SERVICE + "/hydro/uploadElectromechanical";
-//        OkHttpClient client = new OkHttpClient();
-//
-//        RequestBody body = new FormBody.Builder()
-//                .add("electromechanical", electromechanical)
-//                .add("id", Constants.HYDRO_ID.toString())
-//                .build();
-//
-//        final Request request = new Request.Builder()
-//                .url(url)
-//                .post(body)
-//                .build();
-//
-//        client.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                showToastShort("网络连接失败，请检查网络连接");
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                String resultStr = response.body().string();
-//                ResultModel result = JSONObject.parseObject(resultStr, ResultModel.class);
-//                if (result.getCode() == 0) {
-//                    Intent intent = new Intent(ElectromechanicalActivity.this, BuildingActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                }
-//            }
-//        });
+        int manage = 0;
+        int operation = 0;
+        String electromechanical = "";
+
+        if (!hydroManage.getText().toString().equals("")) {
+            manage = Integer.parseInt(hydroManage.getText().toString());
+        } else {
+            showToastShort("请输入管理人员数量");
+            return;
+        }
+
+        if (!hydroOperation.getText().toString().equals("")) {
+            operation = Integer.parseInt(hydroOperation.getText().toString());
+        } else {
+            showToastShort("请输入运维人员数量");
+        }
+
+        if (hydroDisasterLevel.getText().toString().equals("")) {
+            showToastShort("请输入电站机组及柜体制造年限");
+            return;
+        }
+        if (hydroDisasterUseYear.getText().toString().equals("")) {
+            showToastShort("请输入设备使用年限");
+            return;
+        }
+
+
+        electromechanical += "电站共配备人员" + (manage + operation) + "名，其中管理人员" + manage + "名，运维人员" + operation + "名,人员配置"
+                + hydroElectromechanical2.getSelectedItem().toString() + "。电站自动化程度高，运维制度齐全，管理规范，人员操作熟练，维护、检修记录"
+                + hydroElectromechanical3.getSelectedItem().toString() + "。中控室24小时" + hydroElectromechanical4.getSelectedItem().toString()
+                + "人值班，值班人员能通过控制室内的监视控制屏第一时间发现线路及设备故障。箭板电站机组设备及电气屏柜均于" + hydroDisasterLevel.getText().toString()
+                + "年，前后制造，距今使用约" + hydroDisasterUseYear.getText().toString() + "年。各高低压柜体工作期间" + hydroElectromechanical7.getSelectedItem().toString()
+                + "异响，" + hydroElectromechanical8.getSelectedItem().toString() + "异常发热情况，表盘指示" + hydroElectromechanical9.getSelectedItem().toString() +
+                "。检查柜体内部" + hydroElectromechanical10.getSelectedItem().toString() + "，线路" + hydroElectromechanical11.getSelectedItem().toString() +
+                "老化。柜体故障" + hydroElectromechanical12.getSelectedItem().toString() + "处理，无带病运行情况。电站机组投入运行约" + hydroDisasterUsedYear.getText().toString()
+                +"，查机组检修记录，每" + hydroDisasterA.getText().toString() + "一次A修，" + hydroDisasterB.getText().toString() + "一次B修，检修按《水电站水工机电设备检修导则》（Q/GDW 11457-2015）执行。查看运行机组运行工况显示，其振动"
+                +hydroElectromechanical16.getSelectedItem().toString()+"、温度"+hydroElectromechanical17.getSelectedItem().toString() + "，"+hydroElectromechanical18.getSelectedItem().toString()
+                +"异常噪音，机组出力"+hydroElectromechanical19.getSelectedItem().toString()+"达到并保持铭牌显示出力。调速、励磁系统及油气水系统工况"+hydroElectromechanical20+"。机电设备整体风险较小。";
+
+
+
+        String url = Constants.TEST_SERVICE + "/hydro/uploadElectromechanical";
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = new FormBody.Builder()
+                .add("electromechanical", electromechanical)
+                .add("id", Constants.HYDRO_ID.toString())
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                showToastShort("网络连接失败，请检查网络连接");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String resultStr = response.body().string();
+                ResultModel result = JSONObject.parseObject(resultStr, ResultModel.class);
+                if (result.getCode() == 0) {
+                    Intent intent = new Intent(ElectromechanicalActivity.this, BuildingActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
     }
 
 }

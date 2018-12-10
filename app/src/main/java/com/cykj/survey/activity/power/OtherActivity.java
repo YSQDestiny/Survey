@@ -35,12 +35,9 @@ public class OtherActivity extends BaseFragmentActivity {
     Spinner hydroOther1;
     @BindView(R.id.hydro_other_2)
     Spinner hydroOther2;
-    @BindView(R.id.hydro_other_3)
-    Spinner hydroOther3;
 
     private static List<String> data1 = new ArrayList();
     private static List<String> data2 = new ArrayList();
-    private static List<String> data3 = new ArrayList();
 
     static {
         data1.add("有");
@@ -48,9 +45,6 @@ public class OtherActivity extends BaseFragmentActivity {
 
         data2.add("有");
         data2.add("无");
-
-        data3.add("小");
-        data3.add("较大");
     }
 
     @Override
@@ -80,11 +74,9 @@ public class OtherActivity extends BaseFragmentActivity {
     private void initView(){
         ArrayAdapter<String> hdAdapter1 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,data1);
         ArrayAdapter<String> hdAdapter2 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,data2);
-        ArrayAdapter<String> hdAdapter3 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,data3);
 
         spinnerSetAdapter(hdAdapter1,hydroOther1);
-        spinnerSetAdapter(hdAdapter1,hydroOther2);
-        spinnerSetAdapter(hdAdapter1,hydroOther3);
+        spinnerSetAdapter(hdAdapter2,hydroOther2);
     }
 
     private void spinnerSetAdapter(ArrayAdapter<String> arrayAdapter, Spinner spinner){
@@ -95,9 +87,8 @@ public class OtherActivity extends BaseFragmentActivity {
     private void setData(){
         String other = "";
 
-        other += "箭板电站管理较为规范，厂区周围" + hydroOther1.getSelectedItem().toString() + "建造围墙，24小时有人值班，" +
-                "与区域群众" + hydroOther2.getSelectedItem().toString() + "民事纠纷，设备设施遭受人员或小动物损坏可能性"
-                + hydroOther3.getSelectedItem().toString()+"。";
+        other += "电站管理较为规范，厂区周围"+hydroOther1.getSelectedItem().toString()+"围墙，24小时有人值班，与区域群众"+hydroOther2.getSelectedItem().toString()
+              + "民事纠纷，设备设施遭受人员或小动物损坏可能性小。";
 
         String url = Constants.TEST_SERVICE + "/hydro/uploadOthers";
 

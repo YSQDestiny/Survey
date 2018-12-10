@@ -26,6 +26,7 @@ import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.base.BaseFragmentActivity;
 import com.cykj.survey.fragment.index.IndustryFragment;
+import com.cykj.survey.model.CompanyConstants;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.ImgUtil;
 import com.cykj.survey.util.PhotoUtils;
@@ -246,7 +247,7 @@ public class PhotoUploadActivity extends BaseFragmentActivity {
         Long companyId = Constants.REPORT_ID;
 
         RequestBody body = new FormBody.Builder()
-                .add("companyId",companyId.toString())
+                .add("companyId",Long.toString(CompanyConstants.COMPANY_ID))
                 .add("businessPhoto",businessPhoto)
                 .add("industryPhoto",indusrtyPhoto)
                 .add("systemPhoto",systemPhoto)
@@ -267,8 +268,6 @@ public class PhotoUploadActivity extends BaseFragmentActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
                 if (result.getCode() == 0){
-                    Intent intent = new Intent(PhotoUploadActivity.this,IndustryActivity.class);
-                    startActivity(intent);
                     finish();
                 }
             }

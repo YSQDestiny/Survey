@@ -26,6 +26,7 @@ import com.cykj.survey.base.BaseFragmentActivity;
 import com.cykj.survey.fragment.adapter.AccidentGridAdapter;
 import com.cykj.survey.model.Accident;
 import com.cykj.survey.model.AccidentGridModel;
+import com.cykj.survey.model.CompanyConstants;
 import com.cykj.survey.model.PropertyAccident;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.ImgUtil;
@@ -349,7 +350,7 @@ public class AccidentActivity extends BaseFragmentActivity {
         OkHttpClient client = new OkHttpClient();
 
         Accident accident = new Accident();
-        accident.setCompanyId(Constants.REPORT_ID);
+        accident.setCompanyId(CompanyConstants.COMPANY_ID);
         accident.setInstructions(accidentEdit.getText().toString());
         String accidentType = "";
         if (typeMap.size() != 0) {

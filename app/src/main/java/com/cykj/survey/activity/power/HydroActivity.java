@@ -265,7 +265,7 @@ public class HydroActivity extends BaseFragmentActivity {
             }
         });
 
-        final String[] damItem = {"重力坝", "拱坝", "支墩坝"};
+        final String[] damItem = {"重力坝", "拱坝", "支墩坝","底格阑珊坝"};
         hydroDamType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -332,7 +332,6 @@ public class HydroActivity extends BaseFragmentActivity {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-
                     }
                 });
                 dialog.show();

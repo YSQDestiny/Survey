@@ -77,33 +77,6 @@
                 android:layout_marginTop="8dp">
             </Spinner>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#F4F5F7">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="设备遭受人为或小动物破坏风险"
-                    android:textColor="#6D727C"
-                    android:textSize="14sp" />
-
-            </RelativeLayout>
-
-            <Spinner
-                android:id="@+id/hydro_other_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp">
-            </Spinner>
-
         </LinearLayout>
 
     </ScrollView>

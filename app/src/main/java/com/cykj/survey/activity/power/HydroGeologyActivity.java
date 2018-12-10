@@ -9,16 +9,28 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
 import com.cykj.survey.bean.HydroGeologyOption;
+import com.cykj.survey.model.HydroGeology;
+import com.cykj.survey.model.ResultModel;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class HydroGeologyActivity extends BaseFragmentActivity {
 
@@ -369,60 +381,61 @@ public class HydroGeologyActivity extends BaseFragmentActivity {
         }
         flood += "箭板电站也具备一定的泄洪调蓄能力。因此，该电站的洪水风险" + hydroGeology27.getSelectedItem().toString() + "。";
 
-//        String low = "";
-//        low += "该地区冬季" + hydroGeology31.getSelectedItem().toString() + "低温天气，" + hydroGeology32.getSelectedItem().toString() + "出现雨雪、冰冻等低温天气，该地河流" + hydroGeology33.getSelectedItem().toString()
-//                + "凌汛现象，其他低温灾害对电站设施及大坝的影响" + hydroGeology34.getSelectedItem().toString() + "。";
-//
-//        String lightning = "";
-//        lightning += "箭板电站地处河谷地带，因地形、地势原因，气流抬升作用明显，夏季雷雨天气" + hydroGeology41.getSelectedItem().toString() + "，且云层偏低，因此雷雨云对地闪击的频率比平原或丘陵区" + hydroGeology42.getSelectedItem().toString()
-//                + "，该地区" + hydroGeology43.getSelectedItem().toString() + "发生雷击的风险。" + "箭板电站距离沐川县城约24公里（04-4），根据中国气象数据，沐川县年平均雷暴日为42.9d/a（04-1）。综合考虑沐川县与箭板电站的降雨、地形、气候等因素差异，电站所在区域的雷暴日约在30～50d/a，属于"
-//                + hydroGeology44.getSelectedItem().toString() + "。";
-//
-//        String geology = "";
-//        geology += "板电站即位于龙溪河河谷冲积地区，该地区的岩性主要为" + hydroGeology51.getSelectedItem().toString() + "，电站周边地形坡地" + hydroGeology512.getSelectedItem().toString() + "。电站区域内的崩塌、滑坡、泥石流等地质灾害" + hydroGeology52.getSelectedItem().toString()
-//                + "。其次，该地区距离地震带" + hydroGeology53.getSelectedItem().toString() + "，地震发生强度及规模均" + hydroGeology54.getSelectedItem().toString() + "。该地区" + hydroGeology55.getSelectedItem().toString() + "区域性断层通过，小型活动断裂隙构造"
-//                + hydroGeology56.getSelectedItem().toString() + "，该地区的区域稳定性" + hydroGeology57.getSelectedItem().toString() + "，" + hydroGeology58.getSelectedItem().toString() + "发生较强破坏力地震的可能性，电站坝址区的地基稳定" + hydroGeology59.getSelectedItem().toString()
-//                + "，电站库区蓄水并" + hydroGeology510.getSelectedItem().toString() + "诱发过库区地震。综上所述，该电站区域发生地震灾害的风险" + hydroGeology511.getSelectedItem().toString() + "，发生崩塌、滑坡、泥石流等地质灾害的的风险" + hydroGeology513.getSelectedItem().toString() + "。";
-//
-//
-//        HydroGeology hydroGeology = new HydroGeology();
-//        hydroGeology.setRainStorm(rainStorm);
-//        hydroGeology.setFlood(flood);
-//        hydroGeology.setLow(low);
-//        hydroGeology.setLightning(lightning);
-//        hydroGeology.setGeology(geology);
-//
-//        String json = JSONObject.toJSONString(hydroGeology);
-//        String url = Constants.TEST_SERVICE + "/hydro/uploadGeology";
-//        OkHttpClient client = new OkHttpClient();
-//
-//        RequestBody body = new FormBody.Builder()
-//                .add("json", json)
-//                .add("id", Constants.HYDRO_ID.toString())
-//                .build();
-//
-//        final Request request = new Request.Builder()
-//                .url(url)
-//                .post(body)
-//                .build();
-//
-//        client.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                System.out.println("数据上传失败，请检查网络连接是否畅通");
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                String resultStr = response.body().string();
-//                ResultModel result = JSONObject.parseObject(resultStr, ResultModel.class);
-//                if (result.getCode() == 0) {
-//                    Intent intent = new Intent(HydroGeologyActivity.this, HydroImageActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                }
-//            }
-//        });
+        String low = "";
+        low += "该地区全年平均最低气温"+hydroGeology31.getText().toString()+"，多年极端低温"+hydroGeology32.getText().toString()+"，"+hydroGeology33.getSelectedItem().toString()+"出现雨雪、冰冻等低温天气，输电线路"+hydroGeology34.getSelectedItem().toString()+"历史覆冰记录，" +
+                "覆冰程度"+hydroGeology35.getSelectedItem().toString()+"；该地河流"+hydroGeology36.getSelectedItem().toString()+"凌汛现象，其他低温灾害对电站设施及大坝的影响较小。";
+
+        String lightning = "";
+        lightning += "箭板电站距离最近的县城约"+hydroGeology41.getText().toString()+"公里，根据中国气象数据，沐川县年平均雷暴日为"+hydroGeology42.getText().toString()+"，属于"+hydroGeology43.getSelectedItem().toString()+"。电站地处河谷地带，因地形、地势原因，气流抬升作用明显，雷雨天气集中在"+hydroGeology44.getSelectedItem().toString()+
+                "，且云层高度"+hydroGeology45.getSelectedItem().toString()+"，因此雷雨云对地闪击的频率比平原或丘陵区"+hydroGeology46.getSelectedItem().toString()+"。" +
+                "电站厂区装设有避雷针"+hydroGeology47.getText().toString()+"根，避雷针接闪器、引下线、接地体状况"+hydroGeology48.getSelectedItem().toString()+"，绝缘电阻值"+hydroGeology49.getSelectedItem().toString() +
+                "该电站雷击风险较小。";
+
+        String geology = "";
+        geology += "板电站即位于龙溪河河谷冲积地区，该地区的岩性主要为" + hydroGeology51.getSelectedItem().toString() + "，电站周边地形坡地" + hydroGeology512.getSelectedItem().toString() + "。电站区域内的崩塌、滑坡、泥石流等地质灾害" + hydroGeology52.getSelectedItem().toString()
+                + "。其次，该地区距离地震带" + hydroGeology53.getSelectedItem().toString() + "，地震发生强度及规模均" + hydroGeology54.getSelectedItem().toString() + "。该地区" + hydroGeology55.getSelectedItem().toString() + "区域性断层通过，小型活动断裂隙构造"
+                + hydroGeology56.getSelectedItem().toString() + "，该地区的区域稳定性" + hydroGeology57.getSelectedItem().toString() + "，" + hydroGeology58.getSelectedItem().toString() + "发生较强破坏力地震的可能性，电站坝址区的地基稳定" + hydroGeology59.getSelectedItem().toString()
+                + "，电站库区蓄水并" + hydroGeology510.getSelectedItem().toString() + "诱发过库区地震。综上所述，该电站区域发生地震灾害的风险" + hydroGeology511.getSelectedItem().toString() + "，发生崩塌、滑坡、泥石流等地质灾害的的风险" + hydroGeology513.getSelectedItem().toString() + "。";
+
+
+        HydroGeology hydroGeology = new HydroGeology();
+        hydroGeology.setRainStorm(rainStorm);
+        hydroGeology.setFlood(flood);
+        hydroGeology.setLow(low);
+        hydroGeology.setLightning(lightning);
+        hydroGeology.setGeology(geology);
+
+        String json = JSONObject.toJSONString(hydroGeology);
+        String url = Constants.TEST_SERVICE + "/hydro/uploadGeology";
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = new FormBody.Builder()
+                .add("json", json)
+                .add("id", Constants.HYDRO_ID.toString())
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                System.out.println("数据上传失败，请检查网络连接是否畅通");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String resultStr = response.body().string();
+                ResultModel result = JSONObject.parseObject(resultStr, ResultModel.class);
+                if (result.getCode() == 0) {
+                    Intent intent = new Intent(HydroGeologyActivity.this, HydroImageActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
     }
 
 }

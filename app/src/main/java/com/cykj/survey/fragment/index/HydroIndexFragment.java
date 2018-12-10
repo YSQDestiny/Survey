@@ -6,6 +6,12 @@ import android.view.View;
 
 import com.cykj.survey.R;
 import com.cykj.survey.activity.PhotoUploadActivity;
+import com.cykj.survey.activity.power.BuildingActivity;
+import com.cykj.survey.activity.power.ElectromechanicalActivity;
+import com.cykj.survey.activity.power.HydroActivity;
+import com.cykj.survey.activity.power.HydroDisasterActivity;
+import com.cykj.survey.activity.power.HydroGeologyActivity;
+import com.cykj.survey.activity.power.OtherActivity;
 import com.cykj.survey.base.BaseFragment;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
@@ -60,10 +66,28 @@ public class HydroIndexFragment extends BaseFragment {
                     CharSequence text = ((QMUICommonListItemView) v).getText();
                     switch (text.toString()){
                         case "基础信息":
+                            Intent intent = new Intent(getActivity(),HydroActivity.class);
+                            getActivity().startActivity(intent);
                             break;
                         case "自然灾害风险":
+                            Intent intent1 = new Intent(getActivity(),HydroGeologyActivity.class);
+                            getActivity().startActivity(intent1);
                             break;
                         case "火灾风险":
+                            Intent intent2 = new Intent(getActivity(),HydroDisasterActivity.class);
+                            getActivity().startActivity(intent2);
+                            break;
+                        case "机电设备风险":
+                            Intent intent3 = new Intent(getActivity(),ElectromechanicalActivity.class);
+                            getActivity().startActivity(intent3);
+                            break;
+                        case "水工建筑风险":
+                            Intent intent4 = new Intent(getActivity(),BuildingActivity.class);
+                            getActivity().startActivity(intent4);
+                            break;
+                        case "其他风险":
+                            Intent intent5 = new Intent(getActivity(),OtherActivity.class);
+                            getActivity().startActivity(intent5);
                             break;
                     }
                 }
@@ -74,6 +98,9 @@ public class HydroIndexFragment extends BaseFragment {
                 .addItemView(item1,onClickListener)
                 .addItemView(item2,onClickListener)
                 .addItemView(item3,onClickListener)
+                .addItemView(item4,onClickListener)
+                .addItemView(item5,onClickListener)
+                .addItemView(item6,onClickListener)
                 .addTo(groupListView);
     }
     @Override

@@ -93,6 +93,16 @@
 
             </RelativeLayout>
 
+            <Spinner
+                android:id="@+id/hydro_building_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp">
+            </Spinner>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -111,7 +121,8 @@
                     android:maxLines="10"
                     android:scrollbars="vertical"
                     android:gravity="top"
-                    android:hint="有渗漏则进行具体描述，无则留空"/>
+                    android:hint="具体描述渗漏情况"
+                    android:visibility="gone"/>
 
             </RelativeLayout>
 
@@ -264,7 +275,8 @@
                     android:maxLines="10"
                     android:scrollbars="vertical"
                     android:gravity="top"
-                    android:hint="简述厂房结构性损伤"/>
+                    android:hint="简述厂房结构性损伤"
+                    android:visibility="gone"/>
 
             </RelativeLayout>
 

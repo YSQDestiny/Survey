@@ -24,8 +24,10 @@ import com.cykj.survey.fragment.adapter.AccidentGridAdapter;
 import com.cykj.survey.fragment.adapter.BusinessRecAdapter;
 import com.cykj.survey.model.AccidentGridModel;
 import com.cykj.survey.model.Company;
+import com.cykj.survey.model.CompanyConstants;
 import com.cykj.survey.model.CompanyModel;
 import com.cykj.survey.model.OptionsConstants;
+import com.cykj.survey.model.ProgressModel;
 import com.cykj.survey.model.Record;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.DateUtil;
@@ -127,6 +129,9 @@ public class BasicsBusinessFragment extends BaseFragment {
         initData();
         initTopbar();
         initView();
+        if (CompanyConstants.COMPANY_ID != 0){
+
+        }
         businessAreaSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -310,6 +315,7 @@ public class BasicsBusinessFragment extends BaseFragment {
             return;
         } else {
             showTipDialog("请稍等...", QMUITipDialog.Builder.ICON_TYPE_LOADING);
+            CompanyConstants.CP_MODEL = companyModel;
             String json = JSONObject.toJSONString(companyModel);
 
             OkHttpClient client = new OkHttpClient();
@@ -335,10 +341,9 @@ public class BasicsBusinessFragment extends BaseFragment {
                     String resultStr = response.body().string();
                     ResultModel result = JSONObject.parseObject(resultStr, ResultModel.class);
                     if (result.getCode() == 0) {
+                        CompanyConstants.COMPANY_ID = Long.parseLong(result.getData());
+                        ProgressModel.COMPANY_1 = true;
                         handler.post(seccessRun);
-                        Constants constants = new Constants();
-                        constants.setReportId(Long.parseLong(result.getData()));
-                        popBackStack();
                     } else {
                         handler.post(failRun);
                         return;
@@ -353,6 +358,7 @@ public class BasicsBusinessFragment extends BaseFragment {
         @Override
         public void run() {
             showToastShort("保存成功");
+            popBackStack();
         }
     };
 

@@ -14,6 +14,7 @@ import com.cykj.survey.bean.IndustryBean;
 import com.cykj.survey.bean.Node;
 import com.cykj.survey.bean.SimpleTreeAdapter;
 import com.cykj.survey.bean.TreeListViewAdapter;
+import com.cykj.survey.model.CompanyConstants;
 import com.cykj.survey.model.Industry;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.JsonUtil;
@@ -116,7 +117,7 @@ public class IndustryFragment extends BaseFragment{
         OkHttpClient client = new OkHttpClient();
 
         RequestBody body = new FormBody.Builder()
-                .add("companyId", String.valueOf(Constants.REPORT_ID))
+                .add("companyId", String.valueOf(CompanyConstants.COMPANY_ID))
                 .add("industry",postIndustry)
                 .build();
 
