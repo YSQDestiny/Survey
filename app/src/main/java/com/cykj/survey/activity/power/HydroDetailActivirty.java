@@ -97,6 +97,9 @@ public class HydroDetailActivirty extends BaseFragmentActivity {
 
     };
 
+    /**
+     * 初始化view
+     */
     private void initView(){
         reportWeb.loadUrl(Constants.TEST_SERVICE + "/hydro/showHydro?id=" + hydroId);
         reportWeb.setWebChromeClient(webChromeClient);

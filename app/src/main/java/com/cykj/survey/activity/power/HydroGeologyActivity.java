@@ -404,6 +404,11 @@ public class HydroGeologyActivity extends BaseFragmentActivity {
         hydroGeology.setLow(low);
         hydroGeology.setLightning(lightning);
         hydroGeology.setGeology(geology);
+        hydroGeology.setRainStorm(rainStorm);
+
+        hydroGeology.setRainStorm(rainStorm);
+        hydroGeology.setFlood(flood);
+        hydroGeology.setLow(low);
 
         String json = JSONObject.toJSONString(hydroGeology);
         String url = Constants.TEST_SERVICE + "/hydro/uploadGeology";

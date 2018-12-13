@@ -489,8 +489,10 @@ public class HydroActivity extends BaseFragmentActivity {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     String resultStr = response.body().string();
+                    String resultStr1 = response.body().string();
                     ResultModel result = JSONObject.parseObject(resultStr, ResultModel.class);
                     if (result.getCode() == 0) {
+                        Constants.HYDRO_ID = Long.parseLong(result.getData());
                         Constants.HYDRO_ID = Long.parseLong(result.getData());
                         Intent intent = new Intent(HydroActivity.this, TakePhotoActivity.class);
                         startActivity(intent);

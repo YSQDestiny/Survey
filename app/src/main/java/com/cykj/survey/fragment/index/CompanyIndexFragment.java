@@ -74,7 +74,6 @@ public class CompanyIndexFragment extends BaseFragment {
                             }else {
                                 showToastShort("请先填写基本信息");
                             }
-
                             break;
                         case "现场查勘":
                             if (ProgressModel.COMPANY_1){
