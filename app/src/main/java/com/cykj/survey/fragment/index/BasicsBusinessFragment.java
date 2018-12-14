@@ -321,6 +321,10 @@ public class BasicsBusinessFragment extends BaseFragment {
     }
 
     private void postJson() {
+        if (CompanyConstants.CP_MODEL != null){
+            popBackStack();
+            return;
+        }
         String url = Constants.TEST_SERVICE + "/company/post";
 
         CompanyModel companyModel = new CompanyModel();
