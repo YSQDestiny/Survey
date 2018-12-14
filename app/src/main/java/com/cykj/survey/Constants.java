@@ -18,7 +18,7 @@ public class Constants {
 
       public final static String TEST_SERVICE = "http://47.92.209.204:80/CYKJ";
 
-//      public final static String TEST_SERVICE = "http://192.168.0.128:8080/CYKJ";
+//      public final static String TEST_SERVICE = "http://192.168.0.123:8080/CYKJ";
 
 //    public final static String TEST_SERVICE = "http://192.168.199.167:8080/CYKJ";
 

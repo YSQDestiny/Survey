@@ -129,9 +129,6 @@ public class BasicsBusinessFragment extends BaseFragment {
         initData();
         initTopbar();
         initView();
-        if (CompanyConstants.COMPANY_ID != 0){
-
-        }
         businessAreaSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,7 +173,9 @@ public class BasicsBusinessFragment extends BaseFragment {
                 mPicker.showCityPicker();
             }
         });
-
+        if (CompanyConstants.COMPANY_ID != 0){
+            initDataWithView();
+        }
         return root;
     }
 
@@ -219,6 +218,107 @@ public class BasicsBusinessFragment extends BaseFragment {
     }
 
     private boolean isNull = false;
+
+    Runnable seccessRun = new Runnable() {
+        @Override
+        public void run() {
+            showToastShort("保存成功");
+            popBackStack();
+        }
+    };
+
+    Runnable failRun = new Runnable() {
+        @Override
+        public void run() {
+            showToastShort("保存失败");
+        }
+    };
+
+    /**
+     * 初始化数据
+     */
+    private void initData() {
+        handler = new Handler();
+        company = new Company();
+        dataList = new ArrayList<>();
+        dataList.add(new AccidentGridModel("财产综合险", false));
+        dataList.add(new AccidentGridModel("财产基本险", false));
+        dataList.add(new AccidentGridModel("财产一切险", false));
+        dataList.add(new AccidentGridModel("雇主责任险", false));
+        dataList.add(new AccidentGridModel("团体意外险", false));
+        season.add("春");
+        season.add("夏");
+        season.add("秋");
+        season.add("冬");
+    }
+
+    private void spinnerSetAdapter(ArrayAdapter<String> arrayAdapter, Spinner spinner) {
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+    }
+
+    /**
+     * 初始化view
+     */
+    private void initView() {
+
+        ArrayAdapter<String> geology1_0Adapter;
+        geology1_0Adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, season);
+        spinnerSetAdapter(geology1_0Adapter,businessSeason);
+
+        adapter = new AccidentGridAdapter(getActivity(), dataList);
+        grid.setAdapter(adapter);
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (dataList.get(position).isSelect()) {
+                    dataList.get(position).setSelect(false);
+                    insuranceList.remove(dataList.get(position).getName());
+                } else {
+                    dataList.get(position).setSelect(true);
+                    insuranceList.add(dataList.get(position).getName());
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        businessAddText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showRecDialog();
+            }
+        });
+
+    }
+
+    /**
+     * 设置view数据
+     */
+    private void initDataWithView(){
+        CompanyModel companyModel = CompanyConstants.CP_MODEL;
+        Company compantEntitiy = companyModel.getCompanyEntity();
+        recordList = companyModel.getRecords();
+        initRecList();
+
+        businessEditName.setText(compantEntitiy.getName());
+        businessEditCompanyCode.setText(compantEntitiy.getCompanyCode());
+        businessEditAddr.setText(compantEntitiy.getAddr());
+        businessAreaSelectText.setText(compantEntitiy.getProvince() + compantEntitiy.getCity() + compantEntitiy.getCounty());
+        businessEditLinkman.setText(compantEntitiy.getLinkman());
+        businessEditManager.setText(compantEntitiy.getManager());
+        businessEditViceManager.setText(compantEntitiy.getViceManager());
+        businessEditSafe.setText(compantEntitiy.getSafe());
+        businessEditWokerNormal.setText(compantEntitiy.getWokerNormal().toString());
+        businessEditWokerSpecial.setText(compantEntitiy.getWokerSpecial().toString());
+        businessEditAssets.setText(compantEntitiy.getAssets().toString());
+        businessEditAmount.setText(compantEntitiy.getAmount().toString());
+        businessEditPhoneNumber.setText(compantEntitiy.getPhoneNumber());
+        businessEditClient.setText(compantEntitiy.getClient());
+        businessEditClientContact.setText(compantEntitiy.getClientContact());
+        businessEditClientContactPhone.setText(compantEntitiy.getClientContactPhone());
+        businessEditTown.setText(compantEntitiy.getTown());
+
+    }
 
     private void postJson() {
         String url = Constants.TEST_SERVICE + "/company/post";
@@ -351,78 +451,6 @@ public class BasicsBusinessFragment extends BaseFragment {
                 }
             });
         }
-
-    }
-
-    Runnable seccessRun = new Runnable() {
-        @Override
-        public void run() {
-            showToastShort("保存成功");
-            popBackStack();
-        }
-    };
-
-    Runnable failRun = new Runnable() {
-        @Override
-        public void run() {
-            showToastShort("保存失败");
-        }
-    };
-
-    /**
-     * 初始化数据
-     */
-    private void initData() {
-        handler = new Handler();
-        company = new Company();
-        dataList = new ArrayList<>();
-        dataList.add(new AccidentGridModel("财产综合险", false));
-        dataList.add(new AccidentGridModel("财产基本险", false));
-        dataList.add(new AccidentGridModel("财产一切险", false));
-        dataList.add(new AccidentGridModel("雇主责任险", false));
-        dataList.add(new AccidentGridModel("团体意外险", false));
-        season.add("春");
-        season.add("夏");
-        season.add("秋");
-        season.add("冬");
-    }
-
-    private void spinnerSetAdapter(ArrayAdapter<String> arrayAdapter, Spinner spinner) {
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(arrayAdapter);
-    }
-
-    /**
-     * 初始化view
-     */
-    private void initView() {
-
-        ArrayAdapter<String> geology1_0Adapter;
-        geology1_0Adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, season);
-        spinnerSetAdapter(geology1_0Adapter,businessSeason);
-
-        adapter = new AccidentGridAdapter(getActivity(), dataList);
-        grid.setAdapter(adapter);
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (dataList.get(position).isSelect()) {
-                    dataList.get(position).setSelect(false);
-                    insuranceList.remove(dataList.get(position).getName());
-                } else {
-                    dataList.get(position).setSelect(true);
-                    insuranceList.add(dataList.get(position).getName());
-                }
-                adapter.notifyDataSetChanged();
-            }
-        });
-
-        businessAddText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showRecDialog();
-            }
-        });
 
     }
 

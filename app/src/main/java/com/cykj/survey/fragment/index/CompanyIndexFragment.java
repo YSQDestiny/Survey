@@ -28,6 +28,8 @@ public class CompanyIndexFragment extends BaseFragment {
     protected View onCreateView() {
         View root = LayoutInflater.from(getContext()).inflate(R.layout.layout_fragment_company_index, null);
         ButterKnife.bind(this, root);
+        CompanyConstants.COMPANY_ID = 0;
+        CompanyConstants.CP_MODEL = null;
         initTopbar();
         initGroupList();
         return root;
@@ -60,12 +62,8 @@ public class CompanyIndexFragment extends BaseFragment {
                     CharSequence text = ((QMUICommonListItemView) v).getText();
                     switch (text.toString()){
                         case "基础信息":
-                            if (CompanyConstants.CP_MODEL != null){
-                                showToastLong("基本信息已经录入，暂无法编辑，将会尽快开放");
-                            }else {
-                                BaseFragment fragment = new BasicsBusinessFragment();
-                                startFragment(fragment);
-                            }
+                            BaseFragment fragment = new BasicsBusinessFragment();
+                            startFragment(fragment);
                             break;
                         case "照片上传":
                             if (ProgressModel.COMPANY_1){

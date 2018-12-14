@@ -117,6 +117,12 @@ public class PhotoUploadActivity extends BaseFragmentActivity {
 
     private void initTopBar() {
         topbar.setTitle("照片上传");
+        topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void showMenuDialog(){
