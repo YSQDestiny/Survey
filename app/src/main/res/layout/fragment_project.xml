@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/qmui_topbar_height"
-        android:background="@color/qmui_config_color_white">
+        android:background="#f2f0f2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,209 +32,264 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="项目名称"
+                    android:text="项目信息"
                     android:textColor="#666666"
                     android:textSize="12sp" />
 
             </RelativeLayout>
 
-            <EditText
-                android:id="@+id/project_name"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@null" />
-
-            <RelativeLayout
+            <LinearLayout
+                android:background="@color/qmui_config_color_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#f2f0f2">
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/icon_project_local" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="所属地区"
-                    android:textColor="#666666"
-                    android:textSize="12sp" />
+                    android:text="所属地区:"
+                    android:textColor="?attr/qmui_config_color_gray_1"
+                    android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
 
-            </RelativeLayout>
+                <TextView
+                    android:id="@+id/project_area"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:text="请选择项目所在地"
+                    android:textColor="?attr/qmui_config_color_gray_5"
+                    android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
 
-            <EditText
-                android:id="@+id/project_area"
+                <ImageView
+                    android:layout_weight="0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/icon_right" />
+
+            </LinearLayout>
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@null" />
+                android:layout_height="1dp"
+                android:background="@color/qmui_config_color_gray_8"/>
 
-            <RelativeLayout
+            <LinearLayout
+                android:background="@color/qmui_config_color_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#f2f0f2">
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/icon_project_addr" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="项目部"
-                    android:textColor="#666666"
-                    android:textSize="12sp" />
+                    android:text="详细地址:"
+                    android:textColor="?attr/qmui_config_color_gray_1"
+                    android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
 
-            </RelativeLayout>
+                <EditText
+                    android:id="@+id/projiect_edit_addr"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@null"
+                    android:hint="请输入详细地址"
+                    android:textColor="?attr/qmui_config_color_gray_5"
+                    android:textSize="?attr/qmui_common_list_item_detail_h_text_size"
+                    android:layout_marginLeft="8dp"/>
 
-            <EditText
-                android:id="@+id/project_department"
+            </LinearLayout>
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@null" />
+                android:layout_height="1dp"
+                android:background="@color/qmui_config_color_gray_8"/>
 
-            <RelativeLayout
+            <LinearLayout
+                android:background="@color/qmui_config_color_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#f2f0f2">
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/icon_project_construction" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="项目标的"
-                    android:textColor="#666666"
-                    android:textSize="12sp" />
+                    android:text="施工单位:"
+                    android:textColor="?attr/qmui_config_color_gray_1"
+                    android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
 
-            </RelativeLayout>
+                <EditText
+                    android:id="@+id/projiect_edit_construction"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@null"
+                    android:hint="请输入施工单位名称"
+                    android:textColor="?attr/qmui_config_color_gray_5"
+                    android:textSize="?attr/qmui_common_list_item_detail_h_text_size"
+                    android:layout_marginLeft="8dp"/>
 
-            <EditText
-                android:id="@+id/project_target"
+            </LinearLayout>
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@null" />
+                android:layout_height="1dp"
+                android:background="@color/qmui_config_color_gray_8"/>
 
-            <RelativeLayout
+            <LinearLayout
+                android:background="@color/qmui_config_color_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#f2f0f2">
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/icon_project_type" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="工程类型"
-                    android:textColor="#666666"
-                    android:textSize="12sp" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/project_type_select"
-                android:layout_width="match_parent"
-                android:layout_height="40dp">
+                    android:text="工程类型:"
+                    android:textColor="?attr/qmui_config_color_gray_1"
+                    android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
 
                 <TextView
-                    android:id="@+id/project_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="点击选择工程类型"
-                    android:textColor="#666666"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#f2f0f2">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
+                    android:id="@+id/project_type_select"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="工程起点"
-                    android:textColor="#666666"
-                    android:textSize="12sp" />
+                    android:text="请选择工程类型"
+                    android:textColor="?attr/qmui_config_color_gray_5"
+                    android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
 
-            </RelativeLayout>
-
-            <EditText
-                android:id="@+id/project_staring"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@null" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#f2f0f2">
-
-                <TextView
+                <ImageView
+                    android:layout_weight="0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="工程终点"
-                    android:textColor="#666666"
-                    android:textSize="12sp" />
+                    android:layout_marginRight="16dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/icon_right"/>
 
-            </RelativeLayout>
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/project_ending"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@null" />
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="#f2f0f2">-->
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#f2f0f2">
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginBottom="4dp"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--android:layout_marginTop="4dp"-->
+                    <!--android:text="工程起点"-->
+                    <!--android:textColor="#666666"-->
+                    <!--android:textSize="12sp" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="线路全长(KM)"
-                    android:textColor="#666666"
-                    android:textSize="12sp" />
+            <!--</RelativeLayout>-->
 
-            </RelativeLayout>
+            <!--<EditText-->
+                <!--android:id="@+id/project_staring"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:background="@null" />-->
 
-            <EditText
-                android:id="@+id/project_length"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@null"
-                android:inputType="numberDecimal"/>
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="#f2f0f2">-->
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="#f2f0f2">
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginBottom="4dp"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--android:layout_marginTop="4dp"-->
+                    <!--android:text="工程终点"-->
+                    <!--android:textColor="#666666"-->
+                    <!--android:textSize="12sp" />-->
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/project_ending"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:background="@null" />-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="#f2f0f2">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginBottom="4dp"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--android:layout_marginTop="4dp"-->
+                    <!--android:text="线路全长(KM)"-->
+                    <!--android:textColor="#666666"-->
+                    <!--android:textSize="12sp" />-->
+
+            <!--</RelativeLayout>-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/project_length"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:background="@null"-->
+                <!--android:inputType="numberDecimal"/>-->
 
         </LinearLayout>
 

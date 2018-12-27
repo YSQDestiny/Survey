@@ -48,7 +48,7 @@
         android:paddingRight="@dimen/common_content_spacing"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        android:text="该地多年平均气温为多少？"
+        android:text="该地多年平均气温为多少？（℃）"
         android:textColor="?attr/qmui_config_color_gray_1"
         android:textSize="?attr/qmui_common_list_item_title_h_text_size"
         android:inputType="numberDecimal"/>
@@ -78,7 +78,7 @@
         android:paddingRight="@dimen/common_content_spacing"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        android:text="该地多年平均降水量为多少？"
+        android:text="该地多年平均降水量为多少？（mm）"
         android:textColor="?attr/qmui_config_color_gray_1"
         android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
 

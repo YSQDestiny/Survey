@@ -68,8 +68,10 @@ public class ProjectListFragment extends BaseFragment {
         topbar.addRightTextButton("新建",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ProjectActivity.class);
-                getActivity().startActivity(intent);
+//                Intent intent = new Intent(getActivity(), ProjectActivity.class);
+//                getActivity().startActivity(intent);
+            BaseFragment baseFragment = new ProjectFragment();
+            startFragment(baseFragment);
             }
         });
     }
