@@ -29,9 +29,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
                     android:text="项目信息"
                     android:textColor="#666666"
                     android:textSize="12sp" />
@@ -39,46 +39,46 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:background="@color/qmui_config_color_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/qmui_config_color_white"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
                     android:src="@mipmap/icon_project_local" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_gravity="fill_horizontal"
-                    android:gravity="center_vertical"
                     android:layout_marginLeft="8dp"
+                    android:gravity="center_vertical"
                     android:text="所属地区:"
                     android:textColor="?attr/qmui_config_color_gray_1"
                     android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
 
                 <TextView
                     android:id="@+id/project_area"
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_gravity="fill_horizontal"
-                    android:gravity="center_vertical"
                     android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
                     android:text="请选择项目所在地"
                     android:textColor="?attr/qmui_config_color_gray_5"
                     android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
 
                 <ImageView
-                    android:layout_weight="0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
                     android:layout_gravity="center"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="0"
                     android:src="@mipmap/icon_right" />
 
             </LinearLayout>
@@ -86,27 +86,27 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/qmui_config_color_gray_8"/>
+                android:background="@color/qmui_config_color_gray_8" />
 
             <LinearLayout
-                android:background="@color/qmui_config_color_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/qmui_config_color_white"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
                     android:src="@mipmap/icon_project_addr" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_gravity="fill_horizontal"
-                    android:gravity="center_vertical"
                     android:layout_marginLeft="8dp"
+                    android:gravity="center_vertical"
                     android:text="详细地址:"
                     android:textColor="?attr/qmui_config_color_gray_1"
                     android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
@@ -116,38 +116,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
                     android:background="@null"
                     android:hint="请输入详细地址"
                     android:textColor="?attr/qmui_config_color_gray_5"
-                    android:textSize="?attr/qmui_common_list_item_detail_h_text_size"
-                    android:layout_marginLeft="8dp"/>
+                    android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/qmui_config_color_gray_8"/>
+                android:background="@color/qmui_config_color_gray_8" />
 
             <LinearLayout
-                android:background="@color/qmui_config_color_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/qmui_config_color_white"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
                     android:src="@mipmap/icon_project_construction" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_gravity="fill_horizontal"
-                    android:gravity="center_vertical"
                     android:layout_marginLeft="8dp"
+                    android:gravity="center_vertical"
                     android:text="施工单位:"
                     android:textColor="?attr/qmui_config_color_gray_1"
                     android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
@@ -157,145 +157,316 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
                     android:background="@null"
                     android:hint="请输入施工单位名称"
                     android:textColor="?attr/qmui_config_color_gray_5"
-                    android:textSize="?attr/qmui_common_list_item_detail_h_text_size"
-                    android:layout_marginLeft="8dp"/>
+                    android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/qmui_config_color_gray_8"/>
+                android:background="@color/qmui_config_color_gray_8" />
 
             <LinearLayout
-                android:background="@color/qmui_config_color_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/qmui_config_color_white"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:src="@drawable/icon_project_build" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_gravity="fill_horizontal"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center_vertical"
+                    android:text="建设单位:"
+                    android:textColor="?attr/qmui_config_color_gray_1"
+                    android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+                <EditText
+                    android:id="@+id/projiect_edit_build"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:background="@null"
+                    android:hint="请输入施工单位名称"
+                    android:textColor="?attr/qmui_config_color_gray_5"
+                    android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/qmui_config_color_gray_8" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/qmui_config_color_white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
                     android:src="@mipmap/icon_project_type" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_gravity="fill_horizontal"
-                    android:gravity="center_vertical"
                     android:layout_marginLeft="8dp"
+                    android:gravity="center_vertical"
                     android:text="工程类型:"
                     android:textColor="?attr/qmui_config_color_gray_1"
                     android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
 
                 <TextView
                     android:id="@+id/project_type_select"
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_gravity="fill_horizontal"
-                    android:gravity="center_vertical"
                     android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
                     android:text="请选择工程类型"
                     android:textColor="?attr/qmui_config_color_gray_5"
                     android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
 
                 <ImageView
-                    android:layout_weight="0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
                     android:layout_gravity="center"
-                    android:src="@mipmap/icon_right"/>
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="0"
+                    android:src="@mipmap/icon_right" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#f2f0f2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="委托方信息"
+                        android:textColor="#666666"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/qmui_config_color_white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:src="@mipmap/icon_project_construction" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_gravity="fill_horizontal"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center_vertical"
+                    android:text="委托方:"
+                    android:textColor="?attr/qmui_config_color_gray_1"
+                    android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+                <EditText
+                    android:id="@+id/projiect_edit_commission"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:background="@null"
+                    android:hint="请输入委托方单位名称"
+                    android:textColor="?attr/qmui_config_color_gray_5"
+                    android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/qmui_config_color_white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:src="@mipmap/icon_project_contact" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_gravity="fill_horizontal"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center_vertical"
+                    android:text="联系人:"
+                    android:textColor="?attr/qmui_config_color_gray_1"
+                    android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+                <EditText
+                    android:id="@+id/projiect_edit_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:background="@null"
+                    android:hint="请输入委托方联系人姓名"
+                    android:textColor="?attr/qmui_config_color_gray_5"
+                    android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/qmui_config_color_white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:src="@mipmap/icon_project_tel" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_gravity="fill_horizontal"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center_vertical"
+                    android:text="联系电话:"
+                    android:textColor="?attr/qmui_config_color_gray_1"
+                    android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+                <EditText
+                    android:id="@+id/projiect_edit_contact_tel"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:background="@null"
+                    android:hint="请输入委托方联系电话"
+                    android:textColor="?attr/qmui_config_color_gray_5"
+                    android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
 
             </LinearLayout>
 
             <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="#f2f0f2">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="#f2f0f2">-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginBottom="4dp"-->
-                    <!--android:layout_marginLeft="8dp"-->
-                    <!--android:layout_marginTop="4dp"-->
-                    <!--android:text="工程起点"-->
-                    <!--android:textColor="#666666"-->
-                    <!--android:textSize="12sp" />-->
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="4dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginTop="4dp"-->
+            <!--android:text="工程起点"-->
+            <!--android:textColor="#666666"-->
+            <!--android:textSize="12sp" />-->
 
             <!--</RelativeLayout>-->
 
             <!--<EditText-->
-                <!--android:id="@+id/project_staring"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="40dp"-->
-                <!--android:layout_marginLeft="16dp"-->
-                <!--android:layout_marginRight="16dp"-->
-                <!--android:background="@null" />-->
+            <!--android:id="@+id/project_staring"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--android:background="@null" />-->
 
             <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="#f2f0f2">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="#f2f0f2">-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginBottom="4dp"-->
-                    <!--android:layout_marginLeft="8dp"-->
-                    <!--android:layout_marginTop="4dp"-->
-                    <!--android:text="工程终点"-->
-                    <!--android:textColor="#666666"-->
-                    <!--android:textSize="12sp" />-->
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="4dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginTop="4dp"-->
+            <!--android:text="工程终点"-->
+            <!--android:textColor="#666666"-->
+            <!--android:textSize="12sp" />-->
 
             <!--</RelativeLayout>-->
 
             <!--<EditText-->
-                <!--android:id="@+id/project_ending"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="40dp"-->
-                <!--android:layout_marginLeft="16dp"-->
-                <!--android:layout_marginRight="16dp"-->
-                <!--android:background="@null" />-->
+            <!--android:id="@+id/project_ending"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--android:background="@null" />-->
 
             <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="#f2f0f2">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="#f2f0f2">-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginBottom="4dp"-->
-                    <!--android:layout_marginLeft="8dp"-->
-                    <!--android:layout_marginTop="4dp"-->
-                    <!--android:text="线路全长(KM)"-->
-                    <!--android:textColor="#666666"-->
-                    <!--android:textSize="12sp" />-->
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="4dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginTop="4dp"-->
+            <!--android:text="线路全长(KM)"-->
+            <!--android:textColor="#666666"-->
+            <!--android:textSize="12sp" />-->
 
             <!--</RelativeLayout>-->
 
             <!--<EditText-->
-                <!--android:id="@+id/project_length"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="40dp"-->
-                <!--android:layout_marginLeft="16dp"-->
-                <!--android:layout_marginRight="16dp"-->
-                <!--android:background="@null"-->
-                <!--android:inputType="numberDecimal"/>-->
+            <!--android:id="@+id/project_length"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--android:background="@null"-->
+            <!--android:inputType="numberDecimal"/>-->
 
         </LinearLayout>
 
 
     </ScrollView>
-
 
 
 </FrameLayout>

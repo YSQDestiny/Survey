@@ -17,6 +17,12 @@ import com.cykj.survey.model.ProjectModel;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.DateUtil;
 import com.cykj.survey.util.DeviceUtils;
+import com.lljjcoder.Interface.OnCityItemClickListener;
+import com.lljjcoder.bean.CityBean;
+import com.lljjcoder.bean.DistrictBean;
+import com.lljjcoder.bean.ProvinceBean;
+import com.lljjcoder.citywheel.CityConfig;
+import com.lljjcoder.style.citypickerview.CityPickerView;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
@@ -48,19 +54,73 @@ public class ProjectFragment extends BaseFragment {
     TextView projectTypeSelect;
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
+    private CityPickerView mPicker = new CityPickerView();
 
     @Override
     protected View onCreateView() {
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_project, null);
         ButterKnife.bind(this, root);
+        mPicker.init(getActivity());
         initTopbar();
+        initView();
+        projectArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CityConfig cityConfig = new CityConfig.Builder().build();
+                cityConfig.setDefaultProvinceName("四川省");
+                cityConfig.setDefaultCityName("成都市");
+                cityConfig.setDefaultDistrict("市辖区");
+                mPicker.setConfig(cityConfig);
+                mPicker.setOnCityItemClickListener(new OnCityItemClickListener() {
+                    @Override
+                    public void onSelected(ProvinceBean province, CityBean city, DistrictBean district) {
+                        //省份
+                        if (province == null) {
+                            showToastShort("省份信息获取失败");
+                            return;
+                        } else {
+                        }
+
+
+                        //城市
+                        if (city == null) {
+                            showToastShort("城市信息获取失败");
+                            return;
+                        } else {
+                            ProjectConstants.sqlMap.put("city",city.getName());
+                        }
+
+                        //地区
+                        if (district == null) {
+                            showToastShort("地区信息获取失败");
+                            return;
+                        } else {
+                            ProjectConstants.sqlMap.put("country",district.getName());
+                        }
+                        String str = province.getName() + "-" + city.getName() + "-" + district.getName();
+                        projectArea.setText(str);
+                        projectArea.setTextColor(getResources().getColor(R.color.bank_bg01));
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        showToastShort("操作取消");
+                    }
+                });
+                mPicker.showCityPicker();
+            }
+        });
+
+        return root;
+    }
+
+    private void initView() {
         projectTypeSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showMenuDialog();
             }
         });
-        return root;
     }
 
     private void showMenuDialog() {
@@ -77,8 +137,12 @@ public class ProjectFragment extends BaseFragment {
                 .create(mCurrentDialogStyle).show();
     }
 
+
     private void postProjectInfo() {
+
         ProjectModel projectModel = new ProjectModel();
+
+
 
 //        if (isNull(projectName)) {
 //            showToastShort("请输入工程名称");

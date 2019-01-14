@@ -24,10 +24,13 @@ import com.cykj.survey.model.Company;
 import com.cykj.survey.model.ProjectModel;
 import com.cykj.survey.model.ResultModel;
 import com.cykj.survey.util.DeviceUtils;
+import com.cykj.survey.util.HttpUtil;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,14 +66,13 @@ public class ProjectListFragment extends BaseFragment {
     }
 
     private void initTopbar() {
-
         topbar.setTitle("报告列表");
         topbar.addRightTextButton("新建",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                Intent intent = new Intent(getActivity(), ProjectActivity.class);
 //                getActivity().startActivity(intent);
-            BaseFragment baseFragment = new ProjectFragment();
+            BaseFragment baseFragment = new ProjectIndexFragment();
             startFragment(baseFragment);
             }
         });
@@ -79,15 +81,10 @@ public class ProjectListFragment extends BaseFragment {
     private void getData(){
         String url = Constants.TEST_SERVICE + "/project/getList";
 
-        OkHttpClient client = new OkHttpClient();
+        Map<String, String> params = new HashMap<>();
+        params.put("uniqueId",DeviceUtils.getUniqueId(getContext()));
 
-        RequestBody requestBody = new FormBody.Builder()
-                .add("uniqueId", DeviceUtils.getUniqueId(getContext()))
-                .build();
-
-        final Request request = new Request.Builder().url(url).post(requestBody).build();
-
-        client.newCall(request).enqueue(new Callback() {
+        HttpUtil.doPost(url, params, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 
@@ -100,9 +97,33 @@ public class ProjectListFragment extends BaseFragment {
                     projects = JSONObject.parseArray(result.getData(),ProjectModel.class);
                     handler.post(uiable);
                 }
-
             }
         });
+
+//        OkHttpClient client = new OkHttpClient();
+//
+//        RequestBody requestBody = new FormBody.Builder()
+//                .add("uniqueId", DeviceUtils.getUniqueId(getContext()))
+//                .build();
+//
+//        final Request request = new Request.Builder().url(url).post(requestBody).build();
+//
+//        client.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
+//                if (result.getCode() == 0){
+//                    projects = JSONObject.parseArray(result.getData(),ProjectModel.class);
+//                    handler.post(uiable);
+//                }
+//
+//            }
+//        });
     }
 
     @Override

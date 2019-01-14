@@ -73,17 +73,17 @@ public class MapProjectActivity extends BaseFragmentActivity {
     private void initTopbar() {
         topbar.setTitle("绘制路线");
 
-        topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (passingPointList.size() > 0){
-                    postPassingPoint();
-                }else {
-                    showToastShort("路径点未选择");
-                }
-
-            }
-        });
+//        topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (passingPointList.size() > 0){
+//                    postPassingPoint();
+//                }else {
+//                    showToastShort("路径点未选择");
+//                }
+//
+//            }
+//        });
         topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

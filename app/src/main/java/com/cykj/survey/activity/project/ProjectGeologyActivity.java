@@ -162,6 +162,7 @@ public class ProjectGeologyActivity extends BaseFragmentActivity {
                 projectGeology14.getSelectedItem().toString() +",地下水体对混凝土为"+ projectGeology15.getSelectedItem().toString() +"。"
                 + "\n" + "项目沿线与公路工程有关的工程地质问题主要集中在"+projectGeology16.getSelectedItem().toString()+"。";
 
+        
 
         OkHttpClient client = new OkHttpClient();
 
@@ -197,12 +198,12 @@ public class ProjectGeologyActivity extends BaseFragmentActivity {
 
     private void initTopbar() {
         topbar.setTitle("地质选项");
-        topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                postData();
-            }
-        });
+//        topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                postData();
+//            }
+//        });
         topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

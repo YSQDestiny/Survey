@@ -1,5 +1,6 @@
 package com.cykj.survey.fragment.index;
 
+import android.content.Intent;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,15 +8,16 @@ import android.widget.Toast;
 
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
+import com.cykj.survey.activity.MapProjectActivity;
+import com.cykj.survey.activity.project.ProjectAccidentActivity;
+import com.cykj.survey.activity.project.ProjectGeologyActivity;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.model.ProjectAccident;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
-
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 
 import butterknife.BindView;
@@ -62,13 +64,13 @@ public class ProjectIndexFragment extends BaseFragment {
         item1.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
         QMUICommonListItemView item2 = groupListView.createItemView("地质信息");
-        item1.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
+        item2.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
         QMUICommonListItemView item3 = groupListView.createItemView("路径添加");
-        item1.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
+        item3.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
         QMUICommonListItemView item4 = groupListView.createItemView("现场风险");
-        item1.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
+        item4.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -82,20 +84,31 @@ public class ProjectIndexFragment extends BaseFragment {
                             startFragment(baseFragment);
                             break;
                         case "地质信息":
-
+                            Intent intent = new Intent(getActivity(),ProjectGeologyActivity.class);
+                            getActivity().startActivity(intent);
                             break;
                         case "路径添加":
-
+                            Intent intent1 = new Intent(getActivity(),MapProjectActivity.class);
+                            getActivity().startActivity(intent1);
                             break;
                         case "现场风险":
-
+                            Intent intent2 = new Intent(getActivity(),ProjectAccidentActivity.class);
+                            getActivity().startActivity(intent2);
                             break;
                         default:
+
                             break;
                     }
                 }
             }
         };
+
+        QMUIGroupListView.newSection(getContext())
+                .addItemView(item1,onClickListener)
+                .addItemView(item2,onClickListener)
+                .addItemView(item3,onClickListener)
+                .addItemView(item4,onClickListener)
+                .addTo(groupListView);
     }
 
     private void showEditTextDialog() {
@@ -103,12 +116,6 @@ public class ProjectIndexFragment extends BaseFragment {
         builder.setTitle("项目名称")
                 .setPlaceholder("在此输入项目名称")
                 .setInputType(InputType.TYPE_CLASS_TEXT)
-                .addAction("取消", new QMUIDialogAction.ActionListener() {
-                    @Override
-                    public void onClick(QMUIDialog dialog, int index) {
-                        dialog.dismiss();
-                    }
-                })
                 .addAction("确定", new QMUIDialogAction.ActionListener() {
                     @Override
                     public void onClick(QMUIDialog dialog, int index) {
