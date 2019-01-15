@@ -12,6 +12,7 @@ import com.cykj.survey.activity.MapProjectActivity;
 import com.cykj.survey.activity.project.ProjectAccidentActivity;
 import com.cykj.survey.activity.project.ProjectGeologyActivity;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.fragment.project.ProjectScaleFragment;
 import com.cykj.survey.model.ProjectAccident;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
@@ -63,13 +64,16 @@ public class ProjectIndexFragment extends BaseFragment {
         QMUICommonListItemView item1 = groupListView.createItemView("基础信息");
         item1.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
-        QMUICommonListItemView item2 = groupListView.createItemView("地质信息");
+        QMUICommonListItemView item2 = groupListView.createItemView("建设规模");
+        item1.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
+
+        QMUICommonListItemView item3 = groupListView.createItemView("地质信息");
         item2.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
-        QMUICommonListItemView item3 = groupListView.createItemView("路径添加");
+        QMUICommonListItemView item4 = groupListView.createItemView("路径添加");
         item3.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
-        QMUICommonListItemView item4 = groupListView.createItemView("现场风险");
+        QMUICommonListItemView item5 = groupListView.createItemView("现场风险");
         item4.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
 
@@ -82,6 +86,10 @@ public class ProjectIndexFragment extends BaseFragment {
                         case "基础信息":
                             BaseFragment baseFragment = new ProjectFragment();
                             startFragment(baseFragment);
+                            break;
+                        case "建设规模":
+                            BaseFragment baseFragment1 = new ProjectScaleFragment();
+                            startFragment(baseFragment1);
                             break;
                         case "地质信息":
                             Intent intent = new Intent(getActivity(),ProjectGeologyActivity.class);
