@@ -1,7 +1,6 @@
 package com.cykj.survey.fragment.index;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -10,13 +9,10 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
-import com.cykj.survey.activity.project.ProjectGeologyActivity;
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.model.ProjectConstants;
 import com.cykj.survey.model.ProjectModel;
 import com.cykj.survey.model.ResultModel;
-import com.cykj.survey.util.DateUtil;
-import com.cykj.survey.util.DeviceUtils;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
 import com.lljjcoder.bean.DistrictBean;
@@ -27,7 +23,6 @@ import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
 import java.io.IOException;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +47,18 @@ public class ProjectFragment extends BaseFragment {
     EditText projiectEditConstruction;
     @BindView(R.id.project_type_select)
     TextView projectTypeSelect;
+    @BindView(R.id.project_twon)
+    TextView projectTwon;
+    @BindView(R.id.projiect_edit_build)
+    EditText projiectEditBuild;
+    @BindView(R.id.project_review_type)
+    TextView projectReviewType;
+    @BindView(R.id.projiect_edit_commission)
+    EditText projiectEditCommission;
+    @BindView(R.id.projiect_edit_contact)
+    EditText projiectEditContact;
+    @BindView(R.id.projiect_edit_contact_tel)
+    EditText projiectEditContactTel;
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
     private CityPickerView mPicker = new CityPickerView();
@@ -87,7 +94,7 @@ public class ProjectFragment extends BaseFragment {
                             showToastShort("城市信息获取失败");
                             return;
                         } else {
-                            ProjectConstants.sqlMap.put("city",city.getName());
+                            ProjectConstants.sqlMap.put("city", city.getName());
                         }
 
                         //地区
@@ -95,7 +102,7 @@ public class ProjectFragment extends BaseFragment {
                             showToastShort("地区信息获取失败");
                             return;
                         } else {
-                            ProjectConstants.sqlMap.put("country",district.getName());
+                            ProjectConstants.sqlMap.put("country", district.getName());
                         }
                         String str = province.getName() + "-" + city.getName() + "-" + district.getName();
                         projectArea.setText(str);
@@ -124,7 +131,7 @@ public class ProjectFragment extends BaseFragment {
     }
 
     private void showMenuDialog() {
-        final String[] items = new String[]{"公路工程", "轨道交通", "房屋建筑工程", "水利工程","航电工程"};
+        final String[] items = new String[]{"公路工程", "轨道交通", "房屋建筑工程", "水利工程", "航电工程"};
         new QMUIDialog.MenuDialogBuilder(getActivity())
                 .addItems(items, new DialogInterface.OnClickListener() {
                     @Override
@@ -141,7 +148,6 @@ public class ProjectFragment extends BaseFragment {
     private void postProjectInfo() {
 
         ProjectModel projectModel = new ProjectModel();
-
 
 
 //        if (isNull(projectName)) {
@@ -225,8 +231,9 @@ public class ProjectFragment extends BaseFragment {
         topbar.addRightTextButton("完成", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ProjectConstants.sqlMap.put("twon",projectTwon.getText().toString());
 //                postProjectInfo();
-            popBackStack();
+                popBackStack();
             }
         });
     }

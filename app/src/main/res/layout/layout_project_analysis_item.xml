@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/qmui_config_color_background">
+
+    <TextView
+        android:id="@+id/project_analysis_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginLeft="16dp"
+        android:gravity="center_vertical"
+        android:text="地质灾害文字描述"
+        android:textColor="?attr/qmui_config_color_gray_1"
+        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+
+    <Spinner
+        android:id="@+id/project_analysis_item_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp">
+
+    </Spinner>
+
+</RelativeLayout>

@@ -70,10 +70,13 @@ public class ProjectIndexFragment extends BaseFragment {
         QMUICommonListItemView item3 = groupListView.createItemView("地质信息");
         item2.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
-        QMUICommonListItemView item4 = groupListView.createItemView("路径添加");
+        QMUICommonListItemView item4 = groupListView.createItemView("地质信息");
+        item2.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
+
+        QMUICommonListItemView item5 = groupListView.createItemView("路径添加");
         item3.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
-        QMUICommonListItemView item5 = groupListView.createItemView("现场风险");
+        QMUICommonListItemView item6 = groupListView.createItemView("现场风险");
         item4.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
 
@@ -91,9 +94,13 @@ public class ProjectIndexFragment extends BaseFragment {
                             BaseFragment baseFragment1 = new ProjectScaleFragment();
                             startFragment(baseFragment1);
                             break;
-                        case "地质信息":
+                        case "地形地貌":
                             Intent intent = new Intent(getActivity(),ProjectGeologyActivity.class);
                             getActivity().startActivity(intent);
+                            break;
+                        case "地质分析":
+//                            Intent intent = new Intent(getActivity(),ProjectGeologyActivity.class);
+//                            getActivity().startActivity(intent);
                             break;
                         case "路径添加":
                             Intent intent1 = new Intent(getActivity(),MapProjectActivity.class);
@@ -116,6 +123,8 @@ public class ProjectIndexFragment extends BaseFragment {
                 .addItemView(item2,onClickListener)
                 .addItemView(item3,onClickListener)
                 .addItemView(item4,onClickListener)
+                .addItemView(item5,onClickListener)
+                .addItemView(item6,onClickListener)
                 .addTo(groupListView);
     }
 
