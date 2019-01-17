@@ -111,17 +111,16 @@
                     android:textColor="?attr/qmui_config_color_gray_1"
                     android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
 
-                <TextView
-                    android:id="@+id/project_twon"
+                <EditText
+                    android:id="@+id/projiect_edit_twon"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_gravity="fill_horizontal"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="请输入项目所在乡镇"
+                    android:background="@null"
+                    android:hint="请输入项目所在乡镇"
                     android:textColor="?attr/qmui_config_color_gray_5"
-                    android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+                    android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
 
             </LinearLayout>
 

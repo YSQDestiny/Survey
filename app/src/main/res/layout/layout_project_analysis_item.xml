@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/qmui_config_color_background">
+    android:background="@color/qmui_config_color_white">
 
     <TextView
         android:id="@+id/project_analysis_item_name"
@@ -13,7 +13,7 @@
         android:gravity="center_vertical"
         android:text="地质灾害文字描述"
         android:textColor="?attr/qmui_config_color_gray_1"
-        android:textSize="?attr/qmui_common_list_item_title_h_text_size" />
+        android:textSize="13sp" />
 
     <Spinner
         android:id="@+id/project_analysis_item_spinner"

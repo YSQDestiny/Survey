@@ -59,27 +59,28 @@ public class ProjectAnalysisAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.layout_project_analysis_item,null);
             holder.name = convertView.findViewById(R.id.project_analysis_item_name);
             holder.spinner = convertView.findViewById(R.id.project_analysis_item_spinner);
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(mContext,android.R.layout.simple_spinner_item, ProjectConstants.ANALYSIS_SPINNER_ITEM);
-            spinnerSetAdapter(arrayAdapter,holder.spinner);
-            holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position1, long id) {
-                    if (map.containsKey(map.containsKey(mData.get(position).getHiddenDanger()))){
-                        map.put(mData.get(position).getHiddenDanger(),ProjectConstants.ANALYSIS_SPINNER_ITEM.get(position1));
-                    }else {
-                        map.put(mData.get(position).getHiddenDanger(),ProjectConstants.ANALYSIS_SPINNER_ITEM.get(position1));
-                    }
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
+        holder.name.setText(mData.get(position).getHiddenDanger());
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(mContext,android.R.layout.simple_spinner_item, ProjectConstants.ANALYSIS_SPINNER_ITEM);
+        spinnerSetAdapter(arrayAdapter,holder.spinner);
+        holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position1, long id) {
+                if (map.containsKey(map.containsKey(mData.get(position).getHiddenDanger()))){
+                    map.put(mData.get(position).getHiddenDanger(),ProjectConstants.ANALYSIS_SPINNER_ITEM.get(position1));
+                }else {
+                    map.put(mData.get(position).getHiddenDanger(),ProjectConstants.ANALYSIS_SPINNER_ITEM.get(position1));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         return convertView;
     }
 

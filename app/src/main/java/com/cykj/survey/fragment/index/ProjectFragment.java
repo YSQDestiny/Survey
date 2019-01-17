@@ -47,8 +47,6 @@ public class ProjectFragment extends BaseFragment {
     EditText projiectEditConstruction;
     @BindView(R.id.project_type_select)
     TextView projectTypeSelect;
-    @BindView(R.id.project_twon)
-    TextView projectTwon;
     @BindView(R.id.projiect_edit_build)
     EditText projiectEditBuild;
     @BindView(R.id.project_review_type)
@@ -59,6 +57,8 @@ public class ProjectFragment extends BaseFragment {
     EditText projiectEditContact;
     @BindView(R.id.projiect_edit_contact_tel)
     EditText projiectEditContactTel;
+    @BindView(R.id.projiect_edit_twon)
+    EditText projiectEditTwon;
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
     private CityPickerView mPicker = new CityPickerView();
@@ -102,7 +102,7 @@ public class ProjectFragment extends BaseFragment {
                             showToastShort("地区信息获取失败");
                             return;
                         } else {
-                            ProjectConstants.sqlMap.put("country", district.getName());
+                            ProjectConstants.sqlMap.put("county", district.getName());
                         }
                         String str = province.getName() + "-" + city.getName() + "-" + district.getName();
                         projectArea.setText(str);
@@ -231,7 +231,7 @@ public class ProjectFragment extends BaseFragment {
         topbar.addRightTextButton("完成", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProjectConstants.sqlMap.put("twon",projectTwon.getText().toString());
+                ProjectConstants.sqlMap.put("town", projiectEditTwon.getText().toString());
 //                postProjectInfo();
                 popBackStack();
             }

@@ -62,6 +62,7 @@ public class ProjectListFragment extends BaseFragment {
         handler = new Handler();
         initTopbar();
         getData();
+        initView();
         return root;
     }
 
@@ -94,8 +95,10 @@ public class ProjectListFragment extends BaseFragment {
             public void onResponse(Call call, Response response) throws IOException {
                 ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
                 if (result.getCode() == 0){
-                    projects = JSONObject.parseArray(result.getData(),ProjectModel.class);
-                    handler.post(uiable);
+                    if (result.getData() != null){
+                        projects = JSONObject.parseArray(result.getData(),ProjectModel.class);
+                        handler.post(uiable);
+                    }
                 }
             }
         });

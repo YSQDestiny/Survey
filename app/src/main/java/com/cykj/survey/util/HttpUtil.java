@@ -196,12 +196,12 @@ public class HttpUtil {
                         //键值对的形式添加
                         builder.add(oldBody.name(i),oldBody.value(i));
                     }
-//                    //添加公共参数
-//                    for (Map.Entry<String,String> entry: map.entrySet()) {
-//
-//                        builder.add(entry.getKey(),entry.getValue());
-//
-//                    }
+                    //添加公共参数
+                    for (Map.Entry<String,String> entry: map.entrySet()) {
+
+                        builder.add(entry.getKey(),entry.getValue());
+
+                    }
 
                     //构建一个新的请求
                     request = request.newBuilder().url(oldUrl).post(builder.build()).build();

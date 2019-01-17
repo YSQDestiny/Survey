@@ -12,8 +12,10 @@ import com.cykj.survey.activity.MapProjectActivity;
 import com.cykj.survey.activity.project.ProjectAccidentActivity;
 import com.cykj.survey.activity.project.ProjectGeologyActivity;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.fragment.project.ProjectAnalysisFragment;
 import com.cykj.survey.fragment.project.ProjectScaleFragment;
 import com.cykj.survey.model.ProjectAccident;
+import com.cykj.survey.model.ProjectConstants;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
@@ -44,6 +46,7 @@ public class ProjectIndexFragment extends BaseFragment {
     protected View onCreateView() {
         View root = LayoutInflater.from(getContext()).inflate(R.layout.layout_fragment_company_index, null);
         ButterKnife.bind(this, root);
+        ProjectConstants.sqlMap.clear();
         initTopbar();
         initView();
         return root;
@@ -67,10 +70,10 @@ public class ProjectIndexFragment extends BaseFragment {
         QMUICommonListItemView item2 = groupListView.createItemView("建设规模");
         item1.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
-        QMUICommonListItemView item3 = groupListView.createItemView("地质信息");
+        QMUICommonListItemView item3 = groupListView.createItemView("地形地貌");
         item2.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
-        QMUICommonListItemView item4 = groupListView.createItemView("地质信息");
+        QMUICommonListItemView item4 = groupListView.createItemView("地质分析");
         item2.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
         QMUICommonListItemView item5 = groupListView.createItemView("路径添加");
@@ -101,6 +104,8 @@ public class ProjectIndexFragment extends BaseFragment {
                         case "地质分析":
 //                            Intent intent = new Intent(getActivity(),ProjectGeologyActivity.class);
 //                            getActivity().startActivity(intent);
+                            BaseFragment baseFragment2 = new ProjectAnalysisFragment();
+                            startFragment(baseFragment2);
                             break;
                         case "路径添加":
                             Intent intent1 = new Intent(getActivity(),MapProjectActivity.class);
