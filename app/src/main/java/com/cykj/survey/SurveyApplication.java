@@ -5,6 +5,9 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
 
+import com.cykj.survey.base.config.AppComponent;
+import com.cykj.survey.base.config.DaggerAppComponent;
+import com.cykj.survey.base.config.InteractorModule;
 import com.cykj.survey.manager.QDUpgradeManager;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.Bugly;
@@ -16,6 +19,8 @@ public class SurveyApplication extends Application{
     public static final String APP_ID = "05b4adad58"; // TODO 替换成bugly上注册的appid
     public static final String APP_CHANNEL = "DEBUG"; // TODO 自定义渠道
 
+    private AppComponent component;
+
     @SuppressLint("StaticFieldLeak")private static Context context;
 
     public static Context getContext(){
@@ -25,6 +30,7 @@ public class SurveyApplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        setDraggerConfig();
         context = getApplicationContext();
         if (LeakCanary.isInAnalyzerProcess(this)){
             return;
@@ -97,4 +103,22 @@ public class SurveyApplication extends Application{
         Beta.checkUpgrade();
 
     }
+
+    public AppComponent component(){
+        return component;
+    }
+
+    public static SurveyApplication get(Context context){
+        return (SurveyApplication) context.getApplicationContext();
+    }
+
+    /**
+     * 初始化Dragger，DaggerAppComponent是自动生成，需要Rebuild
+     */
+    private void setDraggerConfig() {
+        component = DaggerAppComponent.builder().interactorModule(new InteractorModule())
+                .build();
+        component.inject(this);
+    }
+
 }

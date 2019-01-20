@@ -25,6 +25,8 @@
     <color name="tab_panel_bg">#ffffff</color>
     <color name="tab_panel_divider">@color/bar_divider</color>
 
+    <color name="white">#ffffff</color>
+
     <!-- Components 组件 -->
     <color name="radiusImageView_border_color">@color/app_color_theme_2</color>
     <color name="radiusImageView_selected_border_color">@color/app_color_theme_1</color>

@@ -2,6 +2,8 @@ package com.cykj.survey.base.config;
 
 import com.cykj.survey.base.RestApiAdapter;
 import com.cykj.survey.base.service.WeatherApiService;
+import com.cykj.survey.interactor.WeatherInteractor;
+import com.cykj.survey.interactor.impl.WeatherInteractorImpl;
 
 import dagger.Module;
 import dagger.Provides;

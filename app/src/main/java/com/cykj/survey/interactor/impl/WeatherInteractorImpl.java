@@ -27,4 +27,5 @@ public class WeatherInteractorImpl implements WeatherInteractor {
         Subscription subscribe = observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subsribe);
         return subscribe;
     }
+
 }
