@@ -14,4 +14,15 @@ public interface ConstantApi {
      */
     String baiduKey = "690de88822dee2ea71b0d8a7133bbc0a";
 
+    /**
+     * 测试服务器地址
+     */
+    String TEST_SERVICE = "http://192.168.0.123:8080/CYKJ/";
+
+    /**
+     * 阿里云服务器地址
+     */
+    String SERVICE = "http://47.92.209.204:80/CYKJ";
+
+
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
+import android.support.multidex.MultiDexApplication;
 
 import com.cykj.survey.base.config.AppComponent;
 import com.cykj.survey.base.config.DaggerAppComponent;
@@ -14,7 +15,7 @@ import com.tencent.bugly.Bugly;
 import com.tencent.bugly.BuglyStrategy;
 import com.tencent.bugly.beta.Beta;
 
-public class SurveyApplication extends Application{
+public class SurveyApplication extends MultiDexApplication {
 
     public static final String APP_ID = "05b4adad58"; // TODO 替换成bugly上注册的appid
     public static final String APP_CHANNEL = "DEBUG"; // TODO 自定义渠道
@@ -37,7 +38,7 @@ public class SurveyApplication extends Application{
         }
         LeakCanary.install(this);
 
-        QDUpgradeManager.getInstance(this).check();
+//        QDUpgradeManager.getInstance(this).check();
 
 //        /***** Beta高级设置 *****/
 //        /**

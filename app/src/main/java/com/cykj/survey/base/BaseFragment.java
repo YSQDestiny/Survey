@@ -14,6 +14,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import com.cykj.survey.base.config.AppComponent;
+import com.cykj.survey.interactor.ResultInteractor;
 import com.cykj.survey.manager.QDUpgradeManager;
 
 import com.qmuiteam.qmui.arch.QMUIFragment;
@@ -26,6 +28,8 @@ public abstract class BaseFragment extends QMUIFragment {
 
     private final int mRequestCode = 1024;
     private RequestPermissionCallBack mRequestPermissionCallBack;
+
+
 
     public BaseFragment(){
 

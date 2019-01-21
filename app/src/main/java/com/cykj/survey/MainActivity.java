@@ -1,11 +1,10 @@
 package com.cykj.survey;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.base.BaseFragmentActivity;
-import com.cykj.survey.fragment.home.HomeFragment;
+import com.cykj.survey.ui.fragment.home.HomeFragment;
 
 public class MainActivity extends BaseFragmentActivity{
 

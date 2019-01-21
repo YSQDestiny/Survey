@@ -1,13 +1,11 @@
 package com.cykj.survey.manager;
 
 import com.cykj.survey.base.BaseFragment;
-import com.cykj.survey.fragment.index.BusinessFragment;
-import com.cykj.survey.fragment.index.HydropowerFragment;
-import com.cykj.survey.fragment.index.ProjectFragment;
-import com.cykj.survey.fragment.index.ProjectListFragment;
-import com.cykj.survey.fragment.index.PropertyListFragment;
-import com.cykj.survey.fragment.index.ReportListFragment;
-import com.cykj.survey.fragment.utils.BillFragment;
+import com.cykj.survey.ui.fragment.index.HydropowerFragment;
+import com.cykj.survey.ui.fragment.index.ProjectListFragment;
+import com.cykj.survey.ui.fragment.index.PropertyListFragment;
+import com.cykj.survey.ui.fragment.index.ReportListFragment;
+import com.cykj.survey.ui.fragment.utils.BillFragment;
 import com.cykj.survey.model.ItemDescription;
 
 import java.util.ArrayList;

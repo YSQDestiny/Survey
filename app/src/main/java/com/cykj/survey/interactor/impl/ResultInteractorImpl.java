@@ -1,0 +1,50 @@
+package com.cykj.survey.interactor.impl;
+
+import com.cykj.survey.base.BaseSubsribe;
+import com.cykj.survey.bean.IDBean;
+import com.cykj.survey.bean.ResultBean;
+import com.cykj.survey.bean.StringBean;
+import com.cykj.survey.interactor.ResultInteractor;
+import com.cykj.survey.model.ProjectModel;
+import com.cykj.survey.service.ResultService;
+
+import java.util.HashMap;
+
+import javax.inject.Inject;
+
+import rx.Observable;
+import rx.Scheduler;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
+public class ResultInteractorImpl implements ResultInteractor {
+
+    private final ResultService api;
+
+    @Inject
+    public ResultInteractorImpl(ResultService myApi){
+        this.api = myApi;
+    }
+
+    @Override
+    public Subscription getProjectList(String uniqueId, BaseSubsribe<ResultBean> subsribe) {
+        Observable<ResultBean> observable = api.getPorjectList(uniqueId);
+        Subscription subscribe = observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subsribe);
+        return subscribe;
+    }
+
+    @Override
+    public Subscription createProject(String name,String uniqueId, BaseSubsribe<IDBean> subsribe) {
+        Observable<IDBean> observable = api.createProject(name,uniqueId);
+        Subscription subscription = observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subsribe);
+        return subscription;
+    }
+
+    @Override
+    public Subscription saveProject(Long id, ProjectModel project, BaseSubsribe<StringBean> subsribe) {
+        Observable<StringBean> observable = api.saveProject(id,project);
+        Subscription subscription = observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subsribe);
+        return subscription;
+    }
+}

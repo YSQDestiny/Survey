@@ -1,7 +1,7 @@
 package com.cykj.survey.interactor.impl;
 
 import com.cykj.survey.base.BaseSubsribe;
-import com.cykj.survey.base.service.WeatherApiService;
+import com.cykj.survey.service.WeatherApiService;
 import com.cykj.survey.bean.WeatherResultBean;
 import com.cykj.survey.interactor.WeatherInteractor;
 

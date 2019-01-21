@@ -8,25 +8,68 @@ public class ProjectModel {
 
     private String name;
 
-    private String department;
+    /**
+     *城市
+     */
+    private String city;
+    /**
+     *区/县
+     */
+    private String county;
+    /**
+     *省
+     */
+    private String province;
+    /**
+     * 镇
+     */
+    private String town;
 
-    private String project_target;
+    private String addr;
 
-    private String start;
+    /**
+     * 施工单位
+     */
+    private String construction;
 
-    private String ending;
+    /**
+     * 建设单位
+     */
+    private String building;
 
-    private String area;
+    private String type;
 
-    private double length;
+    /**
+     * 查勘类型
+     */
+    private String reviewType;
 
+    /**
+     * 委托方
+     */
+    private String client;
+    /**
+     * 委托方联系人
+     */
+    private String clientContact;
+    /**
+     * 委托方联系电话
+     */
+    private String clientPhone;
+
+    /**
+     * 地质描述
+     */
     private String geological;
+
+    /**
+     * 地质分析
+     */
+    private String analysis;
 
     private String uniqueId;
 
     private Date makeTime;
-
-    private String type;
 
     private String score;
 
@@ -34,28 +77,12 @@ public class ProjectModel {
 
     private String level;
 
-    public String getLevel() {
-        return level;
+    public Long getId() {
+        return id;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getPassingPost() {
-        return passingPost;
-    }
-
-    public void setPassingPost(String passingPost) {
-        this.passingPost = passingPost;
-    }
-
-    public String getScore() {
-        return score;
-    }
-
-    public void setScore(String score) {
-        this.score = score;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -66,52 +93,100 @@ public class ProjectModel {
         this.name = name;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getCity() {
+        return city;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getProject_target() {
-        return project_target;
+    public String getCounty() {
+        return county;
     }
 
-    public void setProject_target(String project_target) {
-        this.project_target = project_target;
+    public void setCounty(String county) {
+        this.county = county;
     }
 
-    public String getStart() {
-        return start;
+    public String getProvince() {
+        return province;
     }
 
-    public void setStart(String start) {
-        this.start = start;
+    public void setProvince(String province) {
+        this.province = province;
     }
 
-    public String getEnding() {
-        return ending;
+    public String getTown() {
+        return town;
     }
 
-    public void setEnding(String ending) {
-        this.ending = ending;
+    public void setTown(String town) {
+        this.town = town;
     }
 
-    public String getArea() {
-        return area;
+    public String getAddr() {
+        return addr;
     }
 
-    public void setArea(String area) {
-        this.area = area;
+    public void setAddr(String addr) {
+        this.addr = addr;
     }
 
-    public double getLength() {
-        return length;
+    public String getConstruction() {
+        return construction;
     }
 
-    public void setLength(double length) {
-        this.length = length;
+    public void setConstruction(String construction) {
+        this.construction = construction;
+    }
+
+    public String getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(String building) {
+        this.building = building;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getReviewType() {
+        return reviewType;
+    }
+
+    public void setReviewType(String reviewType) {
+        this.reviewType = reviewType;
+    }
+
+    public String getClient() {
+        return client;
+    }
+
+    public void setClient(String client) {
+        this.client = client;
+    }
+
+    public String getClientContact() {
+        return clientContact;
+    }
+
+    public void setClientContact(String clientContact) {
+        this.clientContact = clientContact;
+    }
+
+    public String getClientPhone() {
+        return clientPhone;
+    }
+
+    public void setClientPhone(String clientPhone) {
+        this.clientPhone = clientPhone;
     }
 
     public String getGeological() {
@@ -120,6 +195,14 @@ public class ProjectModel {
 
     public void setGeological(String geological) {
         this.geological = geological;
+    }
+
+    public String getAnalysis() {
+        return analysis;
+    }
+
+    public void setAnalysis(String analysis) {
+        this.analysis = analysis;
     }
 
     public String getUniqueId() {
@@ -138,19 +221,27 @@ public class ProjectModel {
         this.makeTime = makeTime;
     }
 
-    public String getType() {
-        return type;
+    public String getScore() {
+        return score;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setScore(String score) {
+        this.score = score;
     }
 
-    public Long getId() {
-        return id;
+    public String getPassingPost() {
+        return passingPost;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPassingPost(String passingPost) {
+        this.passingPost = passingPost;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 }
