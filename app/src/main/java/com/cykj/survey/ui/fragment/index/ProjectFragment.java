@@ -273,7 +273,8 @@ public class ProjectFragment extends BaseFragment {
             isNull = true;
             return;
         }else {
-            resultInteractor.saveProject(ProjectConstants.PROJECT_ID, projectModel, new BaseSubsribe<StringBean>() {
+            String json = JSONObject.toJSONString(projectModel);
+            resultInteractor.saveProject(ProjectConstants.PROJECT_ID, json, new BaseSubsribe<StringBean>() {
                 @Override
                 public void onSuccess(StringBean result) {
                     if (result.getMessage().equals("success")){

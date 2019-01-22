@@ -69,7 +69,7 @@ public class ProjectModel {
 
     private String uniqueId;
 
-    private Date makeTime;
+    private String makeTime;
 
     private String score;
 
@@ -213,11 +213,11 @@ public class ProjectModel {
         this.uniqueId = uniqueId;
     }
 
-    public Date getMakeTime() {
+    public String getMakeTime() {
         return makeTime;
     }
 
-    public void setMakeTime(Date makeTime) {
+    public void setMakeTime(String makeTime) {
         this.makeTime = makeTime;
     }
 

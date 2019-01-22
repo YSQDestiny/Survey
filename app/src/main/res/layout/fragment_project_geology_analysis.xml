@@ -250,6 +250,37 @@
                 </Spinner>
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f0f2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="重点工程"
+                    android:textColor="#666666"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/qmui_config_color_white">
+
+                <ListView
+                    android:id="@+id/project_analysis_list_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp">
+
+                </ListView>
+
+            </RelativeLayout>
+
         </LinearLayout>
 
     </ScrollView>

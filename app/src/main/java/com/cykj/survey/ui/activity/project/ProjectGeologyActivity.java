@@ -15,6 +15,12 @@ import java.util.List;
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
+import com.cykj.survey.SurveyApplication;
+import com.cykj.survey.base.BaseSubsribe;
+import com.cykj.survey.base.config.AppComponent;
+import com.cykj.survey.bean.StringBean;
+import com.cykj.survey.interactor.ResultInteractor;
+import com.cykj.survey.model.ProjectConstants;
 import com.cykj.survey.ui.activity.MapProjectActivity;
 import com.cykj.survey.base.BaseFragmentActivity;
 import com.cykj.survey.model.ResultModel;
@@ -74,6 +80,9 @@ public class ProjectGeologyActivity extends BaseFragmentActivity {
     @BindView(R.id.project_geology_16)
     Spinner projectGeology16;
 
+    private AppComponent component;
+    private ResultInteractor resultInteractor;
+
     @Override
     protected int getContextViewId() {
         return R.id.survey;
@@ -84,14 +93,14 @@ public class ProjectGeologyActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_geology);
         ButterKnife.bind(this);
+        component = SurveyApplication.get(this).component();
+        resultInteractor = component.getResultInteractor();
         initTopbar();
         initData();
         initView();
     }
 
     private void postData(){
-
-        String url = Constants.TEST_SERVICE + "/project/postStr";
 
         String pg6Str = null;
         String pg8Str = null;
@@ -161,48 +170,34 @@ public class ProjectGeologyActivity extends BaseFragmentActivity {
                 projectGeology14.getSelectedItem().toString() +",地下水体对混凝土为"+ projectGeology15.getSelectedItem().toString() +"。"
                 + "\n" + "项目沿线与公路工程有关的工程地质问题主要集中在"+projectGeology16.getSelectedItem().toString()+"。";
 
-        
+        String target = "geology";
 
-        OkHttpClient client = new OkHttpClient();
-
-        Long projectId = Constants.PROJECT_ID;
-
-        RequestBody body = new FormBody.Builder()
-                .add("projectId",projectId.toString())
-                .add("geologyStr",str)
-                .build();
-
-        final Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
+        resultInteractor.updateProject(ProjectConstants.PROJECT_ID, target, str, new BaseSubsribe<StringBean>() {
             @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
-                if (result.getCode() == 0){
-                    Intent intent = new Intent(ProjectGeologyActivity.this, MapProjectActivity.class);
-                    startActivity(intent);
+            public void onSuccess(StringBean result) {
+                if (result.getMessage().equals("success")){
+                    showToastShort("保存成功");
                     finish();
                 }
             }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                showToastShort("保存失败，请重试");
+            }
         });
+
     }
 
     private void initTopbar() {
         topbar.setTitle("地质选项");
-//        topbar.addRightTextButton("下一步",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                postData();
-//            }
-//        });
+        topbar.addRightTextButton("完成",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                postData();
+            }
+        });
         topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

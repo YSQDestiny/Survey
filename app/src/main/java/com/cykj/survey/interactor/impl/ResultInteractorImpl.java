@@ -42,8 +42,15 @@ public class ResultInteractorImpl implements ResultInteractor {
     }
 
     @Override
-    public Subscription saveProject(Long id, ProjectModel project, BaseSubsribe<StringBean> subsribe) {
-        Observable<StringBean> observable = api.saveProject(id,project);
+    public Subscription saveProject(Long id, String json, BaseSubsribe<StringBean> subsribe) {
+        Observable<StringBean> observable = api.saveProject(id,json);
+        Subscription subscription = observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subsribe);
+        return subscription;
+    }
+
+    @Override
+    public Subscription updateProject(Long id, String target, String json, BaseSubsribe<StringBean> subsribe) {
+        Observable<StringBean> observable = api.updateProject(id,target,json);
         Subscription subscription = observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subsribe);
         return subscription;
     }

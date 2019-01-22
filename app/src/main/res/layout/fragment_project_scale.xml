@@ -52,7 +52,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
                     android:background="@null"
-                    android:hint="请输入详细地址"
+                    android:hint="请输入路线长度"
+                    android:inputType="number"
                     android:textColor="?attr/qmui_config_color_gray_5"
                     android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
 
@@ -93,7 +94,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
                     android:background="@null"
-                    android:hint="请输入详细地址"
+                    android:hint="请输入涵洞信息"
+                    android:inputType="number"
                     android:textColor="?attr/qmui_config_color_gray_5"
                     android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
 
@@ -147,7 +149,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
                     android:background="@null"
-                    android:hint="请输入详细地址"
+                    android:hint="请输入特大桥信息"
+                    android:inputType="number"
                     android:textColor="?attr/qmui_config_color_gray_5"
                     android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
 
@@ -188,7 +191,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
                     android:background="@null"
-                    android:hint="请输入详细地址"
+                    android:hint="请输入大桥信息"
+                    android:inputType="number"
                     android:textColor="?attr/qmui_config_color_gray_5"
                     android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
 
@@ -229,7 +233,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
                     android:background="@null"
-                    android:hint="请输入详细地址"
+                    android:hint="请输入中桥信息"
+                    android:inputType="number"
                     android:textColor="?attr/qmui_config_color_gray_5"
                     android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
 
@@ -282,7 +287,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
                     android:background="@null"
-                    android:hint="请输入详细地址"
+                    android:hint="请输入长隧道信息"
+                    android:inputType="number"
                     android:textColor="?attr/qmui_config_color_gray_5"
                     android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
 
@@ -323,7 +329,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
                     android:background="@null"
-                    android:hint="请输入详细地址"
+                    android:hint="请输入中隧道信息"
+                    android:inputType="number"
                     android:textColor="?attr/qmui_config_color_gray_5"
                     android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
 
@@ -364,7 +371,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
                     android:background="@null"
-                    android:hint="请输入详细地址"
+                    android:hint="请输入短隧道信息"
+                    android:inputType="number"
                     android:textColor="?attr/qmui_config_color_gray_5"
                     android:textSize="?attr/qmui_common_list_item_detail_h_text_size" />
 

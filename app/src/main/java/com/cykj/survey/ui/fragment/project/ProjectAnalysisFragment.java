@@ -4,15 +4,17 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragment;
-import com.cykj.survey.ui.fragment.adapter.ProjectAnalysisAdapter;
+import com.cykj.survey.base.config.AppComponent;
 import com.cykj.survey.model.Disaster;
 import com.cykj.survey.model.ProjectConstants;
 import com.cykj.survey.model.ResultModel;
+import com.cykj.survey.ui.fragment.adapter.ProjectAnalysisAdapter;
 import com.cykj.survey.util.HttpUtil;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
@@ -36,12 +38,25 @@ public class ProjectAnalysisFragment extends BaseFragment {
     QMUITopBar topbar;
     @BindView(R.id.project_analysis_list)
     ListView projectAnalysisList;
+    @BindView(R.id.project_analysis_1)
+    Spinner projectAnalysis1;
+    @BindView(R.id.project_analysis_2)
+    Spinner projectAnalysis2;
+    @BindView(R.id.project_analysis_3)
+    Spinner projectAnalysis3;
+    @BindView(R.id.project_analysis_4)
+    Spinner projectAnalysis4;
+    @BindView(R.id.project_analysis_5)
+    Spinner projectAnalysis5;
+    @BindView(R.id.project_analysis_list_2)
+    ListView projectAnalysisList2;
 
     private List<Disaster> disasterList;
 
     private ProjectAnalysisAdapter analysisAdapter;
 
     private Handler handler;
+
 
     @Override
     protected View onCreateView() {
@@ -57,13 +72,13 @@ public class ProjectAnalysisFragment extends BaseFragment {
 
         String url = Constants.TEST_SERVICE + "/project/searchYHD";
 
-        if (ProjectConstants.sqlMap.size() < 3){
+        if (ProjectConstants.sqlMap.size() < 3) {
             showToastShort("地理信息录入不完整，请检查");
             popBackStack();
-        }else {
-            String json  = JSONObject.toJSONString(ProjectConstants.sqlMap);
-            Map<String,String> params = new HashMap<>();
-            params.put("json",json);
+        } else {
+            String json = JSONObject.toJSONString(ProjectConstants.sqlMap);
+            Map<String, String> params = new HashMap<>();
+            params.put("json", json);
             HttpUtil.doPost(url, params, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
@@ -74,8 +89,8 @@ public class ProjectAnalysisFragment extends BaseFragment {
                 public void onResponse(Call call, Response response) throws IOException {
                     String resultStr = response.body().string();
                     ResultModel result = JSONObject.parseObject(resultStr, ResultModel.class);
-                    if (result.getCode() == 0){
-                        disasterList = JSONObject.parseArray(result.getData(),Disaster.class);
+                    if (result.getCode() == 0) {
+                        disasterList = JSONObject.parseArray(result.getData(), Disaster.class);
                         handler.post(UIable);
                     }
                 }
@@ -85,13 +100,26 @@ public class ProjectAnalysisFragment extends BaseFragment {
     }
 
     private void initView() {
-        if (disasterList != null){
-            analysisAdapter = new ProjectAnalysisAdapter(getActivity(),disasterList);
+        if (disasterList != null) {
+            analysisAdapter = new ProjectAnalysisAdapter(getActivity(), disasterList);
             projectAnalysisList.setAdapter(analysisAdapter);
         }
     }
 
     private void initTopbar() {
+        topbar.setTitle("地质分析");
+        topbar.addRightTextButton("完成", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popBackStack();
+            }
+        });
     }
 
     @Override

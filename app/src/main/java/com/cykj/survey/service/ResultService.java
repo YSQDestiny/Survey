@@ -24,5 +24,8 @@ public interface ResultService {
     Observable<IDBean> createProject(@Query("name") String name,@Query("uniqueId") String uniqueId);
 
     @POST("project/saveProject")
-    Observable<StringBean> saveProject(@Query("id") Long id, @Body ProjectModel project);
+    Observable<StringBean> saveProject(@Query("id") Long id, @Query("json") String json);
+
+    @POST("project/updateProject")
+    Observable<StringBean> updateProject(@Query("id") Long id,@Query("target") String target,@Query("json")String json);
 }
