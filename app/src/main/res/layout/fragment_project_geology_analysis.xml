@@ -44,12 +44,12 @@
                 android:layout_height="wrap_content"
                 android:background="@color/qmui_config_color_white">
 
-                <ListView
+                <com.cykj.survey.view.NoScrollListview
                     android:id="@+id/project_analysis_list"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp">
+                    android:layout_height="wrap_content">
 
-                </ListView>
+                </com.cykj.survey.view.NoScrollListview>
 
             </RelativeLayout>
 
@@ -272,12 +272,12 @@
                 android:layout_height="wrap_content"
                 android:background="@color/qmui_config_color_white">
 
-                <ListView
+                <com.cykj.survey.view.NoScrollListview
                     android:id="@+id/project_analysis_list_2"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp">
+                    android:layout_height="wrap_content">
 
-                </ListView>
+                </com.cykj.survey.view.NoScrollListview>
 
             </RelativeLayout>
 

@@ -11,9 +11,9 @@ public class Disaster implements Serializable {
     private String town;
     private String village;
     private String group;
-    private int threatProperty;
-    private int threatHouseholds;
-    private int threatPeople;
+    private String threatProperty;
+    private String threatHouseholds;
+    private String threatPeople;
     private String isPlan;
     private String isIssue;
     private String isBuild;
@@ -74,27 +74,27 @@ public class Disaster implements Serializable {
         this.group = group;
     }
 
-    public int getThreatProperty() {
+    public String getThreatProperty() {
         return threatProperty;
     }
 
-    public void setThreatProperty(int threatProperty) {
+    public void setThreatProperty(String threatProperty) {
         this.threatProperty = threatProperty;
     }
 
-    public int getThreatHouseholds() {
+    public String getThreatHouseholds() {
         return threatHouseholds;
     }
 
-    public void setThreatHouseholds(int threatHouseholds) {
+    public void setThreatHouseholds(String threatHouseholds) {
         this.threatHouseholds = threatHouseholds;
     }
 
-    public int getThreatPeople() {
+    public String getThreatPeople() {
         return threatPeople;
     }
 
-    public void setThreatPeople(int threatPeople) {
+    public void setThreatPeople(String threatPeople) {
         this.threatPeople = threatPeople;
     }
 

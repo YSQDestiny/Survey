@@ -185,6 +185,7 @@ public class ProjectFragment extends BaseFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                       projectReviewType.setText(items[which]);
+                      ProjectConstants.REVIEW_TYPE = items[which];
                       projectReviewType.setTextColor(getResources().getColor(R.color.qmui_config_color_black));
                       dialog.dismiss();
                     }

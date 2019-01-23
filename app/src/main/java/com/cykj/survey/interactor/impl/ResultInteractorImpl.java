@@ -1,6 +1,7 @@
 package com.cykj.survey.interactor.impl;
 
 import com.cykj.survey.base.BaseSubsribe;
+import com.cykj.survey.bean.DisasterBean;
 import com.cykj.survey.bean.IDBean;
 import com.cykj.survey.bean.ResultBean;
 import com.cykj.survey.bean.StringBean;
@@ -51,6 +52,13 @@ public class ResultInteractorImpl implements ResultInteractor {
     @Override
     public Subscription updateProject(Long id, String target, String json, BaseSubsribe<StringBean> subsribe) {
         Observable<StringBean> observable = api.updateProject(id,target,json);
+        Subscription subscription = observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subsribe);
+        return subscription;
+    }
+
+    @Override
+    public Subscription searchYHD(String json, BaseSubsribe<DisasterBean> subsribe) {
+        Observable<DisasterBean> observable = api.searchYHD(json);
         Subscription subscription = observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subsribe);
         return subscription;
     }

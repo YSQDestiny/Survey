@@ -6,14 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
-import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.SurveyApplication;
 import com.cykj.survey.base.BaseSubsribe;
 import com.cykj.survey.base.config.AppComponent;
 import com.cykj.survey.bean.IDBean;
 import com.cykj.survey.interactor.ResultInteractor;
-import com.cykj.survey.ui.activity.MapProjectActivity;
 import com.cykj.survey.ui.activity.project.ProjectAccidentActivity;
 import com.cykj.survey.ui.activity.project.ProjectGeologyActivity;
 import com.cykj.survey.base.BaseFragment;
@@ -26,18 +24,9 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
-import java.io.IOException;
-import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class ProjectIndexFragment extends BaseFragment {
 
@@ -90,9 +79,6 @@ public class ProjectIndexFragment extends BaseFragment {
         QMUICommonListItemView item4 = groupListView.createItemView("地质分析");
         item2.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
-        QMUICommonListItemView item5 = groupListView.createItemView("路径添加");
-        item3.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
-
         QMUICommonListItemView item6 = groupListView.createItemView("现场风险");
         item4.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
@@ -121,10 +107,6 @@ public class ProjectIndexFragment extends BaseFragment {
                             BaseFragment baseFragment2 = new ProjectAnalysisFragment();
                             startFragment(baseFragment2);
                             break;
-                        case "路径添加":
-                            Intent intent1 = new Intent(getActivity(),MapProjectActivity.class);
-                            getActivity().startActivity(intent1);
-                            break;
                         case "现场风险":
                             Intent intent2 = new Intent(getActivity(),ProjectAccidentActivity.class);
                             getActivity().startActivity(intent2);
@@ -137,14 +119,23 @@ public class ProjectIndexFragment extends BaseFragment {
             }
         };
 
-        QMUIGroupListView.newSection(getContext())
-                .addItemView(item1,onClickListener)
-                .addItemView(item2,onClickListener)
-                .addItemView(item3,onClickListener)
-                .addItemView(item4,onClickListener)
-                .addItemView(item5,onClickListener)
-                .addItemView(item6,onClickListener)
-                .addTo(groupListView);
+        if (ProjectConstants.REVIEW_TYPE.equals("现场查勘")){
+            QMUIGroupListView.newSection(getContext())
+                    .addItemView(item1,onClickListener)
+                    .addItemView(item2,onClickListener)
+                    .addItemView(item3,onClickListener)
+                    .addItemView(item4,onClickListener)
+                    .addItemView(item6,onClickListener)
+                    .addTo(groupListView);
+        }else {
+            QMUIGroupListView.newSection(getContext())
+                    .addItemView(item1,onClickListener)
+                    .addItemView(item2,onClickListener)
+                    .addItemView(item3,onClickListener)
+                    .addItemView(item4,onClickListener)
+                    .addTo(groupListView);
+        }
+
     }
 
     private void showEditTextDialog() {
@@ -182,6 +173,12 @@ public class ProjectIndexFragment extends BaseFragment {
                 showToastShort("项目创建失败");
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initView();
     }
 
     @Override

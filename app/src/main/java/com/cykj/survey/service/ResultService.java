@@ -1,5 +1,6 @@
 package com.cykj.survey.service;
 
+import com.cykj.survey.bean.DisasterBean;
 import com.cykj.survey.bean.IDBean;
 import com.cykj.survey.bean.ResultBean;
 import com.cykj.survey.bean.StringBean;
@@ -28,4 +29,7 @@ public interface ResultService {
 
     @POST("project/updateProject")
     Observable<StringBean> updateProject(@Query("id") Long id,@Query("target") String target,@Query("json")String json);
+
+    @POST("project/searchYHD")
+    Observable<DisasterBean> searchYHD(@Query("json") String json);
 }
