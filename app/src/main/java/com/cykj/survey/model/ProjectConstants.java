@@ -72,17 +72,17 @@ public class ProjectConstants {
         PROJECT_TYPE.add("小型水处理厂");
         PROJECT_TYPE.add("小型矿山");
 
-        COMPLEX_MAP.put("复杂","强烈");
+        COMPLEX_MAP.put("强烈","复杂");
         COMPLEX_MAP.put("复杂","复杂");
-        COMPLEX_MAP.put("复杂","复杂、变化大、不良");
-        COMPLEX_MAP.put("复杂","不良");
-        COMPLEX_MAP.put("复杂","强烈");
+        COMPLEX_MAP.put("复杂、变化大、不良","复杂");
+        COMPLEX_MAP.put("不良","复杂");
+        COMPLEX_MAP.put("强烈","复杂");
 
         COMPLEX_MAP.put("中等","中等");
-        COMPLEX_MAP.put("中等","简单、单一");
-        COMPLEX_MAP.put("中等","较简单、单一");
-        COMPLEX_MAP.put("中等","较差");
-        COMPLEX_MAP.put("中等","较强烈");
+        COMPLEX_MAP.put("简单、单一","中等");
+        COMPLEX_MAP.put("较简单、单一","中等");
+        COMPLEX_MAP.put("较差","中等");
+        COMPLEX_MAP.put("较强烈","中等");
 
         COMPLEX_MAP.put("简单","不发育");
         COMPLEX_MAP.put("简单","较简单、单一");
