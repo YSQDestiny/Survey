@@ -76,7 +76,7 @@ public class ProjectIndexFragment extends BaseFragment {
         QMUICommonListItemView item3 = groupListView.createItemView("地形地貌");
         item2.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
-        QMUICommonListItemView item4 = groupListView.createItemView("地质分析");
+        QMUICommonListItemView item4 = groupListView.createItemView("地质灾害分析");
         item2.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
         QMUICommonListItemView item6 = groupListView.createItemView("现场风险");
@@ -101,7 +101,7 @@ public class ProjectIndexFragment extends BaseFragment {
                             Intent intent = new Intent(getActivity(),ProjectGeologyActivity.class);
                             getActivity().startActivity(intent);
                             break;
-                        case "地质分析":
+                        case "地质灾害分析":
 //                            Intent intent = new Intent(getActivity(),ProjectGeologyActivity.class);
 //                            getActivity().startActivity(intent);
                             BaseFragment baseFragment2 = new ProjectAnalysisFragment();
@@ -119,22 +119,13 @@ public class ProjectIndexFragment extends BaseFragment {
             }
         };
 
-        if (ProjectConstants.REVIEW_TYPE.equals("现场查勘")){
-            QMUIGroupListView.newSection(getContext())
-                    .addItemView(item1,onClickListener)
-                    .addItemView(item2,onClickListener)
-                    .addItemView(item3,onClickListener)
-                    .addItemView(item4,onClickListener)
-                    .addItemView(item6,onClickListener)
-                    .addTo(groupListView);
-        }else {
-            QMUIGroupListView.newSection(getContext())
-                    .addItemView(item1,onClickListener)
-                    .addItemView(item2,onClickListener)
-                    .addItemView(item3,onClickListener)
-                    .addItemView(item4,onClickListener)
-                    .addTo(groupListView);
-        }
+        QMUIGroupListView.newSection(getContext())
+                .addItemView(item1,onClickListener)
+                .addItemView(item2,onClickListener)
+                .addItemView(item3,onClickListener)
+                .addItemView(item4,onClickListener)
+                .addItemView(item6,onClickListener)
+                .addTo(groupListView);
 
     }
 
@@ -178,7 +169,6 @@ public class ProjectIndexFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        initView();
     }
 
     @Override

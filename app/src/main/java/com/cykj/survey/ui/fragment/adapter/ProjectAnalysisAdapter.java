@@ -69,10 +69,12 @@ public class ProjectAnalysisAdapter extends BaseAdapter {
         holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position1, long id) {
-                if (map.containsKey(map.containsKey(mData.get(position).getHiddenDanger()))){
-                    map.put(mData.get(position).getHiddenDanger(),ProjectConstants.ANALYSIS_SPINNER_ITEM.get(position1));
-                }else {
-                    map.put(mData.get(position).getHiddenDanger(),ProjectConstants.ANALYSIS_SPINNER_ITEM.get(position1));
+                if (!ProjectConstants.ANALYSIS_SPINNER_ITEM.get(position1).equals("请选择")){
+                    if (map.containsKey(map.containsKey(mData.get(position).getHiddenDanger()))){
+                        map.put(mData.get(position).getHiddenDanger(),ProjectConstants.ANALYSIS_SPINNER_ITEM.get(position1));
+                    }else {
+                        map.put(mData.get(position).getHiddenDanger(),ProjectConstants.ANALYSIS_SPINNER_ITEM.get(position1));
+                    }
                 }
             }
 

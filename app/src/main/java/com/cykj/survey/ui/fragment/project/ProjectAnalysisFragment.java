@@ -108,14 +108,16 @@ public class ProjectAnalysisFragment extends BaseFragment {
         data_4.add("较差");
         data_4.add("良好");
 
-        data_5.add("强烈");
-        data_5.add("较强烈");
-        data_5.add("一般");
+        data_5.add("活动强烈");
+        data_5.add("活动较强烈");
+        data_5.add("活动一般");
 
     }
 
     /**
      * 获取隐患点数据
+     *
+     *
      */
     private void getDisaster() {
 
@@ -178,7 +180,7 @@ public class ProjectAnalysisFragment extends BaseFragment {
     }
 
     private void initTopbar() {
-        topbar.setTitle("地质分析");
+        topbar.setTitle("地质灾害分析");
         topbar.addRightTextButton("完成", R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,8 +201,20 @@ public class ProjectAnalysisFragment extends BaseFragment {
     }
 
     private void postData(){
+        List<String> complexList = new ArrayList<>();
         Map<String,String> YHDMap = analysisAdapter.map;
         List<String> choseDate = analysisAdapter2.checkData;
+
+        List<String> stringList = new ArrayList<>();
+        stringList.add(projectAnalysis1.getSelectedItem().toString());
+        stringList.add(projectAnalysis2.getSelectedItem().toString());
+        stringList.add(projectAnalysis3.getSelectedItem().toString());
+        stringList.add(projectAnalysis4.getSelectedItem().toString());
+        stringList.add(projectAnalysis5.getSelectedItem().toString());
+
+        for(String str : stringList){
+            complexList.add(ProjectConstants.COMPLEX_MAP.get(str));
+        }
 
 
     }
