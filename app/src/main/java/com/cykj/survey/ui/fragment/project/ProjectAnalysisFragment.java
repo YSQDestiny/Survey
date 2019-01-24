@@ -202,8 +202,14 @@ public class ProjectAnalysisFragment extends BaseFragment {
 
     private void postData(){
         List<String> complexList = new ArrayList<>();
+        List<String> importantList = new ArrayList<>();
         Map<String,String> YHDMap = analysisAdapter.map;
         List<String> choseDate = analysisAdapter2.checkData;
+
+        if (choseDate.size() == 0){
+            showToastShort("请勾选项目类型");
+            return;
+        }
 
         List<String> stringList = new ArrayList<>();
         stringList.add(projectAnalysis1.getSelectedItem().toString());
@@ -215,6 +221,11 @@ public class ProjectAnalysisFragment extends BaseFragment {
         for(String str : stringList){
             complexList.add(ProjectConstants.COMPLEX_MAP.get(str));
         }
+
+        for (String str : choseDate){
+            importantList.add(ProjectConstants.IMPORTANT_MAP.get(str));
+        }
+
 
 
     }
