@@ -22,7 +22,6 @@ public interface ConstantApi {
     /**
      * 阿里云服务器地址
      */
-    String SERVICE = "http://47.92.209.204:80/CYKJ";
-
-
+//    String SERVICE = "http://47.92.209.204:80/CYKJ/";
+    String SERVICE = "http://7h9yv9.natappfree.cc/CYKJ/";
 }

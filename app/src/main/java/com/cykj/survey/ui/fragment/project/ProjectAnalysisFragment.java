@@ -13,6 +13,7 @@ import com.cykj.survey.base.BaseFragment;
 import com.cykj.survey.base.BaseSubsribe;
 import com.cykj.survey.base.config.AppComponent;
 import com.cykj.survey.bean.DisasterBean;
+import com.cykj.survey.bean.StringBean;
 import com.cykj.survey.interactor.ResultInteractor;
 import com.cykj.survey.model.Disaster;
 import com.cykj.survey.model.ProjectConstants;
@@ -23,6 +24,7 @@ import com.cykj.survey.view.NoScrollListview;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -203,8 +205,15 @@ public class ProjectAnalysisFragment extends BaseFragment {
     private void postData(){
         List<String> complexList = new ArrayList<>();
         List<String> importantList = new ArrayList<>();
-        Map<String,String> YHDMap = analysisAdapter.map;
+        Map<String,String> YHDMap = null;
+        if (analysisAdapter != null){
+             YHDMap = analysisAdapter.map;
+        }
         List<String> choseDate = analysisAdapter2.checkData;
+
+        String complex;
+        String important;
+        String lv = "";
 
         if (choseDate.size() == 0){
             showToastShort("请勾选项目类型");
@@ -226,7 +235,89 @@ public class ProjectAnalysisFragment extends BaseFragment {
             importantList.add(ProjectConstants.IMPORTANT_MAP.get(str));
         }
 
+        if (stringList.contains("复杂")){
+            complex = "复杂";
+        }else if (stringList.contains("中等")){
+            complex = "中等";
+        }else {
+            complex = "简单";
+        }
 
+        if (importantList.contains("重要")){
+            important = "重要";
+        }else if (importantList.contains("较重要")){
+            important = "较重要";
+        }else {
+            important = "一般";
+        }
+
+        switch (complex){
+            case "复杂":
+                switch (important){
+                    case "重要":
+                        lv = "一级";
+                        break;
+                    case "较重要":
+                        lv = "一级";
+                        break;
+                    case "一般":
+                        lv = "二级";
+                        break;
+                }
+                break;
+            case "中等":
+                switch (important){
+                    case "重要":
+                        lv = "一级";
+                        break;
+                    case "较重要":
+                        lv = "二级";
+                        break;
+                    case "一般":
+                        lv = "三级";
+                        break;
+                }
+                break;
+            case "简单":
+                switch (important){
+                    case "重要":
+                        lv = "一级";
+                        break;
+                    case "较重要":
+                        lv = "三级";
+                        break;
+                    case "一般":
+                        lv = "三级";
+                        break;
+                }
+                break;
+        }
+
+        Map<String,Object> map = new HashMap<>();
+        if (YHDMap != null){
+            map.put("YHD",YHDMap);
+        }else {
+            map.put("YHD","");
+        }
+        map.put("lv",lv);
+        String json = JSONObject.toJSONString(map);
+        String target = "analysis";
+
+        resultInteractor.updateProject(ProjectConstants.PROJECT_ID, target, json, new BaseSubsribe<StringBean>() {
+            @Override
+            public void onSuccess(StringBean result) {
+                if (result.getMessage().equals("success")){
+                    showToastShort("保存成功");
+                    popBackStack();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                showToastShort("保存失败");
+            }
+        });
 
     }
 

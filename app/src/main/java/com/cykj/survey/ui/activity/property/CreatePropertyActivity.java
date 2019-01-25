@@ -22,7 +22,13 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
+import com.cykj.survey.SurveyApplication;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.base.BaseSubsribe;
+import com.cykj.survey.base.config.AppComponent;
+import com.cykj.survey.bean.IDBean;
+import com.cykj.survey.bean.StringBean;
+import com.cykj.survey.interactor.ResultInteractor;
 import com.cykj.survey.ui.fragment.adapter.AccidentGridAdapter;
 import com.cykj.survey.ui.fragment.adapter.EquipmentAdapter;
 import com.cykj.survey.model.AccidentGridModel;
@@ -50,6 +56,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 
 public class CreatePropertyActivity extends BaseFragmentActivity {
 
@@ -201,6 +210,9 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
 
     private Handler handler;
 
+    private AppComponent component;
+    private ResultInteractor resultInteractor;
+
     @Override
     protected int getContextViewId() {
         return R.id.survey;
@@ -211,6 +223,8 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property_create);
         ButterKnife.bind(this);
+        component = SurveyApplication.get(this).component();
+        resultInteractor = component.getResultInteractor();
         handler = new Handler();
         getDate();
         mPicker.init(this);
@@ -552,15 +566,32 @@ public class CreatePropertyActivity extends BaseFragmentActivity {
         if (isNull) {
             return;
         } else {
-            if (Constants.NETWORK_FLAG){
 
-            }
-            String json = JSONObject.toJSONString(property);
+            final String json = JSONObject.toJSONString(property);
 
-            Intent intent = new Intent(CreatePropertyActivity.this, PropertyUploadActivity.class);
-            intent.putExtra("property",json);
-            startActivity(intent);
-            finish();
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody requestBody = new FormBody.Builder()
+                    .add("json", json)
+                    .build();
+
+            resultInteractor.postProperty(json, new BaseSubsribe<IDBean>() {
+                @Override
+                public void onSuccess(IDBean result) {
+                    Constants.PROPERTY_ID = result.getData();
+                    Intent intent = new Intent(CreatePropertyActivity.this, PropertyUploadActivity.class);
+                    intent.putExtra("property",json);
+                    startActivity(intent);
+                    finish();
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    super.onError(e);
+                    showToastShort("保存失败");
+                }
+            });
+
         }
     }
 

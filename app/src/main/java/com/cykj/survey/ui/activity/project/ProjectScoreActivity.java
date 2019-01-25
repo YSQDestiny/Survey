@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.model.ProjectConstants;
 import com.cykj.survey.model.ResultModel;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
@@ -96,7 +97,7 @@ public class ProjectScoreActivity extends BaseFragmentActivity {
 
         OkHttpClient client = new OkHttpClient();
 
-        Long projectId = Constants.PROJECT_ID;
+        Long projectId = ProjectConstants.PROJECT_ID;
 
         RequestBody body = new FormBody.Builder()
                 .add("projectId",projectId.toString())

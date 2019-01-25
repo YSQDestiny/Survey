@@ -62,4 +62,18 @@ public class ResultInteractorImpl implements ResultInteractor {
         Subscription subscription = observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subsribe);
         return subscription;
     }
+
+    @Override
+    public Subscription postAccident(String json, BaseSubsribe<StringBean> subsribe) {
+        Observable<StringBean> observable = api.postAccident(json);
+        Subscription subscription = observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subsribe);
+        return subscription;
+    }
+
+    @Override
+    public Subscription postProperty(String josn, BaseSubsribe<IDBean> subsribe) {
+        Observable<IDBean> observable = api.postProperty(josn);
+        Subscription subscription = observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subsribe);
+        return subscription;
+    }
 }

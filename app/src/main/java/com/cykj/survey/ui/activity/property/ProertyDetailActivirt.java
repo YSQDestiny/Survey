@@ -59,15 +59,15 @@ public class ProertyDetailActivirt extends BaseFragmentActivity {
                 finish();
             }
         });
-        topbar.addRightTextButton("下载",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = Constants.TEST_SERVICE + "property/download?id=" +propertyId;
-                Uri uri = Uri.parse(url);
-                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
-                startActivity(intent);
-            }
-        });
+//        topbar.addRightTextButton("下载",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String url = Constants.TEST_SERVICE + "/property/download?id=" +propertyId;
+//                Uri uri = Uri.parse(url);
+//                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     private void initView(){

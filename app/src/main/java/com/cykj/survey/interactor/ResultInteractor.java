@@ -26,4 +26,11 @@ public interface ResultInteractor {
 
     //获取地灾隐患点
     Subscription searchYHD(String json, BaseSubsribe<DisasterBean> subsribe);
+
+    //提交现场风险
+    Subscription postAccident(String json,BaseSubsribe<StringBean> subsribe);
+
+    /*********************************************************物业***********************************************/
+    //创建物业项目
+    Subscription postProperty(String josn,BaseSubsribe<IDBean> subsribe);
 }

@@ -19,7 +19,7 @@ public class RestApiAdapter {
             builder.retryOnConnectionFailure(true);
 
             retrofit = new Retrofit.Builder().client(okHttpClient)
-                    .baseUrl(ConstantApi.TEST_SERVICE)
+                    .baseUrl(ConstantApi.SERVICE)
                     .addConverterFactory(gsonConverterFactory)
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();

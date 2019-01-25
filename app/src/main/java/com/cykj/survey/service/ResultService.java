@@ -18,6 +18,8 @@ import rx.Observable;
 
 public interface ResultService {
 
+    /*********************************************************工程******************************************************************************/
+
     @GET("project/getList")
     Observable<ResultBean> getPorjectList(@Query("uniqueId") String uniqueId);
 
@@ -32,4 +34,12 @@ public interface ResultService {
 
     @POST("project/searchYHD")
     Observable<DisasterBean> searchYHD(@Query("json") String json);
+
+    @POST("project/postAccident")
+    Observable<StringBean> postAccident(@Query("json") String json);
+
+    /*********************************************************物业******************************************************************************/
+    @POST("property/postProperty")
+    Observable<IDBean> postProperty(@Query("json") String json);
+
 }

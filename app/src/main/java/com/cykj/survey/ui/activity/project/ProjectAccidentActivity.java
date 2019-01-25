@@ -12,7 +12,12 @@ import android.widget.Button;
 import com.alibaba.fastjson.JSONObject;
 import com.cykj.survey.Constants;
 import com.cykj.survey.R;
+import com.cykj.survey.SurveyApplication;
 import com.cykj.survey.base.BaseFragmentActivity;
+import com.cykj.survey.base.BaseSubsribe;
+import com.cykj.survey.base.config.AppComponent;
+import com.cykj.survey.bean.StringBean;
+import com.cykj.survey.interactor.ResultInteractor;
 import com.cykj.survey.ui.fragment.adapter.ProjectLocalRecAdapter;
 import com.cykj.survey.model.ProjectAccident;
 import com.cykj.survey.model.ResultModel;
@@ -37,12 +42,12 @@ public class ProjectAccidentActivity extends BaseFragmentActivity {
     QMUITopBar topbar;
     @BindView(R.id.local_rec)
     RecyclerView localRec;
-    @BindView(R.id.project_accident_btn)
-    Button projectAccidentBtn;
 
     private ProjectLocalRecAdapter adapter;
     private List<ProjectAccident> accidents = Constants.projectAccidentList;
 
+    private AppComponent component;
+    private ResultInteractor resultInteractor;
 
     @Override
     protected int getContextViewId() {
@@ -54,6 +59,8 @@ public class ProjectAccidentActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_local);
         ButterKnife.bind(this);
+        component = SurveyApplication.get(this).component();
+        resultInteractor = component.getResultInteractor();
         initTopbar();
 
         adapter = new ProjectLocalRecAdapter(this, accidents);
@@ -66,7 +73,6 @@ public class ProjectAccidentActivity extends BaseFragmentActivity {
         adapter.setOnItemClickListener(new ProjectLocalRecAdapter.OnItemClickListener() {
             @Override
             public void onClick(int position) {
-                showToastLong("ssssss");
                 Intent intent = new Intent(ProjectAccidentActivity.this, ProjectAccidentDescActivity.class);
                 intent.putExtra("accident", JSONObject.toJSONString(Constants.projectAccidentList.get(position)));
                 startActivity(intent);
@@ -78,50 +84,28 @@ public class ProjectAccidentActivity extends BaseFragmentActivity {
 
             }
         });
-
-        projectAccidentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                postData();
-            }
-        });
     }
 
     private void postData() {
 
-        String url = Constants.TEST_SERVICE + "/project/postAccident";
-
         String json = JSONObject.toJSONString(Constants.projectAccidentList);
 
-        OkHttpClient client = new OkHttpClient();
-
-        Long projectId = Constants.PROJECT_ID;
-
-        RequestBody body = new FormBody.Builder()
-                .add("accidentStr",json)
-                .build();
-
-        final Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
+        resultInteractor.postAccident(json, new BaseSubsribe<StringBean>() {
             @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
+            public void onSuccess(StringBean result) {
                 if (result.getCode() == 0){
-                    Intent intent = new Intent(ProjectAccidentActivity.this, ProjectScoreActivity.class);
-                    startActivity(intent);
+                    showToastShort("保存成功");
                     finish();
                 }
             }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                showToastShort("保存失败");
+            }
         });
+
     }
 
     private void initTopbar() {
@@ -136,7 +120,7 @@ public class ProjectAccidentActivity extends BaseFragmentActivity {
         topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                postData();
             }
         });
     }

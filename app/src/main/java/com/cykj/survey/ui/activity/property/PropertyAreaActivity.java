@@ -157,20 +157,20 @@ public class PropertyAreaActivity extends BaseFragmentActivity {
                     @Override
                     public void onClick(QMUIDialog dialog, int index) {
                         finish();
-                        Object object = LocalDataCache.getLoaclData(PropertyAreaActivity.this,DeviceUtils.getUniqueId(PropertyAreaActivity.this) + "property");
-                        List<Property> properties = (List<Property>) object;
-                        properties.add(property);
-                        LocalDataCache.save(PropertyAreaActivity.this,properties,DeviceUtils.getUniqueId(PropertyAreaActivity.this) + "property");
-
-                        PropertyModel propertyModel = new PropertyModel();
-                        propertyModel.setProperty(property);
-                        if (Constants.propertyAccidentList.size() > 0){
-                            propertyModel.setAccidentList(Constants.propertyAccidentList);
-                        }
-                        UploadModel uploadModel = new UploadModel();
-                        uploadModel.setTarget("property");
-                        uploadModel.setJson(JSONObject.toJSONString(propertyModel));
-                        dialog.dismiss();
+//                        Object object = LocalDataCache.getLoaclData(PropertyAreaActivity.this,DeviceUtils.getUniqueId(PropertyAreaActivity.this) + "property");
+//                        List<Property> properties = (List<Property>) object;
+//                        properties.add(property);
+//                        LocalDataCache.save(PropertyAreaActivity.this,properties,DeviceUtils.getUniqueId(PropertyAreaActivity.this) + "property");
+//
+//                        PropertyModel propertyModel = new PropertyModel();
+//                        propertyModel.setProperty(property);
+//                        if (Constants.propertyAccidentList.size() > 0){
+//                            propertyModel.setAccidentList(Constants.propertyAccidentList);
+//                        }
+//                        UploadModel uploadModel = new UploadModel();
+//                        uploadModel.setTarget("property");
+//                        uploadModel.setJson(JSONObject.toJSONString(propertyModel));
+//                        dialog.dismiss();
                     }
                 })
                 .create(mCurrentDialogStyle).show();
@@ -235,7 +235,7 @@ public class PropertyAreaActivity extends BaseFragmentActivity {
         topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFinishTip();//oojiprivate int yangshiqi
+                showFinishTip();
             }
         });
         topbar.addRightTextButton("查勘记录",R.id.topbar_right_text_button).setOnClickListener(new View.OnClickListener() {

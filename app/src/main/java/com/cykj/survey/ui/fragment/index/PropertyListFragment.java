@@ -88,48 +88,42 @@ public class PropertyListFragment extends BaseFragment {
     }
 
     private void getList(){
-        Object object = LocalDataCache.getLoaclData(getContext(),DeviceUtils.getUniqueId(getContext()) + "property");
-        if (object == null){
-            String url = Constants.TEST_SERVICE + "/property/getList";
+        String url = Constants.TEST_SERVICE + "/property/getList";
 
-            OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient();
 
-            RequestBody requestBody = new FormBody.Builder()
-                    .add("uniqueId", DeviceUtils.getUniqueId(getContext()))
-                    .build();
+        RequestBody requestBody = new FormBody.Builder()
+                .add("uniqueId", DeviceUtils.getUniqueId(getContext()))
+                .build();
 
-            final Request request = new Request.Builder().url(url).post(requestBody).build();
+        final Request request = new Request.Builder().url(url).post(requestBody).build();
 
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
 
-                }
+            }
 
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
-                    if (result.getCode() == 0){
-                        properties = JSONObject.parseArray(result.getData(),Property.class);
-                        handler.post(UIable);
-                        if (properties != null){
-                            LocalDataCache.save(getContext(),properties,DeviceUtils.getUniqueId(getContext()) + "property");
-                        }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                ResultModel result = JSONObject.parseObject(response.body().string(),ResultModel.class);
+                if (result.getCode() == 0){
+                    properties = JSONObject.parseArray(result.getData(),Property.class);
+                    handler.post(UIable);
+                    if (properties != null){
+                        LocalDataCache.save(getContext(),properties,DeviceUtils.getUniqueId(getContext()) + "property");
                     }
                 }
-            });
-        }else {
-            properties = (List<Property>) object;
-            handler.post(UIable);
-        }
+            }
+        });
 
         Object object2 = LocalDataCache.getLoaclData(getContext(),"propertyArea");
         if (object2 == null){
-            String url = Constants.TEST_SERVICE + "/property/getAreaAndOptions";
-            OkHttpClient client = new OkHttpClient();
-            final Request request = new Request.Builder().url(url).build();
+            String url1 = Constants.TEST_SERVICE + "/property/getAreaAndOptions";
+            OkHttpClient client1 = new OkHttpClient();
+            final Request request1 = new Request.Builder().url(url1).build();
 
-            client.newCall(request).enqueue(new Callback() {
+            client1.newCall(request1).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
 

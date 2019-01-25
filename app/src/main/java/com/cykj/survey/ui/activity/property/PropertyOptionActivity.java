@@ -197,14 +197,6 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
         });
     }
 
-
-    /**
-     * 毫无意义
-     */
-    private void zhuangYangzi(){
-
-    }
-
     /**
      * UI线程
      */
@@ -326,7 +318,8 @@ public class PropertyOptionActivity extends BaseFragmentActivity {
                 }
             }
         }
-        Constants.setDeductionJson(JSONObject.toJSONString(deductionModels));
+//        Constants.setDeductionJson(JSONObject.toJSONString(deductionModels));
+        postDeduction(JSONObject.toJSONString(deductionModels));
     }
 
     /**

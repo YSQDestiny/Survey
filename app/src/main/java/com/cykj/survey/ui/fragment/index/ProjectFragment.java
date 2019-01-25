@@ -280,6 +280,7 @@ public class ProjectFragment extends BaseFragment {
                 public void onSuccess(StringBean result) {
                     if (result.getMessage().equals("success")){
                         showToastShort("保存成功");
+                        ProjectConstants.projectModel = projectModel;
                         popBackStack();
                     }
                 }

@@ -21,6 +21,7 @@ import com.cykj.survey.Constants;
 import com.cykj.survey.R;
 import com.cykj.survey.base.BaseFragmentActivity;
 import com.cykj.survey.model.ProjectAccident;
+import com.cykj.survey.model.ProjectConstants;
 import com.cykj.survey.util.ImgUtil;
 import com.cykj.survey.util.PhotoUtils;
 import com.qmuiteam.qmui.widget.QMUITopBar;
@@ -116,15 +117,17 @@ public class ProjectAccidentDescActivity extends BaseFragmentActivity {
     private void saveAccident() {
 
         ProjectAccident accident = new ProjectAccident();
-        accident.setProjectId(Constants.PROJECT_ID);
+        accident.setProjectId(ProjectConstants.PROJECT_ID);
         accident.setName(projectAccidentName.getText().toString());
         accident.setInstructions(projectAccidentEdit.getText().toString());
         accident.setType(projectAccidentType.getText().toString());
         accident.setSuggestion(projectAccidentSuggestion.getText().toString());
         projectAccidentSiteImg.setDrawingCacheEnabled(true);
-        accident.setSitePhoto(ImgUtil.bitmapToBase64(projectAccidentSiteImg.getDrawingCache()));
+//        accident.setSitePhoto(ImgUtil.bitmapToBase64(projectAccidentSiteImg.getDrawingCache()));
+
         projectAccidentSurroundingsImg.setDrawingCacheEnabled(true);
-        accident.setSurroundingsPhoto(ImgUtil.bitmapToBase64(projectAccidentSurroundingsImg.getDrawingCache()));
+//        accident.setSurroundingsPhoto(ImgUtil.bitmapToBase64(projectAccidentSurroundingsImg.getDrawingCache()));
+
         List<ProjectAccident> list = Constants.projectAccidentList;
         Constants.addProjectAccident(accident);
         finish();

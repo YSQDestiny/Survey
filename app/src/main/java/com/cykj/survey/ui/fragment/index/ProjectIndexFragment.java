@@ -15,6 +15,7 @@ import com.cykj.survey.interactor.ResultInteractor;
 import com.cykj.survey.ui.activity.project.ProjectAccidentActivity;
 import com.cykj.survey.ui.activity.project.ProjectGeologyActivity;
 import com.cykj.survey.base.BaseFragment;
+import com.cykj.survey.ui.activity.project.ProjectScoreActivity;
 import com.cykj.survey.ui.fragment.project.ProjectAnalysisFragment;
 import com.cykj.survey.ui.fragment.project.ProjectScaleFragment;
 import com.cykj.survey.model.ProjectConstants;
@@ -71,17 +72,19 @@ public class ProjectIndexFragment extends BaseFragment {
         item1.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
         QMUICommonListItemView item2 = groupListView.createItemView("建设规模");
-        item1.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
+        item2.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
         QMUICommonListItemView item3 = groupListView.createItemView("地形地貌");
-        item2.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
+        item3.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
         QMUICommonListItemView item4 = groupListView.createItemView("地质灾害分析");
-        item2.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
-
-        QMUICommonListItemView item6 = groupListView.createItemView("现场风险");
         item4.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
+        QMUICommonListItemView item6 = groupListView.createItemView("现场风险");
+        item6.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
+
+        QMUICommonListItemView item5 = groupListView.createItemView("项目评分");
+        item5.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -90,8 +93,12 @@ public class ProjectIndexFragment extends BaseFragment {
                     CharSequence text = ((QMUICommonListItemView) v).getText();
                     switch (text.toString()){
                         case "基础信息":
-                            BaseFragment baseFragment = new ProjectFragment();
-                            startFragment(baseFragment);
+                            if (ProjectConstants.projectModel != null){
+                                showMessagePositiveDialog2();
+                            }else {
+                                BaseFragment baseFragment = new ProjectFragment();
+                                startFragment(baseFragment);
+                            }
                             break;
                         case "建设规模":
                             BaseFragment baseFragment1 = new ProjectScaleFragment();
@@ -102,13 +109,20 @@ public class ProjectIndexFragment extends BaseFragment {
                             getActivity().startActivity(intent);
                             break;
                         case "地质灾害分析":
-//                            Intent intent = new Intent(getActivity(),ProjectGeologyActivity.class);
-//                            getActivity().startActivity(intent);
                             BaseFragment baseFragment2 = new ProjectAnalysisFragment();
                             startFragment(baseFragment2);
                             break;
                         case "现场风险":
-                            Intent intent2 = new Intent(getActivity(),ProjectAccidentActivity.class);
+                            if (ProjectConstants.REVIEW_TYPE.equals("现场查勘")){
+                                Intent intent2 = new Intent(getActivity(),ProjectAccidentActivity.class);
+                                getActivity().startActivity(intent2);
+                            }else {
+                                showMessagePositiveDialog();
+                            }
+
+                            break;
+                        case "项目评分":
+                            Intent intent2 = new Intent(getActivity(),ProjectScoreActivity.class);
                             getActivity().startActivity(intent2);
                             break;
                         default:
@@ -124,9 +138,9 @@ public class ProjectIndexFragment extends BaseFragment {
                 .addItemView(item2,onClickListener)
                 .addItemView(item3,onClickListener)
                 .addItemView(item4,onClickListener)
+                .addItemView(item5,onClickListener)
                 .addItemView(item6,onClickListener)
                 .addTo(groupListView);
-
     }
 
     private void showEditTextDialog() {
@@ -174,5 +188,35 @@ public class ProjectIndexFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    /**
+     * 消息类型对话框
+     */
+    private void showMessagePositiveDialog() {
+        new QMUIDialog.MessageDialogBuilder(getActivity())
+                .setTitle("保前风勘不需要进行现场查勘")
+                .addAction("确定", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                    }
+                })
+                .create(mCurrentDialogStyle).show();
+    }
+
+    /**
+     * 消息类型对话框
+     */
+    private void showMessagePositiveDialog2() {
+        new QMUIDialog.MessageDialogBuilder(getActivity())
+                .setTitle("项目信息已经保存暂不支持编辑")
+                .addAction("确定", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                    }
+                })
+                .create(mCurrentDialogStyle).show();
     }
 }
